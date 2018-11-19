@@ -215,11 +215,14 @@ router router.history.base + to.path
 http router.history.base + router.history.current.path;
 
 ### 移动端调试工具
+```javascript
 <!--<script src="http://weinre.hijs.cc/target/target-script-min.js#anonymous"></script>-->
 <!--<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
 
 <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/eruda"></script>-->
 <!--<script>eruda.init();</script>-->
+```
+
 
 
 
