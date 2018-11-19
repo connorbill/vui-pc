@@ -49,12 +49,12 @@
                                 <div class="menu-text">香粉零距离</div>
                             </div>
                         </router-link>
-                        <router-link class="dy-item" :to="{ name: 'DyItem', params: { id: dynamicType[2].id}}">
+                        <a class="dy-item" href="https://m.qianxiangbank.com/qianXiangH5Ctrl/qxTimeList">
                             <div class="dy-item">
                                 <div class="menu-icon icon-home-qx-time"></div>
                                 <div class="menu-text">钱香时间</div>
                             </div>
-                        </router-link>
+                        </a>
                         <router-link class="dy-item" :to="{ name: 'DyItem', params: { id: dynamicType[3].id}}">
                             <div class="dy-item">
                                 <div class="menu-icon icon-home-public-benefit"></div>

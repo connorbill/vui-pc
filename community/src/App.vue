@@ -25,6 +25,7 @@
     import NavTopBar from './components/NavTopBarComponent';
     import { commonFunction } from './common/CommonFunction';
     import { mapGetters } from 'vuex';
+    import weixin from 'weixin-js-sdk'
 
     export default {
         components: {
@@ -56,6 +57,7 @@
                 this.isOldApp = false;
                 commonFunction.showOldAppTip();
             }
+            // this.wechatShare();
         },
         mounted () {
             if (commonFunction.isApp() || commonFunction.isWeChat()) {
@@ -63,7 +65,6 @@
             } else {
                 this.isShowTop = true;
             }
-            this.wechatShare();
         },
         methods: {
             wechatShare (url) {
@@ -71,19 +72,12 @@
                 if (url) {
                     configUrl = url;
                 }
-                let share = {
-                    title: '钱香社区上线啦，赶紧加入我们吧！',
-                    desc: '满满干货、惊喜福利、畅所欲言，正在召唤你~',
-                    // imgUrl: baseUrl + '/static/image/icon-home-share.png', // 图片地址
-                    imgUrl: 'https://pic.qianxiangbank.com/waps/images/icon-home-share.png',
-                    link: 'https://m.qianxiangbank.com/community'
-                };
                 this.$http.CommonService.getWechatAppId(configUrl)
                     .then(data => {
                         // console.log(data.data);
                         let shareConfig = data.data;
-                        window.wx.config({
-                            debug: false,
+                        weixin.config({
+                            debug: true,
                             appId: shareConfig.appId, // 公众号的唯一标识
                             timestamp: shareConfig.timestamp, // 必填，生成签名的时间戳
                             nonceStr: shareConfig.nonceStr, // 必填，生成签名的随机串
@@ -95,7 +89,15 @@
                             ]
                         });
                         // 处理验证成功的信息
-                        window.wx.ready(function () {
+                        weixin.ready(function () {
+
+                            let share = {
+                                title: '钱香社区上线啦，赶紧加入我们吧！',
+                                desc: '满满干货、惊喜福利、畅所欲言，正在召唤你~',
+                                // imgUrl: baseUrl + '/static/image/icon-home-share.png', // 图片地址
+                                imgUrl: 'https://pic.qianxiangbank.com/waps/images/icon-home-share.png',
+                                link: encodeURIComponent('https://m.qianxiangbank.com/community')
+                            };
                             //              alert(window.location.href.split('#')[0]);
                             let newConfig = {
                                 title: share.title, // 分享标题
@@ -112,12 +114,12 @@
                                 }
                             };
                             // 分享到朋友圈
-                            window.wx.updateTimelineShareData(newConfig);
-                            // 分
-                            window.wx.updateAppMessageShareData(newConfig);
-                            window.wx.onMenuShareAppMessage(newConfig);
-                            window.wx.onMenuShareTimeline(newConfig);
-                            window.wx.onMenuShareQQ(newConfig);
+                            // weixin.updateTimelineShareData(newConfig);
+                            // // 分
+                            // weixin.updateAppMessageShareData(newConfig);
+                            weixin.onMenuShareAppMessage(newConfig);
+                            weixin.onMenuShareTimeline(newConfig);
+                            weixin.onMenuShareQQ(newConfig);
                         });
                     })
                     .catch(err => {

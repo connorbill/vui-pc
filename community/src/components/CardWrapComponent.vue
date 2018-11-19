@@ -208,15 +208,11 @@
                                 this.hotDiscussion.push(hot);
                             }
                         }
-                        if (resArr.length === 0) {
-                            this.showHotTopic = false;
-                        }
                         if (!res.data.hasNext) {
                             this.hasNextDiscussion = false;
                         }
                     })
                     .catch(err => {
-                        this.showHotTopic = false;
                         // if (this.hotPageNum !== 1) {
                         //     Toast({
                         //         message: '暂时没有了',
@@ -226,21 +222,8 @@
                         // }
                     });
             },
-
             doLikePost (postId, index) {
                 this.$emit('child-by-value', postId, index);
-            }
-        },
-        watch: {
-            // props 传值建议用return {} 一次，不影响父组件的值。然后 watch 这个值就可以更新到视图
-            cardData (val) {
-                this.cardList = val;
-            },
-            hotTopicObj (val) {
-                this.hotTopicObj = val;
-            },
-            showHotTopic (val) {
-                this.showTopic = val;
             }
         },
         activated () {
