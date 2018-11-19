@@ -9,61 +9,6 @@
     <title><%= VUE_APP_INDEX_TITLE %></title>
     <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
     <script>
-        function foo(data) {
-            // do stuff with JSON
-            var shareConfig = data.data;
-            wx.config({
-                debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                appId: shareConfig.appId, // 必填，公众号的唯一标识
-                timestamp: shareConfig.timestamp, // 必填，生成签名的时间戳
-                nonceStr: shareConfig.nonceStr, // 必填，生成签名的随机串
-                signature: shareConfig.signature,// 必填，签名
-                jsApiList: [
-                    'updateTimelineShareData', 'updateAppMessageShareData', 'onMenuShareTimeline',
-                    'onMenuShareAppMessage', 'onMenuShareQQ'
-                ]
-            });
-            // 处理验证成功的信息
-            wx.ready(function () {
-
-                var share = {
-                    title: '钱香社区上线啦，赶紧加入我们吧！',
-                    desc: '满满干货、惊喜福利、畅所欲言，正在召唤你~',
-                    // imgUrl: baseUrl + '/static/image/icon-home-share.png', // 图片地址
-                    imgUrl: 'https://pic.qianxiangbank.com/waps/images/icon-home-share.png',
-                    link: 'https://m.qianxiangbank.com/community'
-                };
-                //              alert(window.location.href.split('#')[0]);
-                var newConfig = {
-                    title: share.title, // 分享标题
-                    desc: share.desc, // 分享描述
-                    link: share.link, // 分享链接
-                    imgUrl: share.imgUrl, // 分享图标
-                    success: function (res) {
-                        // 用户确认分享后执行的回调函数
-                        console.log("分享给朋友成功返回的信息为:", res);
-                    },
-                    cancel: function (res) {
-                        // 用户取消分享后执行的回调函数
-                        console.log("取消分享给朋友返回的信息为:", res);
-                    }
-                };
-                // 分享到朋友圈
-                // wx.updateTimelineShareData(newConfig);
-                // // 分
-                // wx.updateAppMessageShareData(newConfig);
-                wx.onMenuShareAppMessage(newConfig);
-                wx.onMenuShareTimeline(newConfig);
-                wx.onMenuShareQQ(newConfig);
-            });
-        }
-
-        var script = document.createElement('script');
-        script.src = 'https://cunapi.qianxiangbank.com/share/shareSign.api?url=https://m.qianxiangbank.com/community&callback=foo';
-
-        document.getElementsByTagName('head')[0].appendChild(script);
-    </script>
-    <script>
         var handlerOrientationChange = function () {
             var width = (window.innerWidth <= 320) ? 320 : ((window.innerWidth >= 750) ? 750 : window.innerWidth);
             var fontSize = 100 * (width / 750);
@@ -84,5 +29,64 @@
 </noscript>
     <!--inject html here auto-->
 </div>
+
+<script>
+    function foo(data) {
+        // do stuff with JSON
+        var shareConfig = data.data;
+        wx.config({
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: shareConfig.appId, // 必填，公众号的唯一标识
+            timestamp: shareConfig.timestamp, // 必填，生成签名的时间戳
+            nonceStr: shareConfig.nonceStr, // 必填，生成签名的随机串
+            signature: shareConfig.signature,// 必填，签名
+            jsApiList: [
+                'onMenuShareTimeline','onMenuShareAppMessage', 'onMenuShareQQ'
+            ]
+        });
+        // 处理验证成功的信息
+        wx.ready(function () {
+
+            var share = {
+                title: '钱香社区上线啦，赶紧加入我们吧！',
+                desc: '满满干货、惊喜福利、畅所欲言，正在召唤你~',
+                // imgUrl: baseUrl + '/static/image/icon-home-share.png', // 图片地址
+                imgUrl: 'https://pic.qianxiangbank.com/waps/images/icon-home-share.png',
+                link: 'https://m.qianxiangbank.com/community'
+            };
+            //              alert(window.location.href.split('#')[0]);
+            var newConfig = {
+                title: share.title, // 分享标题
+                desc: share.desc, // 分享描述
+                link: share.link, // 分享链接
+                imgUrl: share.imgUrl, // 分享图标
+                success: function (res) {
+                    // 用户确认分享后执行的回调函数
+                    console.log("分享给朋友成功返回的信息为:", res);
+                },
+                cancel: function (res) {
+                    // 用户取消分享后执行的回调函数
+                    console.log("取消分享给朋友返回的信息为:", res);
+                }
+            };
+            // 分享到朋友圈
+            // wx.updateTimelineShareData(newConfig);
+            // // 分
+            // wx.updateAppMessageShareData(newConfig);
+            wx.onMenuShareTimeline(newConfig);
+
+            wx.onMenuShareAppMessage(newConfig);
+
+            wx.onMenuShareQQ(newConfig);
+        });
+    }
+
+    window.onload = function () {
+        var script = document.createElement('script');
+        var url = encodeURIComponent('https://m.qianxiangbank.com/community');
+        script.src = 'https://cunapi.qianxiangbank.com/share/shareSign.api?url='+url+'&callback=foo';
+        document.getElementsByTagName('head')[0].appendChild(script);
+    }
+</script>
 </body>
 </html>
