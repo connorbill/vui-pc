@@ -1,0 +1,200 @@
+.article-top{
+    background-color: #fff;
+    padding-top: 58px;
+}
+.article-person-info{
+    padding: 0 25px;
+}
+.article-center{
+    padding: 55px 25px;
+    background-color: #fff;
+    .article-talk-box{
+        height: 140px;
+    }
+    .article-read-info{
+        .talk-item{
+            margin-right: 48px;
+        }
+    }
+    .article-title{
+        font-size: 38px;
+        color: $text-main;
+        line-height: 63px;
+        font-weight: 600;
+    }
+    .platform-announcement{
+        font-size: 26px;
+        font-weight: 600;
+        color: $main-blue;
+
+    }
+    .article-talk-top{
+        border-top: 1PX solid #e0e0e0;
+        height: 66px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .talk-item{
+            display: flex;
+            align-items: center;
+        }
+        .talk-icon{
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+            width: 36px;
+            height: 22px;
+        }
+        .talk-number{
+            font-size: 24px;
+            color: #999999;
+            &:active{
+                color: #ff4444;
+            }
+        }
+    }
+    .article-section{
+        padding-bottom: 60px;
+        word-break: break-all;
+        //text-indent: 2em;
+        font-size: 28px!important;
+        color: $text666;
+        line-height: 50px;
+        margin-bottom: 12px;
+        text-align: justify;
+        .img{
+            text-align: center;
+            img{
+                width: 658px;
+                height: 435px;
+                vertical-align: top;
+            }
+        }
+    }
+}
+.other-article{
+    padding: 50px 25px 0;
+    border-top: 1PX solid $border;
+    background-color: #fff;
+    .article-other-item{
+        padding-bottom: 50px;
+        font-size: 26px;
+        color: $text666;
+        .article-left{
+            font-weight: bold;
+        }
+        .article-right{
+            margin-left: 10px;
+            color: $text666;
+        }
+    }
+    .next-article{
+
+    }
+
+}
+.admire-btn{
+
+    width: 238px;
+    height: 70px;
+    margin: 50px auto 0;
+    border-radius: 7px;
+    background-color: #ffa31f;
+    color: #fff;
+    font-size: 30px;
+    line-height: 70px;
+    text-align: center;
+}
+.admire-score{
+    font-size: 26px;
+    margin-top: 27px;
+    text-align: center;
+    color: $text666;
+    .admire-num{
+        color: #ffa31f;
+    }
+
+}
+.admire-person{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    .admire-head{
+        height: 62px;
+        width: 62px;
+        border-radius: 50%;
+        margin-right: 15px;
+        &:last-child{
+            margin-right: 0;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            vertical-align: top;
+        }
+    }
+}
+.admire-box{
+    padding:20px 25px 80px;
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+.splendid{
+    margin-bottom: 20px;
+}
+.topic-main-hot{
+    margin-bottom: 0px;
+    background-color: #fff;
+    .topic-top{
+        height: 80px;
+        padding: 0 24px 0 30px;
+        border-bottom: 1PX solid $border;
+        .icon-hot{
+            width: 30px;
+            height: 26px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+        }
+        .topic-top-left{
+        }
+        .topic-top-right{
+
+            width: 130px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #edf6ff;
+            font-size: 24px;
+            color: $main-blue;
+        }
+    }
+    .icon-text{
+        color: $text-main;
+        font-size: 30px;
+        margin-left: 10px;
+        font-weight: 600;
+    }
+
+}
+.talk-and-admire{
+    font-size: 24px;
+    color: $text999;
+    padding: 40px 25px 36px;
+    .talk-item{
+        margin-left: 48px;
+    }
+
+}
+.all-talk{
+    .hot-item{
+        border-bottom: 1PX solid $border;
+        &:last-child{
+            border-bottom: 0;
+        }
+    }
+}
+.fontbold{
+    font-weight: bold;
+}

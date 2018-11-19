@@ -1,0 +1,100 @@
+
+#nav {
+    padding: 30px;
+    a {
+        font-weight: bold;
+        color: #2c3e50;
+        &.router-link-exact-active {
+            color: #42b983;
+        }
+    }
+}
+.nav-home{
+    color: $red;
+}
+
+.van-nav-bar{
+    height: 90px;
+    line-height: 90px;
+    border-bottom: 1PX solid #e0e0e0;
+}
+
+.nav-top-padding{
+    padding-top: 90px;
+}
+
+.nav-bottom-padding{
+    padding-bottom: 98px;
+}
+.nav-top{
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    z-index: 900;
+    .van-nav-bar .van-icon {
+        color: #333333;
+        vertical-align: middle;
+        font-size: 0.32rem;
+    }
+    .van-nav-bar__title{
+        color: #333;
+        font-size: 36px;
+    }
+    .van-nav-bar__left{
+        left: 34px;
+    }
+}
+.nav-bottom{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 98px;
+    width: 100%;
+    font-size: 26px;
+    z-index: 900;
+    background-color: #fff;
+}
+
+.detail-replay-title {
+    height: .9rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    z-index: 999999 !important;
+}
+.app-detail-replay-title {
+    height: .9rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    text-align: left;
+    padding-left: .3rem;
+    font-size: .30rem;
+    color: #666666;
+    border-bottom: 1PX solid #e0e0e0;
+    display: flex;
+    align-items: center;
+}
+.van-nav-bar__title {
+    font-size: 36px;
+}
+.van-nav-bar__right{
+    font-size: 34px;
+}
+
+.van-nav-bar .van-icon {
+    color: #333333;
+    vertical-align: middle;
+    font-size: 0.32rem;
+}
+
+.van-nav-bar__left {
+    left: .34rem;
+}
+

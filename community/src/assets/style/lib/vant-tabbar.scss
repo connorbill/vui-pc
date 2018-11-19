@@ -1,0 +1,66 @@
+//Tabbar
+
+.van-icon-home-normal {
+    height: 0.45rem;
+    width: 0.45rem;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    background-image: url("../../images/icon/icon-home-normal.png");
+}
+.nav-bottom{
+    .van-tabbar{
+        height: 98px;
+    }
+    .van-tabbar-item{
+        font-size: 22px;
+        .van-icon{
+            height: 45px;
+            width: 45px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+        .van-icon-home-normal{
+            background-image: url("../../images/icon/icon-home-normal.png");
+        }
+        .van-icon-topic-normal{
+            background-image: url("../../images/icon/icon-topic-normal.png");
+        }
+        .van-icon-my-normal{
+            background-image: url("../../images/icon/icon-my-normal.png");
+        }
+        &.van-tabbar-item--active{
+            .van-icon-home-normal{
+                background-image: url("../../images/icon/icon-home-active.png");
+            }
+            .van-icon-topic-normal{
+                background-image: url("../../images/icon/icon-topic-active.png");
+            }
+            .van-icon-my-normal{
+                background-image: url("../../images/icon/icon-my-active.png");
+            }
+        }
+    }
+    .van-tabbar-item__icon img{
+        height: 45px;
+        width: 45px;
+    }
+    .van-tabbar-item--active{
+        color: #388efd;
+    }
+}
+
+
+.project-group{
+    .van-icon{
+        height: 45px;
+        width: 45px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+    .van-icon-add-file{
+        background-image: url("../../images/icon/icon-add-file.png");
+    }
+}

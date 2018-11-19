@@ -1,0 +1,28 @@
+.van-tab{
+    align-items: center;
+    font-size: 30px;
+    line-height: 80px;
+    font-weight: 500;
+}
+.van-swipe__indicator{
+
+}
+.van-tabs__line{
+    height: 4px;
+    background-color: #388efd;
+    bottom: 3px;
+}
+.van-tabs--line {
+    padding-top: 0;
+}
+.van-tab--active{
+    color: #388efd;
+}
+.van-tabs--line .van-tabs__wrap {
+    height: 80px;
+    border-bottom: 1PX solid #e0e0e0;
+}
+.van-tabs__nav--line{
+    padding-bottom: 0;
+}
+

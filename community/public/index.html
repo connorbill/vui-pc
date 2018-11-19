@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width,initial-scale=1.0">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= VUE_APP_INDEX_TITLE %></title>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+    <script>
+        var handlerOrientationChange = function () {
+            var width = (window.innerWidth <= 320) ? 320 : ((window.innerWidth >= 750) ? 750 : window.innerWidth);
+            var fontSize = 100 * (width / 750);
+            document.documentElement.style.fontSize = fontSize + "px";
+        };
+        handlerOrientationChange();
+        window.onresize = handlerOrientationChange;
+    </script>
+</head>
+<body>
+<div id="app">
+
+    <noscript>
+
+    <strong>
+        请允许Javascript的运行。
+    </strong>
+</noscript>
+    <!--inject html here auto-->
+</div>
+</body>
+</html>

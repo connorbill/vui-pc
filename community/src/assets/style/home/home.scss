@@ -1,0 +1,146 @@
+.overflow-multi-line{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:3;
+}
+.overflow-word{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.home-hot{
+    position: relative;
+}
+.swipe-box{
+    height: 260px;
+    background-color: #fff;
+    .van-swipe{
+        height: 100%;
+    }
+    .banner-img{
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.change-tab{
+    /*height: 50px;*/
+    height: 80px;
+}
+.normal-question{
+    padding: 40px 22px;
+    background-color: #fff;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.normal-item{
+    display: flex;
+    justify-content: space-between;
+    font-size: 26px;
+    .link{
+        color: #388efd;
+    }
+    .question-width{
+        max-width: 400px;
+        color: #333333;
+        display: inline-block;
+        //margin-left: 4px;
+    }
+}
+.hot-item{
+    margin-bottom: 20px;
+    background-color: #fff;
+}
+
+
+.hot-person-info{
+
+    padding: 40px 22px;
+}
+.person-talk-box{
+
+    padding: 0 66px;
+    margin-top: 40px;
+    border-top: 1PX solid #e0e0e0;
+    height: 66px;
+}
+.hot-topics{
+    margin-bottom: 20px;
+    background-color: #fff;
+    .topic-top{
+        height: 80px;
+        padding: 0 24px 0 30px;
+        border-bottom: 1PX solid $border;
+        .icon-hot{
+            width: 30px;
+            height: 26px;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+        }
+        .topic-top-left{
+        }
+        .topic-top-right{
+
+            width: 130px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #edf6ff;
+            font-size: 24px;
+            color: $main-blue;
+        }
+    }
+    .icon-text{
+        color: $text-main;
+        font-size: 30px;
+        margin-left: 10px;
+        font-weight: 600;
+    }
+
+}
+.hot-list{
+    padding: 43px 0;
+}
+.hot-topic-item{
+    padding: 0 24px 0 38px;
+    margin-bottom: 50px;
+    line-height: 1;
+    &:last-child{
+        margin-bottom:0;
+    }
+    .hot-title{
+        font-size: 26px;
+        color: $text-main;
+        margin-left: 23px;
+    }
+    .icon-hot-con{
+        height: 40px;
+        width: 40px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+    }
+    .hot-join-num{
+        font-size: 24px;
+        color: $main-blue;
+    }
+    .icon-text{
+        font-size: 26px;
+        color: $text-main;
+        width: 4rem;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+    }
+}
+.no-more-item{
+    text-align: center;
+    height: 210px;
+    font-size: 26px;
+    color: $text999;
+    justify-content: center;
+}

@@ -1,0 +1,51 @@
+// 发生请求，居中显示的loading
+.loading-global-request{
+  width: 150px;
+  height: 150px;
+  &.global-request-padding{
+    padding: 30px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, .5);
+  }
+}
+
+
+// 其他loading样式
+.loading-request{
+  padding: 10px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+
+// 垂直居中
+.fixed-middle-center{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+}
+
+//显示或隐藏loading
+.show-loading{
+  display: block;
+}
+.hide-loading{
+  display: none;
+}
+.van-list__loading{
+  height: 1.4rem;
+  .van-list__loading-text{
+    font-size: .28rem;
+  }
+}
+.demo-loading {
+  width: 100px;
+  height: 100px;
+  &.van-loading--white {
+    padding: 10px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}

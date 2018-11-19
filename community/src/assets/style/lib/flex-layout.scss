@@ -1,0 +1,21 @@
+/*子元素靠两边主轴水平，交叉轴居中对齐*/
+.flex-between{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*子元素交叉轴居中对齐*/
+.flex-align-center{
+    display: flex;
+    align-items: center;
+}
+.width-all{
+    width: 100%;
+}
+.hidden-word{
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 2rem;
+}

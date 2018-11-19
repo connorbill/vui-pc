@@ -5,6 +5,9 @@ node_modules
 /tests/e2e/videos/
 /tests/e2e/screenshots/
 
+
+
+
 # local env files
 .env.local
 .env.*.local
@@ -22,3 +25,22 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+
+# community
+community/node_modules
+community/dist
+community/tests
+community/tests
+community/.env.local
+community/.env.*.local
+community/npm-debug.log*
+community/yarn-debug.log*
+community/yarn-error.log*
+community/.idea
+community/.vscode
+community/*.suo
+community/*.ntvs*
+community/*.njsproj
+community/*.sln
+community/*.sw*

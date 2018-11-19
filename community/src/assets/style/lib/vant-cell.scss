@@ -1,0 +1,59 @@
+/*
+    使用示例：
+    <van-cell-group class="ul-list">
+            <van-cell title="我的动态"  icon="" is-link >
+                <template slot="icon">
+                    <img src="../../assets/images/icon_21.png" class="icon"><!-- class加上icon名字-->
+                </template>
+            </van-cell>
+            <van-cell title="我的消息" icon="location" :value="msg_num" is-link  class="right-badge">
+            </van-cell>
+    </van-cell-group>
+*/
+.van-cell {
+    padding: 30px 20px;
+    font-size: 28px;
+    line-height: 1.2;
+    //自己挂载的icon，class名需要加上icon
+    .icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+    //标题
+    .van-cell__title{
+        >span{
+            vertical-align: middle;
+        }
+    }
+    //左边图标
+    .van-cell__left-icon{
+        &::before{
+            font-size: 40px;
+            width: 40px;
+            margin-right: 20px;
+            padding-top: 5px;
+        }
+    }
+    //右边箭头
+    .van-cell__right-icon{
+        &::before{
+            padding-top: 10px;
+        }
+    }
+    &.right-badge
+    {
+        .van-cell__value{
+            //右边红色badge
+            span{
+                background: #ff5855;
+                border-radius: 200px;
+                color: #fff;
+                padding: 0 10px;
+                line-height: 1.2;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+}
