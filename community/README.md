@@ -23,7 +23,7 @@ axios 版本0.18.0
 ```
 +-- node_modules 依赖库目录
 +-- dist  打包文件目录
-+-- public 公共资源目录 
++-- public 公共资源目录
 |   +-- favicon.ico  fav图标
 |   +-- index.html   入口html文件
 +-- src 业务代码目录
@@ -57,7 +57,6 @@ axios 版本0.18.0
 vue.config.js
 - 跨域调接口配置：proxy: 'http://localhost:8988'
 - 执行 npm run serve
-- localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiJ9.eyJle'); // 目前开发模式把token赋值到 main.js 中执行可以登录
 
 
 
@@ -98,58 +97,6 @@ QxAppJump('home');// 主页
 QxAppShowSharePanel()// 分享
 等等
 ```
-
-
-### 主要功能
-- axios 调用接口传参 目前采用 ['Content-Type'] = 'application/x-www-form-urlencoded'
-```javascript
-// HttpService.js
-只有返回 code='000000' 时才会响应到 then()方法，例子如下：
-TopicItem.Vue:
-catch()方法会接收 除了code为 000000以外的返回
-getSubTitle () {
-    this.$http.TopicService.getSubTitle()
-        .then(res => {
-            let resData = res.data;
-            for (let i = 0; i < resData.length; i++) {
-                if (resData[i].id == this.topicId) {
-                    this.topicName = resData[i].name;
-                }
-            }
-        })
-        .catch(err => {
-            this.noticeArr = [];
-        });
-},
-
-// post 请求全局使用 form表单形式传参
-instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-let instanceAxios = {
-	get (url, params) {
-		// return instance.get(url, {
-		// 	params: params
-		// });
-		return instance({
-			url: url,
-			method: 'get',
-			params: params
-		});
-	},
-	post (url, params) {
-		return instance.post(url, Qs.stringify(params));
-		// return instance.post(url, params);
-	}
-};
-
-import Qs from 'qs';
-Qs.parse()将URL解析成对象的形式
-Qs.stringify()将对象 序列化成URL的形式，以&进行拼接
-```
-
-
-
-
 
 
 ### vue文件 export default {}方法放置顺序
@@ -257,42 +204,22 @@ Before Parentheses->Function callparentheses 不打勾
 <br>等等
 
 
-
-
-
-
-
-```javascript 解决同样的地址不刷新
-watch: {
-			'$route': 'refreshPage'
-		},
-this.$router.push({name: 'detail', params: {id}});
-				// this.$router.go({
-				// 	path: `/community/detail/16`,
-				// 	force: true
-				// });
-refreshPage () {
-				this.$router.go(0);
-			}
-
-```
-
-z-index 层级要集中备注
+z-index 层级要集中备注， 最大值不要超过2000， vant组件的弹层值为2000
 
 vant-Toast 提示框 2000
 - 上下导航栏： 900-1000
 评论输入框 900-1000
-回复列表 
+回复列表
 
 router router.history.base + to.path
 http router.history.base + router.history.current.path;
 
+### 移动端调试工具
+<!--<script src="http://weinre.hijs.cc/target/target-script-min.js#anonymous"></script>-->
+<!--<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
 
-    <!--<script src="http://weinre.hijs.cc/target/target-script-min.js#anonymous"></script>-->
-    <!--<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
-
-    <!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/eruda"></script>-->
-    <!--<script>eruda.init();</script>-->
+<!--<script type="text/javascript" src="//cdn.jsdelivr.net/npm/eruda"></script>-->
+<!--<script>eruda.init();</script>-->
 
 
 
