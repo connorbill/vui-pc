@@ -1,13 +1,24 @@
 {
-  "name": "vui",
+  "name": "vui-pc",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "main": "./dist/vui.common.js",
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-bundle": "vue-cli-service build --target lib --name vui-pc ./src/components/index.js"
   },
   "dependencies": {
+    "user": "0.0.0",
+    "vant": "^1.5.0",
     "vue": "^2.5.17"
   },
   "devDependencies": {
