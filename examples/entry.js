@@ -3,7 +3,10 @@ import entry from './app';
 import VueRouter from 'vue-router';
 import routes from './route.config';
 
+// import VuiInput from '../lib/input';
+
 Vue.use(VueRouter);
+// Vue.use(VuiInput);
 
 const router = new VueRouter({
   mode: 'hash',

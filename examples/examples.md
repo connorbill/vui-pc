@@ -1,3 +1,6 @@
+
+本地开发调试，调用组件方式
+```javascript
 <template>
 	<div>
 		vui home,123,input
@@ -26,3 +29,4 @@
 <style scoped>
 
 </style>
+```
