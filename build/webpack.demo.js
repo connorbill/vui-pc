@@ -11,14 +11,10 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const config = require('./config');
 
 const isProd = process.env.NODE_ENV === 'production';
-const isPlay = !!process.env.PLAY_ENV;
 
 const webpackConfig = {
   mode: process.env.NODE_ENV,
-  entry: isProd ? {
-    docs: './examples/entry.js',
-    'vui-pc': './src/index.js'
-  } : (isPlay ? './examples/play.js' : './examples/entry.js'),
+  entry: './examples/entry.js',
   output: {
     path: path.resolve(process.cwd(), './examples/vui-pc/'),
     publicPath: process.env.CI_ENV || '',

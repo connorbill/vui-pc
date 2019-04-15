@@ -46,6 +46,7 @@
 </template>
 
 <script>
+  import { judgeValue } from '../../../src/funs/checkFun';
   export default {
     name: 'VuiInput',
     data() {
@@ -79,16 +80,16 @@
         default: 'off'
       },
       autoComplete: {
-        type: String,
+        type: String
       },
       validateEvent: {
         type: Boolean,
         default: true
       },
       className: {
-        type: [Array,String],
+        type: [Array, String],
         default: ''
-      },
+      }
       // placeholder:{
       //     type: String,
       //     default: ''
@@ -173,7 +174,7 @@
           rule: this.selfRule
         };
         if (!obj.rule) return;
-        var tip = this.$judgeValue(obj);
+        var tip = judgeValue(obj);
         var res = {
           isRight: true
         };
@@ -187,11 +188,11 @@
           res.isRight = true;
         }
         return res;
-      },
+      }
     },
     mounted() {
       this.setNativeInputValue();
-    },
+    }
   };
 </script>
 
