@@ -46,7 +46,7 @@
 </template>
 
 <script>
-  import { judgeValue } from '../../../src/funs/checkFun';
+  import { judgeValue } from '../../../src/funs/check-fun';
   export default {
     name: 'VuiInput',
     data() {
