@@ -1,52 +1,71 @@
 <template>
-
-    <div class="vui-form-item " :class="{'is-error': error}" >
-        <div class="vui-form-item__content">
-            <div :class="[
+  <div class="vui-form-item " :class="{'is-error': error}">
+    <div class="vui-form-item__content">
+      <div :class="[
                 type === 'textarea' ? 'vui-textarea' : 'vui-input',
                 {
                   'is-disabled': inputDisabled,
                 }
                 ]"
-            >
-                <input
-                        v-if="type !== 'textarea'"
-                        class="vui-input__inner"
-                        :class="setClassName"
-                        v-bind="$attrs"
-                        :type="type"
-                        :disabled="inputDisabled"
-                        :readonly="readonly"
-                        :autocomplete="autoComplete || autocomplete"
-                        ref="input"
-                        @input="handleInput"
-                        @focus="handleFocus"
-                        @blur="handleBlur"
-                        @change="handleChange"
-                >
-                <textarea
-                        v-else
-                        class="vui-textarea__inner"
-                        :class="setClassName"
-                        @input="handleInput"
-                        ref="textarea"
-                        v-bind="$attrs"
-                        :disabled="inputDisabled"
-                        :readonly="readonly"
-                        :autocomplete="autoComplete || autocomplete"
-                        @focus="handleFocus"
-                        @blur="handleBlur"
-                        @change="handleChange"
-                >
+      >
+        <input
+          v-if="type !== 'textarea'"
+          class="vui-input__inner"
+          :class="setClassName"
+          v-bind="$attrs"
+          :type="showPassword ? 'password' : type"
+          :disabled="inputDisabled"
+          :readonly="readonly"
+          :autocomplete="autoComplete || autocomplete"
+          ref="input"
+          @input="handleInput"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @change="handleChange"
+        >
+        <textarea
+          v-else
+          class="vui-textarea__inner"
+          :class="setClassName"
+          @input="handleInput"
+          ref="textarea"
+          v-bind="$attrs"
+          :disabled="inputDisabled"
+          :readonly="readonly"
+          :autocomplete="autoComplete || autocomplete"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @change="handleChange"
+        >
                     </textarea>
-            </div>
-            <div class="vui-form-item__error">{{errorTip}}</div>
-        </div>
+      </div>
+      <div class="vui-form-item__error">{{errorTip}}</div>
     </div>
+  </div>
 </template>
 
 <script>
+  /**
+   *
+   * 定义一个名为 vui-input 的新组件
+   *
+   * Attributes
+   *@param {参数: type}   {说明: 绑定值} {类型: string }   {可选值: text / textarea}     {默认值: text}
+   *@param {参数: value}   {说明: 绑定值} {类型: string/  number }   {可选值: }     {默认值: }
+   *@param {参数: rule}   {说明: 校验规则}   {类型: Object}     {可选值: }     {默认值: }
+   *@param {参数: disabled}   {说明: 禁用}   {类型: boolean}     {可选值: }     {默认值: false}
+   *@param {参数: autocomplete}   {说明: 原生属性，自动补全}   {类型: string }     {可选值: on, off}     {默认值: off}
+   *@param {参数: className}   {说明: 给select元素添加样式}   {类型: string }     {可选值: }     {默认值: }
+   *@param {参数: placeholder}   {说明: placeholder}   {类型: string }     {可选值: }     {默认值: }
+   *
+   *
+   * Input Events
+   * blur {说明: 在 Input 失去焦点时触发} {回调参数: (event: Event) }
+   * focus {说明: 在 Input 获得焦点时触发} {回调参数: (event: Event) }
+   * change {说明: 在 Input 值改变时触发} {回调参数: (value: string | number) }
+   */
   import { judgeValue } from '../../../src/funs/check-fun';
+
   export default {
     name: 'VuiInput',
     data() {
@@ -89,6 +108,10 @@
       className: {
         type: [Array, String],
         default: ''
+      },
+      showPassword: {
+        type: Boolean,
+        default: false
       }
       // placeholder:{
       //     type: String,
@@ -169,13 +192,13 @@
       },
       checkValue: function() {
 
-        var obj = {
+        let obj = {
           value: this.nativeInputValue,
           rule: this.selfRule
         };
         if (!obj.rule) return;
-        var tip = judgeValue(obj);
-        var res = {
+        let tip = judgeValue(obj);
+        let res = {
           isRight: true
         };
         if (tip) {

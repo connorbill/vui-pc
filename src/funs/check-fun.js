@@ -9,7 +9,7 @@ function isRight(obj, that) {
     if (Array.isArray(vueIns.$refs[v])) {
       // console.log(this.$refs[v]);
       if (vueIns.$refs[v].length > 0) {
-        vueIns.$refs[v].forEach(function(el, index) {
+        vueIns.$refs[v].forEach(function(el) {
           // console.log(el)
           var vali = el.checkValue();
           if (vali && !vali.isRight) {
@@ -103,7 +103,7 @@ function doDeep(o) {
 function deepFreeze(o) {
   var preCode = new Date().getTime();
   if (o.preCode) {
-    preCode = o.preCode ;
+    preCode = o.preCode;
     // preCode = '';
   }
   // preCode = '';
@@ -121,14 +121,17 @@ function isObject(obj) {
   // 判断是否 对象
   return (typeof obj === 'object') && obj.constructor === Object;
 }
+
 function isString(obj) {
   // 判断是否 字符串
   return (typeof obj === 'string') && obj.constructor === String;
 }
+
 function isArray(obj) {
   // 判断是否是数组
   return obj && (typeof obj === 'object') && (obj.constructor === Array);
 }
+
 function checkLicense(num) {
   // 判断是否是营业执照号
   var regIdNo = /^[0-9a-zA-Z]{10,18}$/;
@@ -138,6 +141,7 @@ function checkLicense(num) {
     return true;
   }
 }
+
 function checkMobile(num) {
   // 判断是否是手机号
   var regIdNo = /^[1][2,3,4,5,6,7,8,9,0][0-9]{9}$/;
@@ -147,6 +151,7 @@ function checkMobile(num) {
     return true;
   }
 }
+
 function checkCardID(num) {
   // 判断是否是身份证
   var regIdNo = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
@@ -156,6 +161,7 @@ function checkCardID(num) {
     return true;
   }
 }
+
 function checkInt(num) {
   // 判断是否是整数
   if (!/^\d+$/.test(num)) {
@@ -198,6 +204,7 @@ function checkNumber(num) {
     return false;
   }
 }
+
 function checkDecimalPoint(num) {
   // 判断是否是两位小数，是-> 返回true
   if (/^(\-|\+)?\d+(\.\d{1,2})?$/.test(num)) {
@@ -206,6 +213,15 @@ function checkDecimalPoint(num) {
     return false;
   }
 }
+
+function checkIsValue(value) {
+  if (value === null || value === '' || value === undefined) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function numInt(value) {
   if (value === null || value === '' || value === undefined) {
     return '0';
@@ -221,6 +237,7 @@ function numInt(value) {
     return num;
   }
 }
+
 // function timeFormat(input, fmtstring) {
 //   // 时间戳格式化 依赖于 moment.min.js
 //   return moment(input).format(fmtstring);
@@ -233,6 +250,7 @@ function numTwoDec(value) {
   var num = (Math.round(value * 100) / 100).toFixed(2);
   return num;
 }
+
 function numThou(num) {
   // 千分位格式化 保留两位小数
   if (num && num != null) {
@@ -249,7 +267,8 @@ function numThou(num) {
   }
 }
 
-export { isRight, judgeValue, checkLength, trimSpace, checkNumber, doDeep, deepFreeze, isObject,
+export {
+  isRight, judgeValue, checkLength, trimSpace, checkNumber, doDeep, deepFreeze, isObject,
   isString, isArray, checkLicense, checkMobile, checkCardID, checkInt, checkDecimalPoint,
-  numInt, numTwoDec, numThou
+  numInt, numTwoDec, numThou, checkIsValue
 };

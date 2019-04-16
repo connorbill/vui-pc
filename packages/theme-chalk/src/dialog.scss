@@ -1,0 +1,74 @@
+
+/*vui-dialog start*/
+.vui-dialog__wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  margin: 0;
+  z-index: 1000000;
+}
+.vui-dialog {
+  position: relative;
+  margin: 0 auto 50px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  box-sizing: border-box;
+  width: 50%;
+}
+
+.vui-dialog__header {
+  padding: 8px;
+  background-color: #2c78f4;
+}
+.vui-dialog__title {
+  line-height: 24px;
+  font-size: 16px;
+  color: #fff;
+}
+.vui-dialog__headerbtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  padding: 0;
+  /*background: transparent;*/
+  /*border: none;*/
+  /*outline: none;*/
+  /*font-size: 16px;*/
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  filter: alpha(opacity = 100);
+  opacity: 1;
+  background-image: url("/images/close_icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.vui-dialog__body {
+  padding: 30px 20px;
+  color: #606266;
+  line-height: 24px;
+  font-size: 14px;
+}
+.vui-dialog__footer {
+  padding: 15px;
+  padding-top: 10px;
+  text-align: right;
+  box-sizing: border-box;
+}
+.vui-dialog-close-btn {
+  position: absolute;
+  right: 10px;
+  top: 9px;
+  width: 16px;
+  height: 16px;
+  filter: alpha(opacity = 100);
+  opacity: 1;
+  background-image: url("/images/close_icon.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/*vui-dialog end*/

@@ -1,8 +1,47 @@
+### 源代码地址
+- [github源代码地址](https://github.com/connorbill/vui-pc)
+
+### 开发组件发布到npm 
+
+- 名字:vui-pc
+- 地址：https://www.npmjs.com/package/vui-pc
+- 访问文件CDN：https://unpkg.com/vui-pc
+- 例如：地址+版本号+dist, 即可看到所有文件https://unpkg.com/vui-pc@0.7.0/dist/
+
+### 本地运行使用组件
+
+- 0 开发环境搭建。使用 yarn 进行依赖版本的锁定，所以请不要使用 npm install 安装依赖。
+- 1 开发环境搭建
+
+```shell
+npm run dev
+```
+
+- 2 本地启动测试目录examples，
+- 3 open http://localhost:8085
+
+### 开发组件
+
+- 0 组件开发源代码目录packages
+- 1 打包代码
+
+```shell
+npm run dist
+```
+
+- 2 打包后目录 lib ,
+- 所有组件打包成一个js，浏览器使用js /lib/index.js，这是兼容到ie11的js
+- 打包的commonjs2 文件 /lib/vui-pc.common.js
+- 其他为打包的单个commonjs2 组件
+
+
+### 使用
+
 #### 完整引入
 
 在 main.js 中写入以下内容：
 
-```javascript
+```html
 import Vue from 'vue';
 import VuiPc from 'vui-pc';
 import App from './App.vue';
@@ -45,7 +84,7 @@ npm install babel-plugin-component -D
 
 接下来，如果你只希望引入部分组件，比如 Input，那么需要在 main.js 中写入以下内容：
 
-```javascript
+```html
 import Vue from 'vue';
 import { Input } from 'vui-pc';
 import App from './App.vue';
@@ -63,7 +102,7 @@ new Vue({
 
 
 或者在某个组件中使用
-```javascript
+```html
 <template>
 	<div>
 		<vui-input
@@ -89,3 +128,61 @@ new Vue({
 
 </style>
 ```
+
+# 组件文档
+
+## input 输入框
+
+### 使用案例
+
+- 1[在线运行]()
+
+### Input Attributes
+
+
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| type         | 类型   | string  | text，textarea  | text |
+| value / v-model | 绑定值           | string / number  | — | — |
+| placeholder   | 输入框占位文本    | string          | — | — |
+| show-password | 加上这个则是密码输入框| boolean         | — | false |
+| disabled      | 禁用            | boolean         | — | false   |
+| autocomplete | 原生属性，自动补全 | string | on, off | off |
+| name | 原生属性 | string | — | — |
+| rule | 校验规则 | Array | — | - |
+| class-name | 给input元素添加样式,绑定到input上 | String | — | - |
+
+
+### Input Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| blur | 在 Input 失去焦点时触发 | (event: Event) |
+| focus | 在 Input 获得焦点时触发 | (event: Event) |
+| change | 在 Input 值改变时触发 | (value: string \| number) |
+
+
+
+## select 选择框
+
+### select Attributes
+
+
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| type         | 类型   | string  | text，textarea  | text |
+| value / v-model | 绑定值           | string / number  | — | — |
+| placeholder   | 输入框占位文本    | string          | — | — |
+| show-password | 加上这个则是密码输入框| boolean         | — | false |
+| disabled      | 禁用            | boolean         | — | false   |
+| autocomplete | 原生属性，自动补全 | string | on, off | off |
+| name | 原生属性 | string | — | — |
+| rule | 校验规则 | Array | — | - |
+| class-name | 给input元素添加样式,绑定到input上 | String | — | - |
+
+
+### Input Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| blur | 在 Input 失去焦点时触发 | (event: Event) |
+| focus | 在 Input 获得焦点时触发 | (event: Event) |
+| change | 在 Input 值改变时触发 | (value: string \| number) |

@@ -1,0 +1,64 @@
+
+.vui-table__fixed, .vui-table__fixed-right {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,.12);
+}
+.vui-table__fixed-right{
+  top: 0;
+  left: auto;
+  right: 0;
+}
+.vui-table__fixed-header-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+}
+.vui-table__fixed-header-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+}
+.vui-table__fixed-body-wrapper{
+  position: absolute;
+  left: 0;
+  top: 37px;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.vui-table__fixed-right .vui-table__empty-block{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.vui-table__fixed .vui-table__empty-block{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.vui-table__fixed-footer-wrapper tr{
+  background-color: #e9eef8;
+}
+.vui-table__fixed-right .vui-table__fixed-footer-wrapper{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.vui-table__fixed .vui-table__fixed-footer-wrapper{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.vui-table__fixed-right .vui-table__fixed-body-wrapper, .vui-table__fixed-right .vui-table__fixed-footer-wrapper, .vui-table__fixed-right .vui-table__fixed-header-wrapper {
+  left: auto;
+  right: 0;
+}
+.is-scrolling-left~.vui-table__fixed, .is-scrolling-right~.vui-table__fixed-right , .is-scrolling-none~.vui-table__fixed-right{
+  box-shadow: none;
+}
