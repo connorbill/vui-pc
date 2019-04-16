@@ -133,11 +133,12 @@ new Vue({
 
 ## input 输入框
 
-### 使用案例
+使用案例
 
-- 1[在线运行]()
+- [在线运行](https://codepen.io/connorbill/pen/eoyjxG)
 
-### Input Attributes
+
+Input Attributes
 
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
@@ -152,8 +153,8 @@ new Vue({
 | rule | 校验规则 | Array | — | - |
 | class-name | 给input元素添加样式,绑定到input上 | String | — | - |
 
+Input Events
 
-### Input Events
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
 | blur | 在 Input 失去焦点时触发 | (event: Event) |
@@ -164,25 +165,47 @@ new Vue({
 
 ## select 选择框
 
-### select Attributes
+select Attributes
 
+使用案例
+
+- [在线运行](https://codepen.io/connorbill/pen/ROxJgZ)
 
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type         | 类型   | string  | text，textarea  | text |
 | value / v-model | 绑定值           | string / number  | — | — |
 | placeholder   | 输入框占位文本    | string          | — | — |
-| show-password | 加上这个则是密码输入框| boolean         | — | false |
 | disabled      | 禁用            | boolean         | — | false   |
 | autocomplete | 原生属性，自动补全 | string | on, off | off |
 | name | 原生属性 | string | — | — |
 | rule | 校验规则 | Array | — | - |
 | class-name | 给input元素添加样式,绑定到input上 | String | — | - |
+| option | 选项数组| Array         | — | [] |
+|select-id| option:value参数| string         | — | - |
+|select-name| value对应的显示参数| string         | — | - |
+|select-default-name| 替换默认文字| string         | — | '请选择' |
 
 
-### Input Events
+select Events
+
 | 事件名称 | 说明 | 回调参数 |
 |---------|--------|---------|
-| blur | 在 Input 失去焦点时触发 | (event: Event) |
-| focus | 在 Input 获得焦点时触发 | (event: Event) |
-| change | 在 Input 值改变时触发 | (value: string \| number) |
+| change | 在 Select 值改变时触发 | (value: string \| number) |
+
+
+
+## table 表格
+
+table Attributes
+
+使用案例
+
+- [在线运行](https://codepen.io/connorbill/pen/KYZxVq)
+
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| data | 显示的数据 | array | — | — |
+| show-footer | 是否显示表尾 | boolean | — | true |
+|property| 设置排序，字段值和与之对应的slot | array | — | - |
+
