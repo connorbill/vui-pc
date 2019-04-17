@@ -23,7 +23,6 @@ function judgeValue(obj) {
       }
       if (rule[i].define) {
         var errTip = rule[i].define(value);
-        console.log(errTip);
         if (!errTip) {
           return rule[i].tip;
         }
