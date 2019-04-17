@@ -233,6 +233,7 @@ table Attributes
 ## date-picker  日期选择框
 ## dialog  弹框
 ## table-lr  左右布局表格
+## upload  图片上传
 
 
 
