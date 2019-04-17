@@ -64,7 +64,7 @@
    * focus {说明: 在 Input 获得焦点时触发} {回调参数: (event: Event) }
    * change {说明: 在 Input 值改变时触发} {回调参数: (value: string | number) }
    */
-  import { judgeValue } from '../../../src/funs/check-fun';
+  import { judgeValue } from '../../../src/funs/validate';
 
   export default {
     name: 'VuiInput',

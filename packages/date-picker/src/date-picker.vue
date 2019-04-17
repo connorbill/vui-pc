@@ -33,7 +33,7 @@
 </template>
 
 <script>
-  import { judgeValue } from '../../../src/funs/check-fun';
+  import { judgeValue } from '../../../src/funs/validate';
 
   export default {
     name: 'VuiDatePicker',

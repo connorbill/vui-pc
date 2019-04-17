@@ -30,62 +30,7 @@ function isRight(obj, that) {
   return valiRes;
 }
 
-function judgeValue(obj) {
-  /**
-   *
-   * 优点：
-   * 1 浏览器删除dom元素 或 修改 dom元素（比如将input 修改成div）,仍然绕不过校验
-   * 2 浏览器打开console,修改不了校验规则变量，从而在console上不能绕过校验
-   * 3 相对0.1.0版本更简洁
-   *
-   *
-   新参数
-   require： true, 表示必输项 tip ： 提示语句
-   decimal：0表示整数，2代表保留2位以内的小数，以此类推
-   strMax ：最大字符， strMin： 最小字符长度
-   numMax： 数值最大， numMin： 最小数值
-   define: 自定义校验规则, 可写多个
-   总共如下几种情况：
-   [
-   {require: true, tip: '年龄不能为空'},
-   {strMax: 5, strMin: 2, tip:'长度在 2 到 5 个字符'},
-   {numMax: 100000000000, numMin: 0, tip: '请输入0到12位数值'},
-   {decimal: 0, tip: '请输入整数'},
-   {define: '$checkCardID', tip:'请输入正确的身份证号码'},
-   {define: '$checkNumber', tip:'请输入正确的数值'}
-   ],
 
-   */
-  // console.log(obj)
-  var value = obj.value;
-  var rule = obj.rule;
-  // 新增自定义提示语句
-  if (rule && rule.length > 0) {
-    for (var i = 0; i < rule.length; i++) {
-      if (value === '' || value === null || value === undefined || Array.isArray(value) && value.length === 0) {
-        if (rule[i].require) return rule[i].tip;
-        continue;
-      }
-      if (rule[i].strMax || rule[i].strMin) {
-        if (checkLength(value) > rule[i].strMax || checkLength(value) < rule[i].strMin) return rule[i].tip;
-      }
-      if (rule[i].numMax || rule[i].numMin || rule[i].decimal >= 0) {
-        var decimalLen = '';
-        var decimalStr = value.toString().split('.')[1];
-        if (decimalStr) decimalLen = value.toString().split('.')[1].length;
-        if (!checkNumber(value)) return rule[i].tip;
-        if (decimalLen && decimalLen > rule[i].decimal) return rule[i].tip;
-        if (value > rule[i].numMax || value < rule[i].numMin) return rule[i].tip;
-      }
-      if (rule[i].define) {
-        var errTip = rule[i].define(value);
-        if (!errTip) {
-          return rule[i].tip;
-        }
-      }
-    }
-  }
-}
 
 function doDeep(o) {
   var prop, propKey;

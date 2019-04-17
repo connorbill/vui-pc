@@ -79,7 +79,7 @@
 </template>
 
 <script>
-  import { judgeValue } from '../../../src/funs/check-fun';
+  import { judgeValue } from '../../../src/funs/validate';
   import Emitter from '../../../src/mixins/emitter';
   import axios from 'axios';
 
