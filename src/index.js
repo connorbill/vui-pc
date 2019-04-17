@@ -11,7 +11,7 @@ import Radio from '../packages/radio/index.js';
 import RadioGroup from '../packages/radio-group/index.js';
 import Select from '../packages/select/index.js';
 import Table from '../packages/table/index.js';
-import TableLrLayout from '../packages/table-lr-layout/index.js';
+import TableLr from '../packages/table-lr/index.js';
 import Upload from '../packages/upload/index.js';
 
 const components = [
@@ -26,7 +26,7 @@ const components = [
   RadioGroup,
   Select,
   Table,
-  TableLrLayout,
+  TableLr,
   Upload
 ];
 
@@ -59,7 +59,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '0.8.6',
+  version: '0.9.0',
   install,
   Input,
   Button,
@@ -72,6 +72,6 @@ export default {
   RadioGroup,
   Select,
   Table,
-  TableLrLayout,
+  TableLr,
   Upload
 };

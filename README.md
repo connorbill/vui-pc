@@ -224,8 +224,23 @@ table Attributes
 |property| 设置排序，字段值和与之对应的slot | array | — | - |
 
 
+
+## addr 省市区三级联动
+
+## button 按钮
+## checkbox  多选框
+## radio  单选框
+## date-picker  日期选择框
+## dialog  弹框
+## table-lr  左右布局表格
+
+
+
 ### 版本更新
 
+### [0.9.0](#v087--if)
+
+- vui-table-lr 组件更改名字
 
 ### [0.8.6](#v086--if)
 

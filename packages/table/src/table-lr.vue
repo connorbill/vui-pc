@@ -15,7 +15,7 @@
 
 <script>
   export default {
-    name: 'VuiTableLrLayout',
+    name: 'VuiTableLr',
     data: function() {
       return {
         // tableColumn: [

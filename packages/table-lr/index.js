@@ -1,4 +1,4 @@
-import VuiTableLr from '../table/src/table-lr-layout';
+import VuiTableLr from '../table/src/table-lr';
 
 /* istanbul ignore next */
 VuiTableLr.install = function(Vue) {

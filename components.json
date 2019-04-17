@@ -10,6 +10,6 @@
   "radio-group": "./packages/radio-group/index.js",
   "select": "./packages/select/index.js",
   "table": "./packages/table/index.js",
-  "table-lr-layout": "./packages/table-lr-layout/index.js",
+  "table-lr": "./packages/table-lr/index.js",
   "upload": "./packages/upload/index.js"
 }
