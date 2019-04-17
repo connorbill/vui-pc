@@ -227,6 +227,10 @@ table Attributes
 ### 版本更新
 
 
+### [0.8.6](#v086--if)
+
+- vui-upload 组件更新样式，提供所有上传完成后返回所有图片地址的数组：on-all-file
+
 ### [0.8.5](#v085--if)
 
 - 根目录增加other目录，存放es5的 filter, v-multi-ref指令，数值格式化函数，以便用于es5语法的js中，在页面中直接引入。

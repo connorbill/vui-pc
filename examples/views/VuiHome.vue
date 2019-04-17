@@ -9,7 +9,10 @@
 		>
 		</vui-input>
 		<vui-button type="primary" :loading="isLoading">新 增</vui-button>
-
+		<vui-upload
+			action="/abc/abc"
+			name="name"
+		></vui-upload>
 	</div>
 </template>
 
@@ -17,6 +20,7 @@
   import Input from '../../packages/input/src/input';
   import Select from '../../packages/select/src/select';
   import Button from '../../packages/button/src/button';
+  import Upload from '../../packages/upload/src/upload';
   import {checkCardID, checkLicense, isRight, deepFreeze} from '../../src/funs/check-fun';
 
   export default {
@@ -39,7 +43,8 @@
     components: {
       [Input.name]: Input,
       [Select.name]: Select,
-      [Button.name]: Button
+      [Button.name]: Button,
+      [Upload.name]: Upload
     },
     created() {
       console.log(this.rule);

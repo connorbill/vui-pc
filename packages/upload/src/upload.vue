@@ -40,16 +40,20 @@
             <img :src="item.src" alt="">
             <div class="is-loading-img" v-show="item.isLoading">
               <i class="vui-icon-loading">
-                <div class="m-load2">
-                  <div class="line">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                  </div>
-                  <div class="circlebg"></div>
+
+                <div class="lds-spinner small" >
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
                 </div>
               </i>
             </div>
@@ -72,23 +76,15 @@
 
 <script>
   import axiosRequest from '../../../src/funs/axios-request';
+  import Button from '../../button/src/button';
+
   export default {
     name: 'VuiUpload',
+    components: {
+      [Button.name]: Button
+    },
     data: function() {
       return {
-
-        popPic: {
-          // 提示文字
-          msg: '',
-          // 是否显示 true显示， false隐藏
-          isShow: false,
-          // 如果是删除数组，则传数组的下标
-          index: '',
-          // 如果是删除数组，则传数组的下标的数据，不是的话，传有关删除数据的信息对象如 {id: 1, name:"abcd"}
-          data: '',
-          // 点击确定，执行函数
-          fun: ''
-        },
         allHasUp: true,
         fileNumber: 0,
         willUploadImg: [
@@ -175,10 +171,6 @@
 
     },
     methods: {
-
-      showPicPop: function() {
-        this.popPic.isShow = true;
-      },
       choiceImg() {
         this.$refs.filElem.dispatchEvent(new MouseEvent('click'));
       },
@@ -201,6 +193,7 @@
           src: '',
           name: src.name,
           size: src.size,
+          type: src.type,
           hasUp: false,
           failure: false,
           isLoading: false,
@@ -208,6 +201,7 @@
           sizeError: false,
           address: ''
         };
+        // console.log(src)
         var reader = new FileReader();
         reader.readAsDataURL(src);
         reader.onload = function(e) {
@@ -222,17 +216,17 @@
       },
       startUp: function() {
         // this.beforeUpload('beforeUpload',this.willUploadImg);
-        var that = this;
         if (this.willUploadImg.length > 0) {
           this.isLoadingImg = true;
           for (var i = 0; i < this.willUploadImg.length; i++) {
             if (typeof this.beforeUpload === 'function') {
               var backObj = this.beforeUpload(this.willUploadImg[i].src);
+              // console.log(backObj)
               if (backObj.right) {
-                this.upPicList(this.willUploadImg[i], i);
+                this.upPicList(this.willUploadImg[i], i, backObj.param);
               } else {
-                that.$set(this.willUploadImg[i], 'sizeError', false);
-                that.$set(this.willUploadImg[i], 'tip', backObj.tip);
+                this.$set(this.willUploadImg[i], 'sizeError', false);
+                this.$set(this.willUploadImg[i], 'tip', backObj.tip);
               }
             } else {
               this.upPicList(this.willUploadImg[i], i);
@@ -240,41 +234,53 @@
           }
         }
       },
-      upPicList: function(item, index) {
+      upPicList: function(item, index, param) {
         var that = this;
-        var imgBase = item.src.split(',')[1];
-        var sendData = {
-          [this.name]: imgBase
-        };
-        that.$set(this.willUploadImg[index], 'isLoading', true);
+        // var imgBase = item.src.split(',')[1];
+        // var sendData = {
+        //     [this.name]: JSON.stringify(imgBase)
+        // };
+        if (this.willUploadImg[index].hasUp) {
+          if (index === that.fileNumber - 1) {
+            this.isLoadingImg = false;
+          }
+          return;
+        }
+        this.$set(this.willUploadImg[index], 'isLoading', true);
         var config = {
           url: this.action,
           type: 'post',
           token: '',
           contentType: 'form',
-          params: sendData
+          params: param
         };
         var hasUp = this.willUploadImg[index].hasUp;
         if (!hasUp) {
           axiosRequest(config)
             .then(function(res) {
-              console.log(res);
+              // console.log(res);
               if (res.code === '000000') {
-                that.$set(that.willUploadImg[index], 'address', res.data.src);
+                that.$set(that.willUploadImg[index], 'address', res.data.imgUrl);
                 that.$set(that.willUploadImg[index], 'failure', false);
                 that.$set(that.willUploadImg[index], 'hasUp', true);
                 that.$set(that.willUploadImg[index], 'isLoading', false);
-                // that.onSuccess(res, src);
+                if (that.onSuccess) {
+                  that.onSuccess(res, res.data.imgUrl);
+                }
                 if (index === that.fileNumber - 1) {
                   that.backAllImg();
                 }
               }
             })
-            .catch(function() {
+            .catch(function(err) {
+            // console.log(err);
               that.$set(that.willUploadImg[index], 'address', '');
               that.$set(that.willUploadImg[index], 'failure', true);
               that.$set(that.willUploadImg[index], 'hasUp', false);
               that.$set(that.willUploadImg[index], 'isLoading', false);
+              if (that.onError) {
+                that.onError(err);
+              }
               if (index === that.fileNumber - 1) {
                 that.backAllImg();
               }
