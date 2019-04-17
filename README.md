@@ -131,6 +131,18 @@ new Vue({
 </style>
 ```
 
+或者 引用CDN在线版本，在html中直接引入已打包好的文件，例如：
+```html
+<link rel="stylesheet" href="//unpkg.com/vui-pc@0.8.5/packages/theme-chalk/lib/index.css">
+<script src="//unpkg.com/vue/dist/vue.js"></script>
+<script src="//unpkg.com/vui-pc@0.8.5/lib/index.js"></script>
+<script src="//unpkg.com/vui-pc@0.8.5/other/validate-fun.js"></script>
+
+
+
+```
+
+
 # 组件文档
 
 ## input 输入框
