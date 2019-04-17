@@ -13,6 +13,7 @@ import Select from '../packages/select/index.js';
 import Table from '../packages/table/index.js';
 import TableLr from '../packages/table-lr/index.js';
 import Upload from '../packages/upload/index.js';
+import Pagination from '../packages/pagination/index.js';
 
 const components = [
   Input,
@@ -27,7 +28,8 @@ const components = [
   Select,
   Table,
   TableLr,
-  Upload
+  Upload,
+  Pagination
 ];
 
 const install = function(Vue, opts = {}) {
@@ -73,5 +75,6 @@ export default {
   Select,
   Table,
   TableLr,
-  Upload
+  Upload,
+  Pagination
 };
