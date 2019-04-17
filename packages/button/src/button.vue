@@ -1,11 +1,11 @@
 <template>
-  <button
-    class="vui-button"
-    @click="handleClick"
-    :disabled="buttonDisabled || loading"
-    :autofocus="autofocus"
-    :type="nativeType"
-    :class="[
+	<button
+		class="vui-button"
+		@click="handleClick"
+		:disabled="buttonDisabled || loading"
+		:autofocus="autofocus"
+		:type="nativeType"
+		:class="[
           type ? 'vui-button--' + type : '',
           {
             'is-disabled': buttonDisabled,
@@ -15,25 +15,39 @@
             'is-circle': circle
           }
         ]"
-  >
-    <div class="vui-loading-box">
-      <i class="vui-icon-loading" v-if="loading">
-        <div class="m-load2">
-          <div class="line">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-          </div>
-          <div class="circlebg"></div>
-        </div>
-      </i>
-      <i :class="icon" v-if="icon && !loading"></i>
-      <span v-if="$slots.default"><slot></slot></span>
-    </div>
-  </button>
+	>
+		<div class="vui-loading-box">
+			<div class="lds-spinner small" v-if="loading">
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div>
+			<!--<i class="vui-icon-loading" v-if="loading">-->
+				<!--<div class="m-load2">-->
+					<!--<div class="line">-->
+						<!--<div></div>-->
+						<!--<div></div>-->
+						<!--<div></div>-->
+						<!--<div></div>-->
+						<!--<div></div>-->
+						<!--<div></div>-->
+					<!--</div>-->
+					<!--<div class="circlebg"></div>-->
+				<!--</div>-->
+			<!--</i>-->
+			<i :class="icon" v-if="icon && !loading"></i>
+			<span v-if="$slots.default"><slot></slot></span>
+		</div>
+	</button>
 </template>
 
 <script>

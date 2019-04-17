@@ -1,13 +1,14 @@
 {
   "name": "vui-pc",
-  "version": "0.8.1",
+  "version": "0.8.5",
   "description": "A Component Library for Vue.js.",
   "main": "lib/vui-pc.common.js",
   "files": [
     "lib",
     "src",
     "packages",
-    "types"
+    "types",
+    "other"
   ],
   "typings": "types/index.d.ts",
   "scripts": {

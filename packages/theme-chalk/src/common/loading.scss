@@ -45,21 +45,34 @@
   position: relative;
   width: 64px;
   height: 64px;
-}
-.lds-spinner div {
-  transform-origin: 32px 32px;
-  animation: lds-spinner 1.2s linear infinite;
-}
-.lds-spinner div:after {
-  content: " ";
-  display: block;
-  position: absolute;
-  top: 3px;
-  left: 29px;
-  width: 5px;
-  height: 14px;
-  border-radius: 20%;
-  background: #fff;
+	div {
+		transform-origin: 32px 32px;
+		animation: lds-spinner 1.2s linear infinite;
+		&:after{
+			content: " ";
+			display: block;
+			position: absolute;
+			top: 3px;
+			left: 29px;
+			width: 5px;
+			height: 14px;
+			border-radius: 20%;
+			background: #fff;
+		}
+	}
+	&.small{
+		width: 16px;
+		height: 16px;
+		div{
+			transform-origin: 8px 8px;
+			&:after{
+				top: 12px;
+				left: 6px;
+				width: 2px;
+				height: 4px;
+			}
+		}
+	}
 }
 .lds-spinner div:nth-child(1) {
   transform: rotate(0deg);

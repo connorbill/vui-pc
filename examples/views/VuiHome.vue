@@ -8,6 +8,7 @@
 			:rule="rule.rule.name"
 		>
 		</vui-input>
+		<vui-button type="primary" :loading="isLoading">新 增</vui-button>
 
 	</div>
 </template>
@@ -15,12 +16,14 @@
 <script>
   import Input from '../../packages/input/src/input';
   import Select from '../../packages/select/src/select';
+  import Button from '../../packages/button/src/button';
   import {checkCardID, checkLicense, isRight, deepFreeze} from '../../src/funs/check-fun';
 
   export default {
     name: 'VuiHome',
     data() {
       return {
+        isLoading: true,
         name: '111',
         rule: deepFreeze({
           rule: {
@@ -35,7 +38,8 @@
     },
     components: {
       [Input.name]: Input,
-      [Select.name]: Select
+      [Select.name]: Select,
+      [Button.name]: Button
     },
     created() {
       console.log(this.rule);
