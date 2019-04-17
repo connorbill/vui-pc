@@ -390,6 +390,7 @@
             res.isRight = false;
           } else {
             this.errorCity = false;
+            this.errorTipCity = '';
             res.isRight = true;
           }
           return res;
@@ -405,6 +406,7 @@
             res.isRight = false;
           } else {
             this.errorArea = false;
+            this.errorTipArea = '';
             res.isRight = true;
           }
           return res;
@@ -420,6 +422,7 @@
             res.isRight = false;
           } else {
             this.errorAddress = false;
+            this.errorTipAddress = '';
             res.isRight = true;
           }
           return res;
@@ -448,8 +451,8 @@
               res.isRight = false;
             } else {
               this.errorAddress = false;
+              this.errorTipAddress = '';
             }
-
             return res;
           }
         }

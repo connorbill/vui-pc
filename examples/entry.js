@@ -2,7 +2,7 @@ import Vue from 'vue';
 import entry from './app';
 import VueRouter from 'vue-router';
 import routes from './route.config';
-
+import '../packages/theme-chalk/src/index.scss';
 // import VuiInput from '../lib/input';
 
 Vue.use(VueRouter);

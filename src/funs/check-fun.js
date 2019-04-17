@@ -30,8 +30,6 @@ function isRight(obj, that) {
   return valiRes;
 }
 
-
-
 function doDeep(o) {
   var prop, propKey;
   Object.freeze(o);// 首先冻结第一层对象
@@ -213,7 +211,7 @@ function numThou(num) {
 }
 
 export {
-  isRight, judgeValue, checkLength, trimSpace, checkNumber, doDeep, deepFreeze, isObject,
+  isRight, checkLength, trimSpace, checkNumber, doDeep, deepFreeze, isObject,
   isString, isArray, checkLicense, checkMobile, checkCardID, checkInt, checkDecimalPoint,
   numInt, numTwoDec, numThou, checkIsValue
 };

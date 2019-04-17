@@ -201,6 +201,7 @@
         let res = {
           isRight: true
         };
+        console.log(tip);
         if (tip) {
           this.errorTip = tip;
           this.error = true;
@@ -208,6 +209,7 @@
           res.isRight = false;
         } else {
           this.error = false;
+          this.errorTip = '';
           res.isRight = true;
         }
         return res;

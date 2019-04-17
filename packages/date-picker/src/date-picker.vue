@@ -182,6 +182,7 @@
           res.isRight = false;
         } else {
           this.error = false;
+          this.errorTip = '';
           res.isRight = true;
         }
         return res;
