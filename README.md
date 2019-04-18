@@ -255,6 +255,9 @@ Events
 
 ### 版本更新
 
+### [0.9.4](#--if)
+
+- vui-upload 修复, vui-addr 增加 disabled 禁用参数
 
 ### [0.9.3](#--if)
 

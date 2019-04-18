@@ -17,6 +17,7 @@
       name="imgData"
       accept="image/gif, image/png, image/jpg, image/jpeg"
       multiple
+      auto-upload
       :before-upload="beforeFile"
       :on-all-file="getAllFile"
     ></vui-upload>

@@ -60,7 +60,7 @@
             <div v-if="item.hasUp" class="is-up-img">
               已上传
             </div>
-            <div v-if="item.failure" class="is-up-img reup" @click="upPicList(item, index)">
+            <div v-if="item.failure && !item.isLoading" class="is-up-img reup" @click="upPicList(item, index)">
               上传失败，点击重新上传
             </div>
             <div v-if="item.sizeError">{{item.tip}}</div>
@@ -129,7 +129,7 @@
       accept: String,
       autoUpload: {
         type: Boolean,
-        default: true
+        default: false
       },
       multiple: {
         type: Boolean,
@@ -177,19 +177,19 @@
 
       // 获取到图片
       getFile: function() {
-        var that = this;
-        var inputFile = this.$refs.filElem.files;
+        let that = this;
+        let inputFile = this.$refs.filElem.files;
         if (inputFile) {
           this.fileNumber = this.fileNumber + inputFile.length;
-          for (var i = 0; i < inputFile.length; i++) {
+          for (let i = 0; i < inputFile.length; i++) {
             that.addSrc(inputFile[i], i);
           }
         }
       },
       addSrc: function(src, index) {
-        var that = this;
+        let that = this;
         // console.log(index);
-        var add = {
+        let add = {
           src: '',
           name: src.name,
           size: src.size,
@@ -202,13 +202,16 @@
           address: ''
         };
         // console.log(src)
-        var reader = new FileReader();
+        let reader = new FileReader();
         reader.readAsDataURL(src);
         reader.onload = function(e) {
           add.src = this.result;
           that.willUploadImg.push(add);
           if (that.willUploadImg.length === that.fileNumber) {
             that.isLoadingImg = false;
+            if (that.autoUpload) {
+              that.startUp();
+            }
           } else {
             that.isLoadingImg = true;
           }
@@ -218,9 +221,9 @@
         // this.beforeUpload('beforeUpload',this.willUploadImg);
         if (this.willUploadImg.length > 0) {
           this.isLoadingImg = true;
-          for (var i = 0; i < this.willUploadImg.length; i++) {
+          for (let i = 0; i < this.willUploadImg.length; i++) {
             if (typeof this.beforeUpload === 'function') {
-              var backObj = this.beforeUpload(this.willUploadImg[i].src);
+              let backObj = this.beforeUpload(this.willUploadImg[i].src);
               // console.log(backObj)
               if (backObj.right) {
                 this.upPicList(this.willUploadImg[i], i, backObj.param);
@@ -235,9 +238,9 @@
         }
       },
       upPicList: function(item, index, param) {
-        var that = this;
-        // var imgBase = item.src.split(',')[1];
-        // var sendData = {
+        let that = this;
+        // let imgBase = item.src.split(',')[1];
+        // let sendData = {
         //     [this.name]: JSON.stringify(imgBase)
         // };
         if (this.willUploadImg[index].hasUp) {
@@ -247,14 +250,14 @@
           return;
         }
         this.$set(this.willUploadImg[index], 'isLoading', true);
-        var config = {
+        let config = {
           url: this.action,
           type: 'post',
           token: '',
           contentType: 'form',
           params: param
         };
-        var hasUp = this.willUploadImg[index].hasUp;
+        let hasUp = this.willUploadImg[index].hasUp;
         if (!hasUp) {
           axiosRequest(config)
             .then(function(res) {
@@ -276,9 +279,8 @@
                   that.onError(res);
                 }
               }
-              if (index === that.fileNumber - 1) {
-                that.backAllImg();
-              }
+
+              that.backAllImg();
             })
             .catch(function(err) {
               // console.log(err);
@@ -289,9 +291,8 @@
               if (that.onError) {
                 that.onError(err);
               }
-              if (index === that.fileNumber - 1) {
-                that.backAllImg();
-              }
+
+              that.backAllImg();
             });
         } else {
           if (index === this.fileNumber - 1) {
@@ -303,10 +304,17 @@
         this.willUploadImg.splice(index, 1);
       },
       backAllImg: function() {
-        var that = this;
-        var allImg = [];
+        let that = this;
+        let allImg = [];
+        let load = false;
+        that.willUploadImg.forEach(function(item) {
+          if (item.isLoading) {
+            load = true;
+          }
+        });
+        if (load) return;
         this.isLoadingImg = false;
-        for (var i = 0; i < that.willUploadImg.length; i++) {
+        for (let i = 0; i < that.willUploadImg.length; i++) {
           if (that.willUploadImg[i].hasUp) {
             allImg.push(that.willUploadImg[i].address);
           }

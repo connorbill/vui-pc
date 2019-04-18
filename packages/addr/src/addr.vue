@@ -1,8 +1,13 @@
 <template>
   <div class="vui-addr">
     <div class="vui-form-item " :class="{'is-error': errorProvince}">
-      <div class="vui-form-item__content">
-        <div>
+      <div class="vui-form-item__content"
+      >
+        <div :class="[
+                {
+                  'is-disabled': inputDisabled,
+                }
+                ]">
           <select
             v-model="province"
             class="vui-select__inner"
@@ -23,7 +28,13 @@
 
     <div class="vui-form-item " :class="{'is-error': errorCity}">
       <div class="vui-form-item__content">
-        <div>
+        <div
+          :class="[
+                {
+                  'is-disabled': inputDisabled,
+                }
+                ]"
+        >
           <select
             v-model="city"
             class="vui-select__inner"
@@ -42,7 +53,13 @@
 
     <div class="vui-form-item " :class="{'is-error': errorArea}">
       <div class="vui-form-item__content">
-        <div>
+        <div
+          :class="[
+                {
+                  'is-disabled': inputDisabled,
+                }
+                ]"
+        >
           <select
             v-model="area"
             class="vui-select__inner"
@@ -60,7 +77,13 @@
 
     <div class="vui-form-item " :class="{'is-error': errorAddress}">
       <div class="vui-form-item__content">
-        <div>
+        <div
+          :class="[
+                {
+                  'is-disabled': inputDisabled,
+                }
+                ]"
+        >
           <input
             type="text"
             placeholder="请输入详细地址"
@@ -155,6 +178,15 @@
       addressRuleDetail: {
         type: [Array, String],
         default: ''
+      },
+      disabled: {
+        type: Boolean,
+        default: false
+      }
+    },
+    computed: {
+      inputDisabled() {
+        return this.disabled;
       }
     },
 
