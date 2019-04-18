@@ -312,10 +312,6 @@
           }
         }
         that.onAllFile(allImg);
-      },
-      // 确定插入图片
-      confirmInit: function() {
-
       }
     }
   };

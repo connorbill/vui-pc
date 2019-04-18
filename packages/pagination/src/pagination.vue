@@ -204,7 +204,7 @@
         this.showPrevMore = showPrevMore;
         this.showNextMore = showNextMore;
 
-        console.log(array);
+        // console.log(array);
         return array;
       },
 
@@ -233,61 +233,7 @@
   };
 </script>
 
-<style lang="scss">
-  .vui-pager {
-    li {
-      list-style: none;
-      float: left;
-      background: #fff;
-      margin-right: 7px;
-      display: inline-block;
-      height: 20px;
-      padding: 0 7px;
-      border: 1px solid #d4d4d4;
-      -webkit-border-radius: 2px;
-      -moz-border-radius: 2px;
-      border-radius: 2px;
-      text-align: center;
-      color: #333;
-      font-size: 14px;
-      line-height: 20px;
-      text-decoration: none;
-      cursor: pointer;
+<style >
 
-      &.active {
-        background: #2c78f4;
-        color: #fff;
-        border: 1px solid #2c78f4;
-        cursor: default;
-      }
-
-      &:hover {
-        background: #2c78f4;
-        color: #fff;
-        border: 1px solid #2c78f4;
-      }
-      &.disabled {
-        cursor: not-allowed;
-        background: #fff;
-        color: #333;
-        border: 1px solid #d4d4d4;
-      }
-
-    }
-
-    .input-width {
-      text-align: center;
-      height: 22px;
-      width: 41px;
-      outline: none;
-      -webkit-appearance: none;
-      -webkit-border-radius: 2px;
-      -moz-border-radius: 2px;
-      border-radius: 2px;
-      border: 1px solid #d4d4d4;
-      vertical-align: top;
-      box-sizing: border-box;
-    }
-  }
 
 </style>

@@ -13,7 +13,8 @@
             'is-plain': plain,
             'is-round': round,
             'is-circle': circle
-          }
+          },
+          className
         ]"
 	>
 		<div class="vui-loading-box">
@@ -72,7 +73,8 @@
       plain: Boolean,
       autofocus: Boolean,
       round: Boolean,
-      circle: Boolean
+      circle: Boolean,
+      className: String
     },
     computed: {
       buttonDisabled() {

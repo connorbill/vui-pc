@@ -7,7 +7,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+// const proxy = require('http-proxy-middleware');
 const config = require('./config');
 
 const isProd = process.env.NODE_ENV === 'production';
@@ -30,7 +30,12 @@ const webpackConfig = {
     host: '0.0.0.0',
     port: 8085,
     publicPath: '/',
-    noInfo: true
+    noInfo: true,
+    proxy: {
+      'http://localhost:8806': {
+        target: 'http://localhost:8806'
+      }
+    }
   },
   performance: {
     hints: false

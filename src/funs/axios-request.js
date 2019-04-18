@@ -1,11 +1,11 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
 import Qs from 'qs';
 
 function axiosRequest(config) {
-  var Promise = new Promise();
   // axios-> ajax 请求封装文件
   // 默认配置
-  var defaultConfig = {
+  let defaultConfig = {
     url: '',
     type: 'get',
     token: '',
@@ -13,11 +13,11 @@ function axiosRequest(config) {
     params: {}
   };
   config = Object.assign(defaultConfig, config);
-  var url = config.url;
-  var params = config.params;
-  var instance = axios.create();
+  let url = config.url;
+  let params = config.params;
+  let instance = axios.create();
   // 响应拦截器
-  var instanceToken = config.token ? config.token : '';
+  let instanceToken = config.token ? config.token : '';
 
   if (config.contentType && config.contentType === 'form') {
     instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -25,29 +25,29 @@ function axiosRequest(config) {
     instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
   }
 
-  instance.interceptors.request.use(function(config) {
+  instance.interceptors.request.use(config => {
     // 在发送请求之前做些什么
     if (instanceToken) {
       config.headers.Authorization = instanceToken;
     }
     return config;
-  }, function(error) {
+  }, error => {
     // 对请求错误做些什么
     return Promise.reject(error);
   });
-  instance.interceptors.response.use(function(res) {
+  instance.interceptors.response.use(res => {
     // 请求成功
     if (res.status === 200) {
       return Promise.resolve(res.data);
     } else {
       return Promise.reject(res.data);
     }
-  }, function(error) {
+  }, error => {
     // 请求失败
-    var response = error.response;
+    let response = error.response;
     return Promise.reject(response);
   });
-  var instanceAxios = {
+  let instanceAxios = {
     get: function() {
       return instance.get(url, {
         params: params
