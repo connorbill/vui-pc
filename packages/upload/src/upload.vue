@@ -41,7 +41,7 @@
             <div class="is-loading-img" v-show="item.isLoading">
               <i class="vui-icon-loading">
 
-                <div class="lds-spinner small" >
+                <div class="lds-spinner small">
                   <div></div>
                   <div></div>
                   <div></div>
@@ -267,13 +267,21 @@
                 if (that.onSuccess) {
                   that.onSuccess(res, res.data.imgUrl);
                 }
-                if (index === that.fileNumber - 1) {
-                  that.backAllImg();
+              } else {
+                that.$set(that.willUploadImg[index], 'address', '');
+                that.$set(that.willUploadImg[index], 'failure', true);
+                that.$set(that.willUploadImg[index], 'hasUp', false);
+                that.$set(that.willUploadImg[index], 'isLoading', false);
+                if (that.onError) {
+                  that.onError(res);
                 }
+              }
+              if (index === that.fileNumber - 1) {
+                that.backAllImg();
               }
             })
             .catch(function(err) {
-            // console.log(err);
+              // console.log(err);
               that.$set(that.willUploadImg[index], 'address', '');
               that.$set(that.willUploadImg[index], 'failure', true);
               that.$set(that.willUploadImg[index], 'hasUp', false);

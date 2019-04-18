@@ -16,7 +16,7 @@
 
     <vui-pager
       :total="total"
-      :current-page="currentPage"
+      :current-page.sync="currentPage"
       @current-change="handleCurrentChange"
     ></vui-pager>
 
@@ -36,8 +36,8 @@
     name: 'VuiHome',
     data() {
       return {
-        total: 30,
-        currentPage: 1,
+        total: 10000,
+        currentPage: 2,
         isLoading: true,
         name: '111',
         rule: deepFreeze({
@@ -59,12 +59,12 @@
       [Pagination.name]: Pagination
     },
     created() {
-      console.log(this.rule);
+      // console.log(this.rule);
     },
     methods: {
       handleCurrentChange(val) {
         console.log(val);
-        this.currentPage = val;
+        // this.currentPage = val;
       },
       checkCompanyId() {
         console.log(checkCardID(this.name));

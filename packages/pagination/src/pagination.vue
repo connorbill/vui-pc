@@ -1,39 +1,43 @@
 <template>
-  <ul class="vui-pager middle-center">
-    <li @click="onPagerClick($event, 1)">
+  <ul class="vui-pager middle-center" v-if="pageCount > 0">
+    <li @click="onPagerClick($event, 1)" :class="{'disabled': currentPage === 1}">
       首页
     </li>
-    <li @click="onPagerClick($event, prePage)">
+    <li @click="onPagerClick($event, prePage)"
+        :class="{'disabled': currentPage === 1}">
       上一页
     </li>
-    <li
-      :class="{ active: currentPage === 1}"
-      @click="onPagerClick($event, 1)"
-      v-if="pageCount > 0"
-      class="number">1
-    </li>
+    <!--<li-->
+    <!--:class="[{ active: currentPage === 1 }]"-->
+    <!--@click="onPagerClick($event, 1)"-->
+    <!--v-if="pageCount > 0"-->
+    <!--class="number">1-->
+    <!--</li>-->
     <li
       v-for="pager in pagers"
       :key="pager"
-      :class="{ active: currentPage === pager}"
+      :class="[{ active: currentPage === pager }]"
       @click="onPagerClick($event, pager)"
       class="number">{{ pager }}
     </li>
-    <li
-      :class="{ active: currentPage === pageCount}"
-      @click="onPagerClick($event, pageCount)"
-      class="number"
-      v-if="pageCount > 1">{{ pageCount }}
-    </li>
-    <li @click="onPagerClick($event, nextPage)">
+    <!--<li-->
+    <!--:class="[{ active: currentPage === pageCount }]"-->
+    <!--@click="onPagerClick($event, pageCount)"-->
+    <!--class="number"-->
+    <!--v-if="pageCount > 1">{{ pageCount }}-->
+    <!--</li>-->
+    <li @click="onPagerClick($event, nextPage)"
+        :class="{'disabled': currentPage === pageCount}">
       下一页
     </li>
-    <li @click="onPagerClick($event, pageCount)">
+    <li @click="onPagerClick($event, pageCount)"
+        :class="{'disabled': currentPage === pageCount}">
       尾页
     </li>
     <span>跳</span>
     <input
       class="input-width"
+      @keyup="handleKeyup"
     >
     <span>页</span>
   </ul>
@@ -41,6 +45,7 @@
 
 <script type="text/babel">
   import Input from '../../input/src/input';
+  import {checkInt} from '../../../src/funs/check-fun';
 
   export default {
     name: 'VuiPager',
@@ -80,15 +85,15 @@
     },
     watch: {
       total(val) {
-        console.log(val);
+        // console.log(val);
         this.initPage(val);
       },
       currentPage(val) {
-        console.log(val);
+        // console.log(val);
         // this.initPage(val);
       },
       pageSize(val) {
-        console.log(val);
+        // console.log(val);
         // this.initPage(val);
       }
     },
@@ -96,15 +101,35 @@
       this.initPage();
     },
     methods: {
+
+      handleKeyup(event) {
+        if (event.keyCode === 13) {
+          if (checkInt(event.target.value)) {
+            if (event.target.value > this.pageCount) {
+              this.handleChange(this.pageCount);
+            } else if (event.target.value <= 0) {
+              this.handleChange(1);
+            } else {
+              this.handleChange(Number(event.target.value));
+            }
+          } else {
+            return;
+          }
+        }
+      },
+      handleChange(value) {
+        this.current = value;
+        this.emitChange();
+      },
       initPage() {
         // console.log(val);
         this.pageCount = this.total / this.pageSize;
-        console.log(this.pageCount);
+        // console.log(this.pageCount);
       },
       onPagerClick(event, num) {
         // const target = event.target;
-        console.log(event);
-        console.log(num);
+        // console.log(event);
+        // console.log(num);
         const currentPage = this.currentPage;
         if (num === currentPage) {
           return;
@@ -124,6 +149,7 @@
 
       emitChange() {
         this.$nextTick(() => {
+          this.$emit('update:currentPage', this.current);
           this.$emit('current-change', this.current);
         });
       }
@@ -150,27 +176,27 @@
           }
         }
 
-        console.log(showPrevMore);
-        console.log(showNextMore);
+        // console.log(showPrevMore);
+        // console.log(showNextMore);
 
         const array = [];
 
         if (showPrevMore && !showNextMore) {
-          const startPage = pageCount - (pagerCount - 2);
+          const startPage = pageCount - pagerCount;
           for (let i = startPage; i < pageCount; i++) {
             array.push(i);
           }
         } else if (!showPrevMore && showNextMore) {
-          for (let i = 2; i < pagerCount; i++) {
+          for (let i = 1; i <= pagerCount; i++) {
             array.push(i);
           }
         } else if (showPrevMore && showNextMore) {
-          const offset = Math.floor(pagerCount / 2) - 1;
+          const offset = Math.floor(pagerCount / 2);
           for (let i = currentPage - offset; i <= currentPage + offset; i++) {
             array.push(i);
           }
         } else {
-          for (let i = 2; i < pageCount; i++) {
+          for (let i = 1; i < pageCount; i++) {
             array.push(i);
           }
         }
@@ -180,27 +206,28 @@
 
         console.log(array);
         return array;
-      }
-    },
-    prePage() {
-      let pre = 1;
-      if (this.currentPage > 1) {
-        pre = this.currentPage - 1;
-      } else {
-        pre = this.currentPage;
-      }
+      },
 
-      return pre;
-    },
-    nextPage() {
-      let next = 1;
-      if (this.currentPage < this.pagerCount) {
-        next = this.currentPage + 1;
-      } else {
-        next = this.currentPage;
-      }
+      prePage() {
+        let pre = 1;
+        if (this.currentPage > 1) {
+          pre = this.currentPage - 1;
+        } else {
+          pre = this.currentPage;
+        }
 
-      return next;
+        return pre;
+      },
+      nextPage() {
+        let next = 1;
+        if (this.currentPage < this.pageCount) {
+          next = this.currentPage + 1;
+        } else {
+          next = this.currentPage;
+        }
+
+        return next;
+      }
     }
 
   };
@@ -227,20 +254,23 @@
       text-decoration: none;
       cursor: pointer;
 
-      &.disabled {
-        color: red;
-      }
-
       &.active {
         background: #2c78f4;
         color: #fff;
         border: 1px solid #2c78f4;
+        cursor: default;
       }
 
       &:hover {
         background: #2c78f4;
         color: #fff;
         border: 1px solid #2c78f4;
+      }
+      &.disabled {
+        cursor: not-allowed;
+        background: #fff;
+        color: #333;
+        border: 1px solid #d4d4d4;
       }
 
     }

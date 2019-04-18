@@ -234,6 +234,22 @@ table Attributes
 ## dialog  弹框
 ## table-lr  左右布局表格
 ## upload  图片上传
+## pagination 分页
+
+Attributes
+
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| page-size | 每页显示条目个数 | Number | — | 10 |
+| total | 总条目数 | Number | — | - |
+| current-page | 当前页数，支持 .sync 修饰符 | Number | — | 1 |
+
+
+Events
+
+| 事件名称          | 说明            | 回调参数            |
+|-------------  |---------------- |---------------- |
+| current-change | currentPage 改变时会触发 | 当前页currentPage |
 
 
 
