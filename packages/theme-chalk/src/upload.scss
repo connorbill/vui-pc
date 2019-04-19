@@ -100,9 +100,12 @@
   align-items: center;
   color: #ffffff;
   z-index: 4;
-}
-.is-up-img.reup{
-  cursor: pointer;
+	&.reup{
+		cursor: pointer;
+	}
+	&.tip{
+		z-index: 6;
+	}
 }
 .show-will-upload .img-box{
   width: 100px;

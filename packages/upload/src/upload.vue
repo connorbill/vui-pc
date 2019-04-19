@@ -22,15 +22,14 @@
             type="primary"
             @click="startUp"
             :disabled="isLoadingImg"
+            style="margin-right: 15px;"
           >点击上传
           </vui-button>
+          <div v-if="allTip">{{allTip}}</div>
         </div>
         <div>
           <slot name="trigger"></slot>
           <slot name="tip">
-            <div>
-
-            </div>
           </slot>
         </div>
       </div>
@@ -63,7 +62,7 @@
             <div v-if="item.failure && !item.isLoading" class="is-up-img reup" @click="upPicList(item, index)">
               上传失败，点击重新上传
             </div>
-            <div v-if="item.sizeError">{{item.tip}}</div>
+            <div class="is-up-img tip" v-if="item.sizeError">{{item.tip}}</div>
             <div class="vui-close vui-close-style" @click="deleteWillUpload(index)" v-if="!isLoadingImg">
               <span class="close rounded thick"></span>
             </div>
@@ -85,6 +84,7 @@
     },
     data: function() {
       return {
+        allTip: '',
         allHasUp: true,
         fileNumber: 0,
         willUploadImg: [
@@ -151,13 +151,6 @@
       onExceed: Function
     },
     computed: {},
-    watch: {
-      willUploadImg(val) {
-        // if (val.length > 0){
-        //     // this.allHasUp = false;
-        // }
-      }
-    },
     created: function() {
 
       this.$on('clearData', function(value) {
@@ -172,6 +165,14 @@
     },
     methods: {
       choiceImg() {
+        if (this.limit > 0) {
+          if (this.willUploadImg.length >= this.limit) {
+            this.allTip = `上传文件数量不能大于${this.limit}`;
+            return;
+          } else {
+            this.allTip = '';
+          }
+        }
         this.$refs.filElem.dispatchEvent(new MouseEvent('click'));
       },
 
@@ -180,15 +181,20 @@
         let that = this;
         let inputFile = this.$refs.filElem.files;
         if (inputFile) {
-          this.fileNumber = this.fileNumber + inputFile.length;
+          if (this.limit > 0) {
+            if (inputFile.length + that.willUploadImg.length > this.limit) {
+              this.allTip = `上传文件数量不能大于${this.limit}`;
+              return;
+            }
+          }
+          this.fileNumber = that.willUploadImg.length + inputFile.length;
           for (let i = 0; i < inputFile.length; i++) {
             that.addSrc(inputFile[i], i);
           }
         }
       },
-      addSrc: function(src, index) {
+      addSrc: function(src) {
         let that = this;
-        // console.log(index);
         let add = {
           src: '',
           name: src.name,
@@ -201,7 +207,6 @@
           sizeError: false,
           address: ''
         };
-        // console.log(src)
         let reader = new FileReader();
         reader.readAsDataURL(src);
         reader.onload = function(e) {
@@ -218,18 +223,18 @@
         };
       },
       startUp: function() {
-        // this.beforeUpload('beforeUpload',this.willUploadImg);
         if (this.willUploadImg.length > 0) {
           this.isLoadingImg = true;
           for (let i = 0; i < this.willUploadImg.length; i++) {
             if (typeof this.beforeUpload === 'function') {
-              let backObj = this.beforeUpload(this.willUploadImg[i].src);
+              let backObj = this.beforeUpload(this.willUploadImg[i].src, this.willUploadImg[i].size);
               // console.log(backObj)
               if (backObj.right) {
                 this.upPicList(this.willUploadImg[i], i, backObj.param);
               } else {
-                this.$set(this.willUploadImg[i], 'sizeError', false);
+                this.$set(this.willUploadImg[i], 'sizeError', true);
                 this.$set(this.willUploadImg[i], 'tip', backObj.tip);
+                this.isLoadingImg = false;
               }
             } else {
               this.upPicList(this.willUploadImg[i], i);

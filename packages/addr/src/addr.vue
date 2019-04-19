@@ -102,7 +102,7 @@
 </template>
 
 <script>
-  import { judgeValue } from '../../../src/funs/validate';
+  import {judgeValue} from '../../../src/funs/validate';
   import Emitter from '../../../src/mixins/emitter';
   import axios from 'axios';
 
@@ -123,6 +123,12 @@
         allProvince: [],
         allCity: [],
         allArea: [],
+
+        sProvinceInterface: '/provinceCtrl/findHatProvinceAll',
+        sCityInterface: '/provinceCtrl/findByCityParentCode',
+        sAreaInterface: '/provinceCtrl/findByAreaParentCode',
+        sCityParam: 'code',
+        sAreaParam: 'code',
 
         sProvinceId: 'provinceid',
         sProvinceName: 'province',
@@ -152,6 +158,13 @@
     componentName: 'VuiLinkage',
     mixins: [Emitter],
     props: {
+      provinceArr: {
+        type: Array,
+        default: []
+      },
+      addressConfig: {
+        type: Object
+      },
       addressObj: {
         type: Object,
         default: function() {
@@ -191,6 +204,34 @@
     },
 
     watch: {
+      provinceArr: {
+        immediate: true,
+        handler(newVal) {
+          this.allProvince = [].concat(newVal);
+        }
+      },
+      addressConfig: {
+        immediate: true,
+        handler(newVal) {
+          if (newVal) {
+            this.sProvinceInterface = newVal.sProvinceInterface;
+            this.sCityInterface = newVal.sCityInterface;
+            this.sAreaInterface = newVal.sAreaInterface;
+
+            this.sCityParam = newVal.sCityParam;
+            this.sAreaParam = newVal.sAreaParam;
+
+            this.sProvinceId = newVal.sProvinceId;
+            this.sProvinceName = newVal.sProvinceName;
+
+            this.sCityId = newVal.sCityId;
+            this.sCityName = newVal.sCityName;
+
+            this.sAreaId = newVal.sAreaId;
+            this.sAreaName = newVal.sAreaName;
+          }
+        }
+      },
       addressObj: {
         deep: true,
         immediate: true,
@@ -200,10 +241,16 @@
             cityId: newVal.cityId
           };
           this.setAddress(obj);
-          this.province = newVal.provinceId;
-          this.city = newVal.cityId;
-          this.area = newVal.areaId;
           this.address = newVal.address;
+          if (newVal.provinceId !== '' && newVal.provinceId !== undefined) {
+            this.province = newVal.provinceId;
+          }
+          if (newVal.cityId !== '' && newVal.cityId !== undefined) {
+            this.city = newVal.cityId;
+          }
+          if (newVal.areaId !== '' && newVal.areaId !== undefined) {
+            this.area = newVal.areaId;
+          }
         }
       },
       provinceRuleDetail: {
@@ -232,7 +279,7 @@
       }
     },
     mounted() {
-      this.setAddress();
+      // this.setAddress();
       // this.setAllSelect();
 
     },
@@ -245,24 +292,24 @@
       getProvince: function() {
         return axios({
           method: 'post',
-          url: '/provinceCtrl/findHatProvinceAll'
+          url: this.sProvinceInterface
         });
       },
       getCitys: function(provinceId) {
         return axios({
           method: 'post',
-          url: '/provinceCtrl/findByCityParentCode',
+          url: this.sCityInterface,
           params: {
-            code: provinceId
+            [this.sCityParam]: provinceId
           }
         });
       },
       getArea: function(cityId) {
         return axios({
           method: 'post',
-          url: '/provinceCtrl/findByAreaParentCode',
+          url: this.sAreaInterface,
           params: {
-            code: cityId
+            [this.sAreaParam]: cityId
           }
         });
       },
@@ -272,17 +319,18 @@
         let that = this;
         this.errorProvince = false;
         this.checkValue('province');
+        that.city = '';
+        that.area = '';
+        if (provinceId === '') return;
         axios({
           method: 'post',
-          url: '/provinceCtrl/findByCityParentCode',
+          url: this.sCityInterface,
           params: {
-            code: provinceId
+            [this.sCityParam]: provinceId
           }
         }).then(function(res) {
           if (res.data.code === '000000') {
             that.allCity = [].concat(res.data.data);
-            that.city = '';
-            that.area = '';
           }
         });
 
@@ -294,17 +342,18 @@
         this.errorCity = false;
         this.checkValue('city');
         let that = this;
+        that.area = '';
+        if (cityId === '') return;
         axios({
           method: 'post',
-          url: '/provinceCtrl/findByAreaParentCode',
+          url: this.sAreaInterface,
           params: {
-            code: cityId
+            [this.sAreaParam]: cityId
           }
         })
           .then(res => {
             if (res.data.code === '000000') {
               that.allArea = [].concat(res.data.data);
-              that.area = '';
             }
           });
 
@@ -329,24 +378,21 @@
         if (adr) {
           if (this.province === adr.provinceId && this.city === adr.cityId) return;
           if (adr.provinceId && !adr.cityId) {
-            reqArr = [that.getProvince(), that.getCitys(adr.provinceId)];
+            reqArr = [that.getCitys(adr.provinceId)];
           } else if (adr.provinceId && adr.cityId) {
-            reqArr = [that.getProvince(), that.getCitys(adr.provinceId), that.getArea(adr.cityId)];
-          } else {
-            reqArr = [that.getProvince()];
+            reqArr = [that.getCitys(adr.provinceId), that.getArea(adr.cityId)];
           }
-        } else {
-          reqArr = [that.getProvince()];
         }
+        if (reqArr.length === 0) return;
         axios.all(reqArr)
-          .then(axios.spread(function(pro, city, area) {
-            let prodata = pro ? pro.data : '';
+          .then(axios.spread(function(city, area) {
+            // let prodata = pro ? pro.data : '';
             let citydata = city ? city.data : '';
             let areadata = area ? area.data : '';
 
-            if (prodata.code === '000000') {
-              that.allProvince = [].concat(prodata.data);
-            }
+            // if (prodata.code === '000000') {
+            //   that.allProvince = [].concat(prodata.data);
+            // }
             if (citydata.code === '000000') {
               that.allCity = [].concat(citydata.data);
             }
