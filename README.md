@@ -338,6 +338,16 @@ addr Events 查看以下例子
 ## dialog  弹框
 ## table-lr  左右布局表格
 ## upload  图片上传
+
+
+上传界面结果页面
+
+正在上传中
+![avatar](/examples/assets/images/upload/upload2.png)
+
+已上传
+![avatar](/examples/assets/images/upload/upload1.png)
+
 ## pagination 分页
 
 Attributes
