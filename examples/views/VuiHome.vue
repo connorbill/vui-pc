@@ -14,12 +14,12 @@
       <vui-button type="primary" :loading="isLoading">新 增</vui-button>
     </div>
     <div class="title">上传图片组件</div>
+    <!--accept="image/gif, image/png, image/jpg, image/jpeg"
+      auto-upload-->
     <vui-upload
       action="/fkjdPictureDescriptionCtrl/uploadDescPicFile"
       name="imgData"
-      accept="image/gif, image/png, image/jpg, image/jpeg"
       multiple
-      auto-upload
       :before-upload="beforeFile"
       :on-all-file="getAllFile"
     ></vui-upload>
@@ -29,10 +29,20 @@
       :current-page.sync="currentPage"
       @current-change="handleCurrentChange"
     ></vui-pager>
-    <div class="title">省市区三级联动</div>
+    <!--<div class="title">省市区三级联动</div>-->
+
     <vui-addr
       :province-arr="allProvince"
     ></vui-addr>
+
+    <!--<input type="file">-->
+
+    <vui-upload
+      action="/fileUpload/upload2"
+      multiple
+      :before-upload="beforeFile2"
+      :on-after-upload="onAfterUpload"
+    ></vui-upload>
 
   </div>
 </template>
@@ -79,6 +89,8 @@
     created() {
       // console.log(this.rule);
       this.getProvince();
+      this.getCity();
+      this.getLoanList();
     },
     methods: {
       handleCurrentChange(val) {
@@ -103,7 +115,7 @@
       },
 
       beforeFile: function(file, size) {
-        // console.log(size);
+        // console.log(file);
         // console.log(this.showSize(file));
         // if (size > 300 * 1024) {
         //   return {
@@ -111,20 +123,22 @@
         //     tip: '文件不能大于300kb'
         //   };
         // }
-        // console.log(file.split(',')[0])
-        var base = file.split(',')[1];
-        var typeStr = file.split(';')[0];
+        var base64 = file.split(',')[1];
+        // var typeStr = file.split(';base')[0];
 
-        var type = typeStr.split(':')[1];
+        // var type = typeStr.split('data:')[1];
 
         var imgValue = {
-          path: '/fengkong/' + '20190416002' + '/JD_zhjyqk',
-          imageType: type,
-          baseData64: base
+          path: '/fengkong/' + '20190416002' + '/Qy_file',
+          baseData64: base64
         };
-        // console.log(imgValue)
+        console.log(imgValue);
         var param = {
-          imgData: JSON.stringify(imgValue)
+          param: {
+            imgData: JSON.stringify(imgValue),
+            path: imgValue.path
+          },
+          contentType: 'formdata'
         };
         var back = {
           right: true,
@@ -139,19 +153,97 @@
         this.willUploadImg = [].concat(file);
 
       },
+      beforeFile2: function(file, size) {
+        // console.log(file);
+        // console.log(this.showSize(file));
+        // if (size > 300 * 1024) {
+        //   return {
+        //     right: false,
+        //     tip: '文件不能大于300kb'
+        //   };
+        // }
+        // var base64 = file.split(',')[1];
+        // var typeStr = file.split(';base')[0];
+
+        // var type = typeStr.split('data:')[1];
+
+        var imgValue = {
+          path: '/fengkong/20190416002/Qy_file'
+        };
+        console.log(imgValue);
+
+        let formData = new FormData();// FormData 对象
+        formData.append('file', file);
+        var params = {
+          param: {
+            path: imgValue.path
+          },
+          contentType: 'formdata',
+          data: formData
+        };
+        var back = {
+          right: true,
+          param: params,
+          tip: ''
+        };
+
+        return back;
+      },
+      onAfterUpload: function(res) {
+        console.log(res);
+      },
       getProvince: function() {
 
         let config = {
           url: '/provinceCtrl/findHatProvinceAll',
-          type: 'post',
+          method: 'post',
           token: '',
           contentType: 'form',
           params: {}
         };
+        // 110000
         let that = this;
         axiosRequest(config)
           .then(function(res) {
+            console.log(res);
             that.allProvince = [].concat(res.data);
+          });
+      },
+      getCity: function() {
+
+        let config = {
+          url: '/provinceCtrl/findByCityParentCode',
+          method: 'post',
+          token: '',
+          contentType: 'form',
+          data: {
+            code: 110000
+          }
+        };
+        // 110000
+        // let that = this;
+        axiosRequest(config)
+          .then(function(res) {
+          });
+      },
+
+      getLoanList: function() {
+        var config = {
+          url: '/fkqyStoreReviewCtrl/fkqyStoreReviewList',
+          method: 'post',
+          token: '',
+          contentType: 'form',
+          data: {}
+        };
+        axiosRequest(config)
+          .then(function(res) {
+            console.log(res);
+            if (res.code === '000000') {
+              //  that.loanPlan.list = [].concat();
+            }
+          })
+          .catch(function(err) {
+            console.log(err);
           });
       }
     }

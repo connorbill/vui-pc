@@ -3,38 +3,33 @@ import axios from 'axios';
 import Qs from 'qs';
 
 function axiosRequest(config) {
+  // 不建议使用axios.create(), https://github.com/axios/axios/issues/217
   // axios-> ajax 请求封装文件
   // 默认配置
   let defaultConfig = {
     url: '',
-    type: 'get',
+    method: 'get',
     token: '',
     contentType: 'json',
-    params: {}
+    params: {},
+    data: ''
   };
   config = Object.assign(defaultConfig, config);
-  let url = config.url;
-  let params = config.params;
-  let instance = axios.create();
-  // 响应拦截器
-  let instanceToken = config.token ? config.token : '';
-
+  let contentType = 'application/json;charset=UTF-8';
   if (config.contentType && config.contentType === 'form') {
-    instance.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-  } else {
-    instance.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+    config.data = Qs.stringify(config.data);
+    contentType = 'application/x-www-form-urlencoded';
+  } else if (config.contentType && config.contentType === 'formdata') {
+    contentType = 'multipart/form-data';
   }
-
+  let instance = axios.create();
   instance.interceptors.request.use(config => {
-    // 在发送请求之前做些什么
-    if (instanceToken) {
-      config.headers.Authorization = instanceToken;
-    }
     return config;
   }, error => {
     // 对请求错误做些什么
     return Promise.reject(error);
   });
+  // axios.interceptors.request.eject(myInterceptor);
   instance.interceptors.response.use(res => {
     // 请求成功
     if (res.status === 200) {
@@ -47,32 +42,17 @@ function axiosRequest(config) {
     let response = error.response;
     return Promise.reject(response);
   });
-  let instanceAxios = {
-    get: function() {
-      return instance.get(url, {
-        params: params
-      });
-    },
-    // Qs-> 字段序列化库 /js/qs.js
-    post: function() {
-      if (config.contentType && config.contentType === 'form') {
-        return instance.post(url, Qs.stringify(params));
-      } else {
-        return instance.post(url, params);
-      }
-    },
-    all: function() {
-      return axios.all(config.all);
-    }
 
-  };
-  if (config.type === 'post') {
-    return instanceAxios.post();
-  } else if (config.type === 'get') {
-    return instanceAxios.get();
-  } else if (config.type === 'all') {
-    return instanceAxios.all(config.all);
-  }
+  return instance({
+    method: config.method,
+    url: config.url,
+    data: config.data,
+    params: config.params,
+    headers: {
+      'Content-Type': contentType,
+      'Authorization': config.token ? config.token : ''
+    }
+  });
 }
 
 export default axiosRequest;
