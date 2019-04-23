@@ -372,6 +372,7 @@
           });
       },
       deleteWillUpload: function(index) {
+        this.fileNumber -= 1;
         this.willUploadImg.splice(index, 1);
       },
       backAllImg: function() {
