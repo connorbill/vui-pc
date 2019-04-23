@@ -16,13 +16,6 @@
     <div class="title">上传图片组件</div>
     <!--accept="image/gif, image/png, image/jpg, image/jpeg"
       auto-upload-->
-    <vui-upload
-      action="/fkjdPictureDescriptionCtrl/uploadDescPicFile"
-      name="imgData"
-      multiple
-      :before-upload="beforeFile"
-      :on-all-file="getAllFile"
-    ></vui-upload>
     <div class="title">分页组件</div>
     <vui-pager
       :total="total"
@@ -36,13 +29,23 @@
     ></vui-addr>
 
     <!--<input type="file">-->
+    <button @click="popPic.isShow = true">上传</button>
+    <button @click="popPic.isShow = true">上传</button>
 
-    <vui-upload
-      action="/fileUpload/upload2"
-      multiple
-      :before-upload="beforeFile2"
-      :on-after-upload="onAfterUpload"
-    ></vui-upload>
+
+    <vui-dialog
+      title="图片上传"
+      :visible.sync="popPic.isShow"
+      width="640px"
+    >
+      <vui-upload
+        action="/fileUpload/upload2"
+        multiple
+        :before-upload="beforeFile2"
+        :on-after-upload="onAfterUpload"
+        :on-all-file="getAllFile"
+      ></vui-upload>
+    </vui-dialog>
 
   </div>
 </template>
@@ -56,14 +59,18 @@
   import Upload from '../../packages/upload/src/upload';
   import Pagination from '../../packages/pagination/src/pagination';
   import Addr from '../../packages/addr/src/addr';
+  import Dialog from '../../packages/dialog/src/dialog';
 
   export default {
     name: 'VuiHome',
     data() {
       return {
+        popPic: {
+          isShow: false
+        },
         allProvince: [],
-        total: 10000,
-        currentPage: 2,
+        total: 51,
+        currentPage: 1,
         isLoading: true,
         name: '111',
         rule: deepFreeze({
@@ -84,13 +91,14 @@
       [Button.name]: Button,
       [Upload.name]: Upload,
       [Pagination.name]: Pagination,
-      [Addr.name]: Addr
+      [Addr.name]: Addr,
+      [Dialog.name]: Dialog
     },
     created() {
       // console.log(this.rule);
-      this.getProvince();
-      this.getCity();
-      this.getLoanList();
+      // this.getProvince();
+      // this.getCity();
+      // this.getLoanList();
     },
     methods: {
       handleCurrentChange(val) {

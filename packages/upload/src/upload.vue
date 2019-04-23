@@ -174,6 +174,7 @@
         this.willUploadImg.splice(0, this.willUploadImg.length);
         this.fileNumber = 0;
         this.isLoadingImg = false;
+        this.$refs.filElem.value = '';
       });
     },
     mounted: function() {
@@ -222,7 +223,8 @@
           tip: '',
           sizeError: false,
           address: '',
-          file: src
+          file: src,
+          res: ''
         };
         let reader = new FileReader();
         reader.readAsDataURL(src);
@@ -345,24 +347,26 @@
         };
         axiosRequest(config)
           .then(function(res) {
-            console.log(res);
-            that.$set(that.willUploadImg[index], 'address', res.data.url);
+            // console.log(res);
+            // that.$set(that.willUploadImg[index], 'address', res.data.url);
+            that.$set(that.willUploadImg[index], 'res', res);
             that.$set(that.willUploadImg[index], 'failure', false);
             that.$set(that.willUploadImg[index], 'hasUp', true);
             that.$set(that.willUploadImg[index], 'isLoading', false);
             if (that.onAfterUpload) {
-              that.onAfterUpload(res);
+              that.onAfterUpload(res, index);
             }
             that.backAllImg();
           })
           .catch(function(err) {
-            console.log(err);
+            // console.log(err);
+            that.$set(that.willUploadImg[index], 'res', err);
             that.$set(that.willUploadImg[index], 'address', '');
             that.$set(that.willUploadImg[index], 'failure', true);
             that.$set(that.willUploadImg[index], 'hasUp', false);
             that.$set(that.willUploadImg[index], 'isLoading', false);
             if (that.onAfterUpload) {
-              that.onAfterUpload(err);
+              that.onAfterUpload(err, index);
             }
             that.backAllImg();
           });
@@ -387,9 +391,12 @@
           }
         }
         if (that.onAllFile) {
-          that.onAllFile(allImg);
+          that.onAllFile(that.willUploadImg);
         }
       }
+    },
+    beforeDestroy() {
+      console.log(1);
     }
   };
 </script>

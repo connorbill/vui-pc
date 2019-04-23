@@ -123,8 +123,8 @@
       },
       initPage() {
         // console.log(val);
-        this.pageCount = this.total / this.pageSize;
-        // console.log(this.pageCount);
+        this.pageCount = Math.ceil(this.total / this.pageSize);
+        console.log(this.pageCount);
       },
       onPagerClick(event, num) {
         // const target = event.target;
@@ -176,8 +176,8 @@
           }
         }
 
-        // console.log(showPrevMore);
-        // console.log(showNextMore);
+        console.log(showPrevMore);
+        console.log(showNextMore);
 
         const array = [];
 
@@ -196,7 +196,7 @@
             array.push(i);
           }
         } else {
-          for (let i = 1; i < pageCount; i++) {
+          for (let i = 1; i <= pageCount; i++) {
             array.push(i);
           }
         }
@@ -204,7 +204,7 @@
         this.showPrevMore = showPrevMore;
         this.showNextMore = showNextMore;
 
-        // console.log(array);
+        console.log(array);
         return array;
       },
 
