@@ -159,6 +159,7 @@
       pagers() {
         const pagerCount = this.pagerCount;
         const halfPagerCount = (pagerCount - 1) / 2;
+        console.log(halfPagerCount);
 
         const currentPage = Number(this.currentPage);
         const pageCount = Number(this.pageCount);
@@ -182,20 +183,24 @@
         const array = [];
 
         if (showPrevMore && !showNextMore) {
-          const startPage = pageCount - pagerCount;
-          for (let i = startPage; i < pageCount; i++) {
+          // 页数是从第一页开始的，且总页数大于可显示的页数
+          const startPage = pageCount - (pagerCount - 1);
+          for (let i = startPage; i <= pageCount; i++) {
             array.push(i);
           }
         } else if (!showPrevMore && showNextMore) {
+          // 总页数大于可显示页数，且当前页在第一页
           for (let i = 1; i <= pagerCount; i++) {
             array.push(i);
           }
         } else if (showPrevMore && showNextMore) {
+          // 页数值在中间值
           const offset = Math.floor(pagerCount / 2);
           for (let i = currentPage - offset; i <= currentPage + offset; i++) {
             array.push(i);
           }
         } else {
+          // 页数是从第一页开始的，且总页数小于可显示的页数
           for (let i = 1; i <= pageCount; i++) {
             array.push(i);
           }

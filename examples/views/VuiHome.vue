@@ -69,7 +69,7 @@
           isShow: false
         },
         allProvince: [],
-        total: 51,
+        total: 59,
         currentPage: 1,
         isLoading: true,
         name: '111',
