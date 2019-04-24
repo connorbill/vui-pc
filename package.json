@@ -1,6 +1,6 @@
 {
   "name": "vui-pc",
-  "version": "0.9.64",
+  "version": "0.9.66",
   "description": "A Component Library for Vue.js.",
   "main": "lib/vui-pc.common.js",
   "files": [

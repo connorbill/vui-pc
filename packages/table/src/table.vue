@@ -235,7 +235,7 @@
         leftFixedColumns: 0,
         leftFixedWidth: 0,
         leftOneFixWidth: '',
-        RightOneFixWidth: '',
+        rightOneFixWidth: '',
         rightFixedColumns: 0,
         rightFixedWidth: 0,
         tableHeight: 0,
@@ -312,6 +312,13 @@
           this.setTableHeight();
         }
       },
+      property: {
+        immediate: true,
+        handler() {
+          this.setCol();
+          this.setTableHeight();
+        }
+      },
       isEdit: {
         immediate: true,
         handler(newVal) {
@@ -324,66 +331,13 @@
       }
     },
     created: function() {
-      var tdWidthArr = [];
-      var headTitleArr = [];
-      this.property.forEach(function(item) {
-        tdWidthArr.push(item.width);
-        headTitleArr.push(item.headTitle);
-      });
-      var tableWidth = this.sumArr(tdWidthArr);
-      this.property.forEach(function(item) {
-        item.slot = item.slot.toLowerCase();
-      });
-      Object.assign(this.store, {
-        tdWidthArr: [].concat(tdWidthArr),
-        thTitle: [].concat(headTitleArr),
-        tableWidth: tableWidth,
-        data: [].concat(this.data),
-        rule: this.rule,
-        isEdit: false,
-        showFooter: this.showFooter,
-        property: [].concat(this.property),
-        province: [].concat(this.province),
-        citys: [].concat(this.citys),
-        area: [].concat(this.area)
-      });
-      var property = this.store.property;
-      var leftArr = [];
-      var centerArr = [];
-      var rightArr = [];
-      var leftArrTitle = [];
-      var centerArrTitle = [];
-      var rightArrTitle = [];
-      for (var i = 0; i < property.length; i++) {
-        if (property[i].fixed && property[i].fixed === 'left') {
-          leftArr.push(property[i]);
-          leftArrTitle.push(property[i].headTitle);
-          this.leftFixedWidth += property[i].width;
-          if (i === 0) {
-            this.leftOneFixWidth = property[i].width;
-          }
-        } else if (property[i].fixed && property[i].fixed === 'right') {
-          rightArr.push(property[i]);
-          rightArrTitle.push(property[i].headTitle);
-          this.rightFixedWidth += property[i].width;
-          if (i === 0) {
-            this.rightOneFixWidth = property[i].width;
-          }
-        } else {
-          centerArrTitle.push(property[i].headTitle);
-          centerArr.push(property[i]);
-        }
-      }
-      this.store.thTitle = [].concat(leftArrTitle).concat(centerArrTitle).concat(rightArrTitle);
-      this.store.property = [].concat(leftArr).concat(centerArr).concat(rightArr);
-      this.leftFixedColumns = leftArr.length;
-      this.rightFixedColumns = rightArr.length;
+      this.setCol();
       // console.log(this.isEdit)
       // console.log(leftArr)
       var that = this;
       this.$nextTick(function() {
         // 将每一个在页面中使用后的vui-table存储起来。
-        vuiTableRefArr.push({ ref: this.$refs.vuitable, ins: this });
+        vuiTableRefArr.push({ref: this.$refs.vuitable, ins: this});
         that.isShowFixJudge();
       });
     },
@@ -392,6 +346,71 @@
       this.bindEvents();
     },
     methods: {
+      setCol: function() {
+        var that = this;
+        var tdWidthArr = [];
+        var headTitleArr = [];
+        this.property.forEach(function(item) {
+          item.slot = item.slot.toLowerCase();
+        });
+        var property = this.property;
+        var leftArr = [];
+        var centerArr = [];
+        var rightArr = [];
+        var leftArrTitle = [];
+        var centerArrTitle = [];
+        var rightArrTitle = [];
+        this.leftFixedWidth = 0;
+        this.rightFixedWidth = 0;
+        for (var i = 0; i < property.length; i++) {
+          if (property[i].fixed && property[i].fixed === 'left') {
+            leftArr.push(property[i]);
+            leftArrTitle.push(property[i].headTitle);
+            this.leftFixedWidth += property[i].width;
+            if (i === 0) {
+              this.leftOneFixWidth = property[i].width;
+            }
+          } else if (property[i].fixed && property[i].fixed === 'right') {
+            rightArr.push(property[i]);
+            rightArrTitle.push(property[i].headTitle);
+            this.rightFixedWidth += property[i].width;
+            if (i === 0) {
+              this.rightOneFixWidth = property[i].width;
+            }
+          } else {
+            centerArrTitle.push(property[i].headTitle);
+            centerArr.push(property[i]);
+          }
+        }
+
+        var thTitle = [].concat(leftArrTitle).concat(centerArrTitle).concat(rightArrTitle);
+        var pro = [].concat(leftArr).concat(centerArr).concat(rightArr);
+        this.leftFixedColumns = leftArr.length;
+        this.rightFixedColumns = rightArr.length;
+
+        pro.forEach(function(item) {
+          tdWidthArr.push(item.width);
+          headTitleArr.push(item.headTitle);
+        });
+        var tableWidth = this.sumArr(tdWidthArr);
+        Object.assign(this.store, {
+          tdWidthArr: [].concat(tdWidthArr),
+          thTitle: [].concat(thTitle),
+          tableWidth: tableWidth,
+          data: [].concat(this.data),
+          rule: this.rule,
+          isEdit: false,
+          showFooter: this.showFooter,
+          property: [].concat(this.property),
+          province: [].concat(this.province),
+          citys: [].concat(this.citys),
+          area: [].concat(this.area)
+        });
+        this.$nextTick(function() {
+          // 将每一个在页面中使用后的vui-table存储起来。
+          that.isShowFixJudge();
+        });
+      },
       setTableHeight: function() {
 
         this.$nextTick(function() {
@@ -484,7 +503,7 @@
         };
       },
       bindEvents() {
-        const { headerWrapper, footerWrapper } = this.$refs;
+        const {headerWrapper, footerWrapper} = this.$refs;
         const refs = this.$refs;
         let self = this;
         this.bodyWrapper.addEventListener('scroll', function() {
@@ -509,9 +528,9 @@
       },
       checkForm: function() {
         if (!this.$isRight(this.rule.ref)) {
-          return { data: this.data, isRight: false };
+          return {data: this.data, isRight: false};
         } else {
-          return { data: this.data, isRight: true };
+          return {data: this.data, isRight: true};
         }
       },
       sumArr: function(arr) {

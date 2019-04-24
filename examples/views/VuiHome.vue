@@ -55,11 +55,21 @@
       ></vui-upload>
     </vui-dialog>
 
+    <div @click="changeCol(1)" style="height: 50px;margin: 30px;background-color: pink;">减列</div>
+    <div @click="changeCol(2)" style="height: 50px;margin: 30px;background-color: pink;">加列</div>
+
+    <vui-table
+      :data="list"
+      :property="property"
+    >
+
+    </vui-table>
+
   </div>
 </template>
 
 <script>
-  import { checkCardID, checkLicense, isRight, deepFreeze } from '../../src/funs/check-fun';
+  import {checkCardID, checkLicense, isRight, deepFreeze} from '../../src/funs/check-fun';
   import axiosRequest from '../../src/funs/axios-request';
   import Input from '../../packages/input/src/input';
   import Select from '../../packages/select/src/select';
@@ -68,6 +78,7 @@
   import Pagination from '../../packages/pagination/src/pagination';
   import Addr from '../../packages/addr/src/addr';
   import Dialog from '../../packages/dialog/src/dialog';
+  import Table from '../../packages/table/src/table';
 
   export default {
     name: 'VuiHome',
@@ -85,12 +96,153 @@
           rule: {
             // 营业执照号/身份证号
             name: [
-              { require: true, tip: '此为必填项' },
-              { define: this.checkCompanyId, tip: '请输入正确的营业执照号或身份证号' }
+              {require: true, tip: '此为必填项'},
+              {define: this.checkCompanyId, tip: '请输入正确的营业执照号或身份证号'}
             ]
           }
         }),
-        willUploadImg: []
+        willUploadImg: [],
+        list: [1, 2, 3, 4, 5, 6],
+        property: [
+          {
+            headTitle: '序号', // 表头名称
+            width: 60, // 这一列宽度
+            prop: '',
+            slot: 'indexSlot',
+            fixed: 'left', // 固定在左侧
+            className: '',
+            position: '',
+            type: 'index' // 字段类型 index 为序号，
+          },
+          {
+            headTitle: '借款主体',
+            width: 150,
+            prop: 'storeName',
+            slot: 'storeName',
+            className: '',
+            fixed: 'left',
+            type: ''
+          },
+          {
+            headTitle: '借款金额（元）',
+            width: 150,
+            prop: 'appropriationAmount',
+            slot: 'appropriationAmount',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            // 单位 ： period_unit 0 月， 1 日
+            headTitle: '借款期限',
+            width: 100,
+            prop: 'appropriationDate',
+            slot: 'appropriationDate',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '还款方式',
+            width: 150,
+            prop: 'repaymentType',
+            slot: 'repaymentType',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '借款利率（%）',
+            width: 110,
+            prop: 'lendingRate',
+            slot: 'lendingRate',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '居间服务费率（%）',
+            width: 130,
+            prop: 'serviceTariffing',
+            slot: 'serviceTariffing',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '实际控制人',
+            width: 100,
+            prop: 'ctrlName',
+            slot: 'ctrlName',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '评审通过时间',
+            width: 150,
+            prop: 'reviewTime',
+            slot: 'reviewTime',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            // 经营贷
+            headTitle: '借款类型',
+            width: 100,
+            prop: 'loanType',
+            slot: 'loanType',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '客户经理',
+            width: 100,
+            prop: 'supName',
+            slot: 'supName',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '所属区域',
+            width: 100,
+            prop: 'departmentName',
+            slot: 'departmentName',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '项目编号',
+            width: 110,
+            prop: 'number',
+            slot: 'number',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '状态',
+            width: 100,
+            prop: 'statusName',
+            slot: 'statusName',
+            className: '',
+            fixed: '',
+            type: ''
+          },
+          {
+            headTitle: '操作',
+            width: 120,
+            prop: '',
+            slot: 'operator',
+            fixed: 'right',
+            className: '',
+            type: ''
+          }
+        ]
       };
     },
     components: {
@@ -100,7 +252,8 @@
       [Upload.name]: Upload,
       [Pagination.name]: Pagination,
       [Addr.name]: Addr,
-      [Dialog.name]: Dialog
+      [Dialog.name]: Dialog,
+      [Table.name]: Table
     },
     created() {
       // console.log(this.rule);
@@ -112,6 +265,24 @@
 
     },
     methods: {
+      changeCol: function(a) {
+        if (a === 1) {
+          this.property.splice(2, 1);
+          this.list.splice(1, 1);
+        } else {
+          this.property.push(
+            {
+              headTitle: '状态',
+              width: 100,
+              prop: 'statusName',
+              slot: 'statusName',
+              className: '',
+              fixed: '',
+              type: ''
+            });
+          this.list.push(5);
+        }
+      },
       handleCurrentChange(val) {
         console.log(val);
         // this.currentPage = val;
