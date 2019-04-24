@@ -27,7 +27,13 @@
     <vui-addr
       ref="addr"
       :province-arr="allProvince"
-      @province="change"
+      :address-obj="{
+        'provinceId': 230000,
+        'cityId': 230400,
+        'areaId': 230404,
+        'address': '向阳工业园区133号'
+      }"
+      @addresstext="change"
     ></vui-addr>
 
     <!--<input type="file">-->
@@ -127,11 +133,11 @@
         }
       },
       change: function(v) {
-
-        console.log(this.$refs.addr.province);
-        let id = this.$refs.addr.province;
-        var text = this.allProvince.find(item => item.provinceid === id)['province'];
-        console.log(text);
+        console.log(v);
+        // console.log(this.$refs.addr.province);
+        // let id = this.$refs.addr.province;
+        // var text = this.allProvince.find(item => item.provinceid === id)['province'];
+        // console.log(text);
       },
 
       beforeFile: function(file, size) {

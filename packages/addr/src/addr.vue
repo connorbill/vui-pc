@@ -152,7 +152,10 @@
         provinceRule: '',
         cityRule: '',
         areaRule: '',
-        addressRule: ''
+        addressRule: '',
+        setAddressP: '',
+        setAddressC: '',
+        hasSet: false
       };
     },
     componentName: 'VuiLinkage',
@@ -204,12 +207,6 @@
     },
 
     watch: {
-      provinceArr: {
-        immediate: true,
-        handler(newVal) {
-          this.allProvince = [].concat(newVal);
-        }
-      },
       addressConfig: {
         immediate: true,
         handler(newVal) {
@@ -232,15 +229,24 @@
           }
         }
       },
+      provinceArr: {
+        immediate: true,
+        handler(newVal) {
+          if (newVal.length > 0) {
+            this.allProvince = [].concat(newVal);
+            this.setAddress();
+          }
+        }
+      },
       addressObj: {
         deep: true,
         immediate: true,
         handler(newVal) {
-          let obj = {
-            provinceId: newVal.provinceId,
-            cityId: newVal.cityId
-          };
-          this.setAddress(obj);
+          this.setAddressP = newVal.provinceId;
+          this.setAddressC = newVal.cityId;
+          if (this.allProvince.length !== 0) {
+            this.setAddress();
+          }
           this.address = newVal.address;
           if (newVal.provinceId !== '' && newVal.provinceId !== undefined) {
             this.province = newVal.provinceId;
@@ -278,17 +284,7 @@
         }
       }
     },
-    mounted() {
-      // this.setAddress();
-      // this.setAllSelect();
-
-    },
     methods: {
-      checkHaveProvince: function() {
-        if (this.allProvince.length === 0) {
-          this.setAddress();
-        }
-      },
       getProvince: function() {
         return axios({
           method: 'post',
@@ -372,11 +368,19 @@
         this.setAddressText();
       },
 
-      setAddress: function(adr) {
+      setAddress: function() {
         let that = this;
         let reqArr = [];
+        let adr = {
+          provinceId: this.setAddressP,
+          cityId: this.setAddressC
+        };
+        if (this.allProvince.length === 0) return;
+        if (this.setAddressP === '' || this.setAddressP === null || this.setAddressP === undefined) return;
+        if (this.hasSet) return;
+        this.hasSet = true;
         if (adr) {
-          if (this.province === adr.provinceId && this.city === adr.cityId) return;
+          // if (this.province === adr.provinceId && this.city === adr.cityId) return;
           if (adr.provinceId && !adr.cityId) {
             reqArr = [that.getCitys(adr.provinceId)];
           } else if (adr.provinceId && adr.cityId) {
@@ -399,6 +403,7 @@
             if (areadata.code === '000000') {
               that.allArea = [].concat(areadata.data);
             }
+            that.setAddressText();
           }));
       },
       setAddressText: function() {
@@ -407,22 +412,22 @@
         let are = '';
         if (this.province && this.city && this.address) {
           for (let p = 0; p < this.allProvince.length; p++) {
-            if (this.allProvince[p].provinceid === this.province) {
-              pro = this.allProvince[p].province;
+            if (Number(this.allProvince[p][this.sProvinceId]) === Number(this.province)) {
+              pro = this.allProvince[p][this.sProvinceName];
             }
           }
 
-          for (let c = 0; c < this.allCity[c].length; c++) {
-            if (this.allCity[c].cityid === this.city) {
-              cit = this.allCity[c].city;
+          for (let c = 0; c < this.allCity.length; c++) {
+            if (Number(this.allCity[c][this.sCityId]) === Number(this.city)) {
+              cit = this.allCity[c][this.sCityName];
               if (cit === '县级' || cit === '市辖区' || cit === '县') {
                 cit = '';
               }
             }
           }
-          for (let a = 0; a < this.allArea[a].length; a++) {
-            if (this.allArea[a].areaid === this.area) {
-              are = this.allArea[a].area;
+          for (let a = 0; a < this.allArea.length; a++) {
+            if (Number(this.allArea[a][this.sAreaId]) === Number(this.area)) {
+              are = this.allArea[a][this.sAreaName];
               if (are === '县级' || are === '市辖区' || are === '县') {
                 are = '';
               }
