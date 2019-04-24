@@ -187,7 +187,8 @@
             array.push(i);
           }
         } else if (!showPrevMore && showNextMore) {
-          for (let i = 1; i <= pagerCount; i++) {
+          const startPage = pageCount - pagerCount;
+          for (let i = startPage; i <= pagerCount; i++) {
             array.push(i);
           }
         } else if (showPrevMore && showNextMore) {
