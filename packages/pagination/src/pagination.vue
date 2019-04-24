@@ -124,7 +124,6 @@
       initPage() {
         // console.log(val);
         this.pageCount = Math.ceil(this.total / this.pageSize);
-        console.log(this.pageCount);
       },
       onPagerClick(event, num) {
         // const target = event.target;
@@ -159,7 +158,7 @@
       pagers() {
         const pagerCount = this.pagerCount;
         const halfPagerCount = (pagerCount - 1) / 2;
-        console.log(halfPagerCount);
+        // console.log(halfPagerCount);
 
         const currentPage = Number(this.currentPage);
         const pageCount = Number(this.pageCount);
@@ -177,8 +176,8 @@
           }
         }
 
-        console.log(showPrevMore);
-        console.log(showNextMore);
+        // console.log(showPrevMore);
+        // console.log(showNextMore);
 
         const array = [];
 
@@ -209,7 +208,7 @@
         this.showPrevMore = showPrevMore;
         this.showNextMore = showNextMore;
 
-        console.log(array);
+        // console.log(array);
         return array;
       },
 
