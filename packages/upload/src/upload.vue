@@ -19,6 +19,7 @@
           >选择文件
           </vui-button>
           <vui-button
+            v-if="!autoUpload"
             type="primary"
             @click="startUp"
             :disabled="isLoadingImg"

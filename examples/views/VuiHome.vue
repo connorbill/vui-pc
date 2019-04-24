@@ -25,7 +25,9 @@
     <!--<div class="title">省市区三级联动</div>-->
 
     <vui-addr
+      ref="addr"
       :province-arr="allProvince"
+      @province="change"
     ></vui-addr>
 
     <!--<input type="file">-->
@@ -51,7 +53,7 @@
 </template>
 
 <script>
-  import {checkCardID, checkLicense, isRight, deepFreeze} from '../../src/funs/check-fun';
+  import { checkCardID, checkLicense, isRight, deepFreeze } from '../../src/funs/check-fun';
   import axiosRequest from '../../src/funs/axios-request';
   import Input from '../../packages/input/src/input';
   import Select from '../../packages/select/src/select';
@@ -69,7 +71,7 @@
           isShow: false
         },
         allProvince: [],
-        total: 51,
+        total: 59,
         currentPage: 1,
         isLoading: true,
         name: '111',
@@ -77,8 +79,8 @@
           rule: {
             // 营业执照号/身份证号
             name: [
-              {require: true, tip: '此为必填项'},
-              {define: this.checkCompanyId, tip: '请输入正确的营业执照号或身份证号'}
+              { require: true, tip: '此为必填项' },
+              { define: this.checkCompanyId, tip: '请输入正确的营业执照号或身份证号' }
             ]
           }
         }),
@@ -96,9 +98,12 @@
     },
     created() {
       // console.log(this.rule);
-      // this.getProvince();
+      this.getProvince();
       // this.getCity();
       // this.getLoanList();
+    },
+    mounted() {
+
     },
     methods: {
       handleCurrentChange(val) {
@@ -120,6 +125,13 @@
         if (!isRight(this.rule.ref, this)) {
           console.log('err');
         }
+      },
+      change: function(v) {
+
+        console.log(this.$refs.addr.province);
+        let id = this.$refs.addr.province;
+        var text = this.allProvince.find(item => item.provinceid === id)['province'];
+        console.log(text);
       },
 
       beforeFile: function(file, size) {
