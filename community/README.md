@@ -204,7 +204,7 @@ Before Parentheses->Function callparentheses 不打勾
 <br>等等
 
 
-z-index 层级要集中备注， 最大值不要超过2000， vant组件的弹层值为2000
+z-index 层级要集中备注， 最大值不要超过2000，防止页面层级高于vant提示框， vant组件的弹层值为2000
 
 vant-Toast 提示框 2000
 - 上下导航栏： 900-1000
@@ -216,13 +216,195 @@ http router.history.base + router.history.current.path;
 
 ### 移动端调试工具
 ```html
+方法一
 <script src="http://weinre.hijs.cc/target/target-script-min.js#anonymous"></script>
-<script type="text/javascript" src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 
+方法二：
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>
 ```
+
+- 如何返回不刷新
+```javascript
+
+// 例子
+//在HomeRouter.js中,定义keepAlive为true表示这个路由返回不刷新，isUseCache为false代表不缓存数据
+{
+    path: 'dynamic',
+    name: 'dynamic',
+    component: () => import('../views/home/DynamicList'),
+    meta: {
+        keepAlive: true,
+        isUseCache: false
+    }
+}
+
+// 在App.vue, v-if="$route.meta.keepAlive" 如果路由中keepAlive：true,那么就使用<keep-alive></keep-alive>
+<keep-alive>
+    <router-view v-if="$route.meta.keepAlive" />
+
+<router-view v-if="!$route.meta.keepAlive" />
+
+
+            
+// DynamicList.vue
+methods: {
+    activated () {
+        this.getDynamicTopThree();
+        // isUseCache为false时才重新刷新获取数据
+        // 因为对list使用keep-alive来缓存组件，所以默认是会使用缓存数据的
+        if (!this.$route.meta.isUseCache) {
+            this.dynamicList = [];
+            this.loading = true;
+            this.changeRecommendList('refresh');
+        }
+        this.$route.meta.isUseCache = false;
+    },
+    beforeRouteLeave (to, from, next) {
+        // 只有点击进入详情页，返回列表页才不会刷新，若进入其它页面，返回会刷新
+        if (to.name === 'detail') {
+            from.meta.isUseCache = true;
+        }
+        next();
+    }
+}
+
+// 如果像进入详情页，然后要删除这个数据，返回的时候这个数不存在了，不需要显示了，怎么办？那点进去的时候，肯定知道是数组中的第几个，那么返回到页面的时候删除了呗
+
+```
+
+- 如果我们在官网中，有好几个像社区这样的独立项目，而要共用账户信息怎么办？
+```javascript
+// 在BootRouter.js 中，不同的项目的base值不一样，base: '/community',base: '/community2'
+```
+
+
+- 假如社区里面有一个不存在的地址怎么办？
+```javascript
+// 在BootRouter.js 中，redirect的值就是地址不存在时，你希望跳转到的页面
+{
+    path: '*',
+    redirect: '/'
+}
+```
+
+- 目前定义了哪些公用的板块？
+```javascript
+// 说实话，目前项目未成熟，大约能剥离出去的只有 src/common 文件夹中的js文件了，而且尚未成长成大树
+
+```
+
+- 数据是如何请求的
+```javascript
+// 我们以倒推的思维来理一下，以HomeHot.vue 为例，
+// 第1步：HomeHot.vue   只管字段传参（this.cardPageNum），不管其它事项
+getHomeCardList (refresh) {
+    this.cardPageNum++;
+    this.$http.HomeHotService.getCardList(this.cardPageNum)
+        .then(res=>{
+            // 这里只会接收到 code:'000000'的情况，其余code值都会在 catch()方法中，原因在后面继续推导。
+            // 这样的好处是1：错误可以集中处理
+            // 2：这样写的话，而不是直接在页面中调用ajax,像 jQuery中， 
+            // 如果这样的话，我们每次都要在 ajax方法外面定义一个类似 var self = this; ,在 success方法中 self.isLoading = res.isLoading;
+            // 而可以直接使用
+            this.isLoading = res.isLoading;
+            // 
+        })
+        .then(res=>{
+            //在 ECMA2015 的Promise 这个东西，这样子显得更好看
+        })
+        .catch(res=>{
+            
+        })
+}
+
+// jquery 请求
+var self = this;
+$.ajax({
+    url:'',
+    type:'get',
+    success:function(res){
+        self.isLoading = res.isLoading;
+    }
+})
+
+// 第2步：HomeHotService.js 中，只管接受参数，和定义请求方式（get 或 post)
+// 首页热门推荐
+getCardList (pageNum, ...pageSize) {
+    // let pSize = pageSize[0];
+    let data = {
+        page: pageNum
+    };
+    return instanceAxios.get(base.homeHot.getCardList, data)
+        .then(res => {
+            // console.log(res);
+            return res;
+        })
+        .catch(err => {
+            return Promise.reject(err);
+        });
+}
+
+// 第3步：HomeHotService.js 中，只管接受参数，接口和请求方式（get 或 post)，base.homeHot.getCardList就是管理接口的（在BaseService.js）
+// 首页热门推荐
+getCardList (pageNum, ...pageSize) {
+    // let pSize = pageSize[0];
+    let data = {
+        page: pageNum
+    };
+    return instanceAxios.get(base.homeHot.getCardList, data)
+        .then(res => {
+            // console.log(res);
+            return res;
+        })
+        .catch(err => {
+            return Promise.reject(err);
+        });
+}
+
+// 第4步：HttpService.js 中，使用 axios 插件来处理 ajax请求
+// 1定义get和post请求，
+// 2将参数进行处理，
+// 3响应请求统一处理（000003 是未登录等等）
+// 4 设置 Content-type方式
+// 创建axios实例
+let instance = axios.create({
+    // baseURL: 'http://levi.mobile.qianxiangbank.com',
+    // baseURL: 'http://levi.wap.qianxiangbank.com',
+    // timeout: 2500,
+    // headers: {
+    //     'Content-type': 'application/x-www-form-urlencoded'
+    // }
+});
+let instanceAxios = {
+    get (url, params) {
+        return instance.get(url, {
+            params: params
+        });
+    },
+    post (url, params) {
+        return instance.post(url, Qs.stringify(params));
+    }
+};
+```
+
+- 当查看帖子详情中，点击跳转一个评论的评论列表页，看到一个有意思的评论，我可以分享这个评论页给朋友吗？
+- 答：可以的，每个页面都是一个地址，即使是一个评论中的回复页，我们都要尽可能的做成一个地址，以备将来做成一个可分享的地址。
+
+
+
+- 威慑么发表评论不可以插入表情？
+- 答：这个功能后续再拓展。点击评论是跳转了一个页面，后续可拓展，发表图片等等。
+
+
+- 威慑么发表评论跳转了一个页面，而不是直接在当前页面评论
+- 答：因为把输入框放在底部，在ios中兼容性不是很好，如果有好的方法，欢迎贴代码就是上。
+
+
+
+
+
 
 
 

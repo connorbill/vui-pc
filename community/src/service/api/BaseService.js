@@ -4,13 +4,14 @@
 
 let baseService = {
 	// 可以使用多个接口地址
-    // domainOne: '',
-	domainOne: 'https://cunapi.qianxiangbank.com',
-	// domainOne: process.env.VUE_APP_REQ_BASE_URL,
+    domainOne: '',
+    domainTwo: '',
+    domainThree: ''
+	// domainOne: 'https://cunapi.qianxiangbank.com',
 	// domainTwo 微信app id
-	domainTwo: 'https://cunapi.qianxiangbank.com',
+	// domainTwo: 'https://cunapi.qianxiangbank.com',
 	// 图片上传接口
-	domainThree: 'https://m.qianxiangbank.com'
+	// domainThree: 'https://m.qianxiangbank.com',
 };
 // if (process.env.NODE_ENV === 'development') {
 //     baseService.domainOne = '';
