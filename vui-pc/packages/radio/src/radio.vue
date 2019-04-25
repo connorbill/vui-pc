@@ -111,10 +111,6 @@
   };
 </script>
 
-<style scoped>
-
-</style>
-
 
 
 

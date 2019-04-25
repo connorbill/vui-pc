@@ -180,10 +180,5 @@
 
 </script>
 
-<style scoped>
-
-</style>
-
-
 
 

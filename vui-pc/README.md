@@ -1,7 +1,7 @@
 ## 目录
 
-### 源代码地址
-- [github源代码地址](https://github.com/connorbill/vui-pc)
+### 说明
+- 复制与模仿，增加风控项目所需功能 [element-ui: https://element.eleme.io](https://element.eleme.io)
 
 ### 开发组件发布到npm 
 
@@ -27,7 +27,7 @@ npm run dev
 - 0 组件开发源代码目录packages
 - 1 打包代码
 
-```shell
+```shell 
 npm run dist
 ```
 

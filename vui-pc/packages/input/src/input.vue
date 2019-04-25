@@ -220,10 +220,6 @@
   };
 </script>
 
-<style scoped>
-
-</style>
-
 
 
 

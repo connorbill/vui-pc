@@ -6,6 +6,12 @@
   align-items: center;
   flex-wrap: wrap;
 }
+.middle-right-wrap{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
 /*水平居中，内容两端对齐*/
 .middle-between{
   display: flex;
@@ -24,4 +30,5 @@
   align-items: center;
   flex-wrap: nowrap;
 }
+
 /*flex布局 start*/

@@ -403,10 +403,5 @@
   };
 </script>
 
-<style scoped>
-
-</style>
-
-
 
 

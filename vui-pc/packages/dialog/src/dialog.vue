@@ -197,10 +197,5 @@
 
 </script>
 
-<style scoped>
-
-</style>
-
-
 
 

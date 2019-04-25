@@ -94,10 +94,6 @@
   };
 </script>
 
-<style scoped>
-
-</style>
-
 
 
 

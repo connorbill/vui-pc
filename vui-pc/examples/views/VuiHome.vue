@@ -53,6 +53,14 @@
         :on-after-upload="onAfterUpload"
         :on-all-file="getAllFile"
       ></vui-upload>
+
+      <template v-slot:footer class="dialog-footer">
+        <div class="middle-right-wrap">
+          <vui-button  type="primary" plain>取 消</vui-button>
+          <div class="w-1"></div>
+          <vui-button type="primary"  >保存图片</vui-button>
+        </div>
+      </template>
     </vui-dialog>
 
     <div @click="changeCol(1)" style="height: 50px;margin: 30px;background-color: pink;">减列</div>
