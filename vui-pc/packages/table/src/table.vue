@@ -1,7 +1,8 @@
 <template>
   <div>
+    <!--
+      :style="[{maxWidth: store.tableWidth + 2 + 'px' }]"-->
     <div
-      :style="[{maxWidth: store.tableWidth + 2 + 'px' }]"
       ref="vuitable"
       class="vui-table   vui-table-common-bg vui-total-table-border vui-total-table-display vui-default-style"
     >

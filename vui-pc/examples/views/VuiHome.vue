@@ -37,7 +37,7 @@
     ></vui-addr>
 
     <!--<input type="file">-->
-    <button @click="popPic.isShow = true">上传</button>
+    <button @click="upFile">上传</button>
     <button @click="popPic.isShow = true">上传</button>
 
 
@@ -49,16 +49,19 @@
       <vui-upload
         action="/fileUpload/upload2"
         multiple
+        :accept="accept"
+        :on-remove="remove"
         :before-upload="beforeFile2"
         :on-after-upload="onAfterUpload"
         :on-all-file="getAllFile"
+        :on-change="onChangeFile"
       ></vui-upload>
 
       <template v-slot:footer class="dialog-footer">
         <div class="middle-right-wrap">
-          <vui-button  type="primary" plain>取 消</vui-button>
+          <vui-button type="primary" plain>取 消</vui-button>
           <div class="w-1"></div>
-          <vui-button type="primary"  >保存图片</vui-button>
+          <vui-button type="primary">保存图片</vui-button>
         </div>
       </template>
     </vui-dialog>
@@ -92,6 +95,7 @@
     name: 'VuiHome',
     data() {
       return {
+        accept: 'image/jpeg',
         popPic: {
           isShow: false
         },
@@ -273,6 +277,10 @@
 
     },
     methods: {
+      upFile: function() {
+        this.accept = 'image/*';
+        this.popPic.isShow = true;
+      },
       changeCol: function(a) {
         if (a === 1) {
           this.property.splice(2, 1);
@@ -396,6 +404,13 @@
       },
       onAfterUpload: function(res) {
         console.log(res);
+      },
+      onChangeFile: function(file, list) {
+        console.log(file, list);
+      },
+      remove: function(obj, list) {
+        console.log(obj);
+        console.log(list);
       },
       getProvince: function() {
 
