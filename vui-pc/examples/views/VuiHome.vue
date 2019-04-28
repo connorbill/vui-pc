@@ -45,6 +45,8 @@
       title="图片上传"
       :visible.sync="popPic.isShow"
       width="640px"
+      modal
+      fullscreen
     >
       <vui-upload
         action="/fileUpload/upload2"

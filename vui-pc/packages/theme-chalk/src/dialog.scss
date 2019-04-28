@@ -10,6 +10,15 @@
   margin: 0;
   z-index: 1000000;
 }
+.vui-modal{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: .5;
+	background: #000;
+}
 .vui-dialog {
   position: relative;
   margin: 0 auto 50px;
@@ -51,13 +60,14 @@
   padding: 30px 20px;
   color: #606266;
   line-height: 24px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .vui-dialog__footer {
   padding: 15px;
   padding-top: 10px;
   text-align: right;
   box-sizing: border-box;
+	border-top: 1px solid #ccc;
 }
 .vui-dialog-close-btn {
   position: absolute;

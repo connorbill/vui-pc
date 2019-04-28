@@ -1,31 +1,34 @@
 <template>
-  <div class="vui-dialog__wrapper" v-show="visible" @click.self="handleWrapperClick">
-    <div
-      role="dialog"
-      aria-modal="true"
-      :aria-label="title || 'dialog'"
-      class="vui-dialog"
-      :class="[{ 'is-fullscreen': fullscreen, 'vui-dialog--center': center }, customClass]"
-      ref="dialog"
-      :style="style">
-      <div class="vui-dialog__header">
-        <slot name="title">
-          <span class="vui-dialog__title">{{ title }}</span>
-        </slot>
-        <div
-          class="vui-dialog__headerbtn"
-          aria-label="Close"
-          v-if="showClose"
-          @click="handleClose">
+  <div>
+    <div class="vui-dialog__wrapper" style="z-index: 2001;" v-show="visible" @click.self="handleWrapperClick">
+      <div
+        role="dialog"
+        aria-modal="true"
+        :aria-label="title || 'dialog'"
+        class="vui-dialog"
+        :class="[{ 'is-fullscreen': fullscreen, 'vui-dialog--center': center }, customClass]"
+        ref="dialog"
+        :style="style">
+        <div class="vui-dialog__header">
+          <slot name="title">
+            <span class="vui-dialog__title">{{ title }}</span>
+          </slot>
+          <div
+            class="vui-dialog__headerbtn"
+            aria-label="Close"
+            v-if="showClose"
+            @click="handleClose">
+          </div>
+        </div>
+        <div class="vui-dialog__body">
+          <slot></slot>
+        </div>
+        <div class="vui-dialog__footer" v-if="$slots.footer">
+          <slot name="footer"></slot>
         </div>
       </div>
-      <div class="vui-dialog__body">
-        <slot></slot>
-      </div>
-      <div class="vui-dialog__footer" v-if="$slots.footer">
-        <slot name="footer"></slot>
-      </div>
     </div>
+    <div class="vui-modal" style="z-index: 2000;" v-show="visible"></div>
   </div>
 </template>
 
@@ -166,8 +169,8 @@
         }
       },
       updatePopper() {
-        this.broadcast('ElSelectDropdown', 'updatePopper');
-        this.broadcast('ElDropdownMenu', 'updatePopper');
+        this.broadcast('VuiDropdown', 'updatePopper');
+        this.broadcast('VuiDropdownMenu', 'updatePopper');
       },
       afterEnter() {
         this.$emit('opened');

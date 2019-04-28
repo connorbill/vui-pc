@@ -177,7 +177,6 @@
       accept: {
         immediate: true,
         handler(newVal) {
-          console.log(newVal);
           this.acceptChange = newVal;
         }
       },
@@ -439,9 +438,6 @@
           that.onAllFile(that.willUploadImg);
         }
       }
-    },
-    beforeDestroy() {
-      console.log(1);
     }
   };
 </script>

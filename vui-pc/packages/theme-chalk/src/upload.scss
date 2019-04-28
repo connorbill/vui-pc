@@ -17,6 +17,12 @@
   height: 20px;
   border-radius: 50%;
   border: 1px solid #ccc;
+	&.vui-small-close{
+		right: -7px;
+		top: -7px;
+		width: 15px;
+		height: 15px;
+	}
 }
 .vui-close {
 	.vui-close-icon {
