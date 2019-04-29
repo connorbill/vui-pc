@@ -117,146 +117,7 @@
         }),
         willUploadImg: [],
         list: [1, 2, 3, 4, 5, 6],
-        property: [
-          {
-            headTitle: '序号', // 表头名称
-            width: 60, // 这一列宽度
-            prop: '',
-            slot: 'indexSlot',
-            fixed: 'left', // 固定在左侧
-            className: '',
-            position: '',
-            type: 'index' // 字段类型 index 为序号，
-          },
-          {
-            headTitle: '借款主体',
-            width: 150,
-            prop: 'storeName',
-            slot: 'storeName',
-            className: '',
-            fixed: 'left',
-            type: ''
-          },
-          {
-            headTitle: '借款金额（元）',
-            width: 150,
-            prop: 'appropriationAmount',
-            slot: 'appropriationAmount',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            // 单位 ： period_unit 0 月， 1 日
-            headTitle: '借款期限',
-            width: 100,
-            prop: 'appropriationDate',
-            slot: 'appropriationDate',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '还款方式',
-            width: 150,
-            prop: 'repaymentType',
-            slot: 'repaymentType',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '借款利率（%）',
-            width: 110,
-            prop: 'lendingRate',
-            slot: 'lendingRate',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '居间服务费率（%）',
-            width: 130,
-            prop: 'serviceTariffing',
-            slot: 'serviceTariffing',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '实际控制人',
-            width: 100,
-            prop: 'ctrlName',
-            slot: 'ctrlName',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '评审通过时间',
-            width: 150,
-            prop: 'reviewTime',
-            slot: 'reviewTime',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            // 经营贷
-            headTitle: '借款类型',
-            width: 100,
-            prop: 'loanType',
-            slot: 'loanType',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '客户经理',
-            width: 100,
-            prop: 'supName',
-            slot: 'supName',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '所属区域',
-            width: 100,
-            prop: 'departmentName',
-            slot: 'departmentName',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '项目编号',
-            width: 110,
-            prop: 'number',
-            slot: 'number',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '状态',
-            width: 100,
-            prop: 'statusName',
-            slot: 'statusName',
-            className: '',
-            fixed: '',
-            type: ''
-          },
-          {
-            headTitle: '操作',
-            width: 120,
-            prop: '',
-            slot: 'operator',
-            fixed: 'right',
-            className: '',
-            type: ''
-          }
-        ]
+        property: []
       };
     },
     components: {
@@ -276,7 +137,210 @@
       // this.getLoanList();
     },
     mounted() {
-
+      var that = this;
+      setTimeout(function() {
+        that.property = [].concat([{
+          headTitle: '序号', // 表头名称
+          width: 60, // 这一列宽度
+          prop: '',
+          slot: 'indexSlot',
+          fixed: 'left', // 固定在左侧
+          className: '',
+          position: '',
+          type: 'index' // 字段类型 index 为序号，
+        },
+        {
+          headTitle: '借款主体',
+          width: 150,
+          prop: 'storeName',
+          slot: 'storeName',
+          className: '',
+          fixed: 'left',
+          type: ''
+        },
+        {
+          headTitle: '借款金额（元）',
+          width: 150,
+          prop: 'appropriationAmount',
+          slot: 'appropriationAmount',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          // 单位 ： period_unit 0 月， 1 日
+          headTitle: '借款期限',
+          width: 100,
+          prop: 'appropriationDate',
+          slot: 'appropriationDate',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '还款方式',
+          width: 150,
+          prop: 'repaymentType',
+          slot: 'repaymentType',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '借款利率（%）',
+          width: 110,
+          prop: 'lendingRate',
+          slot: 'lendingRate',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '居间服务费率（%）',
+          width: 130,
+          prop: 'serviceTariffing',
+          slot: 'serviceTariffing',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '实际控制人',
+          width: 100,
+          prop: 'ctrlName',
+          slot: 'ctrlName',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '评审通过时间',
+          width: 150,
+          prop: 'reviewTime',
+          slot: 'reviewTime',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          // 经营贷
+          headTitle: '借款类型',
+          width: 100,
+          prop: 'loanType',
+          slot: 'loanType',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '客户经理',
+          width: 100,
+          prop: 'supName',
+          slot: 'supName',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '所属区域',
+          width: 100,
+          prop: 'departmentName',
+          slot: 'departmentName',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '项目编号',
+          width: 110,
+          prop: 'number',
+          slot: 'number',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '项目编号',
+          width: 110,
+          prop: 'number',
+          slot: 'number',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '项目编号',
+          width: 110,
+          prop: 'number',
+          slot: 'number',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '项目编号',
+          width: 110,
+          prop: 'number',
+          slot: 'number',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '项目编号',
+          width: 110,
+          prop: 'number',
+          slot: 'number',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '项目编号',
+          width: 110,
+          prop: 'number',
+          slot: 'number',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '项目编号',
+          width: 110,
+          prop: 'number',
+          slot: 'number',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '项目编号',
+          width: 110,
+          prop: 'number',
+          slot: 'number',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '状态',
+          width: 100,
+          prop: 'statusName',
+          slot: 'statusName',
+          className: '',
+          fixed: '',
+          type: ''
+        },
+        {
+          headTitle: '操作',
+          width: 120,
+          prop: '',
+          slot: 'operator',
+          fixed: 'right',
+          className: '',
+          type: ''
+        }]);
+      }, 3000);
     },
     methods: {
       upFile: function() {

@@ -14,7 +14,7 @@
             <span class="vui-dialog__title">{{ title }}</span>
           </slot>
           <div
-            class="vui-dialog__headerbtn"
+            class="vui-dialog__headerbtn vui-dialog-close"
             aria-label="Close"
             v-if="showClose"
             @click="handleClose">

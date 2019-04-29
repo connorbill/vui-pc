@@ -4,6 +4,7 @@ const { series, src, dest } = require('gulp');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const cssmin = require('gulp-cssmin');
+const cssBase64 = require('gulp-css-base64');
 
 function compile() {
   return src('./src/*.scss')
@@ -13,6 +14,7 @@ function compile() {
       cascade: false
     }))
     .pipe(cssmin())
+    .pipe(cssBase64())
     .pipe(dest('./lib'));
 }
 

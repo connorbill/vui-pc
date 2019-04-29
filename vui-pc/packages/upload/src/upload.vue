@@ -69,8 +69,9 @@
                 上传失败
               </div>
               <div class="vui-is-up-img tip" v-if="item.sizeError">{{item.tip}}</div>
-              <div class="vui-close vui-close-style" @click="deleteWillUpload(index)" v-if="!isLoadingImg">
-                <span class="vui-close-icon rounded thick"></span>
+              <div class="vui-close-style vui-normal-close" @click="deleteWillUpload(index)" v-if="!isLoadingImg">
+                <!--<span class="vui-close-icon rounded thick"></span>-->
+                <span class="vui-icon-delete"></span>
               </div>
             </div>
             <div class="vui-img-name">{{item.name}}</div>

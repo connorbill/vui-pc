@@ -5,6 +5,7 @@
     <div
       ref="vuitable"
       class="vui-table   vui-table-common-bg vui-total-table-border vui-total-table-display vui-default-style"
+      :style="{ width: (store.tableWidth + 1) + 'px' }"
     >
       <div class="overflow-x-vui" ref="tableScroll" :class=" 'is-scrolling-' + scrollPosition">
         <div class="hidden-columns" ref="hiddenColumns">
