@@ -332,20 +332,16 @@
         }
       }
     },
-    created: function() {
-      this.setCol();
-      // console.log(this.isEdit)
-      // console.log(leftArr)
-      var that = this;
-      this.$nextTick(function() {
-        // 将每一个在页面中使用后的vui-table存储起来。
-        vuiTableRefArr.push({ref: this.$refs.vuitable, ins: this});
-        that.isShowFixJudge();
-      });
-    },
     mounted: function() {
       this.windowSize();
       this.bindEvents();
+      this.setCol();
+      // console.log(this.isEdit)
+      // console.log(leftArr)
+      this.$nextTick(function() {
+        // 将每一个在页面中使用后的vui-table存储起来。
+        vuiTableRefArr.push({ref: this.$refs.vuitable, ins: this});
+      });
     },
     methods: {
       setCol: function() {
@@ -442,10 +438,14 @@
         // 当左右固定列的宽度再加上200，还大于表格本身可视宽度时，就将固定列隐藏掉
         // 也就是说，当浏览器横向缩小到足够小时或者电脑屏幕太小时，表格显示宽度小于固定列加起来的和的宽度，就隐藏固定列，
         // 这样就可以看到完整的表格的数据，在编辑表格数据时，不至于固定列遮挡住表格内容
-        vuiTableRefArr.forEach(function(item) {
-          if (item.ref.offsetWidth < item.ins.leftFixedWidth + item.ins.rightFixedWidth + 200) {
-            item.ins.isShowFix = false;
-          }
+        this.$nextTick(()=>{
+          vuiTableRefArr.forEach(function(item) {
+            if (item.ref.offsetWidth < item.ins.leftFixedWidth + item.ins.rightFixedWidth + 200) {
+              item.ins.isShowFix = false;
+            } else {
+              item.ins.isShowFix = true;
+            }
+          });
         });
       },
       windowSize: function() {

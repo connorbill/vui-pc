@@ -116,7 +116,7 @@
           }
         }),
         willUploadImg: [],
-        list: [1, 2, 3, 4, 5, 6],
+        list: [],
         property: []
       };
     },
@@ -340,6 +340,8 @@
           className: '',
           type: ''
         }]);
+
+        that.list = [].concat([1, 2, 3, 4, 5, 6]);
       }, 3000);
     },
     methods: {
