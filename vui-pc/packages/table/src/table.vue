@@ -212,6 +212,7 @@
 
 <script>
   let vuiTableRefArr = [];
+  import { addResizeListener, removeResizeListener } from '../../../src/utils/resize-event';
   export default {
     name: 'VuiTable',
     data: function() {
@@ -298,6 +299,12 @@
       },
       vuiTableWrapper() {
         return this.$refs.vuitable;
+      },
+      insTableWidth() {
+        return this.store.tableWidth;
+      },
+      insTableHeight() {
+        return this.store.tableHeight;
       }
     },
     watch: {
@@ -307,41 +314,34 @@
           if (newVal[0] !== null && newVal[0] !== '') {
             this.store.data = [].concat(newVal);
           }
-          // this.$nextTick(() => {
-          //     this.dataList = [].concat(value);
-          // });
-          // body 高度设置
-          this.setTableHeight();
+          this.$nextTick(() => {
+            // body 高度设置
+            this.setCol();
+            this.setTableHeight();
+          });
         }
       },
       property: {
         immediate: true,
         handler() {
-          this.setCol();
-          this.setTableHeight();
-        }
-      },
-      isEdit: {
-        immediate: true,
-        handler(newVal) {
-          // console.log(newVal)
-          // this.store.isEdit = newVal;
-          // this.$nextTick(() => {
-          //     this.dataList = [].concat(value);
-          // });
+          this.$nextTick(() => {
+            // body 高度设置
+            this.setCol();
+            this.setTableHeight();
+          });
         }
       }
     },
     mounted: function() {
-      this.windowSize();
       this.bindEvents();
+      this.windowSize();
       this.setCol();
-      // console.log(this.isEdit)
-      // console.log(leftArr)
+      this.setTableHeight();
       this.$nextTick(function() {
         // 将每一个在页面中使用后的vui-table存储起来。
         vuiTableRefArr.push({ref: this.$refs.vuitable, ins: this});
       });
+      this.$ready = true;
     },
     methods: {
       setCol: function() {
@@ -448,6 +448,11 @@
           });
         });
       },
+      resizeListener() {
+        if (!this.$ready) return;
+        this.setCol();
+        this.setTableHeight();
+      },
       windowSize: function() {
         var that = this;
         if (that.vuiTableWrapper.offsetWidth >= that.store.tableWidth) {
@@ -527,6 +532,7 @@
             self.scrollPosition = 'none';
           }
         });
+        addResizeListener(this.$el, this.resizeListener);
       },
       checkForm: function() {
         if (!this.$isRight(this.rule.ref)) {
@@ -557,6 +563,9 @@
 
         return target;
       }
+    },
+    destroyed() {
+      if (this.resizeListener) removeResizeListener(this.$el, this.resizeListener);
     }
   };
 </script>

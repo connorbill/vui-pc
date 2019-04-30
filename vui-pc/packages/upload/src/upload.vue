@@ -37,7 +37,7 @@
       <div class="vui-img-select-center">
         <div class="middle-left-wrap vui-show-will-upload">
           <div v-for="(item, index) in willUploadImg" :key="index" class="vui-upload-list">
-            <div class="vui-img-box">
+            <div class="vui-img-box middle-center">
               <img :src="item.src" alt="">
               <div>
 

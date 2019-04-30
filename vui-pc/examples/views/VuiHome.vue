@@ -25,15 +25,15 @@
     <!--<div class="title">省市区三级联动</div>-->
 
     <!--<vui-addr-->
-      <!--ref="addr"-->
-      <!--:province-arr="allProvince"-->
-      <!--:address-obj="{-->
-        <!--'provinceId': 230000,-->
-        <!--'cityId': 230400,-->
-        <!--'areaId': 230404,-->
-        <!--'address': '向阳工业园区133号'-->
-      <!--}"-->
-      <!--@addresstext="change"-->
+    <!--ref="addr"-->
+    <!--:province-arr="allProvince"-->
+    <!--:address-obj="{-->
+    <!--'provinceId': 230000,-->
+    <!--'cityId': 230400,-->
+    <!--'areaId': 230404,-->
+    <!--'address': '向阳工业园区133号'-->
+    <!--}"-->
+    <!--@addresstext="change"-->
     <!--&gt;</vui-addr>-->
 
     <!--<input type="file">-->
@@ -73,6 +73,13 @@
       :data="list"
       :property="property"
     >
+      <template v-slot:operator>
+        <div v-for="(item, index) in domArr" :key="index">
+          {{item}}
+        </div>
+        <div @click="addDom">增加</div>
+        <div @click="delDom">减少</div>
+      </template>
 
     </vui-table>
 
@@ -115,7 +122,8 @@
         }),
         willUploadImg: [],
         list: [],
-        property: []
+        property: [],
+        domArr: [1, 2]
       };
     },
     components: {
@@ -343,6 +351,12 @@
       }, 3000);
     },
     methods: {
+      addDom() {
+        this.domArr.push(1);
+      },
+      delDom() {
+        this.domArr.splice(0, 1);
+      },
       upFile: function() {
         this.accept = 'image/*';
         this.popPic.isShow = true;
