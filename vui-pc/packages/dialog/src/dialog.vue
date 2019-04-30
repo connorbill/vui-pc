@@ -1,39 +1,52 @@
 <template>
   <div>
-    <div class="vui-dialog__wrapper" style="z-index: 2001;" v-show="visible" @click.self="handleWrapperClick">
-      <div
-        role="dialog"
-        aria-modal="true"
-        :aria-label="title || 'dialog'"
-        class="vui-dialog"
-        :class="[{ 'is-fullscreen': fullscreen, 'vui-dialog--center': center }, customClass]"
-        ref="dialog"
-        :style="style">
-        <div class="vui-dialog__header">
-          <slot name="title">
-            <span class="vui-dialog__title">{{ title }}</span>
-          </slot>
-          <div
-            class="vui-dialog__headerbtn vui-dialog-close"
-            aria-label="Close"
-            v-if="showClose"
-            @click="handleClose">
+    <transition
+      name="dialog-fade"
+    >
+      <div v-show="visible" class="vui-dialog-back-fixed">
+        <div class="vui-dialog__wrapper"
+             style="z-index: 2001;"
+             @click.self="handleWrapperClick">
+          <div class="vui-dialog-parent">
+            <div
+              style="z-index: 2001;"
+              role="dialog"
+              aria-modal="true"
+              :aria-label="title || 'dialog'"
+              class="vui-dialog"
+              :class="[{ 'is-fullscreen': fullscreen, 'vui-dialog--center': center }, customClass]"
+              ref="dialog"
+              :style="style">
+              <div class="vui-dialog__header">
+                <slot name="title">
+                  <span class="vui-dialog__title">{{ title }}</span>
+                </slot>
+                <div
+                  class="vui-dialog__headerbtn vui-dialog-close"
+                  aria-label="Close"
+                  v-if="showClose"
+                  @click="handleClose">
+                </div>
+              </div>
+              <div class="vui-dialog__body">
+                <slot></slot>
+              </div>
+              <div class="vui-dialog__footer" v-if="$slots.footer">
+                <slot name="footer"></slot>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="vui-dialog__body">
-          <slot></slot>
-        </div>
-        <div class="vui-dialog__footer" v-if="$slots.footer">
-          <slot name="footer"></slot>
-        </div>
       </div>
-    </div>
-    <div class="vui-modal" style="z-index: 2000;" v-show="visible"></div>
+    </transition>
+
+    <div class="vui-modal" v-show="visible" style="z-index: 2000;" ></div>
   </div>
 </template>
 
 <script>
   import Emitter from '../../../src/mixins/emitter';
+
   export default {
     name: 'VuiDialog',
     props: {
@@ -93,7 +106,7 @@
 
       top: {
         type: String,
-        default: '15vh'
+        default: ''
       },
       beforeClose: Function,
       center: {

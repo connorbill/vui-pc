@@ -24,17 +24,17 @@
     ></vui-pager>
     <!--<div class="title">省市区三级联动</div>-->
 
-    <vui-addr
-      ref="addr"
-      :province-arr="allProvince"
-      :address-obj="{
-        'provinceId': 230000,
-        'cityId': 230400,
-        'areaId': 230404,
-        'address': '向阳工业园区133号'
-      }"
-      @addresstext="change"
-    ></vui-addr>
+    <!--<vui-addr-->
+      <!--ref="addr"-->
+      <!--:province-arr="allProvince"-->
+      <!--:address-obj="{-->
+        <!--'provinceId': 230000,-->
+        <!--'cityId': 230400,-->
+        <!--'areaId': 230404,-->
+        <!--'address': '向阳工业园区133号'-->
+      <!--}"-->
+      <!--@addresstext="change"-->
+    <!--&gt;</vui-addr>-->
 
     <!--<input type="file">-->
     <button @click="upFile">上传</button>
@@ -45,8 +45,6 @@
       title="图片上传"
       :visible.sync="popPic.isShow"
       width="640px"
-      modal
-      fullscreen
     >
       <vui-upload
         action="/fileUpload/upload2"
@@ -132,7 +130,7 @@
     },
     created() {
       // console.log(this.rule);
-      this.getProvince();
+      // this.getProvince();
       // this.getCity();
       // this.getLoanList();
     },
