@@ -73,12 +73,14 @@
       :data="list"
       :property="property"
     >
-      <template v-slot:operator>
+      <template v-slot:operator="slotProps">
         <div v-for="(item, index) in domArr" :key="index">
-          {{item}}
+          <div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">
+            {{dom}}
+          </div>
         </div>
-        <div @click="addDom">增加</div>
-        <div @click="delDom">减少</div>
+        <div @click="addDom(slotProps.row.index)">增加</div>
+        <div @click="delDom(slotProps.row.index)">减少</div>
       </template>
 
     </vui-table>
@@ -123,7 +125,14 @@
         willUploadImg: [],
         list: [],
         property: [],
-        domArr: [1, 2]
+        domArr: [
+          {
+            a: [1, 2]
+          },
+          {
+            a: [1, 2]
+          }
+        ]
       };
     },
     components: {
@@ -351,8 +360,8 @@
       }, 3000);
     },
     methods: {
-      addDom() {
-        this.domArr.push(1);
+      addDom(index) {
+        this.domArr.push({a: [1, 2, 3]});
       },
       delDom() {
         this.domArr.splice(0, 1);
