@@ -1,5 +1,5 @@
 <template>
-  <label
+  <span
     class="vui-checkbox"
     :class="[
           border && checkboxSize ? 'vui-checkbox--' + checkboxSize : '',
@@ -12,47 +12,47 @@
     :aria-disabled="isDisabled"
     :id="id"
   >
-        <span class="vui-checkbox__input"
-              :class="{
-            'is-disabled': isDisabled,
-            'is-checked': isChecked,
-            'is-indeterminate': indeterminate,
-            'is-focus': focus
-          }"
-              aria-checked="mixed"
-        >
-          <span class="vui-checkbox__inner"></span>
-          <input
-            v-if="trueLabel || falseLabel"
-            class="vui-checkbox__original"
-            type="checkbox"
-            aria-hidden="true"
-            :name="name"
-            :disabled="isDisabled"
-            :true-value="trueLabel"
-            :false-value="falseLabel"
-            v-model="model"
-            @change="handleChange"
-            @focus="focus = true"
-            @blur="focus = false">
-          <input
-            v-else
-            class="vui-checkbox__original"
-            type="checkbox"
-            aria-hidden="true"
-            :disabled="isDisabled"
-            :value="label"
-            :name="name"
-            v-model="model"
-            @change="handleChange"
-            @focus="focus = true"
-            @blur="focus = false">
-        </span>
+    <span class="vui-checkbox__input"
+          :class="{
+        'is-disabled': isDisabled,
+        'is-checked': isChecked,
+        'is-indeterminate': indeterminate,
+        'is-focus': focus
+      }"
+          aria-checked="mixed"
+    >
+      <span class="vui-checkbox__inner"></span>
+      <input
+        v-if="trueLabel || falseLabel"
+        class="vui-checkbox__original"
+        type="checkbox"
+        aria-hidden="true"
+        :name="name"
+        :disabled="isDisabled"
+        :true-value="trueLabel"
+        :false-value="falseLabel"
+        v-model="model"
+        @change="handleChange"
+        @focus="focus = true"
+        @blur="focus = false">
+      <input
+        v-else
+        class="vui-checkbox__original"
+        type="checkbox"
+        aria-hidden="true"
+        :disabled="isDisabled"
+        :value="label"
+        :name="name"
+        v-model="model"
+        @change="handleChange"
+        @focus="focus = true"
+        @blur="focus = false">
+    </span>
     <span class="vui-checkbox__label" v-if="$slots.default || label">
-          <slot></slot>
-          <template v-if="!$slots.default">{{label}}</template>
-        </span>
-  </label>
+      <slot></slot>
+      <template v-if="!$slots.default">{{label}}</template>
+    </span>
+  </span>
 </template>
 
 <script>

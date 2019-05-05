@@ -1,5 +1,5 @@
 <template>
-  <label
+  <span
     class="vui-radio"
     :class="[
           border && radioSize ? 'vui-radio--' + radioSize : '',
@@ -14,32 +14,32 @@
     :tabindex="tabIndex"
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
-        <span class="vui-radio__input"
-              :class="{
-            'is-disabled': isDisabled,
-            'is-checked': model === label
-          }"
-        >
-          <span class="vui-radio__inner"></span>
-          <input
-            class="vui-radio__original"
-            :value="label"
-            type="radio"
-            aria-hidden="true"
-            v-model="model"
-            @focus="focus = true"
-            @blur="focus = false"
-            @change="handleChange"
-            :name="name"
-            :disabled="isDisabled"
-            tabindex="-1"
-          >
-        </span>
+    <span class="vui-radio__input"
+          :class="{
+        'is-disabled': isDisabled,
+        'is-checked': model === label
+      }"
+    >
+      <span class="vui-radio__inner"></span>
+      <input
+        class="vui-radio__original"
+        :value="label"
+        type="radio"
+        aria-hidden="true"
+        v-model="model"
+        @focus="focus = true"
+        @blur="focus = false"
+        @change="handleChange"
+        :name="name"
+        :disabled="isDisabled"
+        tabindex="-1"
+      >
+    </span>
     <span class="vui-radio__label" @keydown.stop>
-          <slot></slot>
-          <template v-if="!$slots.default">{{label}}</template>
-        </span>
-  </label>
+      <slot></slot>
+      <template v-if="!$slots.default">{{label}}</template>
+    </span>
+  </span>
 </template>
 
 <script>

@@ -62,3 +62,21 @@
 .is-scrolling-left~.vui-table__fixed, .is-scrolling-right~.vui-table__fixed-right , .is-scrolling-none~.vui-table__fixed-right{
   box-shadow: none;
 }
+
+.vui-risk-table .vui-default-style td{
+	height: 44px;
+}
+.vui-risk-table thead tr th{
+	border-bottom: 1px solid #ccc;
+	color: #535b6c;
+}
+.vui-risk-table .vui-table__empty-block, .vui-risk-table .vui-total-table-border td {
+	border-bottom: none;
+	border-right: none;
+}
+.vui-risk-table .vui-total-table-border th {
+	border-right: none;
+}
+.vui-risk-table .vui-total-table-border {
+	border-left: none;
+}

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div
+    :class="setClassName">
     <!--
       :style="[{maxWidth: store.tableWidth + 2 + 'px' }]"-->
     <div
@@ -267,33 +268,18 @@
           return {};
         }
       },
-      isEdit: {
-        type: Boolean,
-        default: false
-      },
       showFooter: {
         type: Boolean
       },
-      province: {
-        type: Array,
-        default: function() {
-          return [];
-        }
-      },
-      citys: {
-        type: Array,
-        default: function() {
-          return [];
-        }
-      },
-      area: {
-        type: Array,
-        default: function() {
-          return [];
-        }
+      className: {
+        type: [Array, String],
+        default: ''
       }
     },
     computed: {
+      setClassName() {
+        return this.className;
+      },
       bodyWrapper() {
         return this.$refs.tableScroll;
       },
