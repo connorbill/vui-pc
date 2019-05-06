@@ -18,7 +18,7 @@
           @change="handleChange"
 
         >
-          <option value="">{{sDefaultName}}</option>
+          <option value="" v-if="showDefaultName">{{sDefaultName}}</option>
           <option v-for="(item, index) in optionData" :key="index" :value="item[sId]">{{item[sName]}}</option>
         </select>
       </div>
@@ -88,6 +88,10 @@
       selectDefaultName: {
         type: String,
         default: '请选择'
+      },
+      showDefaultName: {
+        type: Boolean,
+        default: true
       }
     },
     watch: {

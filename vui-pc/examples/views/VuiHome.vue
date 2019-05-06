@@ -72,6 +72,7 @@
     <vui-table
       :data="list"
       :property="property"
+      class-name="vui-risk-table"
     >
       <template v-slot:operator="slotProps">
         <div v-for="(item, index) in domArr" :key="index">
@@ -85,6 +86,33 @@
 
     </vui-table>
 
+    <div class="li-scroll">
+      <vui-scrollbar
+        scroll="about"
+        tag="ul"
+        wrap-class="list">
+        <slot>
+          <li style="white-space: nowrap;">板凳要坐十年冷，文章不写一句空。表示做学问的人要耐下心来坐十年冷板凳，毫无怨言板凳
+            要坐十年冷，文章不写一句空。表示做学问的人要耐下心来坐十年冷板凳，毫无怨言板凳要坐十年冷，文章不写一句空。表示做学问的人
+            要耐下心来坐十年冷板凳，毫无怨言end</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+          <li>1</li>
+        </slot>
+      </vui-scrollbar>
+    </div>
   </div>
 </template>
 
@@ -99,6 +127,7 @@
   import Addr from '../../packages/addr/src/addr';
   import Dialog from '../../packages/dialog/src/dialog';
   import Table from '../../packages/table/src/table';
+  import Scrollbar from '../../packages/scrollbar/src/main';
 
   export default {
     name: 'VuiHome',
@@ -143,7 +172,8 @@
       [Pagination.name]: Pagination,
       [Addr.name]: Addr,
       [Dialog.name]: Dialog,
-      [Table.name]: Table
+      [Table.name]: Table,
+      [Scrollbar.name]: Scrollbar
     },
     created() {
       // console.log(this.rule);
@@ -154,209 +184,95 @@
     mounted() {
       var that = this;
       setTimeout(function() {
-        that.property = [].concat([{
-          headTitle: '序号', // 表头名称
-          width: 60, // 这一列宽度
-          prop: '',
-          slot: 'indexSlot',
-          fixed: 'left', // 固定在左侧
-          className: '',
-          position: '',
-          type: 'index' // 字段类型 index 为序号，
-        },
-        {
-          headTitle: '借款主体',
-          width: 150,
-          prop: 'storeName',
-          slot: 'storeName',
-          className: '',
-          fixed: 'left',
-          type: ''
-        },
-        {
-          headTitle: '借款金额（元）',
-          width: 150,
-          prop: 'appropriationAmount',
-          slot: 'appropriationAmount',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          // 单位 ： period_unit 0 月， 1 日
-          headTitle: '借款期限',
-          width: 100,
-          prop: 'appropriationDate',
-          slot: 'appropriationDate',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '还款方式',
-          width: 150,
-          prop: 'repaymentType',
-          slot: 'repaymentType',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '借款利率（%）',
-          width: 110,
-          prop: 'lendingRate',
-          slot: 'lendingRate',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '居间服务费率（%）',
-          width: 130,
-          prop: 'serviceTariffing',
-          slot: 'serviceTariffing',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '实际控制人',
-          width: 100,
-          prop: 'ctrlName',
-          slot: 'ctrlName',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '评审通过时间',
-          width: 150,
-          prop: 'reviewTime',
-          slot: 'reviewTime',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          // 经营贷
-          headTitle: '借款类型',
-          width: 100,
-          prop: 'loanType',
-          slot: 'loanType',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '客户经理',
-          width: 100,
-          prop: 'supName',
-          slot: 'supName',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '所属区域',
-          width: 100,
-          prop: 'departmentName',
-          slot: 'departmentName',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '项目编号',
-          width: 110,
-          prop: 'number',
-          slot: 'number',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '项目编号',
-          width: 110,
-          prop: 'number',
-          slot: 'number',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '项目编号',
-          width: 110,
-          prop: 'number',
-          slot: 'number',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '项目编号',
-          width: 110,
-          prop: 'number',
-          slot: 'number',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '项目编号',
-          width: 110,
-          prop: 'number',
-          slot: 'number',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '项目编号',
-          width: 110,
-          prop: 'number',
-          slot: 'number',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '项目编号',
-          width: 110,
-          prop: 'number',
-          slot: 'number',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '项目编号',
-          width: 110,
-          prop: 'number',
-          slot: 'number',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '状态',
-          width: 100,
-          prop: 'statusName',
-          slot: 'statusName',
-          className: '',
-          fixed: '',
-          type: ''
-        },
-        {
-          headTitle: '操作',
-          width: 120,
-          prop: '',
-          slot: 'operator',
-          fixed: 'right',
-          className: '',
-          type: ''
-        }]);
+        that.property = [].concat(
+          [
+            {
+              headTitle: '序号', // 表头名称
+              width: 60, // 这一列宽度
+              prop: '',
+              slot: 'indexSlot',
+              fixed: 'left', // 固定在左侧
+              className: '',
+              position: '',
+              type: 'index' // 字段类型 index 为序号，
+            },
+            {
+              headTitle: '借款主体',
+              width: 150,
+              prop: 'storeName',
+              slot: 'storeName',
+              className: '',
+              fixed: 'left',
+              type: ''
+            },
+            {
+              headTitle: '借款金额（元）',
+              width: 150,
+              prop: 'appropriationAmount',
+              slot: 'appropriationAmount',
+              className: '',
+              fixed: '',
+              type: ''
+            },
+            {
+              // 单位 ： period_unit 0 月， 1 日
+              headTitle: '借款期限',
+              width: 100,
+              prop: 'appropriationDate',
+              slot: 'appropriationDate',
+              className: '',
+              fixed: '',
+              type: ''
+            },
+            {
+              headTitle: '还款方式',
+              width: 150,
+              prop: 'repaymentType',
+              slot: 'repaymentType',
+              className: '',
+              fixed: '',
+              type: ''
+            },
+            {
+              headTitle: '借款利率（%）',
+              width: 110,
+              prop: 'lendingRate',
+              slot: 'lendingRate',
+              className: '',
+              fixed: '',
+              type: ''
+            },
+            {
+              headTitle: '居间服务费率（%）',
+              width: 130,
+              prop: 'serviceTariffing',
+              slot: 'serviceTariffing',
+              className: '',
+              fixed: '',
+              type: ''
+            },
+            {
+              headTitle: '居间服务费率（%）',
+              width: 130,
+              prop: 'serviceTariffing',
+              slot: 'serviceTariffing',
+              className: '',
+              fixed: '',
+              type: ''
+            },
+            {
+              headTitle: '居间服务费率（%）',
+              width: 130,
+              prop: 'serviceTariffing',
+              slot: 'serviceTariffing',
+              className: '',
+              fixed: 'right',
+              type: ''
+            }
+          ]
+        );
 
-        that.list = [].concat([1, 2, 3, 4, 5, 6]);
+        // that.list = [].concat([1, 2, 3, 4, 5, 6]);
       }, 3000);
     },
     methods: {
@@ -560,9 +476,62 @@
 
 </script>
 
-<style scoped>
+<style >
   .title {
     font-size: 20px;
     padding: 50px 10px 10px;
+  }
+  .el-autocomplete-suggestion__wrap{
+    max-width: 50px;
+    max-height: 100px;
+  }
+  .li-scroll .el-scrollbar{
+    /*width: 200px;*/
+    /*width: 938px;*/
+  }
+  .list {
+    max-height: 200px;
+    /*width: 200px;*/
+    overflow-y: scroll;
+    overflow-x: scroll;
+  }
+  .el-scrollbar__bar.is-horizontal {
+    height: 6px;
+    left: 2px;
+  }
+  .el-scrollbar__bar {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    z-index: 1;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity .12s ease-out;
+  }
+  .el-scrollbar__bar.is-horizontal>div {
+    height: 100%;
+  }
+  .el-scrollbar__thumb {
+    position: relative;
+    display: block;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: rgba(144,147,153,.3);
+    transition: background-color .3s;
+  }
+  .el-scrollbar__bar.is-vertical>div {
+    width: 100%;
+  }
+  .el-scrollbar__thumb {
+    position: relative;
+    display: block;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: rgba(144,147,153,.3);
+    transition: background-color .3s;
   }
 </style>

@@ -3,19 +3,362 @@
     :class="setClassName">
     <!--
       :style="[{maxWidth: store.tableWidth + 2 + 'px' }]"-->
+
     <div
       ref="vuitable"
       class="vui-table   vui-table-common-bg vui-total-table-border vui-total-table-display vui-default-style"
-      :style="{ width: (store.tableWidth + 1) + 'px' }"
+      :style="{ width: (store.tableWidth + 2) + 'px' }"
     >
-      <div class="overflow-x-vui" ref="tableScroll" :class=" 'is-scrolling-' + scrollPosition">
-        <div class="hidden-columns" ref="hiddenColumns">
-          <slot></slot>
+
+      <vui-scrollbar
+        v-on:movex="setMoveX"
+        v-on:movey="setMoveY"
+        :scroll="scrollType"
+        v-if="scrollType">
+        <!--overflow-x-vui-->
+        <div>
+          <div class="" ref="tableScroll" :class=" 'is-scrolling-' + scrollPosition">
+            <div class="hidden-columns" ref="hiddenColumns">
+              <slot></slot>
+            </div>
+            <div
+              class="vui-table__header-wrapper"
+              ref="headerWrapper">
+              <div class="table__header-wrapper">
+                <table :style="{ width: store.tableWidth + 'px' }">
+                  <colgroup>
+                    <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                  </colgroup>
+                  <thead>
+                  <slot name="header">
+                    <tr>
+                      <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
+                    </tr>
+                  </slot>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <div
+              class="vui-table__body-wrapper"
+              ref="bodyWrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <tbody>
+                <slot name="body">
+                  <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
+                    <td v-for="(edit, editIndex) in store.property" :key="editIndex">
+                      <slot :name=" edit['slot'] " :index="index" :row="item">
+                        <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
+                        <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
+                      </slot>
+                    </td>
+                  </tr>
+                </slot>
+                </tbody>
+              </table>
+            </div>
+            <div
+              v-if="setShowEmpty && !store.data && store.data.length === 0"
+              class="vui-table__empty-block"
+              :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
+              ref="emptyBlock">
+                        <span class="vui-table__empty-text">
+                          <slot name="empty">暂无数据</slot>
+                        </span>
+            </div>
+            <div
+              v-if="store.showFooter"
+              class="vui-table__footer-wrapper"
+              ref="footerWrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <tbody>
+                <slot name="footer"></slot>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div v-show="isShowFix" class="vui-table__fixed"
+               :style="[{width: leftFixedWidth + 'px' }, {height: tableHeight + 'px' }]">
+            <div
+              v-if="leftFixedColumns > 0"
+              class="vui-table__header-wrapper "
+              ref="leftFixedHeaderWrapper">
+              <div class="table__header-wrapper vui-table__fixed-header-wrapper">
+                <table :style="{ width: store.tableWidth + 'px' }">
+                  <colgroup>
+                    <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                  </colgroup>
+                  <thead>
+                  <slot name="header">
+                    <tr>
+                      <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
+                    </tr>
+                  </slot>
+                  </thead>
+                </table>
+              </div>
+
+            </div>
+            <div
+              :style="[{ top: bodyTop+ 'px'}]"
+              class="vui-table__fixed-body-wrapper"
+              ref="leftFixedBodyWrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <tbody>
+                <slot name="body">
+                  <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
+                    <td v-for="(edit, editIndex) in store.property" :key="editIndex">
+                      <slot :name=" edit['slot'] " :index="index" :row="item">
+                        <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
+                        <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
+                      </slot>
+                    </td>
+                  </tr>
+                </slot>
+                </tbody>
+              </table>
+            </div>
+            <div
+              v-if="setShowEmpty && !store.data && store.data.length === 0"
+              class="vui-table__empty-block"
+              :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
+              ref="emptyBlock">
+                        <span class="vui-table__empty-text">
+                          <slot name="empty">暂无数据</slot>
+                        </span>
+            </div>
+            <div
+              v-if="store.showFooter"
+              class="vui-table__fixed-footer-wrapper"
+              ref="leftFixedFooterWrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <tbody>
+                <slot name="footer"></slot>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div v-show="isShowFix" class="vui-table__fixed-right "
+               :style="[{width: rightFixedWidth + 'px'},{height: tableHeight + 'px' }]">
+            <div
+              v-if="leftFixedColumns > 0"
+              ref="rightFixedHeaderWrapper"
+              class="vui-table__fixed-header-wrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <thead>
+                <slot name="header">
+                  <tr>
+                    <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
+                  </tr>
+                </slot>
+                </thead>
+              </table>
+            </div>
+            <div
+              :style="[{ top: bodyTop+ 'px'}]"
+              class="vui-table__fixed-body-wrapper"
+              ref="rightFixedBodyWrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <tbody>
+                <slot name="body">
+                  <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
+                    <td v-for="(edit, editIndex) in store.property" :key="editIndex">
+                      <slot :name=" edit['slot'] " :index="index" :row="item">
+                        <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
+                        <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
+                      </slot>
+                    </td>
+                  </tr>
+                </slot>
+                </tbody>
+              </table>
+            </div>
+            <div
+              v-if="setShowEmpty && !store.data && store.data.length === 0"
+              :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
+              class="vui-table__empty-block"
+              ref="emptyBlock">
+                        <span class="vui-table__empty-text">
+                          <slot name="empty">暂无数据</slot>
+                        </span>
+            </div>
+            <div
+              v-if="store.showFooter"
+              class="vui-table__fixed-footer-wrapper"
+              ref="rightFixedFooterWrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <tbody>
+                <slot name="footer"></slot>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
         </div>
-        <div
-          class="vui-table__header-wrapper"
-          ref="headerWrapper">
-          <div class="table__header-wrapper">
+      </vui-scrollbar>
+      <div v-else>
+        <div class="overflow-x-vui" ref="tableScroll" :class=" 'is-scrolling-' + scrollPosition">
+          <div class="hidden-columns" ref="hiddenColumns">
+            <slot></slot>
+          </div>
+          <div
+            class="vui-table__header-wrapper"
+            ref="headerWrapper">
+            <div class="table__header-wrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <thead>
+                <slot name="header">
+                  <tr>
+                    <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
+                  </tr>
+                </slot>
+                </thead>
+              </table>
+            </div>
+          </div>
+          <div
+            class="vui-table__body-wrapper"
+            ref="bodyWrapper">
+            <table :style="{ width: store.tableWidth + 'px' }">
+              <colgroup>
+                <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+              </colgroup>
+              <tbody>
+              <slot name="body">
+                <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
+                  <td v-for="(edit, editIndex) in store.property" :key="editIndex">
+                    <slot :name=" edit['slot'] " :index="index" :row="item">
+                      <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
+                      <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
+                    </slot>
+                  </td>
+                </tr>
+              </slot>
+              </tbody>
+            </table>
+          </div>
+          <div
+            v-if="setShowEmpty && !store.data && store.data.length === 0"
+            class="vui-table__empty-block"
+            :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
+            ref="emptyBlock">
+                        <span class="vui-table__empty-text">
+                          <slot name="empty">暂无数据</slot>
+                        </span>
+          </div>
+          <div
+            v-if="store.showFooter"
+            class="vui-table__footer-wrapper"
+            ref="footerWrapper">
+            <table :style="{ width: store.tableWidth + 'px' }">
+              <colgroup>
+                <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+              </colgroup>
+              <tbody>
+              <slot name="footer"></slot>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div v-show="isShowFix" class="vui-table__fixed"
+             :style="[{width: leftFixedWidth + 'px' }, {height: tableHeight + 'px' }]">
+          <div
+            v-if="leftFixedColumns > 0"
+            class="vui-table__header-wrapper "
+            ref="leftFixedHeaderWrapper">
+            <div class="table__header-wrapper vui-table__fixed-header-wrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <thead>
+                <slot name="header">
+                  <tr>
+                    <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
+                  </tr>
+                </slot>
+                </thead>
+              </table>
+            </div>
+
+          </div>
+          <div
+            :style="[{ top: bodyTop+ 'px'}]"
+            class="vui-table__fixed-body-wrapper"
+            ref="leftFixedBodyWrapper">
+            <table :style="{ width: store.tableWidth + 'px' }">
+              <colgroup>
+                <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+              </colgroup>
+              <tbody>
+              <slot name="body">
+                <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
+                  <td v-for="(edit, editIndex) in store.property" :key="editIndex">
+                    <slot :name=" edit['slot'] " :index="index" :row="item">
+                      <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
+                      <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
+                    </slot>
+                  </td>
+                </tr>
+              </slot>
+              </tbody>
+            </table>
+          </div>
+          <div
+            v-if="setShowEmpty && !store.data && store.data.length === 0"
+            class="vui-table__empty-block"
+            :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
+            ref="emptyBlock">
+                        <span class="vui-table__empty-text">
+                          <slot name="empty">暂无数据</slot>
+                        </span>
+          </div>
+          <div
+            v-if="store.showFooter"
+            class="vui-table__fixed-footer-wrapper"
+            ref="leftFixedFooterWrapper">
+            <table :style="{ width: store.tableWidth + 'px' }">
+              <colgroup>
+                <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+              </colgroup>
+              <tbody>
+              <slot name="footer"></slot>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+        <div v-show="isShowFix" class="vui-table__fixed-right "
+             :style="[{width: rightFixedWidth + 'px'},{height: tableHeight + 'px' }]">
+          <div
+            v-if="leftFixedColumns > 0"
+            ref="rightFixedHeaderWrapper"
+            class="vui-table__fixed-header-wrapper">
             <table :style="{ width: store.tableWidth + 'px' }">
               <colgroup>
                 <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
@@ -29,195 +372,67 @@
               </thead>
             </table>
           </div>
-        </div>
-        <div
-          class="vui-table__body-wrapper"
-          ref="bodyWrapper">
-          <table :style="{ width: store.tableWidth + 'px' }">
-            <colgroup>
-              <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
-            </colgroup>
-            <tbody>
-            <slot name="body">
-              <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
-                <td v-for="(edit, editIndex) in store.property" :key="editIndex">
-                  <slot :name=" edit['slot'] " :index="index" :row="item">
-                    <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
-                    <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
-                  </slot>
-                </td>
-              </tr>
-            </slot>
-            </tbody>
-          </table>
-        </div>
-        <div
-          v-if="!store.data || store.data.length === 0"
-          class="vui-table__empty-block"
-          :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
-          ref="emptyBlock">
-                        <span class="vui-table__empty-text">
-                          <slot name="empty">暂无数据</slot>
-                        </span>
-        </div>
-        <div
-          v-if="store.showFooter"
-          class="vui-table__footer-wrapper"
-          ref="footerWrapper">
-          <table :style="{ width: store.tableWidth + 'px' }">
-            <colgroup>
-              <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
-            </colgroup>
-            <tbody>
-            <slot name="footer"></slot>
-            </tbody>
-          </table>
-        </div>
-      </div>
-      <div v-show="isShowFix" class="vui-table__fixed"
-           :style="[{width: leftFixedWidth + 'px' }, {height: tableHeight + 'px' }]">
-        <div
-          v-if="leftFixedColumns > 0"
-          class="vui-table__header-wrapper "
-          ref="leftFixedHeaderWrapper">
-          <div class="table__header-wrapper vui-table__fixed-header-wrapper">
+          <div
+            :style="[{ top: bodyTop+ 'px'}]"
+            class="vui-table__fixed-body-wrapper"
+            ref="rightFixedBodyWrapper">
             <table :style="{ width: store.tableWidth + 'px' }">
               <colgroup>
                 <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
               </colgroup>
-              <thead>
-              <slot name="header">
-                <tr>
-                  <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
+              <tbody>
+              <slot name="body">
+                <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
+                  <td v-for="(edit, editIndex) in store.property" :key="editIndex">
+                    <slot :name=" edit['slot'] " :index="index" :row="item">
+                      <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
+                      <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
+                    </slot>
+                  </td>
                 </tr>
               </slot>
-              </thead>
+              </tbody>
+            </table>
+          </div>
+          <div
+            v-if="setShowEmpty && !store.data && store.data.length === 0"
+            :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
+            class="vui-table__empty-block"
+            ref="emptyBlock">
+                        <span class="vui-table__empty-text">
+                          <slot name="empty">暂无数据</slot>
+                        </span>
+          </div>
+          <div
+            v-if="store.showFooter"
+            class="vui-table__fixed-footer-wrapper"
+            ref="rightFixedFooterWrapper">
+            <table :style="{ width: store.tableWidth + 'px' }">
+              <colgroup>
+                <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+              </colgroup>
+              <tbody>
+              <slot name="footer"></slot>
+              </tbody>
             </table>
           </div>
 
         </div>
-        <div
-          :style="[{ top: bodyTop+ 'px'}]"
-          class="vui-table__fixed-body-wrapper"
-          ref="leftFixedBodyWrapper">
-          <table :style="{ width: store.tableWidth + 'px' }">
-            <colgroup>
-              <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
-            </colgroup>
-            <tbody>
-            <slot name="body">
-              <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
-                <td v-for="(edit, editIndex) in store.property" :key="editIndex">
-                  <slot :name=" edit['slot'] " :index="index" :row="item">
-                    <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
-                    <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
-                  </slot>
-                </td>
-              </tr>
-            </slot>
-            </tbody>
-          </table>
-        </div>
-        <div
-          v-if="!store.data || store.data.length === 0"
-          class="vui-table__empty-block"
-          :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
-          ref="emptyBlock">
-                        <span class="vui-table__empty-text">
-                          <slot name="empty">暂无数据</slot>
-                        </span>
-        </div>
-        <div
-          v-if="store.showFooter"
-          class="vui-table__fixed-footer-wrapper"
-          ref="leftFixedFooterWrapper">
-          <table :style="{ width: store.tableWidth + 'px' }">
-            <colgroup>
-              <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
-            </colgroup>
-            <tbody>
-            <slot name="footer"></slot>
-            </tbody>
-          </table>
-        </div>
-
       </div>
-      <div v-show="isShowFix" class="vui-table__fixed-right "
-           :style="[{width: rightFixedWidth + 'px'},{height: tableHeight + 'px' }]">
-        <div
-          v-if="leftFixedColumns > 0"
-          ref="rightFixedHeaderWrapper"
-          class="vui-table__fixed-header-wrapper">
-          <table :style="{ width: store.tableWidth + 'px' }">
-            <colgroup>
-              <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
-            </colgroup>
-            <thead>
-            <slot name="header">
-              <tr>
-                <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
-              </tr>
-            </slot>
-            </thead>
-          </table>
-        </div>
-        <div
-          :style="[{ top: bodyTop+ 'px'}]"
-          class="vui-table__fixed-body-wrapper"
-          ref="rightFixedBodyWrapper">
-          <table :style="{ width: store.tableWidth + 'px' }">
-            <colgroup>
-              <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
-            </colgroup>
-            <tbody>
-            <slot name="body">
-              <tr v-for="(item, index) in store.data" :key="index" v-if="!store.isEdit">
-                <td v-for="(edit, editIndex) in store.property" :key="editIndex">
-                  <slot :name=" edit['slot'] " :index="index" :row="item">
-                    <div v-if="edit.type == 'index' " class="cell">{{index+1}}</div>
-                    <div v-else class="cell">{{ item[ edit['prop'] ] }}</div>
-                  </slot>
-                </td>
-              </tr>
-            </slot>
-            </tbody>
-          </table>
-        </div>
-        <div
-          v-if="!store.data || store.data.length === 0"
-          :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
-          class="vui-table__empty-block"
-          ref="emptyBlock">
-                        <span class="vui-table__empty-text">
-                          <slot name="empty">暂无数据</slot>
-                        </span>
-        </div>
-        <div
-          v-if="store.showFooter"
-          class="vui-table__fixed-footer-wrapper"
-          ref="rightFixedFooterWrapper">
-          <table :style="{ width: store.tableWidth + 'px' }">
-            <colgroup>
-              <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
-            </colgroup>
-            <tbody>
-            <slot name="footer"></slot>
-            </tbody>
-          </table>
-        </div>
 
-      </div>
     </div>
   </div>
 </template>
 
 <script>
   let vuiTableRefArr = [];
-  import { addResizeListener, removeResizeListener } from '../../../src/utils/resize-event';
+  import {addResizeListener, removeResizeListener} from '../../../src/utils/resize-event';
+  import Scrollbar from '../../scrollbar/src/main';
+
   export default {
     name: 'VuiTable',
     data: function() {
-      var store = {
+      let store = {
         tdWidthArr: [],
         thTitle: [],
         tableWidth: 0,
@@ -228,7 +443,8 @@
         property: [],
         province: [],
         citys: [],
-        area: []
+        area: [],
+        maxHeight: 'auto'
       };
       return {
         store,
@@ -248,6 +464,9 @@
         emptyBottom: 0,
         vuiTableRef: 'vuitable'
       };
+    },
+    components: {
+      [Scrollbar.name]: Scrollbar
     },
     props: {
       property: {
@@ -274,6 +493,15 @@
       className: {
         type: [Array, String],
         default: ''
+      },
+      scroll: {
+        type: String,
+        default: ''
+      },
+      maxHeight: [String, Number],
+      showEmpty: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
@@ -291,6 +519,12 @@
       },
       insTableHeight() {
         return this.store.tableHeight;
+      },
+      scrollType() {
+        return this.scroll;
+      },
+      setShowEmpty() {
+        return this.showEmpty;
       }
     },
     watch: {
@@ -316,6 +550,12 @@
             this.setTableHeight();
           });
         }
+      },
+      maxHeight: {
+        immediate: true,
+        handler(value) {
+          this.setMaxHeight(value);
+        }
       }
     },
     mounted: function() {
@@ -331,22 +571,22 @@
     },
     methods: {
       setCol: function() {
-        var that = this;
-        var tdWidthArr = [];
-        var headTitleArr = [];
+        let that = this;
+        let tdWidthArr = [];
+        let headTitleArr = [];
         this.property.forEach(function(item) {
           item.slot = item.slot.toLowerCase();
         });
-        var property = this.property;
-        var leftArr = [];
-        var centerArr = [];
-        var rightArr = [];
-        var leftArrTitle = [];
-        var centerArrTitle = [];
-        var rightArrTitle = [];
+        let property = this.property;
+        let leftArr = [];
+        let centerArr = [];
+        let rightArr = [];
+        let leftArrTitle = [];
+        let centerArrTitle = [];
+        let rightArrTitle = [];
         this.leftFixedWidth = 0;
         this.rightFixedWidth = 0;
-        for (var i = 0; i < property.length; i++) {
+        for (let i = 0; i < property.length; i++) {
           if (property[i].fixed && property[i].fixed === 'left') {
             leftArr.push(property[i]);
             leftArrTitle.push(property[i].headTitle);
@@ -367,8 +607,8 @@
           }
         }
 
-        var thTitle = [].concat(leftArrTitle).concat(centerArrTitle).concat(rightArrTitle);
-        var pro = [].concat(leftArr).concat(centerArr).concat(rightArr);
+        let thTitle = [].concat(leftArrTitle).concat(centerArrTitle).concat(rightArrTitle);
+        let pro = [].concat(leftArr).concat(centerArr).concat(rightArr);
         this.leftFixedColumns = leftArr.length;
         this.rightFixedColumns = rightArr.length;
 
@@ -376,7 +616,7 @@
           tdWidthArr.push(item.width);
           headTitleArr.push(item.headTitle);
         });
-        var tableWidth = this.sumArr(tdWidthArr);
+        let tableWidth = this.sumArr(tdWidthArr);
         Object.assign(this.store, {
           tdWidthArr: [].concat(tdWidthArr),
           thTitle: [].concat(thTitle),
@@ -386,9 +626,7 @@
           isEdit: false,
           showFooter: this.showFooter,
           property: [].concat(this.property),
-          province: [].concat(this.province),
-          citys: [].concat(this.citys),
-          area: [].concat(this.area)
+          maxHeight: this.maxHeight
         });
         this.$nextTick(function() {
           // 将每一个在页面中使用后的vui-table存储起来。
@@ -398,10 +636,10 @@
       setTableHeight: function() {
 
         this.$nextTick(function() {
-          var headerHeight = 0;
-          var footerHeight = 0;
-          var emptyBlockHeight = 0;
-          var bodyHeight = this.$refs.bodyWrapper.offsetHeight;
+          let headerHeight = 0;
+          let footerHeight = 0;
+          let emptyBlockHeight = 0;
+          let bodyHeight = this.$refs.bodyWrapper.offsetHeight;
           if (this.$refs.headerWrapper) {
             headerHeight = this.$refs.headerWrapper.offsetHeight;
           }
@@ -424,14 +662,19 @@
         // 当左右固定列的宽度再加上200，还大于表格本身可视宽度时，就将固定列隐藏掉
         // 也就是说，当浏览器横向缩小到足够小时或者电脑屏幕太小时，表格显示宽度小于固定列加起来的和的宽度，就隐藏固定列，
         // 这样就可以看到完整的表格的数据，在编辑表格数据时，不至于固定列遮挡住表格内容
-        this.$nextTick(()=>{
-          vuiTableRefArr.forEach(function(item) {
-            if (item.ref.offsetWidth < item.ins.leftFixedWidth + item.ins.rightFixedWidth + 200) {
-              item.ins.isShowFix = false;
-            } else {
-              item.ins.isShowFix = true;
-            }
-          });
+        this.$nextTick(() => {
+          let that = this;
+          if (that.vuiTableWrapper.offsetWidth >= that.store.tableWidth) {
+            that.isShowFix = false;
+          } else {
+            vuiTableRefArr.forEach(function(item) {
+              if (item.ref.offsetWidth < item.ins.leftFixedWidth + item.ins.rightFixedWidth + 200) {
+                item.ins.isShowFix = false;
+              } else {
+                item.ins.isShowFix = true;
+              }
+            });
+          }
         });
       },
       resizeListener() {
@@ -440,7 +683,7 @@
         this.setTableHeight();
       },
       windowSize: function() {
-        var that = this;
+        let that = this;
         if (that.vuiTableWrapper.offsetWidth >= that.store.tableWidth) {
           that.isShowFix = false;
         } else {
@@ -451,29 +694,12 @@
             that.isShowFix = false;
           } else {
             vuiTableRefArr.forEach(function(item) {
-              // if (item.ins == that){
-              //
-              //     console.log(item.ref)
-              //     if (item.ref.offsetWidth < that.leftFixedWidth + that.rightFixedWidth + 200){
-              //         that.isShowFix = false;
-              //     }else {
-              //         that.isShowFix = true;
-              //     }
-              // }
               if (item.ref.offsetWidth < item.ins.leftFixedWidth + item.ins.rightFixedWidth + 200) {
                 item.ins.isShowFix = false;
               } else {
                 item.ins.isShowFix = true;
               }
             });
-
-            // console.log(that.vuiTableWrapper)
-            // console.log(that.leftFixedWidth + that.rightFixedWidth + 200)
-            // if (that.vuiTableWrapper.offsetWidth < that.leftFixedWidth + that.rightFixedWidth + 200){
-            //     that.isShowFix = false;
-            // }else {
-            //     that.isShowFix = true;
-            // }
           }
 
           if (that.$refs.headerWrapper) {
@@ -520,6 +746,58 @@
         });
         addResizeListener(this.$el, this.resizeListener);
       },
+      setMoveX(val) {
+        if (this.scrollType === 'about') {
+          const {headerWrapper, footerWrapper} = this.$refs;
+          const refs = this.$refs;
+          let sLeft = val.left;
+          let self = this;
+          if (headerWrapper) headerWrapper.scrollLeft = sLeft;
+          if (footerWrapper) footerWrapper.scrollLeft = sLeft;
+          if (refs.leftFixedBodyWrapper) refs.leftFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
+          if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
+          const maxScrollLeftPosition = this.bodyWrapper.scrollWidth - this.bodyWrapper.offsetWidth - 1;
+          const scrollLeft = sLeft;
+          console.log(this.bodyWrapper.scrollWidth);
+          console.log(this.bodyWrapper.offsetWidth);
+          if (scrollLeft >= maxScrollLeftPosition) {
+            self.scrollPosition = 'right';
+          } else if (scrollLeft === 0) {
+            self.scrollPosition = 'left';
+          } else {
+            self.scrollPosition = 'middle';
+          }
+          if (this.bodyWrapper.scrollWidth === this.bodyWrapper.offsetWidth) {
+            self.scrollPosition = 'none';
+          }
+        }
+      },
+      setMoveY(val) {
+        if (this.scrollType !== 'about') {
+          const {headerWrapper, footerWrapper} = this.$refs;
+          const refs = this.$refs;
+          let sLeft = val.left;
+          let self = this;
+          if (headerWrapper) headerWrapper.scrollLeft = sLeft;
+          if (footerWrapper) footerWrapper.scrollLeft = sLeft;
+          if (refs.leftFixedBodyWrapper) refs.leftFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
+          if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
+          const maxScrollLeftPosition = this.bodyWrapper.scrollWidth - this.bodyWrapper.offsetWidth - 1;
+          const scrollLeft = sLeft;
+          console.log(this.bodyWrapper.scrollWidth);
+          console.log(this.bodyWrapper.offsetWidth);
+          if (scrollLeft >= maxScrollLeftPosition) {
+            self.scrollPosition = 'right';
+          } else if (scrollLeft === 0) {
+            self.scrollPosition = 'left';
+          } else {
+            self.scrollPosition = 'middle';
+          }
+          if (this.bodyWrapper.scrollWidth === this.bodyWrapper.offsetWidth) {
+            self.scrollPosition = 'none';
+          }
+        }
+      },
       checkForm: function() {
         if (!this.$isRight(this.rule.ref)) {
           return {data: this.data, isRight: false};
@@ -528,8 +806,8 @@
         }
       },
       sumArr: function(arr) {
-        var s = 0;
-        for (var i = 0; i < arr.length; i++) {
+        let s = 0;
+        for (let i = 0; i < arr.length; i++) {
           s += arr[i];
         }
         return s;
@@ -548,6 +826,9 @@
         }
 
         return target;
+      },
+      setMaxHeight(value) {
+        this.store.maxHeight = value;
       }
     },
     destroyed() {

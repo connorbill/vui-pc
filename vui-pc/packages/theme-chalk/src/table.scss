@@ -80,3 +80,26 @@
 .vui-risk-table .vui-total-table-border {
 	border-left: none;
 }
+
+.vui-wheel-box{
+	height: 10px;
+	z-index: 4;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	cursor: default;
+	//opacity: 0;
+	opacity: 1;
+	width: 100%;
+}
+.vui-wheel-item{
+	position: absolute;
+	top: 0;
+	height: 8px;
+	width: 562px;
+	background-color: rgb(148, 148, 148);
+	border: 1px solid rgb(255, 255, 255);
+	background-clip: padding-box;
+	border-radius: 5px;
+	left: 164px;
+}
