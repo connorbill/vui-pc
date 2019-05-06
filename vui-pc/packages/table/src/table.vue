@@ -9,7 +9,6 @@
       class="vui-table   vui-table-common-bg vui-total-table-border vui-total-table-display vui-default-style"
       :style="{ width: (store.tableWidth + 2) + 'px' }"
     >
-
       <vui-scrollbar
         v-on:movex="setMoveX"
         v-on:movey="setMoveY"
@@ -419,7 +418,6 @@
 
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -758,8 +756,6 @@
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
           const maxScrollLeftPosition = this.bodyWrapper.scrollWidth - this.bodyWrapper.offsetWidth - 1;
           const scrollLeft = sLeft;
-          console.log(this.bodyWrapper.scrollWidth);
-          console.log(this.bodyWrapper.offsetWidth);
           if (scrollLeft >= maxScrollLeftPosition) {
             self.scrollPosition = 'right';
           } else if (scrollLeft === 0) {
@@ -784,8 +780,6 @@
           if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
           const maxScrollLeftPosition = this.bodyWrapper.scrollWidth - this.bodyWrapper.offsetWidth - 1;
           const scrollLeft = sLeft;
-          console.log(this.bodyWrapper.scrollWidth);
-          console.log(this.bodyWrapper.offsetWidth);
           if (scrollLeft >= maxScrollLeftPosition) {
             self.scrollPosition = 'right';
           } else if (scrollLeft === 0) {

@@ -1,4 +1,3 @@
-
 var vuiCheck = {
   isObject: {},
   isString: {},
@@ -18,7 +17,7 @@ var vuiCheck = {
   doDeep: {},
   deepFreeze: {},
   judgeValue: {},
-  isRight: {},
+  isRight: {}
 };
 !(function(global, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -47,14 +46,17 @@ var vuiCheck = {
     // 判断是否 对象
     return (typeof obj === 'object') && obj.constructor === Object;
   }
+
   function isString(obj) {
     // 判断是否 字符串
     return (typeof obj === 'string') && obj.constructor === String;
   }
+
   function isArray(obj) {
     // 判断是否是数组
     return obj && (typeof obj === 'object') && (obj.constructor === Array);
   }
+
   function checkLicense(num) {
     // 判断是否是营业执照号
     var regIdNo = /^[0-9a-zA-Z]{10,18}$/;
@@ -64,6 +66,7 @@ var vuiCheck = {
       return true;
     }
   }
+
   function checkMobile(num) {
     // 判断是否是手机号
     var regIdNo = /^[1][2,3,4,5,6,7,8,9,0][0-9]{9}$/;
@@ -73,6 +76,7 @@ var vuiCheck = {
       return true;
     }
   }
+
   function checkCardID(num) {
     // 判断是否是身份证
     var regIdNo = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
@@ -82,6 +86,7 @@ var vuiCheck = {
       return true;
     }
   }
+
   function checkInt(num) {
     // 判断是否是整数
     if (!/^\d+$/.test(num)) {
@@ -90,6 +95,7 @@ var vuiCheck = {
       return true;
     }
   }
+
   function checkLength(str) {
     // 字符串长度计算
     var realLength = 0;
@@ -99,6 +105,7 @@ var vuiCheck = {
     }
     return realLength;
   }
+
   function checkNumber(num) {
     // 判断是否是数字
     var regu = /^(\-|\+)?\d+(\.\d+)?$/;
@@ -108,6 +115,7 @@ var vuiCheck = {
       return false;
     }
   }
+
   function checkDecimalPoint(num) {
     // 判断是否是两位小数，是-> 返回true
     if (/^(\-|\+)?\d+(\.\d{1,2})?$/.test(num)) {
@@ -116,6 +124,7 @@ var vuiCheck = {
       return false;
     }
   }
+
   function checkIsValue(value) {
     if (value === null || value === '' || value === undefined) {
       return false;
@@ -123,6 +132,7 @@ var vuiCheck = {
       return true;
     }
   }
+
   function trimSpace(str, is_global) {
     // 去掉空格 is_global=='g'，全局空格，不传参数去掉前后空格
     var result = '';
@@ -136,6 +146,7 @@ var vuiCheck = {
     }
     return result;
   }
+
   function numInt(value) {
     if (value === null || value === '' || value === undefined) {
       return '0';
@@ -151,10 +162,11 @@ var vuiCheck = {
       return num;
     }
   }
-// function timeFormat(input, fmtstring) {
-//   // 时间戳格式化 依赖于 moment.min.js
-//   return moment(input).format(fmtstring);
-// }
+
+  // function timeFormat(input, fmtstring) {
+  //   // 时间戳格式化 依赖于 moment.min.js
+  //   return moment(input).format(fmtstring);
+  // }
   function numTwoDec(value) {
     if (value === '' || value === null || value === undefined) {
       value = 0;
@@ -163,6 +175,7 @@ var vuiCheck = {
     var num = (Math.round(value * 100) / 100).toFixed(2);
     return num;
   }
+
   function numThou(num) {
     // 千分位格式化 保留两位小数
     if (num && num != null) {
@@ -178,6 +191,7 @@ var vuiCheck = {
       return '';
     }
   }
+
   function doDeep(o) {
     var prop, propKey;
     Object.freeze(o);// 首先冻结第一层对象
@@ -190,6 +204,7 @@ var vuiCheck = {
     }
     return o;
   }
+
   function deepFreeze(o) {
     var preCode = new Date().getTime();
     if (o.preCode) {
@@ -206,6 +221,7 @@ var vuiCheck = {
     o = doDeep(o);
     return o;
   }
+
   function judgeValue(obj) {
     var value = obj.value;
     var rule = obj.rule;
@@ -237,6 +253,7 @@ var vuiCheck = {
       }
     }
   }
+
   function isRight(obj, that) {
     var valiRes = true;
     var vueIns = that;
@@ -268,6 +285,7 @@ var vuiCheck = {
     }
     return valiRes;
   }
+
   //1
   // exports.checkIsValue = checkIsValue;
   // 2
@@ -290,7 +308,7 @@ var vuiCheck = {
     doDeep: doDeep,
     deepFreeze: deepFreeze,
     judgeValue: judgeValue,
-    isRight: isRight,
+    isRight: isRight
   };
 });
 
@@ -324,7 +342,11 @@ var vuiFilter = {
   },
   timeFormat: function(input, fmtstring) {
     // 时间戳格式化 依赖于 moment.min.js
-    return moment(input).format(fmtstring);
+    if (input) {
+      return moment(input).format(fmtstring);
+    } else {
+      return '';
+    }
   },
   numIntAbbr: function(value) {
     if (value === null || value === '' || value === undefined) {
