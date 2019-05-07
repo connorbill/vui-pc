@@ -1,10 +1,12 @@
 import VuiHome from './views/VuiHome';
-import TableExample from './views/instence/TableExample';
 import ComponentPage from './views/ComponentPage';
+import TableExample from './views/instence/TableExample';
+import ButtonExample from './views/instence/ButtonExample';
 let route = [
   {
     path: '/',
-    name: 'index'
+    name: 'index',
+    redirect: '/component/button'
   },
   {
     path: '/home',
@@ -15,11 +17,17 @@ let route = [
     path: '/component',
     name: 'ComponentPage',
     component: ComponentPage,
+    redirect: '/component/button',
     children: [
       {
         path: 'table',
-        name: 'ComponentTable',
+        name: 'TableExample',
         component: TableExample
+      },
+      {
+        path: 'button',
+        name: 'ButtonExample',
+        component: ButtonExample
       }
     ]
   },

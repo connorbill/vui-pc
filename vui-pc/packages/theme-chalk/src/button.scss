@@ -101,3 +101,7 @@
   /*content: "\E61E";*/
   /*-webkit-animation:load 1.2s linear 0s infinite;*/
 }
+
+.vui-button [class*=lds-spinner]+span {
+	margin-left: 5px;
+}

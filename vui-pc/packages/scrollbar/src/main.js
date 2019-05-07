@@ -24,7 +24,7 @@ export default {
     },
     scroll: {
       type: String,
-      default: ''
+      default: '' // 上下滚动seesaw  左右滚动about
     }
   },
 
@@ -64,7 +64,7 @@ export default {
       }
     }
     const view = h(this.tag, {
-      class: ['el-scrollbar__view', this.viewClass],
+      class: ['vui-scrollbar__view', this.viewClass],
       style: this.viewStyle,
       ref: 'resize'
     }, this.$slots.default);
@@ -74,7 +74,7 @@ export default {
         style={ style }
         onScroll={ this.handleScroll }
         onWheel={ this.handleWheel }
-        class={ [this.wrapClass, 'el-scrollbar__wrap', gutter ? '' : 'el-scrollbar__wrap--hidden-default'] }>
+        class={ [this.wrapClass, 'vui-scrollbar__wrap', gutter ? '' : 'vui-scrollbar__wrap--hidden-default'] }>
         { [view] }
       </div>
     );
@@ -95,13 +95,13 @@ export default {
       nodes = ([
         <div
           ref="wrap"
-          class={ [this.wrapClass, 'el-scrollbar__wrap'] }
+          class={ [this.wrapClass, 'vui-scrollbar__wrap'] }
           style={ style }>
           { [view] }
         </div>
       ]);
     }
-    return h('div', { class: 'el-scrollbar' }, nodes);
+    return h('div', { class: 'vui-scrollbar' }, nodes);
   },
 
   methods: {
@@ -115,6 +115,7 @@ export default {
     handleWheel(event) {
       const wrap = this.wrap;
       if (this.wrapDirection === 'about') {
+        console.log(this.wrapDirection);
         event.preventDefault();
         if (event.deltaY < 0) {
           wrap.scrollLeft -= 50;

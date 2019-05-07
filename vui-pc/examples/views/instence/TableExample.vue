@@ -5,6 +5,7 @@
       :data="list"
       :property="property"
       class-name="vui-risk-table"
+      scroll="about"
     >
       <template v-slot:operator="slotProps">
         <div v-for="(item, index) in domArr" :key="index">
@@ -20,13 +21,8 @@
 </template>
 
 <script>
-  import Table from '../../../packages/table/src/table';
-
   export default {
-    name: 'Table',
-    components: {
-      [Table.name]: Table
-    },
+    name: 'TableExample',
     data() {
       return {
         property: [],
@@ -128,10 +124,12 @@
     },
     mounted() {
       var that = this;
-      setTimeout(function() {
-        that.property = [].concat(that.propertyArr);
-        // that.list = [].concat([1, 2, 3, 4, 5, 6]);
-      }, 3000);
+      // setTimeout(function() {
+      //   that.property = [].concat(that.propertyArr);
+      //   // that.list = [].concat([1, 2, 3, 4, 5, 6]);
+      // }, 3000);
+      that.property = [].concat(that.propertyArr);
+      that.list = [].concat([1, 2, 3, 4, 5, 6]);
     },
     methods: {
       addDom(index) {
@@ -139,6 +137,24 @@
       },
       delDom() {
         this.domArr.splice(0, 1);
+      },
+      changeCol: function(a) {
+        if (a === 1) {
+          this.property.splice(2, 1);
+          this.list.splice(1, 1);
+        } else {
+          this.property.push(
+            {
+              headTitle: '状态',
+              width: 100,
+              prop: 'statusName',
+              slot: 'statusName',
+              className: '',
+              fixed: '',
+              type: ''
+            });
+          this.list.push(5);
+        }
       }
     }
   };

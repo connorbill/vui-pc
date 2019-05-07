@@ -18,7 +18,7 @@
         ]"
 	>
 		<div class="vui-loading-box">
-			<div class="lds-spinner small" v-if="loading">
+			<div class="lds-spinner small-less" v-if="loading">
 				<div></div>
 				<div></div>
 				<div></div>

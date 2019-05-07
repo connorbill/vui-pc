@@ -524,6 +524,9 @@
       setShowEmpty() {
         return this.showEmpty;
       }
+      // setMaxHeight() {
+      //   return this.maxHeight;
+      // }
     },
     watch: {
       data: {
