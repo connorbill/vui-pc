@@ -1,22 +1,92 @@
 <template>
   <div>
-    <div>Table example</div>
-    <vui-table
-      :data="list"
-      :property="property"
-      class-name="vui-risk-table"
-      scroll="about"
-    >
-      <template v-slot:operator="slotProps">
-        <div v-for="(item, index) in domArr" :key="index">
-          <div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">
-            {{dom}}
+    <h2>Table example1</h2>
+    <div class="demo-block">
+      <div class="source">
+        <div>
+          <!--例子-->
+          <vui-table
+            :data="list"
+            :property="property"
+            class-name="vui-risk-table"
+            scroll="about"
+          >
+            <template v-slot:operator="slotProps">
+              <div v-for="(item, index) in domArr" :key="index">
+                <div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">
+                  {{dom}}
+                </div>
+              </div>
+              <div @click="addDom(slotProps.row.index)">增加</div>
+              <div @click="delDom(slotProps.row.index)">减少</div>
+            </template>
+          </vui-table>
+        </div>
+      </div>
+      <div class="meta" >
+        <div class="description">
+          <div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>
           </div>
         </div>
-        <div @click="addDom(slotProps.row.index)">增加</div>
-        <div @click="delDom(slotProps.row.index)">减少</div>
-      </template>
-    </vui-table>
+      </div>
+      <div class="demo-block-control" style="left: 0px;">
+        <i class="el-icon-caret-top"></i>
+        <span style="display: none;">隐藏代码</span>
+        <span class="button--text">在线运行</span>
+      </div>
+    </div>
+
+
+    <h2>Table example2</h2>
+    <div class="demo-block">
+      <div class="source">
+        <div>
+
+          <vui-table
+            :data="list"
+            :property="property"
+            class-name="vui-risk-table"
+            scroll="about"
+            :show-footer="true"
+            max-height="200"
+          >
+            <template v-slot:operator="slotProps">
+              <div v-for="(item, index) in domArr" :key="index">
+                <div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">
+                  {{dom}}
+                </div>
+              </div>
+              <div @click="addDom(slotProps.row.index)">增加</div>
+              <div @click="delDom(slotProps.row.index)">减少</div>
+            </template>
+            <template v-slot:footer="slotProps">
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+              </tr>
+            </template>
+          </vui-table>
+        </div>
+      </div>
+      <div class="meta" >
+        <div class="description">
+          <div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>
+          </div>
+        </div>
+      </div>
+      <div class="demo-block-control" style="left: 0px;">
+        <i class="el-icon-caret-top"></i>
+        <span style="display: none;">隐藏代码</span>
+        <span class="button--text">在线运行</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,6 +103,88 @@
           },
           {
             a: [1, 2]
+          }
+        ],
+        dataArr: [
+          {
+            storeName: 'storeName',
+            appropriationAmount: 'Amount',
+            appropriationDate: 'Date',
+            repaymentType: 'Type',
+            lendingRate: 'Rate',
+            serviceTariffing: 'Tariffing',
+            serviceTariffing2: 'Tariffing2',
+            serviceTariffing3: 'Tariffing3'
+          },
+          {
+            storeName: 'storeName',
+            appropriationAmount: 'Amount',
+            appropriationDate: 'Date',
+            repaymentType: 'Type',
+            lendingRate: 'Rate',
+            serviceTariffing: 'Tariffing',
+            serviceTariffing2: 'Tariffing2',
+            serviceTariffing3: 'Tariffing3'
+          },
+          {
+            storeName: 'storeName',
+            appropriationAmount: 'Amount',
+            appropriationDate: 'Date',
+            repaymentType: 'Type',
+            lendingRate: 'Rate',
+            serviceTariffing: 'Tariffing',
+            serviceTariffing2: 'Tariffing2',
+            serviceTariffing3: 'Tariffing3'
+          },
+          {
+            storeName: 'storeName',
+            appropriationAmount: 'Amount',
+            appropriationDate: 'Date',
+            repaymentType: 'Type',
+            lendingRate: 'Rate',
+            serviceTariffing: 'Tariffing',
+            serviceTariffing2: 'Tariffing2',
+            serviceTariffing3: 'Tariffing3'
+          },
+          {
+            storeName: 'storeName',
+            appropriationAmount: 'Amount',
+            appropriationDate: 'Date',
+            repaymentType: 'Type',
+            lendingRate: 'Rate',
+            serviceTariffing: 'Tariffing',
+            serviceTariffing2: 'Tariffing2',
+            serviceTariffing3: 'Tariffing3'
+          },
+          {
+            storeName: 'storeName',
+            appropriationAmount: 'Amount',
+            appropriationDate: 'Date',
+            repaymentType: 'Type',
+            lendingRate: 'Rate',
+            serviceTariffing: 'Tariffing',
+            serviceTariffing2: 'Tariffing2',
+            serviceTariffing3: 'Tariffing3'
+          },
+          {
+            storeName: 'storeName',
+            appropriationAmount: 'Amount',
+            appropriationDate: 'Date',
+            repaymentType: 'Type',
+            lendingRate: 'Rate',
+            serviceTariffing: 'Tariffing',
+            serviceTariffing2: 'Tariffing2',
+            serviceTariffing3: 'Tariffing3'
+          },
+          {
+            storeName: 'storeName',
+            appropriationAmount: 'Amount',
+            appropriationDate: 'Date',
+            repaymentType: 'Type',
+            lendingRate: 'Rate',
+            serviceTariffing: 'Tariffing',
+            serviceTariffing2: 'Tariffing2',
+            serviceTariffing3: 'Tariffing3'
           }
         ],
         propertyArr: [
@@ -102,21 +254,21 @@
             type: ''
           },
           {
-            headTitle: '居间服务费率（%）',
+            headTitle: '居222',
             width: 130,
-            prop: 'serviceTariffing',
-            slot: 'serviceTariffing',
+            prop: 'serviceTariffing2',
+            slot: 'serviceTariffing3',
             className: '',
             fixed: '',
             type: ''
           },
           {
-            headTitle: '居间服务费率（%）',
+            headTitle: '居333',
             width: 130,
-            prop: 'serviceTariffing',
-            slot: 'serviceTariffing',
+            prop: 'serviceTariffing3',
+            slot: 'serviceTariffing3',
             className: '',
-            fixed: 'right',
+            fixed: '',
             type: ''
           }
         ]
@@ -129,7 +281,7 @@
       //   // that.list = [].concat([1, 2, 3, 4, 5, 6]);
       // }, 3000);
       that.property = [].concat(that.propertyArr);
-      that.list = [].concat([1, 2, 3, 4, 5, 6]);
+      that.list = [].concat(this.dataArr);
     },
     methods: {
       addDom(index) {

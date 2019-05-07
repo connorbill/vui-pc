@@ -40,6 +40,90 @@
                   <li class="nav-item">
                     <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
                   </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
+                  <li class="nav-item">
+                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                  </li>
                 </ul>
               </div>
             </li>
@@ -226,5 +310,8 @@
     padding-left: 0;
     padding-right: 0;
     font-size: 14px;
+  }
+  .side-nav .nav-item .nav-item a.active, .side-nav .nav-item .nav-item a:hover {
+    color: #409eff;
   }
 </style>

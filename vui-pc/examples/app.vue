@@ -1,14 +1,16 @@
 <template>
   <div id="app" >
-    <div class="header-menu">
-      <div class="header-logo">
-        <div class="vui-icon"></div>
-        <div class="vui-icon-name">vui-pc</div>
-      </div>
-      <div class="header-list">
-        <div class="header-item"><a >指南</a></div>
-        <div class="header-item"><a >组件</a></div>
-        <div class="header-item"><a >版本</a></div>
+    <div class="header-box">
+      <div class="header-menu">
+        <div class="header-logo">
+          <div class="vui-icon"></div>
+          <div class="vui-icon-name">vui-pc</div>
+        </div>
+        <div class="header-list">
+          <div class="header-item"><a >指南</a></div>
+          <div class="header-item"><a >组件</a></div>
+          <div class="header-item"><a >版本</a></div>
+        </div>
       </div>
     </div>
     <div class="main-cnt">
@@ -45,9 +47,20 @@
     align-items: center;
     border-bottom: 1px solid #dcdfe6;
   }
+  .header-box{
+    width: 100%;
+    background-color: #fff;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 1500;
+  }
   .header-logo{
     display: flex;
     align-items: center;
+  }
+  .main-cnt{
+    padding-top: 80px;
   }
   .vui-icon-name{
     margin-left: 10px;

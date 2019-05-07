@@ -25,6 +25,14 @@ export default {
     scroll: {
       type: String,
       default: '' // 上下滚动seesaw  左右滚动about
+    },
+    showX: {
+      type: Boolean,
+      default: true
+    },
+    showY: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -79,18 +87,39 @@ export default {
       </div>
     );
     let nodes;
-
     if (!this.native) {
-      nodes = ([
-        wrap,
-        <Bar
-          move={ this.moveX }
-          size={ this.sizeWidth }></Bar>,
-        <Bar
-          vertical
-          move={ this.moveY }
-          size={ this.sizeHeight }></Bar>
-      ]);
+
+      if (!this.showX && this.showY) {
+        nodes = ([
+          wrap,
+          <Bar
+            vertical
+            move={ this.moveY }
+            size={ this.sizeHeight }></Bar>
+        ]);
+      } else if (this.showX && !this.showY) {
+        nodes = ([
+          wrap,
+          <Bar
+            move={ this.moveX }
+            size={ this.sizeWidth }></Bar>
+        ]);
+      } else if (!this.showX && !this.showY) {
+        nodes = ([
+          wrap
+        ]);
+      } else {
+        nodes = ([
+          wrap,
+          <Bar
+            move={ this.moveX }
+            size={ this.sizeWidth }></Bar>,
+          <Bar
+            vertical
+            move={ this.moveY }
+            size={ this.sizeHeight }></Bar>
+        ]);
+      }
     } else {
       nodes = ([
         <div

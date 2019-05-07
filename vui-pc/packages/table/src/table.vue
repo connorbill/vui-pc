@@ -1,9 +1,6 @@
 <template>
   <div
     :class="setClassName">
-    <!--
-      :style="[{maxWidth: store.tableWidth + 2 + 'px' }]"-->
-
     <div
       ref="vuitable"
       class="vui-table   vui-table-common-bg vui-total-table-border vui-total-table-display vui-default-style"
@@ -12,10 +9,13 @@
       <vui-scrollbar
         v-on:movex="setMoveX"
         v-on:movey="setMoveY"
+        :show-y="true"
         :scroll="scrollType"
         v-if="scrollType">
         <!--overflow-x-vui-->
-        <div>
+        <div
+          >
+
           <div class="" ref="tableScroll" :class=" 'is-scrolling-' + scrollPosition">
             <div class="hidden-columns" ref="hiddenColumns">
               <slot></slot>
@@ -39,9 +39,10 @@
               </div>
             </div>
             <div
+              :style="{maxHeight: maxHeight + 'px' }"
               class="vui-table__body-wrapper"
               ref="bodyWrapper">
-              <table :style="{ width: store.tableWidth + 'px' }">
+              <table :style="{ width: store.tableWidth + 'px'}">
                 <colgroup>
                   <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
                 </colgroup>
@@ -64,9 +65,9 @@
               class="vui-table__empty-block"
               :style="[{ width: store.tableWidth + 'px' }, {bottom: emptyBottom + 'px' }]"
               ref="emptyBlock">
-                        <span class="vui-table__empty-text">
-                          <slot name="empty">暂无数据</slot>
-                        </span>
+                    <span class="vui-table__empty-text">
+                      <slot name="empty">暂无数据</slot>
+                    </span>
             </div>
             <div
               v-if="store.showFooter"
@@ -105,7 +106,7 @@
 
             </div>
             <div
-              :style="[{ top: bodyTop+ 'px'}]"
+              :style="[{ top: bodyTop+ 'px'}, { maxHeight: maxHeight + 'px' }]"
               class="vui-table__fixed-body-wrapper"
               ref="leftFixedBodyWrapper">
               <table :style="{ width: store.tableWidth + 'px' }">
@@ -170,7 +171,7 @@
               </table>
             </div>
             <div
-              :style="[{ top: bodyTop+ 'px'}]"
+              :style="[{ top: bodyTop+ 'px'}, { maxHeight: maxHeight + 'px' }]"
               class="vui-table__fixed-body-wrapper"
               ref="rightFixedBodyWrapper">
               <table :style="{ width: store.tableWidth + 'px' }">
@@ -794,6 +795,9 @@
             self.scrollPosition = 'none';
           }
         }
+      },
+      setScrollY(val) {
+        console.log(val);
       },
       checkForm: function() {
         if (!this.$isRight(this.rule.ref)) {
