@@ -116,3 +116,12 @@
 .vui-scroll-seesaw  .vui-scrollbar__bar{
 	z-index: 30;
 }
+.vui-table__body-wrapper{
+	overflow: hidden;
+}
+.vui-table--scrollable-y .vui-table__body-wrapper {
+	overflow-y: auto;
+}
+.vui-table--scrollable-x .vui-table__body-wrapper {
+	overflow-x: auto;
+}

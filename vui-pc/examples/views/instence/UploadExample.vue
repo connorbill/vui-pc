@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <h2>Upload 上传</h2>
     <div class="title">上传图片组件</div>
     <!--accept="image/gif, image/png, image/jpg, image/jpeg"
       auto-upload-->

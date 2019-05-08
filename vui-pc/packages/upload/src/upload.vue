@@ -83,7 +83,7 @@
 </template>
 
 <script>
-  import axiosRequest from '../../../src/funs/axios-request';
+  import {axiosRequest} from '../../../src/funs/axios-request';
   import Button from '../../button/src/button';
   // import axios from 'axios';
 
@@ -278,6 +278,7 @@
             if (that.autoUploadChange) {
               that.startUp();
             }
+            that.$refs.filElem.value = '';
           } else {
             that.isLoadingImg = true;
           }
@@ -418,6 +419,7 @@
         this.fileNumber -= 1;
         this.willUploadImg.splice(index, 1);
         this.onRemove(obj, this.willUploadImg, index);
+        this.$refs.filElem.value = '';
       },
       backAllImg: function() {
         let that = this;

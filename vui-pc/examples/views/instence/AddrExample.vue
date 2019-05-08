@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="title">省市区三级联动</div>
+    <h2>Addr 省市区三级联动</h2>
 
     <vui-addr
       ref="addr"
@@ -17,12 +17,10 @@
 </template>
 
 <script>
-  import Addr from '../../../packages/addr/src/addr';
+  import { axiosRequest } from '../../../src/funs/axios-request';
+
   export default {
     name: 'AddrExample',
-    components: {
-      [Addr.name]: Addr
-    },
     data() {
       return {
         allProvince: []
@@ -52,7 +50,7 @@
             console.log(res);
             that.allProvince = [].concat(res.data);
           });
-      },
+      }
     }
   };
 </script>

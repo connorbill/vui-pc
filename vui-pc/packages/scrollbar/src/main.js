@@ -1,15 +1,15 @@
 // reference https://github.com/noeldelgado/gemini-scrollbar/blob/master/index.js
 
-import { addResizeListener, removeResizeListener } from '../../../src/utils/resize-event';
+import {addResizeListener, removeResizeListener} from '../../../src/utils/resize-event';
 import scrollbarWidth from '../../../src/utils/scrollbar-width';
-import { toObject } from '../../../src/utils/util';
+import {toObject} from '../../../src/utils/util';
 import Bar from './bar';
 
 /* istanbul ignore next */
 export default {
   name: 'VuiScrollbar',
 
-  components: { Bar },
+  components: {Bar},
 
   props: {
     native: Boolean,
@@ -79,11 +79,11 @@ export default {
     const wrap = (
       <div
         ref="wrap"
-        style={ style }
-        onScroll={ this.handleScroll }
-        onWheel={ this.handleWheel }
-        class={ [this.wrapClass, 'vui-scrollbar__wrap', gutter ? '' : 'vui-scrollbar__wrap--hidden-default'] }>
-        { [view] }
+        style={style}
+        onScroll={this.handleScroll}
+        onWheel={this.handleWheel}
+        class={[this.wrapClass, 'vui-scrollbar__wrap', gutter ? '' : 'vui-scrollbar__wrap--hidden-default']}>
+        {[view]}
       </div>
     );
     let nodes;
@@ -94,15 +94,15 @@ export default {
           wrap,
           <Bar
             vertical
-            move={ this.moveY }
-            size={ this.sizeHeight }></Bar>
+            move={this.moveY}
+            size={this.sizeHeight}></Bar>
         ]);
       } else if (this.showX && !this.showY) {
         nodes = ([
           wrap,
           <Bar
-            move={ this.moveX }
-            size={ this.sizeWidth }></Bar>
+            move={this.moveX}
+            size={this.sizeWidth}></Bar>
         ]);
       } else if (!this.showX && !this.showY) {
         nodes = ([
@@ -112,29 +112,32 @@ export default {
         nodes = ([
           wrap,
           <Bar
-            move={ this.moveX }
-            size={ this.sizeWidth }></Bar>,
+            move={this.moveX}
+            size={this.sizeWidth}></Bar>,
           <Bar
             vertical
-            move={ this.moveY }
-            size={ this.sizeHeight }></Bar>
+            move={this.moveY}
+            size={this.sizeHeight}></Bar>
         ]);
       }
     } else {
       nodes = ([
         <div
           ref="wrap"
-          class={ [this.wrapClass, 'vui-scrollbar__wrap'] }
-          style={ style }>
-          { [view] }
+          class={[this.wrapClass, 'vui-scrollbar__wrap']}
+          style={style}>
+          {[view]}
         </div>
       ]);
     }
-    return h('div', { class: 'vui-scrollbar' }, nodes);
+    return h('div', {class: 'vui-scrollbar'}, nodes);
   },
 
   methods: {
     handleScroll(event) {
+      // event.stopPropagation();
+      event.stopPropagation();
+      event.preventDefault();
       const wrap = this.wrap;
       this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
       this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
@@ -143,32 +146,34 @@ export default {
     },
     handleWheel(event) {
       const wrap = this.wrap;
-      if (this.wrapDirection === 'about') {
-        event.preventDefault();
-        if (event.deltaY < 0) {
-          wrap.scrollLeft -= 50;
-          // 向上滚动鼠标滚轮，屏幕滚动条左移
-          this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
-        } else {
-          wrap.scrollLeft += 50;
-          // 向下滚动鼠标滚轮，屏幕滚动条右移
-          this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
+      if (this.wrapDirection) {
+        if (this.wrapDirection === 'about') {
+          if (event.deltaY < 0) {
+            wrap.scrollLeft -= 50;
+            // 向上滚动鼠标滚轮，屏幕滚动条左移
+            this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
+          } else {
+            wrap.scrollLeft += 50;
+            // 向下滚动鼠标滚轮，屏幕滚动条右移
+            this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
+          }
+
+        } else if (this.wrapDirection === 'seesaw') {
+          if (event.deltaY < 0) {
+            wrap.scrollTop -= 50;
+            // 向上滚动鼠标滚轮，屏幕滚动条上移
+            this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
+          } else {
+            wrap.scrollTop += 50;
+            // 向下滚动鼠标滚轮，屏幕滚动条下移
+            this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
+          }
         }
-      }
-      if (this.wrapDirection === 'seesaw') {
+        this.$emit('movex', {movex: this.moveX, left: wrap.scrollLeft});
+        this.$emit('movey', {movey: this.moveY, top: wrap.scrollTop});
+        event.stopPropagation();
         event.preventDefault();
-        if (event.deltaY < 0) {
-          wrap.scrollTop -= 50;
-          // 向上滚动鼠标滚轮，屏幕滚动条上移
-          this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
-        } else {
-          wrap.scrollTop += 50;
-          // 向下滚动鼠标滚轮，屏幕滚动条下移
-          this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
-        }
       }
-      this.$emit('movex', {movex: this.moveX, left: wrap.scrollLeft});
-      this.$emit('movey', {movey: this.moveY, top: wrap.scrollTop});
     },
 
     update() {

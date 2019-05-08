@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    <h2>Input 输入框</h2>
     <div class="title">input</div>
     <vui-input
       :ref="rule.ref.name"

@@ -55,4 +55,4 @@ function axiosRequest(config) {
   });
 }
 
-export default axiosRequest;
+export { axiosRequest };

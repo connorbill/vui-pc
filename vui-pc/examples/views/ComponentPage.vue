@@ -1,6 +1,10 @@
 <template>
-  <div class="page-container page-component">
-    <div class="">
+
+  <vui-scrollbar
+    class="page-component__scroll"
+    scroll="seesaw"
+  >
+    <div class="page-container page-component">
       <vui-scrollbar
         class="page-component__nav"
         wrap-class="page-component-wrap"
@@ -30,7 +34,7 @@
                 <div class="nav-group__title">Basic</div>
                 <ul class="pure-menu-list sub-nav">
                   <li class="nav-item">
-                    <router-link :to="{ name: 'ButtonExample' }">Button 按钮</router-link>
+                    <router-link active-class="active"  :to="{ name: 'ButtonExample' }">Button 按钮</router-link>
                   </li>
                 </ul>
               </div>
@@ -38,91 +42,57 @@
                 <div class="nav-group__title">Form</div>
                 <ul class="pure-menu-list sub-nav">
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'RadioExample' }">Radio 单选框</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'CheckboxExample' }">Checkbox 多选框</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'InputExample' }">Input 输入框</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'SelectExample' }">Select 选择器</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'DatePickerExample' }">DatePicker 日期选择器</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'UploadExample' }">Upload 上传</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'AddrExample' }">Addr 省市区三级联动</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'FormExample' }">Form 表单</router-link>
+                  </li>
+                </ul>
+              </div>
+              <div class="nav-group">
+                <div class="nav-group__title">Data</div>
+                <ul class="pure-menu-list sub-nav">
+                  <li class="nav-item">
+                    <router-link active-class="active" :to="{ name: 'TableExample' }">Table 表格</router-link>
                   </li>
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'PageExample' }">Pagination 分页</router-link>
                   </li>
+                </ul>
+              </div>
+              <div class="nav-group">
+                <div class="nav-group__title">Notice</div>
+                <ul class="pure-menu-list sub-nav">
+                </ul>
+              </div>
+              <div class="nav-group">
+                <div class="nav-group__title">Navigation</div>
+                <ul class="pure-menu-list sub-nav">
+                </ul>
+              </div>
+              <div class="nav-group">
+                <div class="nav-group__title">Others</div>
+                <ul class="pure-menu-list sub-nav">
                   <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
-                  </li>
-                  <li class="nav-item">
-                    <router-link :to="{ name: 'TableExample' }">table 表格</router-link>
+                    <router-link active-class="active" :to="{ name: 'DialogExample' }">Dialog 对话框</router-link>
                   </li>
                 </ul>
               </div>
@@ -130,37 +100,37 @@
           </ul>
         </div>
       </vui-scrollbar>
+
+      <div class="page-component__content">
+        <router-view></router-view>
+      </div>
     </div>
-    <div class="page-component__content">
-      <router-view></router-view>
-    </div>
-  </div>
+  </vui-scrollbar>
 </template>
 
 <script>
-  import Scrollbar from '../../packages/scrollbar/src/main';
   export default {
-    name: 'ComponentPage',
-    components: {
-      [Scrollbar.name]: Scrollbar
-    }
+    name: 'ComponentPage'
   };
 </script>
 
 <style>
-  li{
+  li {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  ul{
+
+  ul {
     margin: 0;
     padding: 0;
   }
-  .nav-box{
+
+  .nav-box {
     padding-top: 50px;
   }
-  .page-component__nav li a{
+
+  .page-component__nav li a {
     display: block;
     height: 40px;
     color: #444;
@@ -173,19 +143,22 @@
     text-decoration: none;
   }
 
-  .page-component .page-component-wrap{
+  .page-component .page-component-wrap {
     overflow-x: auto;
   }
-  .page-container{
+
+  .page-container {
     margin: auto;
     width: 1140px;
   }
+
   .page-component .page-component__content {
     padding-left: 270px;
     padding-bottom: 100px;
     box-sizing: border-box;
     margin-top: 50px;
   }
+
   .page-component .page-component__nav {
     width: 240px;
     position: fixed;
@@ -194,6 +167,7 @@
     margin-top: 80px;
     transition: padding-top .3s;
   }
+
   .side-nav .nav-item a {
     font-size: 16px;
     color: #333;
@@ -207,6 +181,7 @@
     transition: .15s ease-out;
     font-weight: 700;
   }
+
   .side-nav .nav-item .nav-item a {
     display: block;
     height: 40px;
@@ -218,37 +193,45 @@
     text-overflow: ellipsis;
     font-weight: 400;
   }
+
   .side-nav .nav-group__title {
     font-size: 12px;
     color: #999;
     line-height: 26px;
     margin-top: 15px;
   }
-  .side-nav>ul>.nav-item>a {
+
+  .side-nav > ul > .nav-item > a {
     margin-top: 15px;
   }
-  .page-component__content h2{
+
+  .page-component__content h2 {
     font-weight: 400;
     color: #1f2f3d;
     font-size: 28px;
     margin: 0;
   }
-  .page-component__content p{
+
+  .page-component__content p {
     font-size: 14px;
     color: #5e6d82;
     line-height: 1.5em;
   }
+
   .demo-block {
     border: 1px solid #ebebeb;
     border-radius: 3px;
     transition: .2s;
   }
+
   .demo-block {
     margin-bottom: 24px;
   }
+
   .demo-block .source {
     padding: 24px;
   }
+
   .demo-block .meta {
     background-color: #fafafa;
     border-top: 1px solid #eaeefb;
@@ -256,6 +239,7 @@
     height: 0;
     transition: height .2s;
   }
+
   .demo-block .description {
     padding: 20px;
     box-sizing: border-box;
@@ -268,10 +252,12 @@
     margin: 10px;
     background-color: #fff;
   }
+
   .demo-block .description p {
     margin: 0;
     line-height: 26px;
   }
+
   .demo-block .description code {
     color: #5e6d82;
     background-color: #e6effb;
@@ -283,9 +269,11 @@
     height: 18px;
     line-height: 18px;
   }
+
   .demo-block code {
-    font-family: Menlo,Monaco,Consolas,Courier,monospace;
+    font-family: Menlo, Monaco, Consolas, Courier, monospace;
   }
+
   .demo-block .demo-block-control {
     border-top: 1px solid #eaeefb;
     height: 44px;
@@ -303,7 +291,8 @@
     align-items: center;
     padding: 0 15px;
   }
-  .demo-block  .button--text {
+
+  .demo-block .button--text {
     border-color: transparent;
     color: #409eff;
     background: transparent;
@@ -311,7 +300,17 @@
     padding-right: 0;
     font-size: 14px;
   }
+
   .side-nav .nav-item .nav-item a.active, .side-nav .nav-item .nav-item a:hover {
+    color: #409eff;
+  }
+  .side-nav .nav-item a.active {
+    color: #409eff;
+  }
+  .side-nav .nav-item .nav-item a.router-link-active, .side-nav .nav-item .nav-item a:hover {
+    color: #409eff;
+  }
+  .side-nav .nav-item a.router-link-active {
     color: #409eff;
   }
 </style>
