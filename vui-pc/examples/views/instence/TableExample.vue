@@ -87,6 +87,58 @@
         <span class="button--text">在线运行</span>
       </div>
     </div>
+
+
+    <h2>Table example3</h2>
+    <div class="demo-block">
+      <div class="source">
+        <div>
+
+          <vui-table
+            :data="list"
+            :property="property"
+            class-name="vui-risk-table"
+            scroll="seesaw"
+            :show-footer="true"
+            max-height="200"
+          >
+            <template v-slot:operator="slotProps">
+              <div v-for="(item, index) in domArr" :key="index">
+                <div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">
+                  {{dom}}
+                </div>
+              </div>
+              <div @click="addDom(slotProps.row.index)">增加</div>
+              <div @click="delDom(slotProps.row.index)">减少</div>
+            </template>
+            <template v-slot:footer="slotProps">
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+              </tr>
+            </template>
+          </vui-table>
+        </div>
+      </div>
+      <div class="meta" >
+        <div class="description">
+          <div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>
+          </div>
+        </div>
+      </div>
+      <div class="demo-block-control" style="left: 0px;">
+        <i class="el-icon-caret-top"></i>
+        <span style="display: none;">隐藏代码</span>
+        <span class="button--text">在线运行</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -110,81 +162,81 @@
             storeName: 'storeName',
             appropriationAmount: 'Amount',
             appropriationDate: 'Date',
-            repaymentType: 'Type',
+            repaymentType: 'Type1',
             lendingRate: 'Rate',
-            serviceTariffing: 'Tariffing',
-            serviceTariffing2: 'Tariffing2',
-            serviceTariffing3: 'Tariffing3'
+            serviceTariffing: '1Tariffing',
+            serviceTariffing2: '1Tariffing2',
+            serviceTariffing3: '1Tariffing3'
           },
           {
             storeName: 'storeName',
             appropriationAmount: 'Amount',
             appropriationDate: 'Date',
-            repaymentType: 'Type',
+            repaymentType: 'Type2',
             lendingRate: 'Rate',
-            serviceTariffing: 'Tariffing',
-            serviceTariffing2: 'Tariffing2',
-            serviceTariffing3: 'Tariffing3'
+            serviceTariffing: '2Tariffing',
+            serviceTariffing2: '2Tariffing2',
+            serviceTariffing3: '2Tariffing3'
           },
           {
             storeName: 'storeName',
             appropriationAmount: 'Amount',
             appropriationDate: 'Date',
-            repaymentType: 'Type',
+            repaymentType: 'Type3',
             lendingRate: 'Rate',
-            serviceTariffing: 'Tariffing',
-            serviceTariffing2: 'Tariffing2',
-            serviceTariffing3: 'Tariffing3'
+            serviceTariffing: '3Tariffing',
+            serviceTariffing2: '3Tariffing2',
+            serviceTariffing3: '3Tariffing3'
           },
           {
             storeName: 'storeName',
             appropriationAmount: 'Amount',
             appropriationDate: 'Date',
-            repaymentType: 'Type',
+            repaymentType: 'Type4',
             lendingRate: 'Rate',
-            serviceTariffing: 'Tariffing',
-            serviceTariffing2: 'Tariffing2',
-            serviceTariffing3: 'Tariffing3'
+            serviceTariffing: '4Tariffing',
+            serviceTariffing2: '4Tariffing2',
+            serviceTariffing3: '4Tariffing3'
           },
           {
             storeName: 'storeName',
             appropriationAmount: 'Amount',
             appropriationDate: 'Date',
-            repaymentType: 'Type',
+            repaymentType: 'Type5',
             lendingRate: 'Rate',
-            serviceTariffing: 'Tariffing',
-            serviceTariffing2: 'Tariffing2',
-            serviceTariffing3: 'Tariffing3'
+            serviceTariffing: '5Tariffing',
+            serviceTariffing2: '5Tariffing2',
+            serviceTariffing3: '5Tariffing3'
           },
           {
             storeName: 'storeName',
             appropriationAmount: 'Amount',
             appropriationDate: 'Date',
-            repaymentType: 'Type',
+            repaymentType: 'Type6',
             lendingRate: 'Rate',
-            serviceTariffing: 'Tariffing',
-            serviceTariffing2: 'Tariffing2',
-            serviceTariffing3: 'Tariffing3'
+            serviceTariffing: '6Tariffing',
+            serviceTariffing2: '6Tariffing2',
+            serviceTariffing3: '6Tariffing3'
           },
           {
             storeName: 'storeName',
             appropriationAmount: 'Amount',
             appropriationDate: 'Date',
-            repaymentType: 'Type',
+            repaymentType: 'Type7',
             lendingRate: 'Rate',
-            serviceTariffing: 'Tariffing',
-            serviceTariffing2: 'Tariffing2',
-            serviceTariffing3: 'Tariffing3'
+            serviceTariffing: '7Tariffing',
+            serviceTariffing2: '7Tariffing2',
+            serviceTariffing3: '7Tariffing3'
           },
           {
             storeName: 'storeName',
             appropriationAmount: 'Amount',
             appropriationDate: 'Date',
-            repaymentType: 'Type',
+            repaymentType: 'Type8',
             lendingRate: 'Rate',
-            serviceTariffing: 'Tariffing',
-            serviceTariffing2: 'Tariffing2',
-            serviceTariffing3: 'Tariffing3'
+            serviceTariffing: '8Tariffing',
+            serviceTariffing2: '8Tariffing2',
+            serviceTariffing3: '8Tariffing3'
           }
         ],
         propertyArr: [
@@ -268,7 +320,7 @@
             prop: 'serviceTariffing3',
             slot: 'serviceTariffing3',
             className: '',
-            fixed: '',
+            fixed: 'right',
             type: ''
           }
         ]

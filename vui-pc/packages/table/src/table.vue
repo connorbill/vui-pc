@@ -4,6 +4,7 @@
     <div
       ref="vuitable"
       class="vui-table   vui-table-common-bg vui-total-table-border vui-total-table-display vui-default-style"
+      :class="{'vui-scroll-seesaw': scroll }"
       :style="{ width: (store.tableWidth + 2) + 'px' }"
     >
       <vui-scrollbar
@@ -15,8 +16,7 @@
         <!--overflow-x-vui-->
         <div
           >
-
-          <div class="" ref="tableScroll" :class=" 'is-scrolling-' + scrollPosition">
+          <div class="" ref="tableScroll" :class="[ setScrollPosition ? `is-scrolling-${setScrollPosition}` : 'is-scrolling-left' ]">
             <div class="hidden-columns" ref="hiddenColumns">
               <slot></slot>
             </div>
@@ -39,7 +39,26 @@
               </div>
             </div>
             <div
-              :style="{maxHeight: maxHeight + 'px' }"
+              :style="[{left: store.scrollLeft}]"
+              class="vui-table__header-wrapper vui-table__header-wrapper-scroll"
+              ref="headerWrapperScroll">
+              <div class="table__header-wrapper">
+                <table :style="{ width: store.tableWidth + 'px' }">
+                  <colgroup>
+                    <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                  </colgroup>
+                  <thead>
+                  <slot name="header">
+                    <tr>
+                      <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
+                    </tr>
+                  </slot>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <div
+              :style="[bodyHeight]"
               class="vui-table__body-wrapper"
               ref="bodyWrapper">
               <table :style="{ width: store.tableWidth + 'px'}">
@@ -57,6 +76,7 @@
                     </td>
                   </tr>
                 </slot>
+                <tr :style="{height: store.footerHeight + 'px'}"></tr>
                 </tbody>
               </table>
             </div>
@@ -70,8 +90,23 @@
                     </span>
             </div>
             <div
+              style="opacity: 0;"
               v-if="store.showFooter"
               class="vui-table__footer-wrapper"
+              ref="footerWrapper">
+              <table :style="{ width: store.tableWidth + 'px' }">
+                <colgroup>
+                  <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                </colgroup>
+                <tbody>
+                <slot name="footer"></slot>
+                </tbody>
+              </table>
+            </div>
+            <div
+              :style="[{left: store.scrollLeft}]"
+              v-if="store.showFooter"
+              class="vui-table__footer-wrapper vui-table__footer-wrapper-scroll"
               ref="footerWrapper">
               <table :style="{ width: store.tableWidth + 'px' }">
                 <colgroup>
@@ -90,7 +125,7 @@
               class="vui-table__header-wrapper "
               ref="leftFixedHeaderWrapper">
               <div class="table__header-wrapper vui-table__fixed-header-wrapper">
-                <table :style="{ width: store.tableWidth + 'px' }">
+                <table :style="{ width: store.tableWidth + 'px' }" >
                   <colgroup>
                     <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
                   </colgroup>
@@ -106,10 +141,10 @@
 
             </div>
             <div
-              :style="[{ top: bodyTop+ 'px'}, { maxHeight: maxHeight + 'px' }]"
+              :style="[bodyHeight, { top: bodyTop+ 'px'}]"
               class="vui-table__fixed-body-wrapper"
               ref="leftFixedBodyWrapper">
-              <table :style="{ width: store.tableWidth + 'px' }">
+              <table :style="[{ width: store.tableWidth + 'px' },{transform: 'translateY(' + store.scrollBodyTop + 'px)'}]" ref="leftFixedHeaderWrapperBody">
                 <colgroup>
                   <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
                 </colgroup>
@@ -124,6 +159,7 @@
                     </td>
                   </tr>
                 </slot>
+                <tr :style="{height: store.footerHeight + 'px'}"></tr>
                 </tbody>
               </table>
             </div>
@@ -154,10 +190,12 @@
           <div v-show="isShowFix" class="vui-table__fixed-right "
                :style="[{width: rightFixedWidth + 'px'},{height: tableHeight + 'px' }]">
             <div
-              v-if="leftFixedColumns > 0"
+              v-if="rightFixedColumns > 0"
               ref="rightFixedHeaderWrapper"
               class="vui-table__fixed-header-wrapper">
-              <table :style="{ width: store.tableWidth + 'px' }">
+              <table
+                      :style="[{ width: store.tableWidth + 'px' }]"
+                     >
                 <colgroup>
                   <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
                 </colgroup>
@@ -171,10 +209,10 @@
               </table>
             </div>
             <div
-              :style="[{ top: bodyTop+ 'px'}, { maxHeight: maxHeight + 'px' }]"
+              :style="[bodyHeight, { top: bodyTop+ 'px'}]"
               class="vui-table__fixed-body-wrapper"
               ref="rightFixedBodyWrapper">
-              <table :style="{ width: store.tableWidth + 'px' }">
+              <table :style="[{ width: store.tableWidth + 'px' },{transform: 'translateY(' + store.scrollBodyTop + 'px)'}]" >
                 <colgroup>
                   <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
                 </colgroup>
@@ -189,6 +227,7 @@
                     </td>
                   </tr>
                 </slot>
+                <tr :style="{height: store.footerHeight + 'px'}"></tr>
                 </tbody>
               </table>
             </div>
@@ -219,7 +258,7 @@
         </div>
       </vui-scrollbar>
       <div v-else>
-        <div class="overflow-x-vui" ref="tableScroll" :class=" 'is-scrolling-' + scrollPosition">
+        <div class="overflow-x-vui" ref="tableScroll" :class=" `is-scrolling-${setScrollPosition}`">
           <div class="hidden-columns" ref="hiddenColumns">
             <slot></slot>
           </div>
@@ -308,7 +347,7 @@
 
           </div>
           <div
-            :style="[{ top: bodyTop+ 'px'}]"
+            :style="[bodyHeight, { top: bodyTop+ 'px'}]"
             class="vui-table__fixed-body-wrapper"
             ref="leftFixedBodyWrapper">
             <table :style="{ width: store.tableWidth + 'px' }">
@@ -373,7 +412,7 @@
             </table>
           </div>
           <div
-            :style="[{ top: bodyTop+ 'px'}]"
+            :style="[bodyHeight, { top: bodyTop+ 'px'}]"
             class="vui-table__fixed-body-wrapper"
             ref="rightFixedBodyWrapper">
             <table :style="{ width: store.tableWidth + 'px' }">
@@ -443,14 +482,19 @@
         province: [],
         citys: [],
         area: [],
-        maxHeight: 'auto'
+        maxHeight: null,
+        height: null,
+        headerHeight: null,
+        footerHeight: null,
+        showSeasawScroll: false,
+        scrollLeft: 0,
+        scrollBodyTop: 0
       };
       return {
         store,
         isAuto: false,
         overflowx: '',
         bodyTop: 0,
-        bodyHeight: 0,
         leftFixedColumns: 0,
         leftFixedWidth: 0,
         leftOneFixWidth: '',
@@ -497,7 +541,12 @@
         type: String,
         default: ''
       },
+      height: [String, Number],
       maxHeight: [String, Number],
+      showHeader: {
+        type: Boolean,
+        default: true
+      },
       showEmpty: {
         type: Boolean,
         default: false
@@ -524,10 +573,32 @@
       },
       setShowEmpty() {
         return this.showEmpty;
+      },
+      isSeasawScroll() {
+        if (this.scrollType() === 'seesaw') {
+          return true;
+        }
+        if (this.scrollType() === 'about') {
+          return false;
+        }
+      },
+      setScrollPosition() {
+        return this.scrollPosition;
+      },
+      bodyHeight() {
+        if (this.height) {
+          return {
+            height: this.store.bodyHeight ? this.store.bodyHeight + 'px' : ''
+          };
+        } else if (this.maxHeight) {
+          return {
+            'max-height': (this.showHeader
+              ? this.maxHeight - this.store.headerHeight - this.store.footerHeight
+              : this.maxHeight - this.store.footerHeight) + 'px'
+          };
+        }
+        return {};
       }
-      // setMaxHeight() {
-      //   return this.maxHeight;
-      // }
     },
     watch: {
       data: {
@@ -551,6 +622,12 @@
             this.setCol();
             this.setTableHeight();
           });
+        }
+      },
+      height: {
+        immediate: true,
+        handler(value) {
+          this.setHeight(value);
         }
       },
       maxHeight: {
@@ -656,6 +733,8 @@
           if (footerHeight > 0) {
             this.emptyBottom = footerHeight;
           }
+          this.store.headerHeight = headerHeight;
+          this.store.footerHeight = footerHeight;
         });
       },
       isShowFixJudge: function() {
@@ -749,62 +828,67 @@
         addResizeListener(this.$el, this.resizeListener);
       },
       setMoveX(val) {
-        if (this.scrollType === 'about') {
-          const {headerWrapper, footerWrapper} = this.$refs;
-          const refs = this.$refs;
-          let sLeft = val.left;
-          let self = this;
-          if (headerWrapper) headerWrapper.scrollLeft = sLeft;
-          if (footerWrapper) footerWrapper.scrollLeft = sLeft;
-          if (refs.leftFixedBodyWrapper) refs.leftFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
-          if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
-          const maxScrollLeftPosition = this.bodyWrapper.scrollWidth - this.bodyWrapper.offsetWidth - 1;
-          const scrollLeft = sLeft;
-          if (scrollLeft >= maxScrollLeftPosition) {
-            self.scrollPosition = 'right';
-          } else if (scrollLeft === 0) {
-            self.scrollPosition = 'left';
-          } else {
-            self.scrollPosition = 'middle';
-          }
-          if (this.bodyWrapper.scrollWidth === this.bodyWrapper.offsetWidth) {
-            self.scrollPosition = 'none';
-          }
+        // console.log(val);
+        // console.log(val.left);
+        if (val.left === 0) {
+          this.store.scrollLeft = 0;
+        } else {
+          this.store.scrollLeft = -val.left + 'px';
         }
+        // if (this.scrollType === 'about') {
+        const {headerWrapper, footerWrapper} = this.$refs;
+        const refs = this.$refs;
+        let sLeft = val.left;
+        let self = this;
+        if (headerWrapper) headerWrapper.scrollLeft = sLeft;
+        if (footerWrapper) footerWrapper.scrollLeft = sLeft;
+        if (refs.leftFixedBodyWrapper) refs.leftFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
+        if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
+        const maxScrollLeftPosition = this.bodyWrapper.scrollWidth - this.bodyWrapper.offsetWidth - 1;
+        const scrollLeft = sLeft;
+        if (scrollLeft >= maxScrollLeftPosition) {
+          self.scrollPosition = 'right';
+        } else if (scrollLeft === 0) {
+          self.scrollPosition = 'left';
+        } else {
+          self.scrollPosition = 'middle';
+        }
+        if (this.bodyWrapper.scrollWidth === this.bodyWrapper.offsetWidth) {
+          self.scrollPosition = 'none';
+        }
+        // }
       },
       setMoveY(val) {
-        if (this.scrollType !== 'about') {
-          const {headerWrapper, footerWrapper} = this.$refs;
-          const refs = this.$refs;
-          let sLeft = val.left;
-          let self = this;
-          if (headerWrapper) headerWrapper.scrollLeft = sLeft;
-          if (footerWrapper) footerWrapper.scrollLeft = sLeft;
-          if (refs.leftFixedBodyWrapper) refs.leftFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
-          if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
-          const maxScrollLeftPosition = this.bodyWrapper.scrollWidth - this.bodyWrapper.offsetWidth - 1;
-          const scrollLeft = sLeft;
-          if (scrollLeft >= maxScrollLeftPosition) {
-            self.scrollPosition = 'right';
-          } else if (scrollLeft === 0) {
-            self.scrollPosition = 'left';
-          } else {
-            self.scrollPosition = 'middle';
-          }
-          if (this.bodyWrapper.scrollWidth === this.bodyWrapper.offsetWidth) {
-            self.scrollPosition = 'none';
-          }
-        }
+        // console.log(val);
+        // this.$refs.leftFixedHeaderWrapperBody.scrollTop = val.top;
+        this.store.scrollBodyTop = -val.top;
+        // this.bodyTop = (this.store.headerHeight - val.top);
+        // console.log(this.bodyTop);
+        // if (this.scrollType !== 'about') {
+        //   const {headerWrapper, footerWrapper} = this.$refs;
+        //   const refs = this.$refs;
+        //   let sLeft = val.left;
+        //   let self = this;
+        //   if (headerWrapper) headerWrapper.scrollLeft = sLeft;
+        //   if (footerWrapper) footerWrapper.scrollLeft = sLeft;
+        //   if (refs.leftFixedBodyWrapper) refs.leftFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
+        //   if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.bodyWrapper.scrollTop;
+        //   const maxScrollLeftPosition = this.bodyWrapper.scrollWidth - this.bodyWrapper.offsetWidth - 1;
+        //   const scrollLeft = sLeft;
+        //   if (scrollLeft >= maxScrollLeftPosition) {
+        //     self.scrollPosition = 'right';
+        //   } else if (scrollLeft === 0) {
+        //     self.scrollPosition = 'left';
+        //   } else {
+        //     self.scrollPosition = 'middle';
+        //   }
+        //   if (this.bodyWrapper.scrollWidth === this.bodyWrapper.offsetWidth) {
+        //     self.scrollPosition = 'none';
+        //   }
+        // }
       },
       setScrollY(val) {
         console.log(val);
-      },
-      checkForm: function() {
-        if (!this.$isRight(this.rule.ref)) {
-          return {data: this.data, isRight: false};
-        } else {
-          return {data: this.data, isRight: true};
-        }
       },
       sumArr: function(arr) {
         let s = 0;
@@ -828,8 +912,27 @@
 
         return target;
       },
+      setHeight(value, prop = 'height') {
+        // this.store.maxHeight = value;
+        const el = this.$el;
+        if (typeof value === 'string' && /^\d+$/.test(value)) {
+          value = Number(value);
+        }
+        this.store.height = value;
+
+        if (!el && (value || value === 0)) return this.$nextTick(() => this.setHeight(value, prop));
+
+        if (typeof value === 'number') {
+          el.style[prop] = value + 'px';
+
+          this.setTableHeight();
+        } else if (typeof value === 'string') {
+          el.style[prop] = value;
+          this.setTableHeight();
+        }
+      },
       setMaxHeight(value) {
-        this.store.maxHeight = value;
+        return this.setHeight(value, 'max-height');
       }
     },
     destroyed() {

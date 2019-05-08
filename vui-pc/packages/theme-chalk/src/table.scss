@@ -43,7 +43,8 @@
   bottom: 0;
 }
 .vui-table__fixed-footer-wrapper tr{
-  background-color: #e9eef8;
+  //background-color: #e9eef8;
+	background-color: #fff;
 }
 .vui-table__fixed-right .vui-table__fixed-footer-wrapper{
   position: absolute;
@@ -102,4 +103,16 @@
 	background-clip: padding-box;
 	border-radius: 5px;
 	left: 164px;
+}
+
+.vui-scroll-seesaw .vui-table__header-wrapper-scroll{
+	position: absolute;
+	top: 0;
+}
+.vui-scroll-seesaw .vui-table__footer-wrapper-scroll{
+	position: absolute;
+	bottom: 0;
+}
+.vui-scroll-seesaw  .vui-scrollbar__bar{
+	z-index: 30;
 }

@@ -144,7 +144,6 @@ export default {
     handleWheel(event) {
       const wrap = this.wrap;
       if (this.wrapDirection === 'about') {
-        console.log(this.wrapDirection);
         event.preventDefault();
         if (event.deltaY < 0) {
           wrap.scrollLeft -= 50;
@@ -154,9 +153,22 @@ export default {
           wrap.scrollLeft += 50;
           // 向下滚动鼠标滚轮，屏幕滚动条右移
           this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
-          // this.moveX += 50;
         }
       }
+      if (this.wrapDirection === 'seesaw') {
+        event.preventDefault();
+        if (event.deltaY < 0) {
+          wrap.scrollTop -= 50;
+          // 向上滚动鼠标滚轮，屏幕滚动条上移
+          this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
+        } else {
+          wrap.scrollTop += 50;
+          // 向下滚动鼠标滚轮，屏幕滚动条下移
+          this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
+        }
+      }
+      this.$emit('movex', {movex: this.moveX, left: wrap.scrollLeft});
+      this.$emit('movey', {movey: this.moveY, top: wrap.scrollTop});
     },
 
     update() {
