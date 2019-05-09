@@ -280,8 +280,9 @@
               <table :style="{ width: store.tableWidth + 'px' }">
                 <colgroup>
                   <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                  <col v-if="hasGutter" name="gutter">
                 </colgroup>
-                <thead>
+                <thead :class="[{ 'has-gutter': this.hasGutter }]" >
                 <slot name="header">
                   <tr>
                     <th v-for="(item, index) in store.thTitle" :key="index">{{item}}</th>
@@ -478,6 +479,7 @@
   let vuiTableRefArr = [];
   import {addResizeListener, removeResizeListener} from '../../../src/utils/resize-event';
   import Scrollbar from '../../scrollbar/src/main';
+  import scrollbarWidth from '../../../src/utils/scrollbar-width';
 
   export default {
     name: 'VuiTable',
@@ -504,7 +506,8 @@
         scrollBodyTop: 0,
         bodyHeight: 0,
         scrollX: false,
-        scrollY: false
+        scrollY: false,
+        gutterWidth: scrollbarWidth()
       };
       return {
         store,
@@ -617,6 +620,9 @@
           };
         }
         return {};
+      },
+      hasGutter() {
+        return this.store.gutterWidth;
       }
     },
     watch: {
@@ -747,8 +753,8 @@
           if (this.$refs.emptyBlock) {
             emptyBlockHeight = this.$refs.emptyBlock.offsetHeight;
           }
-          const tableHeight = this.store.tableHeight = this.$el.clientHeight;
           // 设置所有相关高度
+          const tableHeight = this.store.tableHeight = this.$el.clientHeight;
           this.bodyTop = headerHeight;
           if (this.height !== null && (!isNaN(this.height) || typeof this.height === 'string')) {
             this.store.bodyHeight = tableHeight - headerHeight - emptyBlockHeight - footerHeight + (this.$refs.footerWrapper ? 1 : 0);
