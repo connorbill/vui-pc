@@ -63,7 +63,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '0.9.83',
+  version: '0.9.84',
   install,
   Input,
   Button,

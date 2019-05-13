@@ -1,6 +1,6 @@
 {
   "name": "vui-pc",
-  "version": "0.9.83",
+  "version": "0.9.84",
   "description": "A Component Library for Vue.js.",
   "main": "lib/vui-pc.common.js",
   "files": [
@@ -24,7 +24,6 @@
     "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
     "test": "npm run lint  && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test:watch": " cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
-    "prod":"npm run build:file && cross-env NODE_ENV=development webpack --config build/webpack.demo.js"
   },
   "faas": [
     {

@@ -3,146 +3,146 @@
     <h2>Table 表格</h2>
     <h2>Table example1</h2>
     <p>美化滚动条，左右滚轮移动</p>
-    <!--<div class="demo-block">-->
-      <!--<div class="source">-->
-        <!--<div>-->
-          <!--&lt;!&ndash;例子&ndash;&gt;-->
-          <!--<vui-table-->
-            <!--:data="list"-->
-            <!--:property="property"-->
-            <!--class-name="vui-risk-table"-->
-            <!--scroll="about"-->
-          <!--&gt;-->
-            <!--<template v-slot:operator="slotProps">-->
-              <!--<div v-for="(item, index) in domArr" :key="index">-->
-                <!--<div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">-->
-                  <!--{{dom}}-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div @click="addDom(slotProps.row.index)">增加</div>-->
-              <!--<div @click="delDom(slotProps.row.index)">减少</div>-->
-            <!--</template>-->
-          <!--</vui-table>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="meta" >-->
-        <!--<div class="description">-->
-          <!--<div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="demo-block-control" style="left: 0px;">-->
-        <!--<i class="el-icon-caret-top"></i>-->
-        <!--<span style="display: none;">隐藏代码</span>-->
-        <!--<span class="button&#45;&#45;text">在线运行</span>-->
-      <!--</div>-->
-    <!--</div>-->
+    <div class="demo-block">
+      <div class="source">
+        <div>
+          <!--例子-->
+          <vui-table
+            :data="list"
+            :property="property"
+            class-name="vui-risk-table"
+            scroll="about"
+          >
+            <template v-slot:operator="slotProps">
+              <div v-for="(item, index) in domArr" :key="index">
+                <div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">
+                  {{dom}}
+                </div>
+              </div>
+              <div @click="addDom(slotProps.row.index)">增加</div>
+              <div @click="delDom(slotProps.row.index)">减少</div>
+            </template>
+          </vui-table>
+        </div>
+      </div>
+      <div class="meta" >
+        <div class="description">
+          <div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>
+          </div>
+        </div>
+      </div>
+      <div class="demo-block-control" style="left: 0px;">
+        <i class="el-icon-caret-top"></i>
+        <span style="display: none;">隐藏代码</span>
+        <span class="button--text">在线运行</span>
+      </div>
+    </div>
 
 
     <h2>Table example2</h2>
     <p>美化滚动条，左右滚轮移动， 上下拖动，最大高度</p>
-    <!--<div class="demo-block">-->
-      <!--<div class="source">-->
-        <!--<div>-->
+    <div class="demo-block">
+      <div class="source">
+        <div>
 
-          <!--<vui-table-->
-            <!--:data="list"-->
-            <!--:property="property"-->
-            <!--class-name="vui-risk-table"-->
-            <!--scroll="about"-->
-            <!--:show-footer="true"-->
-            <!--max-height="200"-->
-          <!--&gt;-->
-            <!--<template v-slot:operator="slotProps">-->
-              <!--<div v-for="(item, index) in domArr" :key="index">-->
-                <!--<div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">-->
-                  <!--{{dom}}-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div @click="addDom(slotProps.row.index)">增加</div>-->
-              <!--<div @click="delDom(slotProps.row.index)">减少</div>-->
-            <!--</template>-->
-            <!--<template v-slot:footer="slotProps">-->
-              <!--<tr>-->
-                <!--<td>1</td>-->
-                <!--<td>2</td>-->
-                <!--<td>3</td>-->
-                <!--<td>4</td>-->
-                <!--<td>5</td>-->
-                <!--<td>6</td>-->
-                <!--<td>7</td>-->
-                <!--<td>8</td>-->
-                <!--<td>9</td>-->
-              <!--</tr>-->
-            <!--</template>-->
-          <!--</vui-table>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="meta" >-->
-        <!--<div class="description">-->
-          <!--<div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="demo-block-control" style="left: 0px;">-->
-        <!--<i class="el-icon-caret-top"></i>-->
-        <!--<span style="display: none;">隐藏代码</span>-->
-        <!--<span class="button&#45;&#45;text">在线运行</span>-->
-      <!--</div>-->
-    <!--</div>-->
+          <vui-table
+            :data="list"
+            :property="property"
+            class-name="vui-risk-table"
+            scroll="about"
+            :show-footer="true"
+            max-height="200"
+          >
+            <template v-slot:operator="slotProps">
+              <div v-for="(item, index) in domArr" :key="index">
+                <div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">
+                  {{dom}}
+                </div>
+              </div>
+              <div @click="addDom(slotProps.row.index)">增加</div>
+              <div @click="delDom(slotProps.row.index)">减少</div>
+            </template>
+            <template v-slot:footer="slotProps">
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+              </tr>
+            </template>
+          </vui-table>
+        </div>
+      </div>
+      <div class="meta" >
+        <div class="description">
+          <div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>
+          </div>
+        </div>
+      </div>
+      <div class="demo-block-control" style="left: 0px;">
+        <i class="el-icon-caret-top"></i>
+        <span style="display: none;">隐藏代码</span>
+        <span class="button--text">在线运行</span>
+      </div>
+    </div>
 
 
     <h2>Table example3</h2>
     <p>美化滚动条，上下滚轮移动， 左右拖动，最大高度</p>
-    <!--<div class="demo-block">-->
-      <!--<div class="source">-->
-        <!--<div>-->
+    <div class="demo-block">
+      <div class="source">
+        <div>
 
-          <!--<vui-table-->
-            <!--:data="list"-->
-            <!--:property="property"-->
-            <!--class-name="vui-risk-table"-->
-            <!--scroll="seesaw"-->
-            <!--:show-footer="true"-->
-            <!--max-height="200"-->
-          <!--&gt;-->
-            <!--<template v-slot:operator="slotProps">-->
-              <!--<div v-for="(item, index) in domArr" :key="index">-->
-                <!--<div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">-->
-                  <!--{{dom}}-->
-                <!--</div>-->
-              <!--</div>-->
-              <!--<div @click="addDom(slotProps.row.index)">增加</div>-->
-              <!--<div @click="delDom(slotProps.row.index)">减少</div>-->
-            <!--</template>-->
-            <!--<template v-slot:footer="slotProps">-->
-              <!--<tr>-->
-                <!--<td>1</td>-->
-                <!--<td>2</td>-->
-                <!--<td>3</td>-->
-                <!--<td>4</td>-->
-                <!--<td>5</td>-->
-                <!--<td>6</td>-->
-                <!--<td>7</td>-->
-                <!--<td>8</td>-->
-                <!--<td>9</td>-->
-              <!--</tr>-->
-            <!--</template>-->
-          <!--</vui-table>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="meta" >-->
-        <!--<div class="description">-->
-          <!--<div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--<div class="demo-block-control" style="left: 0px;">-->
-        <!--<i class="el-icon-caret-top"></i>-->
-        <!--<span style="display: none;">隐藏代码</span>-->
-        <!--<span class="button&#45;&#45;text">在线运行</span>-->
-      <!--</div>-->
-    <!--</div>-->
+          <vui-table
+            :data="list"
+            :property="property"
+            class-name="vui-risk-table"
+            scroll="seesaw"
+            :show-footer="true"
+            max-height="200"
+          >
+            <template v-slot:operator="slotProps">
+              <div v-for="(item, index) in domArr" :key="index">
+                <div v-for="(dom, indexDom) in domArr[index].a" :key="indexDom">
+                  {{dom}}
+                </div>
+              </div>
+              <div @click="addDom(slotProps.row.index)">增加</div>
+              <div @click="delDom(slotProps.row.index)">减少</div>
+            </template>
+            <template v-slot:footer="slotProps">
+              <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+              </tr>
+            </template>
+          </vui-table>
+        </div>
+      </div>
+      <div class="meta" >
+        <div class="description">
+          <div><p>使用<code>type</code>、<code>plain</code>、<code>round</code>和<code>circle</code>属性来定义 Button 的样式。</p>
+          </div>
+        </div>
+      </div>
+      <div class="demo-block-control" style="left: 0px;">
+        <i class="el-icon-caret-top"></i>
+        <span style="display: none;">隐藏代码</span>
+        <span class="button--text">在线运行</span>
+      </div>
+    </div>
 
 
     <h2>Table example4</h2>

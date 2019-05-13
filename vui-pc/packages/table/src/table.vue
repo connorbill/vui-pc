@@ -759,7 +759,7 @@
           if (this.height !== null && (!isNaN(this.height) || typeof this.height === 'string')) {
             this.store.bodyHeight = tableHeight - headerHeight - emptyBlockHeight - footerHeight + (this.$refs.footerWrapper ? 1 : 0);
           }
-          console.log(this.store.tableHeight);
+          // console.log(this.store.tableHeight);
           if (footerHeight > 0) {
             this.emptyBottom = footerHeight;
           }
@@ -871,8 +871,8 @@
         let self = this;
         if (headerWrapper) headerWrapper.scrollLeft = sLeft;
         if (footerWrapper) footerWrapper.scrollLeft = sLeft;
-        if (refs.leftFixedBodyWrapper) refs.leftFixedelTableWrapper.scrollTop = this.elTableWrapper.scrollTop;
-        if (refs.rightFixedelTableWrapper) refs.rightFixedelTableWrapper.scrollTop = this.elTableWrapper.scrollTop;
+        if (refs.leftFixedBodyWrapper) refs.leftFixedBodyWrapper.scrollTop = this.elTableWrapper.scrollTop;
+        if (refs.rightFixedBodyWrapper) refs.rightFixedBodyWrapper.scrollTop = this.elTableWrapper.scrollTop;
         const maxScrollLeftPosition = this.elTableWrapper.scrollWidth - this.elTableWrapper.offsetWidth - 1;
         const scrollLeft = sLeft;
         if (scrollLeft >= maxScrollLeftPosition) {
