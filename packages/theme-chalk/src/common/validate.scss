@@ -68,6 +68,7 @@ input.vui-input__inner {
 }
 .vui-radio__inner label{
   margin: 0;
+	font-weight: normal;
 }
 .vui-form-item.is-error .vui-radio__inner{
   border: 1px solid;
@@ -81,6 +82,9 @@ input.vui-input__inner {
 }
 .vui-form-item.is-error .vui-select__inner{
   border-color: #f56c6c;
+}
+.vui-form-item.is-error .vui-textarea__inner{
+	border-color: #f56c6c;
 }
 
 .is-error .vui-form-item__error{

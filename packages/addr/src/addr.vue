@@ -545,10 +545,6 @@
   };
 </script>
 
-<style scoped>
-
-</style>
-
 
 
 

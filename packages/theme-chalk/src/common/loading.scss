@@ -73,6 +73,19 @@
 			}
 		}
 	}
+	&.small-less{
+		width: 10px;
+		height: 10px;
+		div{
+			transform-origin: 6px 6px;
+			&:after{
+				top: 9px;
+				left: 6px;
+				width: 1px;
+				height: 4px;
+			}
+		}
+	}
 }
 .lds-spinner div:nth-child(1) {
   transform: rotate(0deg);

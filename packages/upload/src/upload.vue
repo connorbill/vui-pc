@@ -3,13 +3,13 @@
     <div>
       <input type="file"
              ref="filElem"
-             class="select-img"
+             class="vui-select-img"
              id="select-img"
-             :multiple="multiple"
+             :multiple="multipleChange"
              style="opacity: 0;width: 0;height: 0;"
-             :accept="accept"
+             :accept="acceptChange"
              @change="getFile"/>
-      <div class="img-select-top">
+      <div class="vui-img-select-top">
         <div class="middle-left-wrap">
           <vui-button
             type="primary"
@@ -19,7 +19,7 @@
           >选择文件
           </vui-button>
           <vui-button
-            v-if="!autoUpload"
+            v-if="!autoUploadChange"
             type="primary"
             @click="startUp"
             :disabled="isLoadingImg"
@@ -34,10 +34,10 @@
           </slot>
         </div>
       </div>
-      <div class="img-select-center">
-        <div class="middle-left-wrap show-will-upload">
-          <div v-for="(item, index) in willUploadImg" :key="index" class="upload-list">
-            <div class="img-box">
+      <div class="vui-img-select-center">
+        <div class="middle-left-wrap vui-show-will-upload">
+          <div v-for="(item, index) in willUploadImg" :key="index" class="vui-upload-list">
+            <div class="vui-img-box middle-center">
               <img :src="item.src" alt="">
               <div>
 
@@ -62,18 +62,19 @@
                   </div>
                 </i>
               </div>
-              <div v-if="item.hasUp" class="is-up-img">
+              <div v-if="item.hasUp" class="vui-is-up-img">
                 已上传
               </div>
-              <div v-if="item.failure && !item.isLoading" class="is-up-img">
+              <div v-if="item.failure && !item.isLoading" class="vui-is-up-img">
                 上传失败
               </div>
-              <div class="is-up-img tip" v-if="item.sizeError">{{item.tip}}</div>
-              <div class="vui-close vui-close-style" @click="deleteWillUpload(index)" v-if="!isLoadingImg">
-                <span class="close rounded thick"></span>
+              <div class="vui-is-up-img tip" v-if="item.sizeError">{{item.tip}}</div>
+              <div class="vui-close-style vui-normal-close" @click="deleteWillUpload(index)" v-if="!isLoadingImg">
+                <!--<span class="vui-close-icon rounded thick"></span>-->
+                <span class="vui-icon-delete"></span>
               </div>
             </div>
-            <div class="img-name">{{item.name}}</div>
+            <div class="vui-img-name">{{item.name}}</div>
           </div>
         </div>
       </div>
@@ -82,7 +83,7 @@
 </template>
 
 <script>
-  import axiosRequest from '../../../src/funs/axios-request';
+  import {axiosRequest} from '../../../src/funs/axios-request';
   import Button from '../../button/src/button';
   // import axios from 'axios';
 
@@ -117,7 +118,12 @@
         ],
         isLoadingImg: false,
         successUploadImg: [],
-        errUploadImg: []
+        errUploadImg: [],
+        acceptChange: '',
+        limitChange: '',
+        multipleChange: '',
+        autoUploadChange: '',
+        actionChange: ''
       };
     },
 
@@ -165,9 +171,41 @@
       },
       onAllFile: Function,
       onProgress: Function,
-      onExceed: Function
+      onExceed: Function,
+      onChange: Function
     },
-    computed: {},
+    watch: {
+      accept: {
+        immediate: true,
+        handler(newVal) {
+          this.acceptChange = newVal;
+        }
+      },
+      limit: {
+        immediate: true,
+        handler(newVal) {
+          this.limitChange = newVal;
+        }
+      },
+      multiple: {
+        immediate: true,
+        handler(newVal) {
+          this.multipleChange = newVal;
+        }
+      },
+      autoUpload: {
+        immediate: true,
+        handler(newVal) {
+          this.autoUploadChange = newVal;
+        }
+      },
+      action: {
+        immediate: true,
+        handler(newVal) {
+          this.actionChange = newVal;
+        }
+      }
+    },
     created: function() {
 
       this.$on('clearData', function(value) {
@@ -183,9 +221,9 @@
     },
     methods: {
       choiceImg() {
-        if (this.limit > 0) {
-          if (this.willUploadImg.length >= this.limit) {
-            this.allTip = `上传文件数量不能大于${this.limit}`;
+        if (this.limitChange > 0) {
+          if (this.willUploadImg.length >= this.limitChange) {
+            this.allTip = `上传文件数量不能大于${this.limitChange}`;
             return;
           } else {
             this.allTip = '';
@@ -199,9 +237,9 @@
         let that = this;
         let inputFile = this.$refs.filElem.files;
         if (inputFile) {
-          if (this.limit > 0) {
-            if (inputFile.length + that.willUploadImg.length > this.limit) {
-              this.allTip = `上传文件数量不能大于${this.limit}`;
+          if (this.limitChange > 0) {
+            if (inputFile.length + that.willUploadImg.length > this.limitChange) {
+              this.allTip = `上传文件数量不能大于${this.limitChange}`;
               return;
             }
           }
@@ -232,11 +270,15 @@
         reader.onload = function(e) {
           add.src = this.result;
           that.willUploadImg.push(add);
+          if (that.onChange) {
+            that.onChange(add, that.willUploadImg);
+          }
           if (that.willUploadImg.length === that.fileNumber) {
             that.isLoadingImg = false;
-            if (that.autoUpload) {
+            if (that.autoUploadChange) {
               that.startUp();
             }
+            that.$refs.filElem.value = '';
           } else {
             that.isLoadingImg = true;
           }
@@ -280,7 +322,7 @@
       //   console.log(formData);
       //   param.param.file = formData;
       //   let config = {
-      //     url: this.action + '?path=' + param.param.path,
+      //     url: this.actionChange + '?path=' + param.param.path,
       //     type: 'post',
       //     token: '',
       //     contentType: param.contentType,
@@ -339,7 +381,7 @@
         }
         this.$set(this.willUploadImg[index], 'isLoading', true);
         let config = {
-          url: this.action,
+          url: this.actionChange,
           method: 'post',
           token: '',
           params: param.param,
@@ -373,8 +415,11 @@
           });
       },
       deleteWillUpload: function(index) {
+        let obj = this.willUploadImg[index];
         this.fileNumber -= 1;
         this.willUploadImg.splice(index, 1);
+        this.onRemove(obj, this.willUploadImg, index);
+        this.$refs.filElem.value = '';
       },
       backAllImg: function() {
         let that = this;
@@ -396,17 +441,9 @@
           that.onAllFile(that.willUploadImg);
         }
       }
-    },
-    beforeDestroy() {
-      console.log(1);
     }
   };
 </script>
-
-<style scoped>
-
-</style>
-
 
 
 

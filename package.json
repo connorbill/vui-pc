@@ -1,6 +1,6 @@
 {
   "name": "vui-pc",
-  "version": "0.9.66",
+  "version": "0.9.83",
   "description": "A Component Library for Vue.js.",
   "main": "lib/vui-pc.common.js",
   "files": [
@@ -23,7 +23,8 @@
     "dist": "npm run clean && npm run build:file && npm run lint && webpack --config build/webpack.conf.js && webpack --config build/webpack.common.js && webpack --config build/webpack.component.js && npm run build:utils && npm run build:theme",
     "lint": "eslint src/**/* test/**/* packages/**/* build/**/* --quiet",
     "test": "npm run lint  && cross-env CI_ENV=/dev/ BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
-    "test:watch": " cross-env BABEL_ENV=test karma start test/unit/karma.conf.js"
+    "test:watch": " cross-env BABEL_ENV=test karma start test/unit/karma.conf.js",
+    "prod":"npm run build:file && cross-env NODE_ENV=development webpack --config build/webpack.demo.js"
   },
   "faas": [
     {
@@ -71,6 +72,7 @@
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.6.0",
     "algoliasearch": "^3.24.5",
+    "animate.css": "^3.7.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
@@ -99,6 +101,8 @@
     "file-save": "^0.2.0",
     "gulp": "^4.0.0",
     "gulp-autoprefixer": "^6.0.0",
+    "gulp-base64-inline": "^1.0.4",
+    "gulp-css-base64": "^1.3.4",
     "gulp-cssmin": "^0.2.0",
     "gulp-sass": "^4.0.2",
     "highlight.js": "^9.3.0",

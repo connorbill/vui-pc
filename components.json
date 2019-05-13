@@ -12,5 +12,6 @@
   "table": "./packages/table/index.js",
   "table-lr": "./packages/table-lr/index.js",
   "upload": "./packages/upload/index.js",
-  "pagination": "./packages/pagination/index.js"
+  "pagination": "./packages/pagination/index.js",
+  "scrollbar": "./packages/scrollbar/index.js"
 }

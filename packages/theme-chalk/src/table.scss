@@ -43,7 +43,8 @@
   bottom: 0;
 }
 .vui-table__fixed-footer-wrapper tr{
-  background-color: #e9eef8;
+  //background-color: #e9eef8;
+	background-color: #fff;
 }
 .vui-table__fixed-right .vui-table__fixed-footer-wrapper{
   position: absolute;
@@ -61,4 +62,66 @@
 }
 .is-scrolling-left~.vui-table__fixed, .is-scrolling-right~.vui-table__fixed-right , .is-scrolling-none~.vui-table__fixed-right{
   box-shadow: none;
+}
+
+.vui-risk-table .vui-default-style td{
+	height: 44px;
+}
+.vui-risk-table thead tr th{
+	border-bottom: 1px solid #ccc;
+	color: #535b6c;
+}
+.vui-risk-table .vui-table__empty-block, .vui-risk-table .vui-total-table-border td {
+	border-bottom: none;
+	border-right: none;
+}
+.vui-risk-table .vui-total-table-border th {
+	border-right: none;
+}
+.vui-risk-table .vui-total-table-border {
+	border-left: none;
+}
+
+.vui-wheel-box{
+	height: 10px;
+	z-index: 4;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	cursor: default;
+	//opacity: 0;
+	opacity: 1;
+	width: 100%;
+}
+.vui-wheel-item{
+	position: absolute;
+	top: 0;
+	height: 8px;
+	width: 562px;
+	background-color: rgb(148, 148, 148);
+	border: 1px solid rgb(255, 255, 255);
+	background-clip: padding-box;
+	border-radius: 5px;
+	left: 164px;
+}
+
+.vui-scroll-seesaw .vui-table__header-wrapper-scroll{
+	position: absolute;
+	top: 0;
+}
+.vui-scroll-seesaw .vui-table__footer-wrapper-scroll{
+	position: absolute;
+	bottom: 0;
+}
+.vui-scroll-seesaw  .vui-scrollbar__bar{
+	z-index: 30;
+}
+.vui-table__body-wrapper{
+	overflow: hidden;
+}
+.vui-table--scrollable-y .vui-table__body-wrapper {
+	overflow-y: auto;
+}
+.vui-table--scrollable-x .vui-table__body-wrapper {
+	overflow-x: auto;
 }
