@@ -97,11 +97,11 @@
       list-style: none;
       position: relative;
       cursor: pointer;
-    
+
       &.nav-algolia-search {
         cursor: default;
       }
-    
+
       &.lang-item,
       &:last-child {
         cursor: default;
@@ -195,7 +195,7 @@
       }
     }
   }
-  
+
   .nav-dropdown-list {
     width: auto;
   }
@@ -215,7 +215,7 @@
         &:last-child {
           margin-left: 10px;
         }
-         
+
         a {
           padding: 0 5px;
         }
@@ -239,11 +239,11 @@
 
         &.lang-item {
           height: 100%;
-         
+
           .nav-lang {
             display: flex;
             align-items: center;
-            
+
             span {
               padding-bottom: 0;
             }
@@ -287,27 +287,27 @@
         <!-- nav -->
         <ul class="nav">
           <li class="nav-item nav-algolia-search" v-show="isComponentPage">
-            <algolia-search></algolia-search>
+            <!--<algolia-search></algolia-search>-->
           </li>
-          <li class="nav-item">
-            <router-link
-              active-class="active"
-              :to="`/${ lang }/guide`">{{ langConfig.guide }}
-            </router-link>
-          </li>
+          <!--<li class="nav-item">-->
+            <!--<router-link-->
+              <!--active-class="active"-->
+              <!--:to="`/${ lang }/guide`">{{ langConfig.guide }}-->
+            <!--</router-link>-->
+          <!--</li>-->
           <li class="nav-item">
             <router-link
               active-class="active"
               :to="`/${ lang }/component`">{{ langConfig.components }}
             </router-link>
           </li>
-          <li class="nav-item">
-            <router-link
-              active-class="active"
-              :to="`/${ lang }/resource`"
-              exact>{{ langConfig.resource }}
-            </router-link>
-          </li>
+          <!--<li class="nav-item">-->
+            <!--<router-link-->
+              <!--active-class="active"-->
+              <!--:to="`/${ lang }/resource`"-->
+              <!--exact>{{ langConfig.resource }}-->
+            <!--</router-link>-->
+          <!--</li>-->
 
           <!-- gap -->
           <li class="nav-item" v-show="isComponentPage">
@@ -316,69 +316,69 @@
 
           <!-- 版本选择器 -->
           <li class="nav-item nav-versions" v-show="isComponentPage">
-            <el-dropdown
-              trigger="click"
-              class="nav-dropdown"
-              :class="{ 'is-active': verDropdownVisible }">
-              <span>
-                {{ version }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu
-                slot="dropdown"
-                class="nav-dropdown-list"
-                @input="handleVerDropdownToggle">
-                <el-dropdown-item
-                  v-for="item in Object.keys(versions)"
-                  :key="item"
-                  @click.native="switchVersion(item)">
-                  {{ item }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+            <!--<el-dropdown-->
+              <!--trigger="click"-->
+              <!--class="nav-dropdown"-->
+              <!--:class="{ 'is-active': verDropdownVisible }">-->
+              <!--<span>-->
+                <!--{{ version }}-->
+                <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+              <!--</span>-->
+              <!--<el-dropdown-menu-->
+                <!--slot="dropdown"-->
+                <!--class="nav-dropdown-list"-->
+                <!--@input="handleVerDropdownToggle">-->
+                <!--<el-dropdown-item-->
+                  <!--v-for="item in Object.keys(versions)"-->
+                  <!--:key="item"-->
+                  <!--@click.native="switchVersion(item)">-->
+                  <!--{{ item }}-->
+                <!--</el-dropdown-item>-->
+              <!--</el-dropdown-menu>-->
+            <!--</el-dropdown>-->
           </li>
 
           <!-- 语言选择器 -->
           <li class="nav-item lang-item">
-            <el-dropdown
-              trigger="click"
-              class="nav-dropdown nav-lang"
-              :class="{ 'is-active': langDropdownVisible }">
-              <span>
-                {{ displayedLang }}
-                <i class="el-icon-arrow-down el-icon--right"></i>
-              </span>
-              <el-dropdown-menu
-                slot="dropdown"
-                class="nav-dropdown-list"
-                @input="handleLangDropdownToggle">
-                <el-dropdown-item
-                  v-for="(value, key) in langs"
-                  :key="key"
-                  @click.native="switchLang(key)">
-                  {{ value }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+            <!--<el-dropdown-->
+              <!--trigger="click"-->
+              <!--class="nav-dropdown nav-lang"-->
+              <!--:class="{ 'is-active': langDropdownVisible }">-->
+              <!--<span>-->
+                <!--{{ displayedLang }}-->
+                <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+              <!--</span>-->
+              <!--<el-dropdown-menu-->
+                <!--slot="dropdown"-->
+                <!--class="nav-dropdown-list"-->
+                <!--@input="handleLangDropdownToggle">-->
+                <!--<el-dropdown-item-->
+                  <!--v-for="(value, key) in langs"-->
+                  <!--:key="key"-->
+                  <!--@click.native="switchLang(key)">-->
+                  <!--{{ value }}-->
+                <!--</el-dropdown-item>-->
+              <!--</el-dropdown-menu>-->
+            <!--</el-dropdown>-->
           </li>
-          
+
           <!--theme picker-->
-          <li class="nav-item nav-theme-switch" v-show="isComponentPage">
-            <theme-configurator :key="lang" v-if="showThemeConfigurator"></theme-configurator>
-            <theme-picker v-else></theme-picker>
-          </li>
+          <!--<li class="nav-item nav-theme-switch" v-show="isComponentPage">-->
+            <!--<theme-configurator :key="lang" v-if="showThemeConfigurator"></theme-configurator>-->
+            <!--<theme-picker v-else></theme-picker>-->
+          <!--</li>-->
         </ul>
       </div>
     </header>
   </div>
 </template>
 <script>
-  import ThemePicker from './theme-picker.vue';
-  import ThemeConfigurator from './theme-configurator';
-  import AlgoliaSearch from './search.vue';
+  // import ThemePicker from './theme-picker.vue';
+  // import ThemeConfigurator from './theme-configurator';
+  // import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
   import Element from 'main/index.js';
-  import { getVars } from './theme-configurator/utils/api.js';
+  // import { getVars } from './theme-configurator/utils/api.js';
   import bus from '../bus';
 
   const { version } = Element;
@@ -402,9 +402,9 @@
     },
 
     components: {
-      ThemePicker,
-      ThemeConfigurator,
-      AlgoliaSearch
+      // ThemePicker,
+      // ThemeConfigurator,
+      // AlgoliaSearch
     },
 
     computed: {
@@ -424,16 +424,16 @@
     mounted() {
       const host = location.hostname;
       this.showThemeConfigurator = host.match('localhost') || host.match('elenet');
-      if (!this.showThemeConfigurator) {
-        getVars()
-          .then(() => {
-            this.showThemeConfigurator = true;
-            ga('send', 'event', 'DocView', 'Inner');
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
+      // if (!this.showThemeConfigurator) {
+      //   getVars()
+      //     .then(() => {
+      //       this.showThemeConfigurator = true;
+      //       ga('send', 'event', 'DocView', 'Inner');
+      //     })
+      //     .catch((err) => {
+      //       console.error(err);
+      //     });
+      // }
     },
     methods: {
       switchVersion(version) {

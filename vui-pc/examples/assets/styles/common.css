@@ -14,7 +14,9 @@ html, body {
 
 #app {
   height: 100%;
-  
+  .vui-scrollbar__thumb{
+    background-color: rgba(144,147,153,.3);
+  }
   &.is-component {
     overflow-y: hidden;
 
@@ -31,7 +33,7 @@ html, body {
       left: 0;
       top: 0;
       z-index: 1500;
-      
+
       .container {
         padding: 0;
       }
