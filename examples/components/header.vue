@@ -2,7 +2,24 @@
   .headerWrapper {
     height: 80px;
   }
+  .header-logo {
+    display: flex;
+    align-items: center;
+  }
+  .vui-icon-name {
+    margin-left: 10px;
+    text-decoration: none;
+    color: #1989fa;
+  }
 
+  .vui-icon-logo {
+    background-image: url("../assets/images/logo.png");
+    width: 50px;
+    height: 50px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
   .header {
     height: 80px;
     background-color: #fff;
@@ -272,14 +289,15 @@
         <h1><router-link :to="`/${ lang }`">
           <!-- logo -->
           <slot>
-            <img
-              src="../assets/images/element-logo.svg"
-              alt="element-logo"
-              class="nav-logo">
-            <img
-              src="../assets/images/element-logo-small.svg"
-              alt="element-logo"
-              class="nav-logo-small">
+            <!--<img-->
+              <!--src="../assets/images/vue-logo.png"-->
+              <!--alt="element-logo"-->
+              <!--class="nav-logo">-->
+            <!--<span>Vui</span>-->
+            <div class="header-logo">
+              <div class="vui-icon-logo"></div>
+              <div class="vui-icon-name">Vui</div>
+            </div>
           </slot>
 
         </router-link></h1>

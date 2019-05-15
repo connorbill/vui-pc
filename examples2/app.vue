@@ -107,19 +107,10 @@
     display: flex;
     align-items: center;
   }
-
-  .main-cnt {
-    padding-top: 80px;
-  }
-
   .vui-icon-name {
     margin-left: 10px;
     text-decoration: none;
     color: #1989fa;
-  }
-
-  .vui-icon-name:hover {
-    opacity: 1;
   }
 
   .vui-icon {
@@ -129,6 +120,15 @@
     background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  .main-cnt {
+    padding-top: 80px;
+  }
+
+
+  .vui-icon-name:hover {
+    opacity: 1;
   }
 
   .header-list {

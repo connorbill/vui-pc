@@ -1,0 +1,72 @@
+@import "common/var";
+@import "mixins/mixins";
+@import "mixins/_button";
+@import "mixins/utils";
+
+@include b(checkbox) {
+	position: relative;
+	cursor: pointer;
+	display: inline-block;
+	white-space: nowrap;
+	user-select: none;
+	margin-right: 30px;
+
+
+	@include e(input) {
+		white-space: nowrap;
+		cursor: pointer;
+		outline: none;
+		display: inline-block;
+		line-height: 1;
+		position: relative;
+		vertical-align: middle;
+
+		@include when(disabled) {
+			.vui-checkbox__inner {
+				background-color: $--checkbox-disabled-input-fill;
+				border-color: $--checkbox-disabled-input-border-color;
+				cursor: not-allowed;
+
+				&::after {
+					cursor: not-allowed;
+					border-color: $--checkbox-disabled-icon-color;
+				}
+
+				& + .vui-checkbox__label {
+					cursor: not-allowed;
+				}
+			}
+
+			&.is-checked {
+				.vui-checkbox__inner {
+					background-color: $--checkbox-disabled-checked-input-fill;
+					border-color: $--checkbox-disabled-checked-input-border-color;
+
+					&::after {
+						border-color: $--checkbox-disabled-checked-icon-color;
+					}
+				}
+			}
+
+			&.is-indeterminate {
+				.vui-checkbox__inner {
+					background-color: $--checkbox-disabled-checked-input-fill;
+					border-color: $--checkbox-disabled-checked-input-border-color;
+
+					&::before {
+						background-color: $--checkbox-disabled-checked-icon-color;
+						border-color: $--checkbox-disabled-checked-icon-color;
+					}
+				}
+			}
+
+			& + span.vui-checkbox__label {
+				color: $--disabled-color-base;
+				cursor: not-allowed;
+			}
+		}
+	}
+	&:last-child {
+		margin-right: 0;
+	}
+}

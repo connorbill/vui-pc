@@ -43,8 +43,7 @@ router.afterEach(route => {
       return;
     }
   }
-  document.title = 'Element';
-  ga('send', 'event', 'PageView', route.name);
+  document.title = 'Vui';
 });
 
 new Vue({ // eslint-disable-line

@@ -115,6 +115,9 @@
       transition: .3s;
       box-shadow: 0 0 6px rgba(0, 0, 0, .12);
       z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       i {
         color: #409EFF;
@@ -123,6 +126,8 @@
         text-align: center;
         font-size: 18px;
       }
+
+
 
       &.hover {
         opacity: 1;
@@ -213,7 +218,7 @@
           @mouseenter="hover = true"
           @mouseleave="hover = false"
           @click="toTop">
-          <i class="el-icon-caret-top"></i>
+          <i class="el-icon-caret-top vui-icon-caret-top"></i>
         </div>
       </transition>
     </div>

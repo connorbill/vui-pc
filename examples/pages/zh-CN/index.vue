@@ -1,7 +1,8 @@
-<style scoped>
+<style scoped lang="scss">
   .banner {
     text-align: center;
   }
+
   .banner-desc {
     padding-top: 20px;
 
@@ -18,11 +19,14 @@
       color: #888;
       margin: 10px 0 5px;
     }
+
   }
+
   .sponsors {
     display: flex;
     justify-content: center;
   }
+
   .sponsor {
     margin: 0 20px 50px;
     display: inline-flex;
@@ -46,7 +50,9 @@
       color: #999;
       font-size: 14px;
     }
+
   }
+
   .jumbotron {
     width: 890px;
     height: 465px;
@@ -124,7 +130,9 @@
       right: 10px;
       height: 68px;
     }
+
   }
+
   .cards {
     margin: 0 auto 110px;
     width: 1140px;
@@ -133,15 +141,21 @@
       padding: 0;
       margin: 0 -11px;
       width: auto;
-      &::before, &::after {
+
+      &
+      ::before,
+      &
+      ::after {
         display: table;
         content: "";
       }
-      &::after {
+
+      &
+      ::after {
         clear: both;
       }
-    }
 
+    }
 
     li {
       width: 33.33333%;
@@ -155,13 +169,15 @@
       width: 160px;
       height: 120px;
     }
+
   }
+
   .card {
     height: 430px;
     width: 100%;
-    background:#ffffff;
-    border:1px solid #eaeefb;
-    border-radius:5px;
+    background: #ffffff;
+    border: 1px solid #eaeefb;
+    border-radius: 5px;
     box-sizing: border-box;
     text-align: center;
     position: relative;
@@ -171,18 +187,21 @@
     img {
       margin: 66px auto 60px;
     }
+
     h3 {
       margin: 0;
       font-size: 18px;
       color: #1f2f3d;
       font-weight: normal;
     }
+
     p {
       font-size: 14px;
       color: #99a9bf;
       padding: 0 25px;
       line-height: 20px;
     }
+
     a {
       height: 53px;
       line-height: 52px;
@@ -203,69 +222,89 @@
       text-decoration: none;
       display: block;
 
-      &:hover {
+      &
+      :hover {
         color: #fff;
         background: #409EFF;
       }
+
     }
-    &:hover {
+    &
+    :hover {
       bottom: 6px;
-      box-shadow: 0 6px 18px 0 rgba(232,237,250,0.50);
+      box-shadow: 0 6px 18px 0 rgba(232, 237, 250, 0.50);
     }
+
   }
+
   @media (max-width: 1140px) {
     .cards {
       width: 100%;
+
       .container {
         width: 100%;
         margin: 0;
       }
     }
+
     .banner .container {
       width: 100%;
       box-sizing: border-box;
     }
+
     .banner img {
       right: 0;
     }
+
   }
 
   @media (max-width: 1000px) {
     .banner .container {
+
       img {
         display: none;
       }
     }
+
     .jumbotron {
       display: none;
     }
+
   }
 
   @media (max-width: 768px) {
     .cards {
+
       li {
         width: 80%;
         margin: 0 auto 20px;
         float: none;
       }
+
       .card {
         height: auto;
         padding-bottom: 54px;
       }
     }
+
     .banner-stars {
       display: none;
     }
+
     .banner-desc {
+
       #line2 {
         display: none;
       }
+
       h2 {
         font-size: 32px;
       }
+
       p {
         width: auto;
       }
+
     }
   }
 </style>
@@ -273,78 +312,21 @@
   <div>
     <div class="banner">
       <div class="banner-desc">
-        <h1>网站快速成型工具</h1>
-        <p>Element，一套为开发者、设计师和产品经理准备的基于 Vue 2.0 的桌面端组件库</p>
+        <h1>为了没有的功能</h1>
+        <p>vui-pc, 复制与模仿<a href="https://element.eleme.io](https://element.eleme.io">element-ui</a>，并增加后台系统所需更多功能</p>
+        <p>为了我们曾经重复写同样的代码而逝去的青春，同样也是为了站在element-ui的肩膀上去学习</p>
       </div>
-    </div>
-    <div class="jumbotron">
-      <div>
-        <img class="jumbotron-plant-2" src="~examples/assets/images/plant-2.png" alt="">
-        <img class="jumbotron-web" src="~examples/assets/images/web.png" alt="">
-        <img class="jumbotron-plant-1" src="~examples/assets/images/plant-1.png" alt="">
-        <img class="jumbotron-figure-1" src="~examples/assets/images/figure-1.png" alt="">
-        <img class="jumbotron-figure-2" src="~examples/assets/images/figure-2.png" alt="">
-      </div>
-      <div data-hover-layer="0">
-        <img class="jumbotron-cloud-1" src="~examples/assets/images/cloud-1.png" alt="">
-        <img class="jumbotron-cloud-2" src="~examples/assets/images/cloud-2.png" alt="">
-      </div>
-      <div data-hover-layer="1">
-        <img class="jumbotron-compo-1" src="~examples/assets/images/compo-1.png" alt="">
-        <img class="jumbotron-compo-2" src="~examples/assets/images/compo-2.png" alt="">
-        <img class="jumbotron-compo-3" src="~examples/assets/images/compo-3.png" alt="">
-      </div>
-    </div>
-    <div class="sponsors">
-      <a class="sponsor" href="https://tipe.io/?ref=element" target="_blank" v-show="lang !== 'zh-CN'">
-        <img width="35px" src="~examples/assets/images/tipe.svg" alt="tipe.io">
-        <div>
-          <p>Sponsored by Tipe.io</p>
-          <p>Next Generation API-first CMS</p>
-        </div>
-      </a>
-      <a class="sponsor" href="https://www.duohui.cn/?utm_source=element&utm_medium=web&utm_campaign=element-index" target="_blank">
-        <img width="45px" src="~examples/assets/images/duohui.svg" alt="duohui">
-        <div>
-          <p>Sponsored by 多会</p>
-          <p>炫酷的新一代活动票务系统</p>
-        </div>
-      </a>
     </div>
     <div class="cards">
       <ul class="container">
         <li>
           <div class="card">
-            <img src="~examples/assets/images/guide.png" alt="">
-            <h3>指南</h3>
-            <p>了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。</p>
-            <router-link
-              active-class="active"
-              to="/zh-CN/guide/design"
-              exact>查看详情
-            </router-link>
-          </div>
-        </li>
-        <li>
-          <div class="card">
             <img src="~examples/assets/images/component.png" alt="">
             <h3>组件</h3>
-            <p>使用组件 Demo 快速体验交互细节；使用前端框架封装的代码帮助工程师快速开发。</p>
+            <p>组件 Demo </p>
             <router-link
               active-class="active"
               to="/zh-CN/component/layout"
-              exact>查看详情
-            </router-link>
-          </div>
-        </li>
-        <li>
-          <div class="card">
-            <img src="~examples/assets/images/resource.png" alt="">
-            <h3>资源</h3>
-            <p>下载相关资源，用其快速搭建页面原型或高保真视觉稿，提升产品设计效率。</p>
-            <router-link
-              active-class="active"
-              to="/zh-CN/resource"
               exact>查看详情
             </router-link>
           </div>
@@ -354,27 +336,11 @@
   </div>
 </template>
 <script>
-  import { Hover } from 'perspective.js';
-
   export default {
     data() {
       return {
         lang: this.$route.meta.lang
       };
-    },
-    mounted() {
-      new Hover('.jumbotron', { // eslint-disable-line
-        max: 3,
-        scale: 1,
-        perspective: 700,
-        layers: [{
-          multiple: 0.01,
-          reverseTranslate: true
-        }, {
-          multiple: 0.02,
-          reverseTranslate: true
-        }]
-      });
     }
   };
 </script>

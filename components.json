@@ -13,5 +13,6 @@
   "table-lr": "./packages/table-lr/index.js",
   "upload": "./packages/upload/index.js",
   "pagination": "./packages/pagination/index.js",
-  "scrollbar": "./packages/scrollbar/index.js"
+  "scrollbar": "./packages/scrollbar/index.js",
+  "tooltip": "./packages/tooltip/index.js"
 }

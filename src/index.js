@@ -15,6 +15,7 @@ import TableLr from '../packages/table-lr/index.js';
 import Upload from '../packages/upload/index.js';
 import Pagination from '../packages/pagination/index.js';
 import Scrollbar from '../packages/scrollbar/index.js';
+import Tooltip from '../packages/tooltip/index.js';
 
 const components = [
   Input,
@@ -31,7 +32,8 @@ const components = [
   TableLr,
   Upload,
   Pagination,
-  Scrollbar
+  Scrollbar,
+  Tooltip
 ];
 
 const install = function(Vue, opts = {}) {
@@ -63,7 +65,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: '0.9.84',
+  version: '0.9.9',
   install,
   Input,
   Button,
@@ -79,5 +81,6 @@ export default {
   TableLr,
   Upload,
   Pagination,
-  Scrollbar
+  Scrollbar,
+  Tooltip
 };

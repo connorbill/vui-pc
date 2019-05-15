@@ -7,6 +7,7 @@
 		:type="nativeType"
 		:class="[
           type ? 'vui-button--' + type : '',
+          buttonSize ? 'vui-button--' + buttonSize : '',
           {
             'is-disabled': buttonDisabled,
             'is-loading': loading,
@@ -79,6 +80,9 @@
     computed: {
       buttonDisabled() {
         return this.disabled;
+      },
+      buttonSize() {
+        return this.size;
       }
     },
     methods: {

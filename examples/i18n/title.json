@@ -1,26 +1,26 @@
 {
   "zh-CN": {
-    "home": "Element - 网站快速成型工具",
-    "guide": "指南 | Element",
-    "component": "组件 | Element",
-    "resource": "资源 | Element"
+    "home": "Vui",
+    "guide": "指南 | Vui",
+    "component": "组件 | Vui",
+    "resource": "资源 | Vui"
   },
   "en-US": {
-    "home": "Element - A Desktop UI Toolkit for Web",
-    "guide": "Guide | Element",
-    "component": "Component | Element",
-    "resource": "Resource | Element"
+    "home": "Vui - A Desktop UI Toolkit for Web",
+    "guide": "Guide | Vui",
+    "component": "Component | Vui",
+    "resource": "Resource | Vui"
   },
   "es": {
-    "home": "Element - Un kit de interfaz de usuario para la web",
-    "guide": "Guía | Element",
-    "component": "Componentes | Element",
-    "resource": "Recursos | Element"
+    "home": "Vui - Un kit de interfaz de usuario para la web",
+    "guide": "Guía | Vui",
+    "component": "Componentes | Vui",
+    "resource": "Recursos | Vui"
   },
   "fr-FR": {
-    "home": "Element - Un kit de composants d'interface pour le web",
-    "guide": "Guide | Element",
-    "component": "Composants | Element",
-    "resource": "Ressources | Element"
+    "home": "Vui - Un kit de composants d'interface pour le web",
+    "guide": "Guide | Vui",
+    "component": "Composants | Vui",
+    "resource": "Ressources | Vui"
   }
 }

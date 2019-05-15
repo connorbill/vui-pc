@@ -4,7 +4,42 @@
   font-size: 1.5em;
   vertical-align: middle;
 }
-
+.vui-icon-caret-top{
+	width: 18px;
+	height: 18px;
+	background-image: url("../assets/images/icon/caret-up.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+.vui-icon-caret-bottom{
+	width: 18px;
+	height: 18px;
+	background-image: url("../assets/images/icon/caret-down.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+.vui-icon-caret-bottom.hovering{
+	width: 18px;
+	height: 18px;
+	background-image: url("../assets/images/icon/caret-down.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	display: inline-block;
+}
+.demo-block-control{
+	.vui-icon-caret-bottom{
+		height: 44px;
+		background-size: contain;
+		background-position: center;
+	}
+	.vui-icon-caret-top{
+		height: 44px;
+		background-size: contain;
+		background-position: center;
+	}
+}
 .demo-icon .source button {
   margin: 0 20px;
 }
