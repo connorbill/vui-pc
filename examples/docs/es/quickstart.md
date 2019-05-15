@@ -18,7 +18,7 @@ Puede importar Element completamente o solamente importar lo que necesite. Comen
 
 #### Importando todo
 
-In main.js:
+In icon-loading.vue:
 
 ```javascript
 import Vue from 'vue';
@@ -63,7 +63,7 @@ Luego edite .babelrc:
 }
 ```
 
-Luego, si necesita Button y Select, edite main.js:
+Luego, si necesita Button y Select, edite icon-loading.vue:
 
 ```javascript
 import Vue from 'vue';

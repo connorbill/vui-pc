@@ -18,7 +18,7 @@ Element peut être importé entièrement ou à la demande. Commençons par l'imp
 
 #### Import total
 
-Dans main.js:
+Dans icon-loading.vue:
 
 ```javascript
 import Vue from 'vue';
@@ -63,7 +63,7 @@ Puis éditez .babelrc:
 }
 ```
 
-Ensuite, si vous n'avez besoin que de Button et Select, éditez main.js comme suit:
+Ensuite, si vous n'avez besoin que de Button et Select, éditez icon-loading.vue comme suit:
 
 ```javascript
 import Vue from 'vue';

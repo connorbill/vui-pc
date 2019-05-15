@@ -41,7 +41,7 @@ npm run dist
 
 #### 完整引入
 
-在 main.js 中写入以下内容：
+在 icon-loading.vue 中写入以下内容：
 
 ```html
 import Vue from 'vue';
@@ -84,7 +84,7 @@ npm install babel-plugin-component -D
 }
 ```
 
-接下来，如果你只希望引入部分组件，比如 Input，那么需要在 main.js 中写入以下内容：
+接下来，如果你只希望引入部分组件，比如 Input，那么需要在 icon-loading.vue 中写入以下内容：
 
 ```html
 import Vue from 'vue';

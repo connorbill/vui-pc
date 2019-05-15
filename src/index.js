@@ -16,6 +16,14 @@ import Upload from '../packages/upload/index.js';
 import Pagination from '../packages/pagination/index.js';
 import Scrollbar from '../packages/scrollbar/index.js';
 import Tooltip from '../packages/tooltip/index.js';
+import Autocomplete from '../packages/autocomplete/index.js';
+import IconLoading from '../packages/icon-loading/index.js';
+import Popover from '../packages/popover/index.js';
+import MessageBox from '../packages/message-box/index.js';
+import Alert from '../packages/alert/index.js';
+import Notification from '../packages/notification/index.js';
+import Loading from '../packages/loading/index.js';
+import Message from '../packages/message/index.js';
 
 const components = [
   Input,
@@ -33,7 +41,11 @@ const components = [
   Upload,
   Pagination,
   Scrollbar,
-  Tooltip
+  Tooltip,
+  Autocomplete,
+  IconLoading,
+  Popover,
+  Alert
 ];
 
 const install = function(Vue, opts = {}) {
@@ -42,20 +54,20 @@ const install = function(Vue, opts = {}) {
     Vue.component(component.name, component);
   });
 
-  // Vue.use(Loading.directive);
+  Vue.use(Loading.directive);
 
-  // Vue.prototype.$ELEMENT = {
-  //   size: opts.size || '',
-  //   zIndex: opts.zIndex || 2000
-  // };
+  Vue.prototype.$VUI = {
+    size: opts.size || '',
+    zIndex: opts.zIndex || 2000
+  };
 
-  // Vue.prototype.$loading = Loading.service;
-  // Vue.prototype.$msgbox = MessageBox;
-  // Vue.prototype.$alert = MessageBox.alert;
-  // Vue.prototype.$confirm = MessageBox.confirm;
-  // Vue.prototype.$prompt = MessageBox.prompt;
-  // Vue.prototype.$notify = Notification;
-  // Vue.prototype.$message = Message;
+  Vue.prototype.$loading = Loading.service;
+  Vue.prototype.$msgbox = MessageBox;
+  Vue.prototype.$alert = MessageBox.alert;
+  Vue.prototype.$confirm = MessageBox.confirm;
+  Vue.prototype.$prompt = MessageBox.prompt;
+  Vue.prototype.$notify = Notification;
+  Vue.prototype.$message = Message;
 
 };
 
@@ -82,5 +94,12 @@ export default {
   Upload,
   Pagination,
   Scrollbar,
-  Tooltip
+  Tooltip,
+  Autocomplete,
+  IconLoading,
+  Popover,
+  MessageBox,
+  Alert,
+  Notification,
+  Message
 };

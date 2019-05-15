@@ -279,6 +279,16 @@
       .nav-versions {
         display: none;
       }
+      .header-logo{
+        height: 80px;
+        .vui-icon-logo{
+          width: 30px;
+          height: 30px;
+        }
+        .vui-icon-name{
+          display: none;
+        }
+      }
     }
   }
 </style>

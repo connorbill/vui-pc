@@ -14,5 +14,13 @@
   "upload": "./packages/upload/index.js",
   "pagination": "./packages/pagination/index.js",
   "scrollbar": "./packages/scrollbar/index.js",
-  "tooltip": "./packages/tooltip/index.js"
+  "tooltip": "./packages/tooltip/index.js",
+  "autocomplete": "./packages/autocomplete/index.js",
+  "icon-loading": "./packages/icon-loading/index.js",
+  "popover": "./packages/popover/index.js",
+  "message-box": "./packages/message-box/index.js",
+  "alert": "./packages/alert/index.js",
+  "notification": "./packages/notification/index.js",
+  "loading": "./packages/loading/index.js",
+  "message": "./packages/message/index.js"
 }

@@ -6,28 +6,18 @@
 
 在表格等容器中加载数据时显示。
 
-:::demo Element 提供了两种调用 Loading 的方法：指令和服务。对于自定义指令`v-loading`，只需要绑定`Boolean`即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加`body`修饰符，可以使遮罩插入至 DOM 中的 body 上。
+:::demo vui 提供了两种调用 Loading 的方法：指令和服务。对于自定义指令`v-loading`，只需要绑定`Boolean`即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加`body`修饰符，可以使遮罩插入至 DOM 中的 body 上。
 ```html
 <template>
-  <el-table
-    v-loading="loading"
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      prop="date"
-      label="日期"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="地址">
-    </el-table-column>
-  </el-table>
+  <div v-loading="loading">
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+  </div>
 </template>
 
 <style>
@@ -65,31 +55,21 @@
 
 可自定义加载文案、图标和背景色。
 
-:::demo 在绑定了`v-loading`指令的元素上添加`element-loading-text`属性，其值会被渲染为加载文案，并显示在加载图标的下方。类似地，`element-loading-spinner`和`element-loading-background`属性分别用来设定图标类名和背景色值。
+:::demo 在绑定了`v-loading`指令的元素上添加`vui-loading-text`属性，其值会被渲染为加载文案，并显示在加载图标的下方。类似地，`vui-loading-spinner`和`vui-loading-background`属性分别用来设定图标类名和背景色值。
 ```html
 <template>
-  <el-table
-    v-loading="loading2"
-    element-loading-text="拼命加载中"
-    element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(0, 0, 0, 0.8)"
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      prop="date"
-      label="日期"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="地址">
-    </el-table-column>
-  </el-table>
+  <div v-loading="loading2"
+    vui-loading-text="拼命加载中"
+    vui-loading-spinner="vui-icon-loading"
+    vui-loading-background="rgba(0, 0, 0, 0.8)">
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+  </div>
 </template>
 
 <script>
@@ -125,17 +105,17 @@
 
 ```html
 <template>
-  <el-button
+  <vui-button
     type="primary"
     @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
     指令方式
-  </el-button>
-  <el-button
+  </vui-button>
+  <vui-button
     type="primary"
     @click="openFullScreen2">
     服务方式
-  </el-button>
+  </vui-button>
 </template>
 
 <script>
@@ -156,7 +136,7 @@
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'el-icon-loading',
+          spinner: 'vui-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {
@@ -172,7 +152,7 @@
 ### 服务
 Loading 还可以以服务的方式调用。引入 Loading 服务：
 ```javascript
-import { Loading } from 'element-ui';
+import { Loading } from 'vui-ui';
 ```
 在需要调用时：
 ```javascript
@@ -193,7 +173,7 @@ console.log(loadingInstance1 === loadingInstance2); // true
 ```
 此时调用它们中任意一个的 `close` 方法都能关闭这个全屏 Loading。
 
-如果完整引入了 Element，那么 Vue.prototype 上会有一个全局方法 `$loading`，它的调用方式为：`this.$loading(options)`，同样会返回一个 Loading 实例。
+如果完整引入了 vui，那么 Vue.prototype 上会有一个全局方法 `$loading`，它的调用方式为：`this.$loading(options)`，同样会返回一个 Loading 实例。
 
 ### Options
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
