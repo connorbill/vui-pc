@@ -10,17 +10,5 @@
     "guide": "Guide | Vui",
     "component": "Component | Vui",
     "resource": "Resource | Vui"
-  },
-  "es": {
-    "home": "Vui - Un kit de interfaz de usuario para la web",
-    "guide": "Guía | Vui",
-    "component": "Componentes | Vui",
-    "resource": "Recursos | Vui"
-  },
-  "fr-FR": {
-    "home": "Vui - Un kit de composants d'interface pour le web",
-    "guide": "Guide | Vui",
-    "component": "Composants | Vui",
-    "resource": "Ressources | Vui"
   }
 }

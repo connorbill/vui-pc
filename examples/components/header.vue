@@ -5,6 +5,7 @@
   .header-logo {
     display: flex;
     align-items: center;
+    height: 80px;
   }
   .vui-icon-name {
     margin-left: 10px;
@@ -344,50 +345,50 @@
 
           <!-- 版本选择器 -->
           <li class="nav-item nav-versions" v-show="isComponentPage">
-            <!--<el-dropdown-->
-              <!--trigger="click"-->
-              <!--class="nav-dropdown"-->
-              <!--:class="{ 'is-active': verDropdownVisible }">-->
-              <!--<span>-->
-                <!--{{ version }}-->
-                <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-              <!--</span>-->
-              <!--<el-dropdown-menu-->
-                <!--slot="dropdown"-->
-                <!--class="nav-dropdown-list"-->
-                <!--@input="handleVerDropdownToggle">-->
-                <!--<el-dropdown-item-->
-                  <!--v-for="item in Object.keys(versions)"-->
-                  <!--:key="item"-->
-                  <!--@click.native="switchVersion(item)">-->
-                  <!--{{ item }}-->
-                <!--</el-dropdown-item>-->
-              <!--</el-dropdown-menu>-->
-            <!--</el-dropdown>-->
+            <vui-dropdown
+              trigger="click"
+              class="nav-dropdown"
+              :class="{ 'is-active': verDropdownVisible }">
+              <span>
+                {{ version }}
+                <i class="vui-icon-arrow-down vui-icon--right"></i>
+              </span>
+              <vui-dropdown-menu
+                slot="dropdown"
+                class="nav-dropdown-list"
+                @input="handleVerDropdownToggle">
+                <vui-dropdown-item
+                  v-for="item in Object.keys(versions)"
+                  :key="item"
+                  @click.native="switchVersion(item)">
+                  {{ item }}
+                </vui-dropdown-item>
+              </vui-dropdown-menu>
+            </vui-dropdown>
           </li>
 
           <!-- 语言选择器 -->
           <li class="nav-item lang-item">
-            <!--<el-dropdown-->
-              <!--trigger="click"-->
-              <!--class="nav-dropdown nav-lang"-->
-              <!--:class="{ 'is-active': langDropdownVisible }">-->
-              <!--<span>-->
-                <!--{{ displayedLang }}-->
-                <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-              <!--</span>-->
-              <!--<el-dropdown-menu-->
-                <!--slot="dropdown"-->
-                <!--class="nav-dropdown-list"-->
-                <!--@input="handleLangDropdownToggle">-->
-                <!--<el-dropdown-item-->
-                  <!--v-for="(value, key) in langs"-->
-                  <!--:key="key"-->
-                  <!--@click.native="switchLang(key)">-->
-                  <!--{{ value }}-->
-                <!--</el-dropdown-item>-->
-              <!--</el-dropdown-menu>-->
-            <!--</el-dropdown>-->
+            <vui-dropdown
+              trigger="click"
+              class="nav-dropdown nav-lang"
+              :class="{ 'is-active': langDropdownVisible }">
+              <span>
+                {{ displayedLang }}
+                <i class="vui-icon-arrow-down vui-icon--right"></i>
+              </span>
+              <vui-dropdown-menu
+                slot="dropdown"
+                class="nav-dropdown-list"
+                @input="handleLangDropdownToggle">
+                <vui-dropdown-item
+                  v-for="(value, key) in langs"
+                  :key="key"
+                  @click.native="switchLang(key)">
+                  {{ value }}
+                </vui-dropdown-item>
+              </vui-dropdown-menu>
+            </vui-dropdown>
           </li>
 
           <!--theme picker-->
@@ -421,9 +422,7 @@
         langDropdownVisible: true,
         langs: {
           'zh-CN': '中文',
-          'en-US': 'English',
-          'es': 'Español',
-          'fr-FR': 'Français'
+          'en-US': 'English'
         },
         showThemeConfigurator: false
       };
@@ -471,7 +470,7 @@
 
       switchLang(targetLang) {
         if (this.lang === targetLang) return;
-        localStorage.setItem('ELEMENT_LANGUAGE', targetLang);
+        localStorage.setItem('VUI_LANGUAGE', targetLang);
         this.$router.push(this.$route.path.replace(this.lang, targetLang));
       },
 

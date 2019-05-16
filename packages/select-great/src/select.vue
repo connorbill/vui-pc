@@ -1,6 +1,6 @@
 <template>
   <div
-    class="vui-select-great"
+    class="vui-select"
     :class="[selectSize ? 'vui-select--' + selectSize : '']"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
@@ -67,7 +67,7 @@
         :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px' }"
         ref="input">
     </div>
-    <vui-input
+    <vui-input-great
       ref="reference"
       v-model="selectedLabel"
       type="text"
@@ -91,14 +91,14 @@
       @paste.native="debouncedOnInputChange"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
-      <!--<template slot="prefix" v-if="$slots.prefix">-->
-        <!--<slot name="prefix"></slot>-->
-      <!--</template>-->
-      <!--<template slot="suffix">-->
-        <!--<i v-show="!showClose" :class="['vui-select__caret', 'vui-input__icon', 'vui-icon-' + iconClass]"></i>-->
-        <!--<i v-if="showClose" class="vui-select__caret vui-input__icon vui-icon-circle-close" @click="handleClearClick"></i>-->
-      <!--</template>-->
-    </vui-input>
+      <template slot="prefix" v-if="$slots.prefix">
+        <slot name="prefix"></slot>
+      </template>
+      <template slot="suffix">
+        <i v-show="!showClose" :class="['vui-select__caret', 'vui-input__icon', 'vui-icon-' + iconClass]"></i>
+        <i v-if="showClose" class="vui-select__caret vui-input__icon vui-icon-circle-close" @click="handleClearClick"></i>
+      </template>
+    </vui-input-great>
     <transition
       name="vui-zoom-in-top"
       @before-enter="handleMenuEnter"
@@ -136,7 +136,7 @@
   import Emitter from 'vui-pc/src/mixins/emitter';
   import Focus from 'vui-pc/src/mixins/focus';
   import Locale from 'vui-pc/src/mixins/locale';
-  import VuiInput from 'vui-pc/packages/input';
+  import VuiInputGreat from 'vui-pc/packages/input-great';
   import VuiSelectMenu from './select-dropdown.vue';
   import VuiOption from './option.vue';
   import VuiTag from 'vui-pc/packages/tag';
@@ -236,7 +236,7 @@
     },
 
     components: {
-      VuiInput,
+      VuiInputGreat,
       VuiSelectMenu,
       VuiOption,
       VuiTag,
@@ -404,7 +404,7 @@
                 this.broadcast('VuiOption', 'queryChange', '');
                 this.broadcast('VuiOptionGroup', 'queryChange');
               }
-              this.broadcast('VuiInput', 'inputSelect');
+              this.broadcast('VuiInputGreat', 'inputSelect');
             }
           }
         }

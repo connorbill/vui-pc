@@ -1,5 +1,6 @@
 {
   "input": "./packages/input/index.js",
+  "input-great": "./packages/input-great/index.js",
   "button": "./packages/button/index.js",
   "addr": "./packages/addr/index.js",
   "checkbox": "./packages/checkbox/index.js",
@@ -9,7 +10,6 @@
   "radio": "./packages/radio/index.js",
   "radio-group": "./packages/radio-group/index.js",
   "select": "./packages/select/index.js",
-  "select-great": "./packages/select-great/index.js",
   "option": "./packages/option/index.js",
   "option-group": "./packages/option-group/index.js",
   "table": "./packages/table/index.js",
@@ -25,5 +25,9 @@
   "alert": "./packages/alert/index.js",
   "notification": "./packages/notification/index.js",
   "loading": "./packages/loading/index.js",
-  "message": "./packages/message/index.js"
+  "message": "./packages/message/index.js",
+  "dropdown": "./packages/dropdown/index.js",
+  "dropdown-menu": "./packages/dropdown-menu/index.js",
+  "dropdown-item": "./packages/dropdown-item/index.js",
+  "icon": "./packages/icon/index.js"
 }

@@ -1,17 +1,16 @@
-## Checkbox
+## Checkbox 多选框
+一组备选项中进行多选
 
-A group of options for multiple choices.
+### 基础用法
 
-### Basic usage
+单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox 按钮后的介绍。
 
-Checkbox can be used alone to switch between two states.
-
-:::demo Define `v-model`(bind variable) in `el-checkbox`. The default value is a `Boolean` for single `checkbox`, and it becomes `true` when selected. Content inside the `el-checkbox` tag will become the description following the button of the checkbox.
+:::demo 在`vui-checkbox`元素中定义`v-model`绑定变量，单一的`checkbox`中，默认绑定变量的值会是`Boolean`，选中为`true`。
 
 ```html
 <template>
-  <!-- `checked` should be true or false -->
-  <el-checkbox v-model="checked">Option</el-checkbox>
+  <!-- `checked` 为 true 或 false -->
+  <vui-checkbox v-model="checked">备选项</vui-checkbox>
 </template>
 <script>
   export default {
@@ -25,16 +24,16 @@ Checkbox can be used alone to switch between two states.
 ```
 :::
 
-### Disabled State
+### 禁用状态
 
-Disabled state for checkbox.
+多选框不可用状态。
 
-:::demo Set the `disabled` attribute.
+:::demo 设置`disabled`属性即可。
 
 ```html
 <template>
-  <el-checkbox v-model="checked1" disabled>Option</el-checkbox>
-  <el-checkbox v-model="checked2" disabled>Option</el-checkbox>
+  <vui-checkbox v-model="checked1" disabled>备选项1</vui-checkbox>
+  <vui-checkbox v-model="checked2" disabled>备选项</vui-checkbox>
 </template>
 <script>
   export default {
@@ -49,28 +48,28 @@ Disabled state for checkbox.
 ```
 :::
 
-### Checkbox group
+### 多选框组
 
-It is used for multiple checkboxes which are bound in one group, and indicates whether one option is selected by checking if it is checked.
+适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。
 
-:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. Inside the `el-checkbox` element, `label` is the value of the checkbox. If no content is nested in that tag, `label` will be rendered as the description following the button of the checkbox. `label` also corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
+:::demo `checkbox-group`元素能把多个 checkbox 管理为一组，只需要在 Group 中使用`v-model`绑定`Array`类型的变量即可。 `vui-checkbox` 的 `label`属性是该 checkbox 对应的值，若该标签中无内容，则该属性也充当 checkbox 按钮后的介绍。`label`与数组中的元素值相对应，如果存在指定的值则为选中状态，否则为不选中。
 
 ```html
 <template>
-  <el-checkbox-group v-model="checkList">
-    <el-checkbox label="Option A"></el-checkbox>
-    <el-checkbox label="Option B"></el-checkbox>
-    <el-checkbox label="Option C"></el-checkbox>
-    <el-checkbox label="disabled" disabled></el-checkbox>
-    <el-checkbox label="selected and disabled" disabled></el-checkbox>
-  </el-checkbox-group>
+  <vui-checkbox-group v-model="checkList">
+    <vui-checkbox label="复选框 A"></vui-checkbox>
+    <vui-checkbox label="复选框 B"></vui-checkbox>
+    <vui-checkbox label="复选框 C"></vui-checkbox>
+    <vui-checkbox label="禁用" disabled></vui-checkbox>
+    <vui-checkbox label="选中且禁用" disabled></vui-checkbox>
+  </vui-checkbox-group>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        checkList: ['selected and disabled','Option A']
+        checkList: ['选中且禁用','复选框 A']
       };
     }
   };
@@ -78,207 +77,29 @@ It is used for multiple checkboxes which are bound in one group, and indicates w
 ```
 :::
 
-### Indeterminate
 
-The `indeterminate` property can help you to achieve a 'check all' effect.
-
-:::demo
-
-```html
-<template>
-  <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Check all</el-checkbox>
-  <div style="margin: 15px 0;"></div>
-  <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-  </el-checkbox-group>
-</template>
-<script>
-  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
-  export default {
-    data() {
-      return {
-        checkAll: false,
-        checkedCities: ['Shanghai', 'Beijing'],
-        cities: cityOptions,
-        isIndeterminate: true
-      };
-    },
-    methods: {
-      handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-      }
-    }
-  };
-</script>
-```
-:::
-
-### Minimum / Maximum items checked
-
-The `min` and `max` properties can help you to limit the number of checked items.
-
-:::demo
-
-```html
-<template>
-  <el-checkbox-group 
-    v-model="checkedCities1"
-    :min="1"
-    :max="2">
-    <el-checkbox v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox>
-  </el-checkbox-group>
-</template>
-<script>
-  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
-  export default {
-    data() {
-      return {
-        checkedCities1: ['Shanghai', 'Beijing'],
-        cities: cityOptions
-      };
-    }
-  };
-</script>
-```
-:::
-
-### Button style
-
-Checkbox with button styles.
-
-:::demo You just need to change `el-checkbox` element into `el-checkbox-button` element. We also provide `size` attribute.
-```html
-<template>
-  <div>
-    <el-checkbox-group v-model="checkboxGroup1">
-      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
-    </el-checkbox-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup2" size="medium">
-      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
-    </el-checkbox-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup3" size="small">
-      <el-checkbox-button v-for="city in cities" :label="city" :disabled="city === 'Beijing'" :key="city">{{city}}</el-checkbox-button>
-    </el-checkbox-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup4" size="mini" disabled>
-      <el-checkbox-button v-for="city in cities" :label="city" :key="city">{{city}}</el-checkbox-button>
-    </el-checkbox-group>
-  </div>
-</template>
-<script>
-  const cityOptions = ['Shanghai', 'Beijing', 'Guangzhou', 'Shenzhen'];
-
-  export default {
-    data () {
-      return {
-        checkboxGroup1: ['Shanghai'],
-        checkboxGroup2: ['Shanghai'],
-        checkboxGroup3: ['Shanghai'],
-        checkboxGroup4: ['Shanghai'],
-        cities: cityOptions
-      };
-    }
-  }
-</script>
-```
-:::
-
-### With borders
-
-:::demo The `border` attribute adds a border to Checkboxes.
-```html
-<template>
-  <div>
-    <el-checkbox v-model="checked3" label="Option1" border></el-checkbox>
-    <el-checkbox v-model="checked4" label="Option2" border></el-checkbox>
-  </div>
-  <div style="margin-top: 20px">
-    <el-checkbox v-model="checked5" label="Option1" border size="medium"></el-checkbox>
-    <el-checkbox v-model="checked6" label="Option2" border size="medium"></el-checkbox>
-  </div>
-  <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup5" size="small">
-      <el-checkbox label="Option1" border></el-checkbox>
-      <el-checkbox label="Option2" border disabled></el-checkbox>
-    </el-checkbox-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-checkbox-group v-model="checkboxGroup6" size="mini" disabled>
-      <el-checkbox label="Option1" border></el-checkbox>
-      <el-checkbox label="Option2" border></el-checkbox>
-    </el-checkbox-group>
-  </div>
-</template>
-
-<script>
-  export default {
-    data () {
-      return {
-        checked3: true,
-        checked4: false,
-        checked5: false,
-        checked6: true,
-        checkboxGroup5: [],
-        checkboxGroup6: []
-      };
-    }
-  }
-</script>
-```
-:::
 
 ### Checkbox Attributes
-| Attribute      | Description         | Type    | Options                         | Default|
+| 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | binding value | string / number / boolean | — | — |
-| label     | value of the Checkbox when used inside a `checkbox-group`   | string / number / boolean   |       —        |     —    |
-| true-label | value of the Checkbox if it's checked   | string / number    |       —        |     —    |
-| false-label | value of the Checkbox if it's not checked   | string / number    |      —         |     —    |
-| disabled  | whether the Checkbox is disabled   | boolean   |  — | false   |
-| border  | whether to add a border around Checkbox  | boolean   | — | false   |
-| size  | size of the Checkbox, only works when `border` is true  | string  | medium / small / mini | — |
-| name | native 'name' attribute | string    |      —         |     —    |
-| checked  | if the Checkbox is checked   | boolean   |  — | false   |
-| indeterminate  | same as `indeterminate` in native checkbox | boolean   |  — | false   |
+| value / v-model | 绑定值 | string / number / boolean | — | — |
+| label     | 选中状态的值（只有在`checkbox-group`或者绑定对象类型为`array`时有效）| string / number / boolean  | 
+| disabled  | 是否禁用    | boolean   |  — | false   |
+| name | 原生 name 属性 | string    |      —         |     —    |
+| checked  | 当前是否勾选    | boolean   |  — | false   |
 
 ### Checkbox Events
-| Event Name | Description | Parameters |
+| 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| change  | triggers when the binding value changes | the updated value |
+| change  | 当绑定值变化时触发的事件 | 更新后的值 |
 
 ### Checkbox-group Attributes
-| Attribute      | Description         | Type    | Options                         | Default|
+| 参数      | 说明    | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | binding value | array | — | — |
-|size | size of checkbox buttons or bordered checkboxes | string | medium / small / mini | — |
-| disabled  | whether the nesting checkboxes are disabled | boolean   | — | false   |
-| min     | minimum number of checkbox checked   | number    |       —        |     —    |
-| max     | maximum number of checkbox checked   | number    |       —        |     —    |
-|text-color | font color when button is active | string   | — | #ffffff   |
-|fill  | border and background color when button is active | string   | — | #409EFF   |
+| value / v-model | 绑定值 | array | — | — |
+| disabled  | 是否禁用    | boolean   | — | false   |
 
 ### Checkbox-group Events
-| Event Name | Description | Parameters |
+| 事件名称      | 说明    | 回调参数      |
 |---------- |-------- |---------- |
-| change  | triggers when the binding value changes | the updated value |
-
-### Checkbox-button Attributes
-| Attribute      | Description         | Type    | Options                         | Default|
-|---------- |-------- |---------- |-------------  |-------- |
-| label     | value of the checkbox when used inside a `checkbox-group` | string / number / boolean  |       —        |     —    |
-| true-label | value of the checkbox if it's checked | string / number | — |     —    |
-| false-label | value of the checkbox if it's not checked | string / number    |      —         |     —    |
-| disabled  | whether the checkbox is disabled | boolean   |  — | false   |
-| name | native 'name' attribute | string    |      —         |     —    |
-| checked  | if the checkbox is checked | boolean   |  — | false   |
+| change  | 当绑定值变化时触发的事件 | 更新后的值 |

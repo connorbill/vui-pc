@@ -1,314 +1,184 @@
-## Upload
+## Upload 上传
 
-Upload files by clicking or drag-and-drop
+通过点击或者拖拽上传文件
 
-### Click to upload files
+### 点击上传
 
-:::demo Customize upload button type and text using `slot`. Set `limit` and `on-exceed` to limit the maximum number of uploads allowed and specify method when the limit is exceeded. Plus, you can abort removing a file in the `before-remove` hook.
+:::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置`limit`和`on-exceed`来限制上传文件的个数和定义超出限制时的行为。可通过设置`before-remove`来阻止文件移除操作。
 ```html
-<el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :before-remove="beforeRemove"
-  multiple
-  :limit="3"
-  :on-exceed="handleExceed"
-  :file-list="fileList">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
+<vui-button @click="upFile">点击上传</vui-button>
+<vui-dialog
+  title="图片上传"
+  :visible.sync="upload.isShow"
+  width="500px"
+>
+  <vui-upload
+    action="/fileUpload/upload2"
+    :accept="upload.accept"
+    :multiple="upload.multiple"
+    :auto-upload="upload.autoUpload"
+    :limit="upload.limit"
+    :before-upload="beforeFile"
+    :on-all-file="getAllFile"
+    :on-remove="onRemove"
+  >
+  </vui-upload>
+  <template v-slot:footer class="dialog-footer">
+    <div class="middle-right-wrap">
+      <vui-button @click="upload.isShow = false" type="primary" plain>取 消</vui-button>
+      <div style="margin-right: 15px;"></div>
+      <vui-button
+        type="primary"
+        :loading="upload.isSaving"
+        @click="judgeUpload()"
+        :disabled="upload.disabled"
+      >确认添加</vui-button>
+    </div>
+  </template>
+</vui-dialog>
 <script>
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`Cancel the transfert of ${ file.name } ?`);
-      }
-    }
-  }
-</script>
-```
-:::
-
-### User avatar upload
-
-Use `before-upload` hook to limit the upload file format and size.
-
-:::demo
-```html
-<el-upload
-  class="avatar-uploader"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :show-file-list="false"
-  :on-success="handleAvatarSuccess"
-  :before-upload="beforeAvatarUpload">
-  <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-</el-upload>
-
-<style>
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
-</style>
-
-<script>
-  export default {
-    data() {
-      return {
-        imageUrl: ''
-      };
-    },
-    methods: {
-      handleAvatarSuccess(res, file) {
-        this.imageUrl = URL.createObjectURL(file.raw);
-      },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('Avatar picture must be JPG format!');
+        upload: {
+          isShow: false,
+          isSaving: false,
+          autoUpload: true,
+          multiple: false,
+          accept: '*',
+          limit: 1,
+          disabled: true,
+          type: 0,
+          pathType: 'path',
+          agenciesId: '',
+          agenciesNo: '',
+          index: '',
+          index2: '',
+          fileIndex: '',
+          num: 0,
         }
-        if (!isLt2M) {
-          this.$message.error('Avatar picture size can not exceed 2MB!');
+      };
+    },
+    methods: {
+      // 点击显示弹框 选择上传文件
+      upFile: function(obj, num) {
+        //id, type, pathType, agenciesNo
+        this.upload.limit = 20;
+        this.upload.multiple = true;
+        // 置空
+        this.upload.id = '';
+        this.upload.type = '';
+        this.upload.pathType = '';
+        this.upload.agenciesId = '';
+        this.upload.agenciesNo = '';
+        this.upload.num = 0;
+        this.upload.index = '';
+        this.upload.index2 = '';
+  
+        this.upload.isShow = true;
+        this.upload.disabled = true;
+      },
+      beforeFile: function(file, size) {
+        if (size > 20 * 1024 * 1024) {
+          return {
+            right: false,
+            tip: '上传文件不能大于20M'
+          };
         }
-        return isJPG && isLt2M;
-      }
-    }
-  }
-</script>
-```
-:::
-
-### Photo Wall
-
-Use `list-type` to change the fileList style.
-
-:::demo
-```html
-<el-upload
-  action="https://jsonplaceholder.typicode.com/posts/"
-  list-type="picture-card"
-  :on-preview="handlePictureCardPreview"
-  :on-remove="handleRemove">
-  <i class="el-icon-plus"></i>
-</el-upload>
-<el-dialog :visible.sync="dialogVisible">
-  <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
-<script>
-  export default {
-    data() {
-      return {
-        dialogImageUrl: '',
-        dialogVisible: false
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
+  
+        var fileValue = {
+          path: '/fengkong/' + 20191234 + '/' + 20191234
+        };
+        let formData = new FormData();// FormData 对象
+        formData.append('file', file);
+        var params = {
+          param: fileValue,
+          contentType: 'formdata',
+          data: formData
+        };
+        var back = {
+          right: true,
+          param: params,
+          tip: ''
+        };
+  
+        return back;
       },
-      handlePictureCardPreview(file) {
-        this.dialogImageUrl = file.url;
-        this.dialogVisible = true;
-      }
-    }
-  }
-</script>
-```
-:::
-
-### FileList with thumbnail
-
-:::demo
-```html
-<el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :file-list="fileList"
-  list-type="picture">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
-<script>
-  export default {
-    data() {
-      return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
-      };
-    },
-    methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
+      onRemove: function(file, list, index) {
+        this.getAllFile(list);
       },
-      handlePreview(file) {
-        console.log(file);
-      }
+      getAllFile: function(file) {
+        var that = this;
+        var hasOneTrue = false;
+        this.willUploadImg = [].concat(file);
+        var willUploadImg = this.$refs.uploadFileRef.willUploadImg;
+        willUploadImg.forEach(function(item, index) {
+          // 判断是否上传失败
+          if (item.res) {
+            if (item.res.code != '000000') {
+              Vue.set(that.$refs.uploadFileRef.willUploadImg[index], 'hasUp', false);
+              Vue.set(that.$refs.uploadFileRef.willUploadImg[index], 'failure', true);
+            } else if (item.res.code == '000000') {
+              hasOneTrue = true;
+            }
+          }
+        });
+        if (hasOneTrue) {
+          this.upload.disabled = false;
+        } else {
+          this.upload.disabled = true;
+        }
+      },
+      // 判断每一个文件是否上传成功，上传成功的才执行添加文件
+      judgeUpload: function() {
+        var that = this;
+        this.upload.isSaving = true;
+        this.willUploadImg.forEach(function(item, index) {
+          // 判断是否上传失败
+          if (item.res.code == '000000') {
+            var url = item.res.data.url;
+            that.saveUpload(url, item.name);
+          }
+        });
+      },
+      // 新增签约文件
+      saveUpload: function(url, fileName) {
+        let that = this;
+        var sendData = {
+          qyId: this.detailId,
+          type: this.upload.type,
+          path: url
+        };
+        let config = {
+          url: '',
+          method: 'post',
+          contentType: 'form',
+          data: sendData
+        };
+        axiosRequest(config)
+          .then(function(res) {
+            
+          })
+      },
     }
   }
 </script>
 ```
 :::
 
-### File list control
 
-Use `on-change` hook function to control upload file list
+### Attribute
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| action | 必选参数，上传的地址 | string | — | — |
+| multiple | 是否支持多选文件 | boolean | — | — |
+| accept | 接受上传的文件类型| string | — | — |
+| auto-upload | 选择文件后是否自动上传 | boolean | — | — |
+| multiple | 是否多选 | boolean | — | — |
+| limit | 最多选择文件个数 | number | — | — |
+| on-after-upload | 每上传一张图返回当前接口返回对象res:接口返回对象， index第几个文件 | function(res, index) | — | — |
+| before-upload | 每一个文件上传之前file：当前文件信息所有信息， size: 文件大小 | function(file, size) | — | — |
+| on-remove | 接受上传的文件类型obj:被删除对象信息，fileList: 剩下的文件数组，index：删除之前的文件在数组中的下标 | function(obj, fileList, index) | — | — |
+| on-all-file | 当选择的所有图片上传完，接口都有回调时，返回文件所有信息的数组 | function(fileList) | — | — |
 
-:::demo
-```html
-<el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-change="handleChange"
-  :file-list="fileList">
-  <el-button size="small" type="primary">Click to upload</el-button>
-  <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
-<script>
-  export default {
-    data() {
-      return {
-        fileList: [{
-          name: 'food.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }, {
-          name: 'food2.jpeg',
-          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
-        }]
-      };
-    },
-    methods: {
-      handleChange(file, fileList) {
-        this.fileList = fileList.slice(-3);
-      }
-    }
-  }
-</script>
-```
-:::
 
-### Drag to upload
-
-You can drag your file to a certain area to upload it.
-
-:::demo
-```html
-<el-upload
-  class="upload-demo"
-  drag
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :file-list="fileList"
-  multiple>
-  <i class="el-icon-upload"></i>
-  <div class="el-upload__text">Drop file here or <em>click to upload</em></div>
-  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
-```
-:::
-
-### Manual upload
-
-:::demo
-```html
-<el-upload
-  class="upload-demo"
-  ref="upload"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :auto-upload="false">
-  <el-button slot="trigger" size="small" type="primary">select file</el-button>
-  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">upload to server</el-button>
-  <div class="el-upload__tip" slot="tip">jpg/png files with a size less than 500kb</div>
-</el-upload>
-<script>
-  export default {
-    methods: {
-      submitUpload() {
-        this.$refs.upload.submit();
-      }
-    }
-  }
-</script>
-```
-:::
-
-### Attributes
-Attribute      | Description          | Type      | Accepted Values       | Default
-----| ----| ----| ----| ----
-action | required, request URL | string | — | —
-headers | request headers | object | — | —
-multiple | whether uploading multiple files is permitted | boolean | — | —
-data | additions options of request | object | — | —
-name | key name for uploaded file | string | — | file
-with-credentials | whether cookies are sent | boolean | — |false
-show-file-list | whether to show the uploaded file list | boolean | — | true
- drag | whether to activate drag and drop mode | boolean | — | false
-accept | accepted [file types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept), will not work when `thumbnail-mode` is `true` | string | — | —
-on-preview | hook function when clicking the uploaded files | function(file) | — | —
-on-remove | hook function when files are removed | function(file, fileList) | — | —
-on-success | hook function when uploaded successfully | function(response, file, fileList) | — | —
-on-error | hook function when some errors occurs | function(err, file, fileList) | — | —
-on-progress | hook function when some progress occurs | function(event, file, fileList) | — | — |
-on-change | hook function when select file or upload file success or upload file fail | function(file, fileList) | — | — |
-before-upload | hook function before uploading with the file to be uploaded as its parameter. If `false` is returned or a `Promise` is returned and then is rejected, uploading will be aborted | function(file) | — | —
-before-remove | hook function before removing a file with the file and file list as its parameters. If `false` is returned or a `Promise` is returned and then is rejected, removing will be aborted. | function(file, fileList) | — | — |
-thumbnail-mode | whether thumbnail is displayed | boolean | — | false
-file-list | default uploaded files, e.g. [{name: 'food.jpg', url: 'https://xxx.cdn.com/xxx.jpg'}] | array | — | []
-list-type | type of fileList | string | text/picture/picture-card | text |
-auto-upload | whether to auto upload file | boolean | — | true |
-http-request | override default xhr behavior, allowing you to implement your own upload-file's request | function | — | — |
-disabled | whether to disable upload | boolean | — | false |
-limit | maximum number of uploads allowed | number | — | — |
-on-exceed | hook function when limit is exceeded | function(files, fileList) | — | - |
-
-### Slot
-| Name | Description |
-|------|--------|
-| trigger | content which triggers file dialog |
-| tip | content of tips |
-
-### Methods
-| Methods Name | Description | Parameters |
-|---------- |-------- |---------- |
-| clearFiles | clear the uploaded file list (this method is not supported in the `before-upload` hook) | — |
-| abort      | cancel upload request                    | （ file: fileList's item ） |
-| submit     | upload the file list manually            |  —                         |

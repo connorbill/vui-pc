@@ -32,12 +32,12 @@ export default ${ComponentName};`
   {
     filename: 'src/main.vue',
     content: `<template>
-  <div class="el-${componentname}"></div>
+  <div class="vui-${componentname}"></div>
 </template>
 
 <script>
 export default {
-  name: 'El${ComponentName}'
+  name: 'Vui${ComponentName}'
 };
 </script>`
   },
@@ -47,14 +47,6 @@ export default {
   },
   {
     filename: path.join('../../examples/docs/en-US', `${componentname}.md`),
-    content: `## ${ComponentName}`
-  },
-  {
-    filename: path.join('../../examples/docs/es', `${componentname}.md`),
-    content: `## ${ComponentName}`
-  },
-  {
-    filename: path.join('../../examples/docs/fr-FR', `${componentname}.md`),
     content: `## ${ComponentName}`
   },
   {
@@ -88,7 +80,7 @@ describe('${ComponentName}', () => {
     content: `import { ElementUIComponent } from './component'
 
 /** ${ComponentName} Component */
-export declare class El${ComponentName} extends ElementUIComponent {
+export declare class Vui${ComponentName} extends ElementUIComponent {
 }`
   }
 ];

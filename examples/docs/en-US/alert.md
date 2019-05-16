@@ -1,58 +1,56 @@
-## Alert
+## Alert 警告
 
-Displays important alert messages.
+用于页面中展示重要的提示信息。
 
-### Basic usage
+### 基本用法
 
-Alert components are non-overlay elements in the page that does not disappear automatically.
+页面中的非浮层元素，不会自动消失。
 
-:::demo Alert provides 4 types of themes defined by `type`, whose default value is `info`.
-
+:::demo Alert 组件提供四种主题，由`type`属性指定，默认值为`info`。
 ```html
 <template>
-  <el-alert
-    title="success alert"
+  <vui-alert
+    title="成功提示的文案"
     type="success">
-  </el-alert>
-  <el-alert
-    title="info alert"
+  </vui-alert>
+  <vui-alert
+    title="消息提示的文案"
     type="info">
-  </el-alert>
-  <el-alert
-    title="warning alert"
+  </vui-alert>
+  <vui-alert
+    title="警告提示的文案"
     type="warning">
-  </el-alert>
-  <el-alert
-    title="error alert"
+  </vui-alert>
+  <vui-alert
+    title="错误提示的文案"
     type="error">
-  </el-alert>
+  </vui-alert>
 </template>
 ```
 :::
 
-### Customizable close button
+### 自定义关闭按钮
 
-Customize the close button as texts or other symbols.
+自定义关闭按钮为文字或其他符号。
 
-:::demo Alert allows you to configure if it's closable. The close button text and closing callbacks are also customizable. `closable` attribute decides if the component can be closed or not. It accepts `boolean`, and the default is `true`. You can set `close-text` attribute to replace the default cross symbol as the close button. Be careful that `close-text` must be a string. `close` event fires when the component is closed.
-
+:::demo 在 Alert 组件中，你可以设置是否可关闭，关闭按钮的文本以及关闭时的回调函数。`closable`属性决定是否可关闭，接受`boolean`，默认为`true`。你可以设置`close-text`属性来代替右侧的关闭图标，注意：`close-text`必须为文本。设置`close`事件来设置关闭时的回调。
 ```html
 <template>
-  <el-alert
-    title="unclosable alert"
+  <vui-alert
+    title="不可关闭的 alert"
     type="success"
     :closable="false">
-  </el-alert>
-  <el-alert
-    title="customized close-text"
+  </vui-alert>
+  <vui-alert
+    title="自定义 close-text"
     type="info"
-    close-text="Gotcha">
-  </el-alert>
-  <el-alert
-    title="alert with callback"
+    close-text="知道了">
+  </vui-alert>
+  <vui-alert
+    title="设置了回调的 alert"
     type="warning"
     @close="hello">
-  </el-alert>
+  </vui-alert>
 </template>
 
 <script>
@@ -67,143 +65,139 @@ Customize the close button as texts or other symbols.
 ```
 :::
 
-### With icon
+### 带有 icon
 
-Displaying an icon improves readability.
+表示某种状态时提升可读性。
 
-:::demo Setting the `show-icon` attribute displays an icon that corresponds with the current Alert type.
-
+:::demo 通过设置`show-icon`属性来显示 Alert 的 icon，这能更有效地向用户展示你的显示意图。
 ```html
 <template>
-  <el-alert
-    title="success alert"
+  <vui-alert
+    title="成功提示的文案"
     type="success"
     show-icon>
-  </el-alert>
-  <el-alert
-    title="info alert"
+  </vui-alert>
+  <vui-alert
+    title="消息提示的文案"
     type="info"
     show-icon>
-  </el-alert>
-  <el-alert
-    title="warning alert"
+  </vui-alert>
+  <vui-alert
+    title="警告提示的文案"
     type="warning"
     show-icon>
-  </el-alert>
-  <el-alert
-    title="error alert"
+  </vui-alert>
+  <vui-alert
+    title="错误提示的文案"
     type="error"
     show-icon>
-  </el-alert>
+  </vui-alert>
 </template>
 ```
 :::
 
-## Centered text
+### 文字居中
 
-Use the `center` attribute to center the text.
+使用 `center` 属性让文字水平居中。
 
 :::demo
-
 ```html
 <template>
-  <el-alert
-    title="success alert"
+  <vui-alert
+    title="成功提示的文案"
     type="success"
     center
     show-icon>
-  </el-alert>
-  <el-alert
-    title="info alert"
+  </vui-alert>
+  <vui-alert
+    title="消息提示的文案"
     type="info"
     center
     show-icon>
-  </el-alert>
-  <el-alert
-    title="warning alert"
+  </vui-alert>
+  <vui-alert
+    title="警告提示的文案"
     type="warning"
     center
     show-icon>
-  </el-alert>
-  <el-alert
-    title="error alert"
+  </vui-alert>
+  <vui-alert
+    title="错误提示的文案"
     type="error"
     center
     show-icon>
-  </el-alert>
+  </vui-alert>
 </template>
 ```
 :::
 
-### With description
+### 带有辅助性文字介绍
 
-Description includes a message with more detailed information.
+包含标题和内容，解释更详细的警告。
 
-:::demo Besides the required `title` attribute, you can add a `description` attribute to help you describe the alert with more details. Description can only store text string, and it will word wrap automatically.
-
+:::demo 除了必填的`title`属性外，你可以设置`description`属性来帮助你更好地介绍，我们称之为辅助性文字。辅助性文字只能存放单行文本，会自动换行显示。
 ```html
 <template>
-  <el-alert
-    title="with description"
+  <vui-alert
+    title="带辅助性文字介绍"
     type="success"
-    description="This is a description.">
-  </el-alert>
+    description="这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……">
+  </vui-alert>
 </template>
 ```
 :::
 
-### With icon and description
+### 带有 icon 和辅助性文字介绍
 
-:::demo At last, this is an example with both icon and description.
-
+:::demo 最后，这是一个同时具有 icon 和辅助性文字的样例。
 ```html
 <template>
-  <el-alert
-    title="success alert"
+  <vui-alert
+    title="成功提示的文案"
     type="success"
-    description="more text description"
+    description="文字说明文字说明文字说明文字说明文字说明文字说明"
     show-icon>
-  </el-alert>
-  <el-alert
-    title="info alert"
+  </vui-alert>
+  <vui-alert
+    title="消息提示的文案"
     type="info"
-    description="more text description"
+    description="文字说明文字说明文字说明文字说明文字说明文字说明"
     show-icon>
-  </el-alert>
-  <el-alert
-    title="warning alert"
+  </vui-alert>
+  <vui-alert
+    title="警告提示的文案"
     type="warning"
-    description="more text description"
+    description="文字说明文字说明文字说明文字说明文字说明文字说明"
     show-icon>
-  </el-alert>
-  <el-alert
-    title="error alert"
+  </vui-alert>
+  <vui-alert
+    title="错误提示的文案"
     type="error"
-    description="more text description"
+    description="文字说明文字说明文字说明文字说明文字说明文字说明"
     show-icon>
-  </el-alert>
+  </vui-alert>
 </template>
 ```
 :::
 
 ### Attributes
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| title     | title         | string | — | — |
-| type | component type | string | success/warning/info/error | info |
-| description | descriptive text. Can also be passed with the default slot | string | — | — |
-| closable | if closable or not | boolean | — | true |
-| center | whether to center the text | boolean | — | false |
-| close-text | customized close button text | string | — | — |
-| show-icon | if a type icon is displayed | boolean | — | false |
+| title     | 标题           | string | — | — |
+| type | 主题 | string | success/warning/info/error | info |
+| description | 辅助性文字。也可通过默认 slot 传入 | string | — | — |
+| closable | 是否可关闭 | boolean | — | true |
+| center | 文字是否居中 | boolean | — | true |
+| close-text | 关闭按钮自定义文本 | string | — | — |
+| show-icon | 是否显示图标 | boolean | — | false |
 
 ### Slot
 
 | Name | Description |
 |------|--------|
-| title | content of the Alert title |
+| title | 标题的内容 |
 
 ### Events
-| Event Name | Description | Parameters |
+| 事件名称 | 说明 | 回调参数 |
 |---------- |-------- |---------- |
-| close | fires when alert is closed | — |
+| close | 关闭alert时触发的事件 | — |

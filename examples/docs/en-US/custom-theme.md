@@ -1,25 +1,24 @@
-## Custom theme
-Element uses BEM-styled CSS so that you can override styles easily. But if you need to replace styles at a large scale, e.g. change the theme color from blue to orange or green, maybe overriding them one by one is not a good idea. We provide three ways to change the style variables.
+## 自定义主题
+Element 默认提供一套主题，CSS 命名采用 BEM 的风格，方便使用者覆盖样式。我们提供了三种方法，可以进行不同程度的样式自定义。
 
-### Changing theme color
-If you just want to change the theme color of Element, the [theme preview website](https://elementui.github.io/theme-chalk-preview/#/en-US) is recommended. The theme color of Element is bright and friendly blue. By changing it, you can make Element more visually connected to specific projects.
+### 仅替换主题色
+如果仅希望更换 Element 的主题色，推荐使用[在线主题生成工具](https://elementui.github.io/theme-chalk-preview)。Element 默认的主题色是鲜艳、友好的蓝色。通过替换主题色，能够让 Element 的视觉更加符合具体项目的定位。
 
-The above website enables you to preview theme of a new theme color in real-time, and it can generate a complete style package based on the new theme color for you to download directly (to import new style files in your project, please refer to the 'Import custom theme' or 'Import component theme on demand' part of this section).
+使用上述工具，可以很方便地实时预览主题色改变之后的视觉，同时它还可以基于新的主题色生成完整的样式文件包，供直接下载使用（关于如何使用下载的主题包，请参考本节「引入自定义主题」和「搭配插件按需引入组件主题」部分）。
 
-### Update SCSS variables in your project
-`theme-chalk` is written in SCSS. If your project also uses SCSS, you can directly change Element style variables. Create a new style file, e.g. `element-variables.scss`:
-
+### 在项目中改变 SCSS 变量
+Element 的 theme-chalk 使用 SCSS 编写，如果你的项目也使用了 SCSS，那么可以直接在项目中改变 Element 的样式变量。新建一个样式文件，例如 `element-variables.scss`，写入以下内容：
 ```html
-/* theme color */
+/* 改变主题色变量 */
 $--color-primary: teal;
 
-/* icon font path, required */
+/* 改变 icon 字体路径变量，必需 */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 @import "~element-ui/packages/theme-chalk/src/index";
 ```
 
-Then in the entry file of your project, import this style file instead of Element's built CSS:
+之后，在项目的入口文件中，直接引入以上样式文件即可（无需引入 Element 编译好的 CSS 文件）：
 ```JS
 import Vue from 'vue'
 import Element from 'element-ui'
@@ -29,37 +28,37 @@ Vue.use(Element)
 ```
 
 :::tip
-Note that it is required to override icon font path to the relative path of Element's font files.
+需要注意的是，覆盖字体路径变量是必需的，将其赋值为 Element 中 icon 图标所在的相对路径即可。
 :::
 
-### CLI theme tool
-If you project doesn't use SCSS, you can customize themes with our CLI theme tool:
+### 命令行主题工具
+如果你的项目没有使用 SCSS，那么可以使用命令行主题工具进行深层次的主题定制：
 
-#### <strong>Install</strong>
-First install the theme generator globally or locally. Local install is recommended because in this way, when others clone your project, npm will automatically install it for them.
+#### <strong>安装工具</strong>
+首先安装「主题生成工具」，可以全局安装或者安装在当前项目下，推荐安装在项目里，方便别人 clone 项目时能直接安装依赖并启动，这里以全局安装做演示。
 ```shell
 npm i element-theme -g
 ```
 
-Then install the chalk theme from npm or GitHub.
+安装白垩主题，可以从 npm 安装或者从 GitHub 拉取最新代码。
 ```shell
-# from npm
+# 从 npm
 npm i element-theme-chalk -D
 
-# from GitHub
+# 从 GitHub
 npm i https://github.com/ElementUI/theme-chalk -D
 ```
 
-#### <strong>Initialize variable file</strong>
-After successfully installing the above packages, a command named `et` is available in CLI (if the packages are installed locally, use `node_modules/.bin/et` instead). Run `-i` to initialize the variable file which outputs to `element-variables.scss` by default. And you can specify its output directory as you will.
+#### <strong>初始化变量文件</strong>
+主题生成工具安装成功后，如果全局安装可以在命令行里通过 `et` 调用工具，如果安装在当前目录下，需要通过 `node_modules/.bin/et` 访问到命令。执行 `-i` 初始化变量文件。默认输出到 `element-variables.scss`，当然你可以传参数指定文件输出目录。
 
 ```shell
-et -i [custom output file]
+et -i [可以自定义变量文件]
 
 > ✔ Generator variables file
 ```
 
-In `element-variables.scss` you can find all the variables we used to style Element and they are defined in SCSS format. Here's a snippet:
+如果使用默认配置，执行后当前目录会有一个 `element-variables.scss` 文件。内部包含了主题所用到的所有变量，它们使用 SCSS 的格式定义。大致结构如下：
 ```css
 $--color-primary: #409EFF !default;
 $--color-primary-light-1: mix($--color-white, $--color-primary, 10%) !default; /* 53a8ff */
@@ -80,14 +79,14 @@ $--color-info: #909399 !default;
 ...
 ```
 
-#### <strong>Modify variables</strong>
-Just edit `element-variables.scss`, e.g. changing the theme color to red:
+#### <strong>修改变量</strong>
+直接编辑 `element-variables.scss` 文件，例如修改主题色为红色。
 ```CSS
 $--color-primary: red;
 ```
 
-#### <strong>Build theme</strong>
-After saving the variable file, use `et` to build your theme. You can activate `watch` mode by adding a parameter `-w`. And if you customized the variable file's output, you need to add a parameter `-c` and variable file's name:
+#### <strong>编译主题</strong>
+保存文件后，到命令行里执行 `et` 编译主题，如果你想启用 `watch` 模式，实时编译主题，增加 `-w` 参数；如果你在初始化时指定了自定义变量文件，则需要增加 `-c` 参数，并带上你的变量文件名
 ```shell
 et
 
@@ -95,8 +94,8 @@ et
 > ✔ build element theme
 ```
 
-#### <strong>Import custom theme</strong>
-By default the build theme file is placed inside `./theme`. You can specify its output directory with parameter `-o`. Importing your own theme is just like importing the default theme, only this time you import the file you just built:
+#### <strong>引入自定义主题</strong>
+默认情况下编译的主题目录是放在 `./theme` 下，你可以通过 `-o` 参数指定打包目录。像引入默认主题一样，在代码里直接引用 `theme/index.css` 文件即可。
 
 ```javascript
 import '../theme/index.css'
@@ -106,8 +105,8 @@ import Vue from 'vue'
 Vue.use(ElementUI)
 ```
 
-#### <strong>Import component theme on demand</strong>
-If you are using `babel-plugin-component` for on-demand import, just modify `.babelrc` and specify `styleLibraryName` to the path where your custom theme is located relative to `.babelrc`. Note that `~` is required:
+#### <strong>搭配插件按需引入组件主题</strong>
+如果是搭配 `babel-plugin-component` 一起使用，只需要修改 `.babelrc` 的配置，指定 `styleLibraryName` 路径为自定义主题相对于 `.babelrc` 的路径，注意要加 `~`。
 ```json
 {
   "plugins": [
@@ -122,4 +121,4 @@ If you are using `babel-plugin-component` for on-demand import, just modify `.ba
 }
 ```
 
-If you are unfamiliar with `babel-plugin-component`, please refer to <a href="./#/en-US/component/quickstart">Quick Start</a>. For more details, check out the [project repository](https://github.com/ElementUI/element-theme) of `element-theme`.
+如果不清楚 `babel-plugin-component` 是什么，请阅读 <a href="./#/zh-CN/component/quickstart">快速上手</a> 一节。更多 `element-theme` 用法请参考[项目仓库](https://github.com/ElementUI/element-theme)。

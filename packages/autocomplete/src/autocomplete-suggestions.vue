@@ -1,5 +1,5 @@
 <template>
-  <transition name="el-zoom-in-top" @after-leave="doDestroy">
+  <transition name="vui-zoom-in-top" @after-leave="doDestroy">
     <div
       v-show="showPopper"
       class="vui-autocomplete-suggestion vui-popper"
@@ -12,7 +12,7 @@
         view-class="vui-autocomplete-suggestion__list">
         <li v-if="!parent.hideLoading && parent.loading">
           <i class="icon-loading">
-            <vui-icon-loading></vui-icon-loading>
+            <vui-icon-loading  color="gray"></vui-icon-loading>
           </i>
         </li>
         <slot v-else>

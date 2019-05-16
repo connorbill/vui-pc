@@ -135,9 +135,10 @@ export default {
 
   methods: {
     handleScroll(event) {
-      // event.stopPropagation();
-      event.stopPropagation();
-      event.preventDefault();
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
       const wrap = this.wrap;
       this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
       this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
@@ -171,8 +172,10 @@ export default {
         }
         this.$emit('movex', {movex: this.moveX, left: wrap.scrollLeft});
         this.$emit('movey', {movey: this.moveY, top: wrap.scrollTop});
-        event.stopPropagation();
-        event.preventDefault();
+        if (event) {
+          event.stopPropagation();
+          event.preventDefault();
+        }
       }
     },
 

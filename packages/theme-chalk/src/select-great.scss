@@ -18,12 +18,12 @@
     }
 
   &:hover {
-    .vui-input__inner {
+    .vuiel-input__inner {
       border-color: $--select-border-color-hover;
     }
   }
 
-  .vui-input__inner {
+  .vuiel-input__inner {
     cursor: pointer;
     padding-right: 35px;
 
@@ -32,8 +32,8 @@
     }
   }
 
-  .vui-input {
-    & .vui-select__caret {
+  .vuiel-input {
+    & .vuiel-select__caret {
       color: $--select-input-color;
       font-size: $--select-input-font-size;
       transition: transform .3s;
@@ -59,7 +59,7 @@
     }
 
     &.is-disabled {
-      & .vui-input__inner {
+      & .vuiel-input__inner {
         cursor: not-allowed;
 
         &:hover {
@@ -68,12 +68,12 @@
       }
     }
 
-    &.is-focus .vui-input__inner {
+    &.is-focus .vuiel-input__inner {
       border-color: $--select-input-focus-border-color;
     }
   }
 
-  > .vui-input {
+  > .vuiel-input {
     display: block;
   }
 

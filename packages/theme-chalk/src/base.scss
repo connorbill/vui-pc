@@ -1,6 +1,7 @@
 @import "./common/common-index";
 @import "~animate.css";
-
+@import "common/transition.scss";
+@import "icon.scss";
 .vui-close-style{
 	position: absolute;
 	border-radius: 50%;

@@ -1,34 +1,23 @@
-## Loading
+## Loading 加载
 
-Show animation while loading data.
+加载数据时显示动效。
 
-### Loading inside a container
+### 区域加载
 
-Displays animation in a container (such as a table) while loading data.
+在表格等容器中加载数据时显示。
 
-:::demo Element provides two ways to invoke Loading: directive and service. For the custom directive `v-loading`, you just need to bind a `boolean` value to it. By default, the loading mask will append to the element where the directive is used. Adding the `body` modifier makes the mask append to the body element.
-
+:::demo vui 提供了两种调用 Loading 的方法：指令和服务。对于自定义指令`v-loading`，只需要绑定`Boolean`即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加`body`修饰符，可以使遮罩插入至 DOM 中的 body 上。
 ```html
 <template>
-  <el-table
-    v-loading="loading"
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      prop="date"
-      label="Date"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="Name"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="Address">
-    </el-table-column>
-  </el-table>
+  <div v-loading="loading">
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+  </div>
 </template>
 
 <style>
@@ -42,17 +31,17 @@ Displays animation in a container (such as a table) while loading data.
     data() {
       return {
         tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
           date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
         }, {
           date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
         }],
         loading: true
       };
@@ -62,35 +51,25 @@ Displays animation in a container (such as a table) while loading data.
 ```
 :::
 
-### Customization
+### 自定义
 
-You can customize loading text, loading spinner and background color.
+可自定义加载文案、图标和背景色。
 
-:::demo Add attribute `element-loading-text` to the element on which `v-loading` is bound, and its value will be displayed under the spinner. Similarly, `element-loading-spinner` and `element-loading-background` are for customizing loading spinner class name and background color.
+:::demo 在绑定了`v-loading`指令的元素上添加`vui-loading-text`属性，其值会被渲染为加载文案，并显示在加载图标的下方。类似地，`vui-loading-spinner`和`vui-loading-background`属性分别用来设定图标类名和背景色值。
 ```html
 <template>
-  <el-table
-    v-loading="loading2"
-    element-loading-text="Loading..."
-    element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(0, 0, 0, 0.8)"
-    :data="tableData"
-    style="width: 100%">
-    <el-table-column
-      prop="date"
-      label="Date"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="Name"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="Address">
-    </el-table-column>
-  </el-table>
+  <div v-loading="loading2"
+    vui-loading-text="拼命加载中"
+    vui-loading-spinner="vui-icon-loading"
+    vui-loading-background="rgba(0, 0, 0, 0.8)">
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+    <div>1</div>
+  </div>
 </template>
 
 <script>
@@ -98,17 +77,17 @@ You can customize loading text, loading spinner and background color.
     data() {
       return {
         tableData: [{
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
           date: '2016-05-02',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
         }, {
           date: '2016-05-04',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
-        }, {
-          date: '2016-05-01',
-          name: 'John Smith',
-          address: 'No.1518,  Jinshajiang Road, Putuo District'
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
         }],
         loading2: true
       };
@@ -118,25 +97,25 @@ You can customize loading text, loading spinner and background color.
 ```
 :::
 
-### Full screen loading
+### 整页加载
 
-Show a full screen animation while loading data.
+页面数据加载时显示。
 
-:::demo When used as a directive, a full screen Loading requires the `fullscreen` modifier, and it will be appended to body. In this case, if you wish to disable scrolling on body, you can add another modifier `lock`. When used as a service, Loading will be full screen by default.
+:::demo 当使用指令方式时，全屏遮罩需要添加`fullscreen`修饰符（遮罩会插入至 body 上），此时若需要锁定屏幕的滚动，可以使用`lock`修饰符；当使用服务方式时，遮罩默认即为全屏，无需额外设置。
 
 ```html
 <template>
-  <el-button
+  <vui-button
     type="primary"
     @click="openFullScreen"
     v-loading.fullscreen.lock="fullscreenLoading">
-    As a directive
-  </el-button>
-  <el-button
+    指令方式
+  </vui-button>
+  <vui-button
     type="primary"
     @click="openFullScreen2">
-    As a service
-  </el-button>
+    服务方式
+  </vui-button>
 </template>
 
 <script>
@@ -157,7 +136,7 @@ Show a full screen animation while loading data.
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'el-icon-loading',
+          spinner: 'vui-icon-loading',
           background: 'rgba(0, 0, 0, 0.7)'
         });
         setTimeout(() => {
@@ -170,40 +149,40 @@ Show a full screen animation while loading data.
 ```
 :::
 
-### Service
-You can also invoke Loading with a service. Import Loading service:
+### 服务
+Loading 还可以以服务的方式调用。引入 Loading 服务：
 ```javascript
-import { Loading } from 'element-ui';
+import { Loading } from 'vui-ui';
 ```
-Invoke it:
+在需要调用时：
 ```javascript
 Loading.service(options);
 ```
-The parameter `options` is the configuration of Loading, and its details can be found in the following table. `LoadingService` returns a Loading instance, and you can close it by invoking its `close` method:
+其中 `options` 参数为 Loading 的配置项，具体见下表。`LoadingService` 会返回一个 Loading 实例，可通过调用该实例的 `close` 方法来关闭它：
 ```javascript
 let loadingInstance = Loading.service(options);
-this.$nextTick(() => { // Loading should be closed asynchronously
+this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
   loadingInstance.close();
 });
 ```
-Note that in this case the full screen Loading is singleton. If a new full screen Loading is invoked before an existing one is closed, the existing full screen Loading instance will be returned instead of actually creating another Loading instance:
+需要注意的是，以服务的方式调用的全屏 Loading 是单例的：若在前一个全屏 Loading 关闭前再次调用全屏 Loading，并不会创建一个新的 Loading 实例，而是返回现有全屏 Loading 的实例：
 ```javascript
 let loadingInstance1 = Loading.service({ fullscreen: true });
 let loadingInstance2 = Loading.service({ fullscreen: true });
 console.log(loadingInstance1 === loadingInstance2); // true
 ```
-Calling the `close` method on any one of them can close this full screen Loading.
+此时调用它们中任意一个的 `close` 方法都能关闭这个全屏 Loading。
 
-If Element is imported entirely, a globally method `$loading` will be registered to Vue.prototype. You can invoke it like this: `this.$loading(options)`, and it also returns a Loading instance.
+如果完整引入了 vui，那么 Vue.prototype 上会有一个全局方法 `$loading`，它的调用方式为：`this.$loading(options)`，同样会返回一个 Loading 实例。
 
 ### Options
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| target | the DOM node Loading needs to cover. Accepts a DOM object or a string. If it's a string, it will be passed to `document.querySelector` to get the corresponding DOM node | object/string | — | document.body |
-| body | same as the `body` modifier of `v-loading` | boolean | — | false |
-| fullscreen | same as the `fullscreen` modifier of `v-loading` | boolean | — | true |
-| lock | same as the `lock` modifier of `v-loading` | boolean | — | false |
-| text | loading text that displays under the spinner | string | — | — |
-| spinner | class name of the custom spinner | string | — | — |
-| background | background color of the mask | string | — | — |
-| customClass | custom class name for Loading | string | — | — |
+| target | Loading 需要覆盖的 DOM 节点。可传入一个 DOM 对象或字符串；若传入字符串，则会将其作为参数传入 `document.querySelector`以获取到对应 DOM 节点 | object/string | — | document.body |
+| body | 同 `v-loading` 指令中的 `body` 修饰符 | boolean | — | false |
+| fullscreen | 同 `v-loading` 指令中的 `fullscreen` 修饰符 | boolean | — | true |
+| lock | 同 `v-loading` 指令中的 `lock` 修饰符 | boolean | — | false |
+| text | 显示在加载图标下方的加载文案 | string | — | — |
+| spinner | 自定义加载图标类名 | string | — | — |
+| background | 遮罩背景色 | string | — | — |
+| customClass | Loading 的自定义类名 | string | — | — |

@@ -1,16 +1,17 @@
-## Radio
+## Radio 单选框
 
-Single selection among multiple options.
+在一组备选项中进行单选
 
-### Basic usage
+### 基础用法
 
-Radio should not have too many options. Otherwise, use the Select component instead.
+由于选项默认可见，不宜过多，若选项过多，建议使用 Select 选择器。
 
-:::demo Creating a radio component is easy, you just need to bind a variable to Radio's `v-model`. It equals to the value of `label` of the chosen radio. The type of `label` is `String`, `Number` or `Boolean`.
+:::demo 要使用 Radio 组件，只需要设置`v-model`绑定变量，选中意味着变量的值为相应 Radio `label`属性的值，`label`可以是`String`、`Number`或`Boolean`。
+
 ```html
 <template>
-  <el-radio v-model="radio" label="1">Option A</el-radio>
-  <el-radio v-model="radio" label="2">Option B</el-radio>
+  <vui-radio v-model="radio" label="1">备选项</vui-radio>
+  <vui-radio v-model="radio" label="2">备选项</vui-radio>
 </template>
 
 <script>
@@ -25,22 +26,22 @@ Radio should not have too many options. Otherwise, use the Select component inst
 ```
 :::
 
-### Disabled
+### 禁用状态
 
-`disabled` attribute is used to disable the radio.
+单选框不可用的状态。
 
-:::demo You just need to add the `disabled` attribute.
+:::demo 只要在`vui-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
 ```html
 <template>
-  <el-radio disabled v-model="radio1" label="disabled">Option A</el-radio>
-  <el-radio disabled v-model="radio1" label="selected and disabled">Option B</el-radio>
+  <vui-radio disabled v-model="radio1" label="禁用">备选项</vui-radio>
+  <vui-radio disabled v-model="radio1" label="选中且禁用">备选项</vui-radio>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        radio1: 'selected and disabled'
+        radio1: '选中且禁用'
       };
     }
   }
@@ -48,18 +49,20 @@ Radio should not have too many options. Otherwise, use the Select component inst
 ```
 :::
 
-### Radio button group
+### 单选框组
 
-Suitable for choosing from some mutually exclusive options.
+适用于在多个互斥的选项中选择的场景
 
-:::demo Combine `el-radio-group` with `el-radio` to display a radio group. Bind a variable with `v-model` of `el-radio-group` element and set label value in `el-radio`. It also provides `change` event with the current value as its parameter.
+:::demo 结合`vui-radio-group`元素和子元素`vui-radio`可以实现单选组，在`vui-radio-group`中绑定`v-model`，在`vui-radio`中设置好`label`即可，无需再给每一个`vui-radio`绑定变量，另外，还提供了`change`事件来响应变化，它会传入一个参数`value`。
 
 ```html
-<el-radio-group v-model="radio2">
-  <el-radio :label="3">Option A</el-radio>
-  <el-radio :label="6">Option B</el-radio>
-  <el-radio :label="9">Option C</el-radio>
-</el-radio-group>
+<template>
+  <vui-radio-group v-model="radio2">
+    <vui-radio :label="3">备选项</vui-radio>
+    <vui-radio :label="6">备选项</vui-radio>
+    <vui-radio :label="9">备选项</vui-radio>
+  </vui-radio-group>
+</template>
 
 <script>
   export default {
@@ -73,141 +76,28 @@ Suitable for choosing from some mutually exclusive options.
 ```
 :::
 
-### Button style
-
-Radio with button styles.
-
-:::demo You just need to change `el-radio` element into `el-radio-button` element. We also provide `size` attribute.
-```html
-<template>
-  <div>
-    <el-radio-group v-model="radio3">
-      <el-radio-button label="New York"></el-radio-button>
-      <el-radio-button label="Washington"></el-radio-button>
-      <el-radio-button label="Los Angeles"></el-radio-button>
-      <el-radio-button label="Chicago"></el-radio-button>
-    </el-radio-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group v-model="radio4" size="medium">
-      <el-radio-button label="New York" ></el-radio-button>
-      <el-radio-button label="Washington"></el-radio-button>
-      <el-radio-button label="Los Angeles"></el-radio-button>
-      <el-radio-button label="Chicago"></el-radio-button>
-    </el-radio-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group v-model="radio5" size="small">
-      <el-radio-button label="New York"></el-radio-button>
-      <el-radio-button label="Washington" disabled ></el-radio-button>
-      <el-radio-button label="Los Angeles"></el-radio-button>
-      <el-radio-button label="Chicago"></el-radio-button>
-    </el-radio-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group v-model="radio6" disabled size="mini">
-      <el-radio-button label="New York"></el-radio-button>
-      <el-radio-button label="Washington"></el-radio-button>
-      <el-radio-button label="Los Angeles"></el-radio-button>
-      <el-radio-button label="Chicago"></el-radio-button>
-    </el-radio-group>
-  </div>
-</template>
-
-<script>
-  export default {
-    data () {
-      return {
-        radio3: 'New York',
-        radio4: 'New York',
-        radio5: 'New York',
-        radio6: 'New York'
-      };
-    }
-  }
-</script>
-```
-:::
-
-### With borders
-
-:::demo The `border` attribute adds a border to Radios.
-```html
-<template>
-  <div>
-    <el-radio v-model="radio7" label="1" border>Option A</el-radio>
-    <el-radio v-model="radio7" label="2" border>Option B</el-radio>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio v-model="radio8" label="1" border size="medium">Option A</el-radio>
-    <el-radio v-model="radio8" label="2" border size="medium">Option B</el-radio>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group v-model="radio9" size="small">
-      <el-radio label="1" border>Option A</el-radio>
-      <el-radio label="2" border disabled>Option B</el-radio>
-    </el-radio-group>
-  </div>
-  <div style="margin-top: 20px">
-    <el-radio-group v-model="radio10" size="mini" disabled>
-      <el-radio label="1" border>Option A</el-radio>
-      <el-radio label="2" border>Option B</el-radio>
-    </el-radio-group>
-  </div>
-</template>
-
-<script>
-  export default {
-    data () {
-      return {
-        radio7: '1',
-        radio8: '1',
-        radio9: '1',
-        radio10: '1'
-      };
-    }
-  }
-</script>
-```
-:::
 
 ### Radio Attributes
-
- Attribute      | Description          | Type      | Accepted Values       | Default
----- | ---- | ---- | ---- | ----
-value / v-model | binding value | string / number / boolean | — | —
-label | the value of Radio | string / number / boolean | — | —
-disabled | whether Radio is disabled | boolean | — | false
-border  | whether to add a border around Radio  | boolean   | — | false
-size  | size of the Radio, only works when `border` is true  | string  | medium / small / mini | —
-name | native 'name' attribute | string    |      —         |     —
+| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+|---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | 绑定值 | string / number / boolean | — | — |
+| label     | Radio 的 value   | string / number / boolean    |       —        |      —   |
+| disabled  | 是否禁用    | boolean   | — | false   |
+| name | 原生 name 属性 | string    |      —         |     —    |
 
 ### Radio Events
-
-| Event Name | Description | Parameters |
-| --- | --- | --- |
-| change | triggers when the bound value changes | the label value of the chosen radio |
+| 事件名称 | 说明 | 回调参数 |
+|---------- |-------- |---------- |
+| change  | 绑定值变化时触发的事件 |  选中的 Radio label 值  |
 
 ### Radio-group Attributes
-
- Attribute      | Description          | Type      | Accepted Values       | Default
----- | ---- | ---- | ---- | ----
-value / v-model | binding value | string / number / boolean | — | —
-size | the size of radio buttons or bordered radios | string | medium / small / mini | —
-disabled  | whether the nesting radios are disabled | boolean   | — | false
-text-color | font color when button is active | string   | — | #ffffff   |
-fill  | border and background color when button is active | string   | — | #409EFF   |
+| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+|---------- |-------- |---------- |-------------  |-------- |
+| value / v-model | 绑定值 | string / number / boolean | — | — |
+| disabled  | 是否禁用    | boolean   | — | false   |
 
 ### Radio-group Events
+| 事件名称 | 说明 | 回调参数 |
+|---------- |-------- |---------- |
+| change  | 绑定值变化时触发的事件 |  选中的 Radio label 值  |
 
-| Event Name | Description | Parameters |
-| --- | --- | --- |
-| change | triggers when the bound value changes | the label value of the chosen radio |
-
-### Radio-button Attributes
-
- Attribute      | Description          | Type      | Accepted Values       | Default
----- | ---- | ---- | ---- | ----
-label | the value of radio | string / number | — | —
-disabled | whether radio is disabled | boolean | — | false
-name | native 'name' attribute | string    |      —         |     —

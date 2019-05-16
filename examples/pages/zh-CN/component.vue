@@ -1,9 +1,9 @@
-<style lang="scss">
+<style>
   .page-component__scroll {
     height: calc(100% - 80px);
     margin-top: 80px;
 
-    .el-scrollbar__wrap {
+    .vui-scrollbar__wrap {
       overflow-x: auto;
     }
   }
@@ -24,7 +24,7 @@
       margin-top: 80px;
       transition: padding-top .3s;
 
-      .el-scrollbar__wrap {
+      .vui-scrollbar__wrap {
         height: 100%;
       }
 
@@ -113,11 +113,8 @@
       border-radius: 20px;
       cursor: pointer;
       transition: .3s;
-      box-shadow: 0 0 6px rgba(0, 0, 0, .12);
+      box-shadow: 0 0 6px rgba(0,0,0, .12);
       z-index: 5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
 
       i {
         color: #409EFF;
@@ -126,8 +123,6 @@
         text-align: center;
         font-size: 18px;
       }
-
-
 
       &.hover {
         opacity: 1;
@@ -142,13 +137,13 @@
 
   @media (min-width: 1140px) {
     .page-component__content {
-      transition: padding-right 0.3s ease;
+      transition:padding-right 0.3s ease;
       &.theme-config {
         padding-right: 26%;
       }
     }
     .page-container.page-component {
-      transition: all 0.3s ease;
+      transition:all 0.3s ease;
       &.theme-config {
         width: 98%;
         .page-component__nav {
@@ -202,26 +197,26 @@
 </style>
 <template>
   <vui-scrollbar class="page-component__scroll" ref="componentScrollBar">
-    <div class="page-container page-component" :class="{'theme-config': isThemeConfigVisible}">
-      <vui-scrollbar class="page-component__nav">
-        <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
-      </vui-scrollbar>
-      <div class="page-component__content" :class="{'theme-config': isThemeConfigVisible}">
-        <router-view class="content"></router-view>
-        <footer-nav></footer-nav>
-      </div>
-      <transition name="back-top-fade">
-        <div
-          class="page-component-up"
-          :class="{ 'hover': hover }"
-          v-show="showBackToTop"
-          @mouseenter="hover = true"
-          @mouseleave="hover = false"
-          @click="toTop">
-          <i class="el-icon-caret-top vui-icon-caret-top"></i>
-        </div>
-      </transition>
+  <div class="page-container page-component" :class="{'theme-config': isThemeConfigVisible}">
+    <vui-scrollbar class="page-component__nav">
+      <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
+    </vui-scrollbar>
+    <div class="page-component__content" :class="{'theme-config': isThemeConfigVisible}">
+      <router-view class="content"></router-view>
+      <footer-nav></footer-nav>
     </div>
+    <transition name="back-top-fade">
+      <div
+        class="page-component-up"
+        :class="{ 'hover': hover }"
+        v-show="showBackToTop"
+        @mouseenter="hover = true"
+        @mouseleave="hover = false"
+        @click="toTop">
+        <i class="vui-icon-caret-top"></i>
+      </div>
+    </transition>
+  </div>
   </vui-scrollbar>
 </template>
 <script>

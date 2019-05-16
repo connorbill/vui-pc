@@ -1,22 +1,13 @@
-## Input
+## Input 输入框
 
-Input data using mouse or keyboard.
-
-:::warning
-Input is a controlled component, it **always shows Vue binding value**.
-
-Under normal circumstances, `input` event should be handled. Its handler should update component's binding value (or use `v-model`). Otherwise, input box's value will not change.
-
-Do not support `v-model` modifiers.
-:::
+通过鼠标或键盘输入字符
 
 
-### Basic usage
+### 基础用法
 
 :::demo
-
 ```html
-<el-input placeholder="Please input" v-model="input"></el-input>
+<vui-input v-model="input" placeholder="请输入内容"></vui-input>
 
 <script>
 export default {
@@ -30,16 +21,16 @@ export default {
 ```
 :::
 
-### Disabled
 
-:::demo Disable the Input with the `disabled` attribute.
+### 禁用状态
 
+:::demo 通过 `disabled` 属性指定是否禁用 input 组件
 ```html
-<el-input
-  placeholder="Please input"
+<vui-input
+  placeholder="请输入内容"
   v-model="input1"
   :disabled="true">
-</el-input>
+</vui-input>
 
 <script>
 export default {
@@ -53,35 +44,13 @@ export default {
 ```
 :::
 
-### Clearable
 
-:::demo Make the Input clearable with the `clearable` attribute.
+### 密码框
 
-```html
-<el-input
-  placeholder="Please input"
-  v-model="input10"
-  clearable>
-</el-input>
-
-<script>
-export default {
-  data() {
-    return {
-      input10: ''
-    }
-  }
-}
-</script>
-```
-:::
-
-### Password box
-
-:::demo Make a toggleable password Input with the `show-password` attribute.
+:::demo 使用`show-password`属性即可得到一个可切换显示隐藏的密码框
 
 ```html
-<el-input placeholder="Please input password" v-model="input11" show-password></el-input>
+<vui-input placeholder="请输入密码" v-model="input11" show-password></vui-input>
 
 <script>
   export default {
@@ -95,74 +64,18 @@ export default {
 ```
 :::
 
-### Input with icon
+### 文本域
 
-Add an icon to indicate input type.
+用于输入多行文本信息，通过将 `type` 属性的值指定为 textarea。
 
-:::demo To add icons in Input, you can simply use `prefix-icon` and `suffix-icon` attributes. Also, the `prefix` and `suffix` named slots works as well.
+:::demo 文本域高度可通过 `rows` 属性控制
 ```html
-<div class="demo-input-suffix">
-  <span class="demo-input-label">Using attributes</span>
-  <el-input
-    placeholder="Pick a date"
-    suffix-icon="el-icon-date"
-    v-model="input2">
-  </el-input>
-  <el-input
-    placeholder="Type something"
-    prefix-icon="el-icon-search"
-    v-model="input21">
-  </el-input>
-</div>
-<div class="demo-input-suffix">
-  <span class="demo-input-label">Using slots</span>
-  <el-input
-    placeholder="Pick a date"
-    v-model="input22">
-    <i slot="suffix" class="el-input__icon el-icon-date"></i>
-  </el-input>
-  <el-input
-    placeholder="Type something"
-    v-model="input23">
-    <i slot="prefix" class="el-input__icon el-icon-search"></i>
-  </el-input>
-</div>
-
-<style>
-  .demo-input-label {
-    display: inline-block;
-    width: 130px;
-  }
-</style>
-
-<script>
-export default {
-  data() {
-    return {
-      input2: '',
-      input21: '',
-      input22: '',
-      input23: ''
-    }
-  }
-}
-</script>
-```
-:::
-
-### Textarea
-
-Resizable for entering multiple lines of text information. Add attribute `type="textarea"` to change `input` into native `textarea`.
-
-:::demo Control the height by setting the `rows` prop.
-
-```html
-<el-input
+<vui-input
   type="textarea"
   :rows="2"
-  placeholder="Please input"
+  placeholder="请输入内容"
   v-model="textarea">
-</el-input>
+</vui-input>
 
 <script>
 export default {
@@ -176,276 +89,237 @@ export default {
 ```
 :::
 
-### Autosize Textarea
 
-Setting the `autosize` prop for a textarea type of Input makes the height to automatically adjust based on the content. An options object can be provided to `autosize` to specify the minimum and maximum number of lines the textarea can automatically adjust.
 
-:::demo
+### 带输入建议
 
+根据输入内容提供对应的输入建议
+
+:::demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
 ```html
-<el-input
-  type="textarea"
-  autosize
-  placeholder="Please input"
-  v-model="textarea2">
-</el-input>
-<div style="margin: 20px 0;"></div>
-<el-input
-  type="textarea"
-  :autosize="{ minRows: 2, maxRows: 4}"
-  placeholder="Please input"
-  v-model="textarea3">
-</el-input>
 
-<script>
-export default {
-  data() {
-    return {
-      textarea2: '',
-      textarea3: ''
-    }
-  }
-}
-</script>
-```
-:::
+<div class="sub-title">激活即列出输入建议</div>
+<vui-autocomplete
+  class="inline-input"
+  v-model="state1"
+  :fetch-suggestions="querySearch"
+  placeholder="请输入内容"
+  @select="handleSelect"
+></vui-autocomplete>
 
-### Mixed input
 
-Prepend or append an element, generally a label or a button.
+<div class="sub-title">输入后匹配输入建议</div>
+<vui-autocomplete
+  class="inline-input"
+  v-model="state2"
+  :fetch-suggestions="querySearch"
+  placeholder="请输入内容"
+  :trigger-on-focus="false"
+  @select="handleSelect"
+></vui-autocomplete>
 
-:::demo Use `slot` to distribute elements that prepend or append to Input.
-
-```html
-<div>
-  <el-input placeholder="Please input" v-model="input3">
-    <template slot="prepend">Http://</template>
-  </el-input>
-</div>
-<div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input4">
-    <template slot="append">.com</template>
-  </el-input>
-</div>
-<div style="margin-top: 15px;">
-  <el-input placeholder="Please input" v-model="input5" class="input-with-select">
-    <el-select v-model="select" slot="prepend" placeholder="Select">
-      <el-option label="Restaurant" value="1"></el-option>
-      <el-option label="Order No." value="2"></el-option>
-      <el-option label="Tel" value="3"></el-option>
-    </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
-  </el-input>
-</div>
-
-<style>
-  .el-select .el-input {
-    width: 110px;
-  }
-  .input-with-select .el-input-group__prepend {
-    background-color: #fff;
-  }
-</style>
-<script>
-export default {
-  data() {
-    return {
-      input3: '',
-      input4: '',
-      input5: '',
-      select: ''
-    }
-  }
-}
-</script>
-```
-:::
-
-### Sizes
-
-:::demo Add `size` attribute to change the size of Input. In addition to the default size, there are three other options: `large`, `small` and `mini`.
-```html
-<div class="demo-input-size">
-  <el-input
-    placeholder="Please Input"
-    v-model="input6">
-  </el-input>
-  <el-input
-    size="medium"
-    placeholder="Please Input"
-    v-model="input7">
-  </el-input>
-  <el-input
-    size="small"
-    placeholder="Please Input"
-    v-model="input8">
-  </el-input>
-  <el-input
-    size="mini"
-    placeholder="Please Input"
-    v-model="input9">
-  </el-input>
-</div>
-
-<script>
-export default {
-  data() {
-    return {
-      input6: '',
-      input7: '',
-      input8: '',
-      input9: ''
-    }
-  }
-}
-</script>
-```
-:::
-
-### Autocomplete
-
-You can get some recommended tips based on the current input.
-
-:::demo Autocomplete component provides input suggestions. The `fetch-suggestions` attribute is a method that returns suggested input. In this example, `querySearch(queryString, cb)` returns suggestions to Autocomplete via `cb(data)` when suggestions are ready.
-```html
-<el-row class="demo-autocomplete">
-  <el-col :span="12">
-    <div class="sub-title">list suggestions when activated</div>
-    <el-autocomplete
-      class="inline-input"
-      v-model="state1"
-      :fetch-suggestions="querySearch"
-      placeholder="Please Input"
-      @select="handleSelect"
-    ></el-autocomplete>
-  </el-col>
-  <el-col :span="12">
-    <div class="sub-title">list suggestions on input</div>
-    <el-autocomplete
-      class="inline-input"
-      v-model="state2"
-      :fetch-suggestions="querySearch"
-      placeholder="Please Input"
-      :trigger-on-focus="false"
-      @select="handleSelect"
-    ></el-autocomplete>
-  </el-col>
-</el-row>
 <script>
   export default {
     data() {
       return {
-        links: [],
+        restaurants: [],
         state1: '',
         state2: ''
       };
     },
     methods: {
       querySearch(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
-        // call callback function to return suggestions
+        var restaurants = this.restaurants;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
         cb(results);
       },
       createFilter(queryString) {
-        return (link) => {
-          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        return (restaurant) => {
+          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
         return [
-          { "value": "vue", "link": "https://github.com/vuejs/vue" },
-          { "value": "element", "link": "https://github.com/ElemeFE/element" },
-          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "value": "babel", "link": "https://github.com/babel/babel" }
-         ];
+          { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
+          { "value": "Hot honey 首尔炸鸡（仙霞路）", "address": "上海市长宁区淞虹路661号" },
+          { "value": "新旺角茶餐厅", "address": "上海市普陀区真北路988号创邑金沙谷6号楼113" },
+          { "value": "泷千家(天山西路店)", "address": "天山西路438号" },
+          { "value": "胖仙女纸杯蛋糕（上海凌空店）", "address": "上海市长宁区金钟路968号1幢18号楼一层商铺18-101" },
+          { "value": "贡茶", "address": "上海市长宁区金钟路633号" },
+          { "value": "豪大大香鸡排超级奶爸", "address": "上海市嘉定区曹安公路曹安路1685号" },
+          { "value": "茶芝兰（奶茶，手抓饼）", "address": "上海市普陀区同普路1435号" },
+          { "value": "十二泷町", "address": "上海市北翟路1444弄81号B幢-107" },
+          { "value": "星移浓缩咖啡", "address": "上海市嘉定区新郁路817号" },
+          { "value": "阿姨奶茶/豪大大", "address": "嘉定区曹安路1611号" },
+          { "value": "新麦甜四季甜品炸鸡", "address": "嘉定区曹安公路2383弄55号" },
+          { "value": "Monica摩托主题咖啡店", "address": "嘉定区江桥镇曹安公路2409号1F，2383弄62号1F" },
+          { "value": "浮生若茶（凌空soho店）", "address": "上海长宁区金钟路968号9号楼地下一层" },
+          { "value": "NONO JUICE  鲜榨果汁", "address": "上海市长宁区天山西路119号" },
+          { "value": "CoCo都可(北新泾店）", "address": "上海市长宁区仙霞西路" },
+          { "value": "快乐柠檬（神州智慧店）", "address": "上海市长宁区天山西路567号1层R117号店铺" },
+          { "value": "Merci Paul cafe", "address": "上海市普陀区光复西路丹巴路28弄6号楼819" },
+          { "value": "猫山王（西郊百联店）", "address": "上海市长宁区仙霞西路88号第一层G05-F01-1-306" },
+          { "value": "枪会山", "address": "上海市普陀区棕榈路" },
+          { "value": "纵食", "address": "元丰天山花园(东门) 双流路267号" },
+          { "value": "钱记", "address": "上海市长宁区天山西路" },
+          { "value": "壹杯加", "address": "上海市长宁区通协路" },
+          { "value": "唦哇嘀咖", "address": "上海市长宁区新泾镇金钟路999号2幢（B幢）第01层第1-02A单元" },
+          { "value": "爱茜茜里(西郊百联)", "address": "长宁区仙霞西路88号1305室" },
+          { "value": "爱茜茜里(近铁广场)", "address": "上海市普陀区真北路818号近铁城市广场北区地下二楼N-B2-O2-C商铺" },
+          { "value": "鲜果榨汁（金沙江路和美广店）", "address": "普陀区金沙江路2239号金沙和美广场B1-10-6" },
+          { "value": "开心丽果（缤谷店）", "address": "上海市长宁区威宁路天山路341号" },
+          { "value": "超级鸡车（丰庄路店）", "address": "上海市嘉定区丰庄路240号" },
+          { "value": "妙生活果园（北新泾店）", "address": "长宁区新渔路144号" },
+          { "value": "香宜度麻辣香锅", "address": "长宁区淞虹路148号" },
+          { "value": "凡仔汉堡（老真北路店）", "address": "上海市普陀区老真北路160号" },
+          { "value": "港式小铺", "address": "上海市长宁区金钟路968号15楼15-105室" },
+          { "value": "蜀香源麻辣香锅（剑河路店）", "address": "剑河路443-1" },
+          { "value": "北京饺子馆", "address": "长宁区北新泾街道天山西路490-1号" },
+          { "value": "饭典*新简餐（凌空SOHO店）", "address": "上海市长宁区金钟路968号9号楼地下一层9-83室" },
+          { "value": "焦耳·川式快餐（金钟路店）", "address": "上海市金钟路633号地下一层甲部" },
+          { "value": "动力鸡车", "address": "长宁区仙霞西路299弄3号101B" },
+          { "value": "浏阳蒸菜", "address": "天山西路430号" },
+          { "value": "四海游龙（天山西路店）", "address": "上海市长宁区天山西路" },
+          { "value": "樱花食堂（凌空店）", "address": "上海市长宁区金钟路968号15楼15-105室" },
+          { "value": "壹分米客家传统调制米粉(天山店)", "address": "天山西路428号" },
+          { "value": "福荣祥烧腊（平溪路店）", "address": "上海市长宁区协和路福泉路255弄57-73号" },
+          { "value": "速记黄焖鸡米饭", "address": "上海市长宁区北新泾街道金钟路180号1层01号摊位" },
+          { "value": "红辣椒麻辣烫", "address": "上海市长宁区天山西路492号" },
+          { "value": "(小杨生煎)西郊百联餐厅", "address": "长宁区仙霞西路88号百联2楼" },
+          { "value": "阳阳麻辣烫", "address": "天山西路389号" },
+          { "value": "南拳妈妈龙虾盖浇饭", "address": "普陀区金沙江路1699号鑫乐惠美食广场A13" }
+        ];
       },
       handleSelect(item) {
         console.log(item);
       }
     },
     mounted() {
-      this.links = this.loadAll();
+      this.restaurants = this.loadAll();
     }
   }
 </script>
 ```
 :::
 
-### Custom template
 
-Customize how suggestions are displayed.
+### 自定义模板
 
-:::demo Use `scoped slot` to customize suggestion items. In the scope, you can access the suggestion object via the `item` key.
+可自定义输入建议的显示
+
+:::demo 使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
 ```html
-<el-autocomplete
+<vui-autocomplete
   popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
-  placeholder="Please input"
+  placeholder="请输入内容"
   @select="handleSelect">
   <i
-    class="el-icon-edit el-input__icon"
+    class="vui-icon-edit vui-input__icon"
     slot="suffix"
     @click="handleIconClick">
   </i>
   <template slot-scope="{ item }">
-    <div class="value">{{ item.value }}</div>
-    <span class="link">{{ item.link }}</span>
+    <div class="name">{{ item.value }}</div>
+    <span class="addr">{{ item.address }}</span>
   </template>
-</el-autocomplete>
+</vui-autocomplete>
 
 <style>
-  .my-autocomplete {
-    li {
-      line-height: normal;
-      padding: 7px;
+.my-autocomplete {
+  li {
+    line-height: normal;
+    padding: 7px;
 
-      .value {
-        text-overflow: ellipsis;
-        overflow: hidden;
-      }
-      .link {
-        font-size: 12px;
-        color: #b4b4b4;
-      }
+    .name {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .addr {
+      font-size: 12px;
+      color: #b4b4b4;
+    }
+
+    .highlighted .addr {
+      color: #ddd;
     }
   }
+}
 </style>
 
 <script>
   export default {
     data() {
       return {
-        links: [],
+        restaurants: [],
         state3: ''
       };
     },
     methods: {
       querySearch(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
-        // call callback function to return suggestion objects
+        var restaurants = this.restaurants;
+        var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
+        // 调用 callback 返回建议列表的数据
         cb(results);
       },
       createFilter(queryString) {
-        return (link) => {
-          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+        return (restaurant) => {
+          return (restaurant.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       loadAll() {
         return [
-          { "value": "vue", "link": "https://github.com/vuejs/vue" },
-          { "value": "element", "link": "https://github.com/ElemeFE/element" },
-          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "value": "babel", "link": "https://github.com/babel/babel" }
-         ];
+          { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
+          { "value": "Hot honey 首尔炸鸡（仙霞路）", "address": "上海市长宁区淞虹路661号" },
+          { "value": "新旺角茶餐厅", "address": "上海市普陀区真北路988号创邑金沙谷6号楼113" },
+          { "value": "泷千家(天山西路店)", "address": "天山西路438号" },
+          { "value": "胖仙女纸杯蛋糕（上海凌空店）", "address": "上海市长宁区金钟路968号1幢18号楼一层商铺18-101" },
+          { "value": "贡茶", "address": "上海市长宁区金钟路633号" },
+          { "value": "豪大大香鸡排超级奶爸", "address": "上海市嘉定区曹安公路曹安路1685号" },
+          { "value": "茶芝兰（奶茶，手抓饼）", "address": "上海市普陀区同普路1435号" },
+          { "value": "十二泷町", "address": "上海市北翟路1444弄81号B幢-107" },
+          { "value": "星移浓缩咖啡", "address": "上海市嘉定区新郁路817号" },
+          { "value": "阿姨奶茶/豪大大", "address": "嘉定区曹安路1611号" },
+          { "value": "新麦甜四季甜品炸鸡", "address": "嘉定区曹安公路2383弄55号" },
+          { "value": "Monica摩托主题咖啡店", "address": "嘉定区江桥镇曹安公路2409号1F，2383弄62号1F" },
+          { "value": "浮生若茶（凌空soho店）", "address": "上海长宁区金钟路968号9号楼地下一层" },
+          { "value": "NONO JUICE  鲜榨果汁", "address": "上海市长宁区天山西路119号" },
+          { "value": "CoCo都可(北新泾店）", "address": "上海市长宁区仙霞西路" },
+          { "value": "快乐柠檬（神州智慧店）", "address": "上海市长宁区天山西路567号1层R117号店铺" },
+          { "value": "Merci Paul cafe", "address": "上海市普陀区光复西路丹巴路28弄6号楼819" },
+          { "value": "猫山王（西郊百联店）", "address": "上海市长宁区仙霞西路88号第一层G05-F01-1-306" },
+          { "value": "枪会山", "address": "上海市普陀区棕榈路" },
+          { "value": "纵食", "address": "元丰天山花园(东门) 双流路267号" },
+          { "value": "钱记", "address": "上海市长宁区天山西路" },
+          { "value": "壹杯加", "address": "上海市长宁区通协路" },
+          { "value": "唦哇嘀咖", "address": "上海市长宁区新泾镇金钟路999号2幢（B幢）第01层第1-02A单元" },
+          { "value": "爱茜茜里(西郊百联)", "address": "长宁区仙霞西路88号1305室" },
+          { "value": "爱茜茜里(近铁广场)", "address": "上海市普陀区真北路818号近铁城市广场北区地下二楼N-B2-O2-C商铺" },
+          { "value": "鲜果榨汁（金沙江路和美广店）", "address": "普陀区金沙江路2239号金沙和美广场B1-10-6" },
+          { "value": "开心丽果（缤谷店）", "address": "上海市长宁区威宁路天山路341号" },
+          { "value": "超级鸡车（丰庄路店）", "address": "上海市嘉定区丰庄路240号" },
+          { "value": "妙生活果园（北新泾店）", "address": "长宁区新渔路144号" },
+          { "value": "香宜度麻辣香锅", "address": "长宁区淞虹路148号" },
+          { "value": "凡仔汉堡（老真北路店）", "address": "上海市普陀区老真北路160号" },
+          { "value": "港式小铺", "address": "上海市长宁区金钟路968号15楼15-105室" },
+          { "value": "蜀香源麻辣香锅（剑河路店）", "address": "剑河路443-1" },
+          { "value": "北京饺子馆", "address": "长宁区北新泾街道天山西路490-1号" },
+          { "value": "饭典*新简餐（凌空SOHO店）", "address": "上海市长宁区金钟路968号9号楼地下一层9-83室" },
+          { "value": "焦耳·川式快餐（金钟路店）", "address": "上海市金钟路633号地下一层甲部" },
+          { "value": "动力鸡车", "address": "长宁区仙霞西路299弄3号101B" },
+          { "value": "浏阳蒸菜", "address": "天山西路430号" },
+          { "value": "四海游龙（天山西路店）", "address": "上海市长宁区天山西路" },
+          { "value": "樱花食堂（凌空店）", "address": "上海市长宁区金钟路968号15楼15-105室" },
+          { "value": "壹分米客家传统调制米粉(天山店)", "address": "天山西路428号" },
+          { "value": "福荣祥烧腊（平溪路店）", "address": "上海市长宁区协和路福泉路255弄57-73号" },
+          { "value": "速记黄焖鸡米饭", "address": "上海市长宁区北新泾街道金钟路180号1层01号摊位" },
+          { "value": "红辣椒麻辣烫", "address": "上海市长宁区天山西路492号" },
+          { "value": "(小杨生煎)西郊百联餐厅", "address": "长宁区仙霞西路88号百联2楼" },
+          { "value": "阳阳麻辣烫", "address": "天山西路389号" },
+          { "value": "南拳妈妈龙虾盖浇饭", "address": "普陀区金沙江路1699号鑫乐惠美食广场A13" }
+        ];
       },
       handleSelect(item) {
         console.log(item);
@@ -455,30 +329,30 @@ Customize how suggestions are displayed.
       }
     },
     mounted() {
-      this.links = this.loadAll();
+      this.restaurants = this.loadAll();
     }
   }
 </script>
 ```
 :::
 
-### Remote search
+### 远程搜索
 
-Search data from server-side.
+从服务端搜索数据
 
 :::demo
 ```html
-<el-autocomplete
+<vui-autocomplete
   v-model="state4"
   :fetch-suggestions="querySearchAsync"
-  placeholder="Please input"
+  placeholder="请输入内容"
   @select="handleSelect"
-></el-autocomplete>
+></vui-autocomplete>
 <script>
   export default {
     data() {
       return {
-        links: [],
+        restaurants: [],
         state4: '',
         timeout:  null
       };
@@ -486,27 +360,68 @@ Search data from server-side.
     methods: {
       loadAll() {
         return [
-          { "value": "vue", "link": "https://github.com/vuejs/vue" },
-          { "value": "element", "link": "https://github.com/ElemeFE/element" },
-          { "value": "cooking", "link": "https://github.com/ElemeFE/cooking" },
-          { "value": "mint-ui", "link": "https://github.com/ElemeFE/mint-ui" },
-          { "value": "vuex", "link": "https://github.com/vuejs/vuex" },
-          { "value": "vue-router", "link": "https://github.com/vuejs/vue-router" },
-          { "value": "babel", "link": "https://github.com/babel/babel" }
-         ];
+          { "value": "三全鲜食（北新泾店）", "address": "长宁区新渔路144号" },
+          { "value": "Hot honey 首尔炸鸡（仙霞路）", "address": "上海市长宁区淞虹路661号" },
+          { "value": "新旺角茶餐厅", "address": "上海市普陀区真北路988号创邑金沙谷6号楼113" },
+          { "value": "泷千家(天山西路店)", "address": "天山西路438号" },
+          { "value": "胖仙女纸杯蛋糕（上海凌空店）", "address": "上海市长宁区金钟路968号1幢18号楼一层商铺18-101" },
+          { "value": "贡茶", "address": "上海市长宁区金钟路633号" },
+          { "value": "豪大大香鸡排超级奶爸", "address": "上海市嘉定区曹安公路曹安路1685号" },
+          { "value": "茶芝兰（奶茶，手抓饼）", "address": "上海市普陀区同普路1435号" },
+          { "value": "十二泷町", "address": "上海市北翟路1444弄81号B幢-107" },
+          { "value": "星移浓缩咖啡", "address": "上海市嘉定区新郁路817号" },
+          { "value": "阿姨奶茶/豪大大", "address": "嘉定区曹安路1611号" },
+          { "value": "新麦甜四季甜品炸鸡", "address": "嘉定区曹安公路2383弄55号" },
+          { "value": "Monica摩托主题咖啡店", "address": "嘉定区江桥镇曹安公路2409号1F，2383弄62号1F" },
+          { "value": "浮生若茶（凌空soho店）", "address": "上海长宁区金钟路968号9号楼地下一层" },
+          { "value": "NONO JUICE  鲜榨果汁", "address": "上海市长宁区天山西路119号" },
+          { "value": "CoCo都可(北新泾店）", "address": "上海市长宁区仙霞西路" },
+          { "value": "快乐柠檬（神州智慧店）", "address": "上海市长宁区天山西路567号1层R117号店铺" },
+          { "value": "Merci Paul cafe", "address": "上海市普陀区光复西路丹巴路28弄6号楼819" },
+          { "value": "猫山王（西郊百联店）", "address": "上海市长宁区仙霞西路88号第一层G05-F01-1-306" },
+          { "value": "枪会山", "address": "上海市普陀区棕榈路" },
+          { "value": "纵食", "address": "元丰天山花园(东门) 双流路267号" },
+          { "value": "钱记", "address": "上海市长宁区天山西路" },
+          { "value": "壹杯加", "address": "上海市长宁区通协路" },
+          { "value": "唦哇嘀咖", "address": "上海市长宁区新泾镇金钟路999号2幢（B幢）第01层第1-02A单元" },
+          { "value": "爱茜茜里(西郊百联)", "address": "长宁区仙霞西路88号1305室" },
+          { "value": "爱茜茜里(近铁广场)", "address": "上海市普陀区真北路818号近铁城市广场北区地下二楼N-B2-O2-C商铺" },
+          { "value": "鲜果榨汁（金沙江路和美广店）", "address": "普陀区金沙江路2239号金沙和美广场B1-10-6" },
+          { "value": "开心丽果（缤谷店）", "address": "上海市长宁区威宁路天山路341号" },
+          { "value": "超级鸡车（丰庄路店）", "address": "上海市嘉定区丰庄路240号" },
+          { "value": "妙生活果园（北新泾店）", "address": "长宁区新渔路144号" },
+          { "value": "香宜度麻辣香锅", "address": "长宁区淞虹路148号" },
+          { "value": "凡仔汉堡（老真北路店）", "address": "上海市普陀区老真北路160号" },
+          { "value": "港式小铺", "address": "上海市长宁区金钟路968号15楼15-105室" },
+          { "value": "蜀香源麻辣香锅（剑河路店）", "address": "剑河路443-1" },
+          { "value": "北京饺子馆", "address": "长宁区北新泾街道天山西路490-1号" },
+          { "value": "饭典*新简餐（凌空SOHO店）", "address": "上海市长宁区金钟路968号9号楼地下一层9-83室" },
+          { "value": "焦耳·川式快餐（金钟路店）", "address": "上海市金钟路633号地下一层甲部" },
+          { "value": "动力鸡车", "address": "长宁区仙霞西路299弄3号101B" },
+          { "value": "浏阳蒸菜", "address": "天山西路430号" },
+          { "value": "四海游龙（天山西路店）", "address": "上海市长宁区天山西路" },
+          { "value": "樱花食堂（凌空店）", "address": "上海市长宁区金钟路968号15楼15-105室" },
+          { "value": "壹分米客家传统调制米粉(天山店)", "address": "天山西路428号" },
+          { "value": "福荣祥烧腊（平溪路店）", "address": "上海市长宁区协和路福泉路255弄57-73号" },
+          { "value": "速记黄焖鸡米饭", "address": "上海市长宁区北新泾街道金钟路180号1层01号摊位" },
+          { "value": "红辣椒麻辣烫", "address": "上海市长宁区天山西路492号" },
+          { "value": "(小杨生煎)西郊百联餐厅", "address": "长宁区仙霞西路88号百联2楼" },
+          { "value": "阳阳麻辣烫", "address": "天山西路389号" },
+          { "value": "南拳妈妈龙虾盖浇饭", "address": "普陀区金沙江路1699号鑫乐惠美食广场A13" }
+        ];
       },
       querySearchAsync(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
+        var restaurants = this.restaurants;
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants;
 
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
           cb(results);
         }, 3000 * Math.random());
       },
-      createFilter(queryString) {
-        return (link) => {
-          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
+      createStateFilter(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
         };
       },
       handleSelect(item) {
@@ -514,116 +429,84 @@ Search data from server-side.
       }
     },
     mounted() {
-      this.links = this.loadAll();
+      this.restaurants = this.loadAll();
     }
   };
 </script>
 ```
 :::
 
+
+
 ### Input Attributes
 
-| Attribute      | Description          | Type      | Accepted Values       | Default  |
-| ----| ----| ----| ---- | ----- |
-|type| type of input | string | text, textarea and other [native input types](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types) | text |
-|value / v-model| binding value | string / number| — | — |
-|maxlength| same as `maxlength` in native input | number| — | — |
-|minlength| same as `minlength` in native input | number | — | — |
-|placeholder| placeholder of Input| string | — | — |
-| clearable | whether to show clear button | boolean | — | false |
-| show-password | whether to show toggleable password input| boolean         | — | false |
-|disabled | whether Input is disabled | boolean | — | false |
-|size | size of Input, works when `type` is not 'textarea' | string | medium / small / mini | — |
-| prefix-icon   | prefix icon class  | string          | — | — |
-| suffix-icon   | suffix icon class  | string          | — | — |
-|rows | number of rows of textarea, only works when `type` is 'textarea' | number | — | 2 |
-|autosize | whether textarea has an adaptive height, only works when `type` is 'textarea'. Can accept an object, e.g. { minRows: 2, maxRows: 6 }  | boolean / object | — | false |
-|autocomplete | same as `autocomplete` in native input | string | on/off | off |
-|auto-complete | @DEPRECATED in next major version | string | on/off | off |
-|name | same as `name` in native input | string | — | — |
-| readonly | same as `readonly` in native input | boolean | — | false |
-|max | same as `max` in native input | — | — | — |
-|min | same as `min` in native input | — | — | — |
-|step| same as `step` in native input | — | — | — |
-|resize| control the resizability | string | none, both, horizontal, vertical | — |
-|autofocus | same as `autofocus` in native input | boolean | — | false |
-|form | same as `form` in native input | string | — | — |
-| label | label text | string | — | — |
-| tabindex | input tabindex | string | - | - |
-| validate-event | whether to trigger form validation | boolean | - | true |
-
-### Input slots
-
-| Name | Description |
-|------|--------|
-| prefix | content as Input prefix, only works when `type` is 'text' |
-| suffix | content as Input suffix, only works when `type` is 'text' |
-| prepend | content to prepend before Input, only works when `type` is 'text' |
-| append | content to append after Input, only works when `type` is 'text' |
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| type         | 类型   | string  | text，textarea | text |
+| value / v-model | 绑定值           | string / number  | — | — |
+| maxlength     | 原生属性，最大输入长度      | number          |  —  | — |
+| minlength     | 原生属性，最小输入长度      | number          | — | — |
+| placeholder   | 输入框占位文本    | string          | — | — |
+| show-password | 是否显示切换密码图标| boolean         | — | false |
+| disabled      | 禁用            | boolean         | — | false   |
+| autocomplete | 原生属性，自动补全 | string | on, off | off |
+| name | 原生属性 | string | — | — |
+| readonly | 原生属性，是否只读 | boolean | — | false |
+| resize | 控制是否能被用户缩放 | string | none, both, horizontal, vertical | — |
 
 ### Input Events
-
-| Event Name | Description | Parameters |
-|----| ----| ----|
-| blur | triggers when Input blurs | (event: Event) |
-| focus | triggers when Input focuses | (event: Event) |
-| change | triggers when the icon inside Input value change | (value: string \| number) |
-| clear | triggers when the Input is cleared by clicking the clear button | — |
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| blur | 在 Input 失去焦点时触发 | (event: Event) |
+| focus | 在 Input 获得焦点时触发 | (event: Event) |
+| change | 在 Input 值改变时触发 | (value: string \| number) |
 
 ### Input Methods
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | — |
+| blur | 使 input 失去焦点 | — |
+| select | 选中 input 中的文字 | — |
 
-| Method | Description | Parameters |
-|------|--------|-------|
-| focus | focus the input element | — |
-| blur | blur the input element | — |
-| select | select the text in input element | — |
 
 ### Autocomplete Attributes
 
-Attribute | Description | Type | Options | Default
-|----| ----| ----| ---- | -----|
-|placeholder| the placeholder of Autocomplete| string | — | — |
-| clearable | whether to show clear button | boolean | — | false |
-|disabled | whether Autocomplete is disabled  | boolean | — | false|
-| value-key | key name of the input suggestion object for display | string | — | value |
-|icon | icon name | string | — | — |
-|value | binding value | string | — | — |
-| debounce | debounce delay when typing, in milliseconds | number | — | 300 |
-| placement | placement of the popup menu | string | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
-|fetch-suggestions | a method to fetch input suggestions. When suggestions are ready, invoke `callback(data:[])` to return them to Autocomplete | Function(queryString, callback) | — | — |
-| popper-class | custom class name for autocomplete's dropdown | string | — | — |
-| trigger-on-focus | whether show suggestions when input focus | boolean | — | true |
-| name | same as `name` in native input | string | — | — |
-| select-when-unmatched | whether to emit a `select` event on enter when there is no autocomplete match | boolean | — | false |
-| label | label text | string | — | — |
-| prefix-icon | prefix icon class | string | — | — |
-| suffix-icon | suffix icon class | string | — | — |
-| hide-loading | whether to hide the loading icon in remote search | boolean | — | false |
-| popper-append-to-body | whether to append the dropdown to body. If the positioning of the dropdown is wrong, you can try to set this prop to false | boolean | - | true |
-| highlight-first-item | whether to highlight first item in remote search suggestions by default | boolean | — | false |
+| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+|-------------  |---------------- |---------------- |---------------------- |-------- |
+| placeholder   | 输入框占位文本   | string          | — | — |
+| disabled      | 禁用            | boolean         | — | false   |
+| value-key | 输入建议对象中用于显示的键名 | string | — | value |
+| value         | 必填值，输入绑定值   | string  | — | — |
+| debounce      | 获取输入建议的去抖延时 | number         | — | 300 |
+| placement     | 菜单弹出位置 | string         | top / top-start / top-end / bottom / bottom-start / bottom-end | bottom-start |
+| fetch-suggestions | 返回输入建议的方法，仅当你的输入建议数据 resolve 时，通过调用 callback(data:[]) 来返回它  | Function(queryString, callback)  | — | — |
+| popper-class | Autocomplete 下拉列表的类名 | string | — | — |
+| trigger-on-focus | 是否在输入框 focus 时显示建议列表 | boolean | — | true |
+| name | 原生属性 | string | — | — |
+| select-when-unmatched | 在输入没有任何匹配建议的情况下，按下回车是否触发 `select` 事件 | boolean | — | false |
+| hide-loading | 是否隐藏远程加载时的加载图标 | boolean | — | false |
+| popper-append-to-body | 是否将下拉列表插入至 body 元素。在下拉列表的定位出现问题时，可将该属性设置为 false | boolean | - | true |
+| highlight-first-item | 是否默认突出显示远程搜索建议中的第一项 | boolean | — | false |
 
 ### Autocomplete Slots
-
-| Name | Description |
+| name | 说明 |
 |------|--------|
-| prefix | content as Input prefix |
-| suffix | content as Input suffix |
-| prepend | content to prepend before Input |
-| append | content to append after Input |
+| prefix | 输入框头部内容 |
+| suffix | 输入框尾部内容 |
+| prepend | 输入框前置内容 |
+| append | 输入框后置内容 |
 
 ### Autocomplete Scoped Slot
-| Name | Description |
+| name | 说明 |
 |------|--------|
-| — | Custom content for input suggestions. The scope parameter is { item } |
+| — | 自定义输入建议，参数为 { item } |
 
 ### Autocomplete Events
-
-| Event Name | Description | Parameters |
-|----| ----| ----|
-|select | triggers when a suggestion is clicked | suggestion being clicked |
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| select | 点击选中建议项时触发 | 选中建议项 |
 
 ### Autocomplete Methods
-
-| Method | Description | Parameters |
-|------|--------|-------|
-| focus | focus the input element | — |
+| 方法名 | 说明 | 参数 |
+| ---- | ---- | ---- |
+| focus | 使 input 获取焦点 | - |

@@ -1,8 +1,7 @@
-<style scoped lang="scss">
+<style scoped>
   .banner {
     text-align: center;
   }
-
   .banner-desc {
     padding-top: 20px;
 
@@ -19,14 +18,11 @@
       color: #888;
       margin: 10px 0 5px;
     }
-
   }
-
   .sponsors {
     display: flex;
     justify-content: center;
   }
-
   .sponsor {
     margin: 0 20px 50px;
     display: inline-flex;
@@ -50,9 +46,7 @@
       color: #999;
       font-size: 14px;
     }
-
   }
-
   .jumbotron {
     width: 890px;
     height: 465px;
@@ -130,9 +124,7 @@
       right: 10px;
       height: 68px;
     }
-
   }
-
   .cards {
     margin: 0 auto 110px;
     width: 1140px;
@@ -141,18 +133,15 @@
       padding: 0;
       margin: 0 -11px;
       width: auto;
-
-      &::before,
-      &::after {
+      &::before, &::after {
         display: table;
         content: "";
       }
-
       &::after {
         clear: both;
       }
-
     }
+
 
     li {
       width: 33.33333%;
@@ -166,15 +155,13 @@
       width: 160px;
       height: 120px;
     }
-
   }
-
   .card {
     height: 430px;
     width: 100%;
-    background: #ffffff;
-    border: 1px solid #eaeefb;
-    border-radius: 5px;
+    background:#ffffff;
+    border:1px solid #eaeefb;
+    border-radius:5px;
     box-sizing: border-box;
     text-align: center;
     position: relative;
@@ -184,21 +171,18 @@
     img {
       margin: 66px auto 60px;
     }
-
     h3 {
       margin: 0;
       font-size: 18px;
       color: #1f2f3d;
       font-weight: normal;
     }
-
     p {
       font-size: 14px;
       color: #99a9bf;
       padding: 0 25px;
       line-height: 20px;
     }
-
     a {
       height: 53px;
       line-height: 52px;
@@ -223,83 +207,65 @@
         color: #fff;
         background: #409EFF;
       }
-
     }
     &:hover {
       bottom: 6px;
-      box-shadow: 0 6px 18px 0 rgba(232, 237, 250, 0.50);
+      box-shadow: 0 6px 18px 0 rgba(232,237,250,0.50);
     }
-
   }
-
   @media (max-width: 1140px) {
     .cards {
       width: 100%;
-
       .container {
         width: 100%;
         margin: 0;
       }
     }
-
     .banner .container {
       width: 100%;
       box-sizing: border-box;
     }
-
     .banner img {
       right: 0;
     }
-
   }
 
   @media (max-width: 1000px) {
     .banner .container {
-
       img {
         display: none;
       }
     }
-
     .jumbotron {
       display: none;
     }
-
   }
 
   @media (max-width: 768px) {
     .cards {
-
       li {
         width: 80%;
         margin: 0 auto 20px;
         float: none;
       }
-
       .card {
         height: auto;
         padding-bottom: 54px;
       }
     }
-
     .banner-stars {
       display: none;
     }
-
     .banner-desc {
-
       #line2 {
         display: none;
       }
-
       h2 {
         font-size: 32px;
       }
-
       p {
         width: auto;
       }
-
     }
   }
 </style>
@@ -308,8 +274,7 @@
     <div class="banner">
       <div class="banner-desc">
         <h1>为了没有的功能</h1>
-        <p>vui-pc, 复制与模仿<a href="https://element.eleme.io](https://element.eleme.io">element-ui</a>，并增加后台系统所需更多功能</p>
-        <p>为了我们曾经重复写同样的代码而逝去的青春，同样也是为了站在element-ui的肩膀上去学习</p>
+        <p>vui-pc, 复制与模仿<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，并增加后台系统所需更多功能<br>为了我们曾经重复写同样的代码而逝去的青春，同样也是为了站在element-ui的肩膀上去学习</p>
       </div>
     </div>
     <div class="cards">
@@ -321,7 +286,7 @@
             <p>组件 Demo </p>
             <router-link
               active-class="active"
-              to="/zh-CN/component/button"
+              to="/zh-CN/component/layout"
               exact>查看详情
             </router-link>
           </div>
