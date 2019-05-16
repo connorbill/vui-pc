@@ -142,16 +142,13 @@
       margin: 0 -11px;
       width: auto;
 
-      &
-      ::before,
-      &
-      ::after {
+      &::before,
+      &::after {
         display: table;
         content: "";
       }
 
-      &
-      ::after {
+      &::after {
         clear: both;
       }
 
@@ -222,15 +219,13 @@
       text-decoration: none;
       display: block;
 
-      &
-      :hover {
+      &:hover {
         color: #fff;
         background: #409EFF;
       }
 
     }
-    &
-    :hover {
+    &:hover {
       bottom: 6px;
       box-shadow: 0 6px 18px 0 rgba(232, 237, 250, 0.50);
     }
@@ -326,7 +321,7 @@
             <p>组件 Demo </p>
             <router-link
               active-class="active"
-              to="/zh-CN/component/layout"
+              to="/zh-CN/component/button"
               exact>查看详情
             </router-link>
           </div>

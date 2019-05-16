@@ -26,7 +26,7 @@
     'error': 'vui-icon-error'
   };
   export default {
-    name: 'ElAlert',
+    name: 'VuiAlert',
 
     props: {
       title: {

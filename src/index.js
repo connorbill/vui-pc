@@ -10,6 +10,9 @@ import Dialog from '../packages/dialog/index.js';
 import Radio from '../packages/radio/index.js';
 import RadioGroup from '../packages/radio-group/index.js';
 import Select from '../packages/select/index.js';
+import SelectGreat from '../packages/select-great/index.js';
+import Option from '../packages/option/index.js';
+import OptionGroup from '../packages/option-group/index.js';
 import Table from '../packages/table/index.js';
 import TableLr from '../packages/table-lr/index.js';
 import Upload from '../packages/upload/index.js';
@@ -36,6 +39,9 @@ const components = [
   Radio,
   RadioGroup,
   Select,
+  SelectGreat,
+  Option,
+  OptionGroup,
   Table,
   TableLr,
   Upload,
@@ -89,6 +95,9 @@ export default {
   Radio,
   RadioGroup,
   Select,
+  SelectGreat,
+  Option,
+  OptionGroup,
   Table,
   TableLr,
   Upload,
