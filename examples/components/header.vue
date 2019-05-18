@@ -466,7 +466,7 @@
     methods: {
       switchVersion(version) {
         if (version === this.version) return;
-        location.href = `${ location.origin }/${ this.versions[version] }/${ location.hash } `;
+        location.href = `${ location.origin }/vui/${ this.versions[version] }/${ location.hash } `;
       },
 
       switchLang(targetLang) {
