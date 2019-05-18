@@ -299,6 +299,7 @@
             <table :style="[{ width: store.tableWidth + 'px' }]" class="vui-table__body">
               <colgroup>
                 <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                <col v-if="hasGutter" name="gutter">
               </colgroup>
               <tbody>
               <slot name="body">
@@ -330,6 +331,7 @@
             <table :style="{ width: store.tableWidth + 'px' }">
               <colgroup>
                 <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                <col v-if="hasGutter" name="gutter">
               </colgroup>
               <tbody>
               <slot name="footer"></slot>
@@ -347,6 +349,7 @@
               <table :style="{ width: store.tableWidth + 'px' }">
                 <colgroup>
                   <col v-for="(item, index) in store.tdWidthArr" :key="index" :style="{ width: item + 'px' }"/>
+                  <col v-if="hasGutter" name="gutter">
                 </colgroup>
                 <thead>
                 <slot name="header">

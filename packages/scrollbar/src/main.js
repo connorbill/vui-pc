@@ -41,7 +41,10 @@ export default {
       sizeWidth: '0',
       sizeHeight: '0',
       moveX: 0,
-      moveY: 0
+      moveY: 0,
+      preMoveX: 0,
+      preMoveY: 0,
+      isStop: false
     };
   },
 
@@ -80,6 +83,7 @@ export default {
       <div
         ref="wrap"
         style={style}
+        onTouchmove={this.handleScroll}
         onScroll={this.handleScroll}
         onWheel={this.handleWheel}
         class={[this.wrapClass, 'vui-scrollbar__wrap', gutter ? '' : 'vui-scrollbar__wrap--hidden-default']}>
@@ -135,18 +139,21 @@ export default {
 
   methods: {
     handleScroll(event) {
-      if (event) {
-        event.stopPropagation();
-        event.preventDefault();
-      }
+      // if (event) {
+      //   event.stopPropagation();
+      //   event.preventDefault();
+      // }
       const wrap = this.wrap;
       this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
       this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
       this.$emit('movex', {movex: this.moveX, left: wrap.scrollLeft});
       this.$emit('movey', {movey: this.moveY, top: wrap.scrollTop});
+
     },
     handleWheel(event) {
       const wrap = this.wrap;
+      this.preMoveX = this.moveX;
+      this.preMoveY = this.moveY;
       if (this.wrapDirection) {
         if (this.wrapDirection === 'about') {
           if (event.deltaY < 0) {
@@ -158,7 +165,13 @@ export default {
             // 向下滚动鼠标滚轮，屏幕滚动条右移
             this.moveX = ((wrap.scrollLeft * 100) / wrap.clientWidth);
           }
-
+          if (event) {
+            if (this.preMoveX !== this.moveX) {
+              event.stopPropagation();
+              event.preventDefault();
+            }
+          }
+          this.$emit('movex', {movex: this.moveX, left: wrap.scrollLeft});
         } else if (this.wrapDirection === 'seesaw') {
           if (event.deltaY < 0) {
             wrap.scrollTop -= 50;
@@ -169,12 +182,13 @@ export default {
             // 向下滚动鼠标滚轮，屏幕滚动条下移
             this.moveY = ((wrap.scrollTop * 100) / wrap.clientHeight);
           }
-        }
-        this.$emit('movex', {movex: this.moveX, left: wrap.scrollLeft});
-        this.$emit('movey', {movey: this.moveY, top: wrap.scrollTop});
-        if (event) {
-          event.stopPropagation();
-          event.preventDefault();
+          if (event) {
+            if (this.preMoveY !== this.moveY) {
+              event.stopPropagation();
+              event.preventDefault();
+            }
+          }
+          this.$emit('movey', {movey: this.moveY, top: wrap.scrollTop});
         }
       }
     },

@@ -168,11 +168,18 @@
   }
 
   @media (max-width: 768px) {
+    body{
+      -webkit-transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), box-shaow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), box-shaow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), box-shaow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), box-shaow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+      -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    }
     .page-component {
       .page-component__nav {
-        width: 100%;
+        width: 260px;
         position: static;
-        margin-top: 0;
+        margin-top: 40;
       }
       .side-nav {
         padding-top: 0;
@@ -181,6 +188,7 @@
       .page-component__content {
         padding-left: 10px;
         padding-right: 10px;
+        padding-top: 50px;
       }
       .content {
         padding-top: 0;
@@ -193,14 +201,238 @@
         display: none;
       }
     }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      z-index: 9999;
+    }
+    .drawer > * {
+      -webkit-transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), box-shaow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), box-shaow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), box-shaow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), box-shaow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    }
+    .drawer .drawer-mask {
+      background: #000;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: fixed;
+      top: 0;
+      -webkit-transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), width 0s ease 0.3s, height 0s ease 0.3s;
+      transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), width 0s ease 0.3s, height 0s ease 0.3s;
+    }
+    .drawer-content-wrapper {
+      position: fixed;
+      background: #fff;
+    }
+    .drawer-content {
+      overflow: auto;
+      z-index: 1;
+      position: relative;
+    }
+    .drawer-handle {
+      position: absolute;
+      top: 89px;
+      width: 41px;
+      height: 40px;
+      cursor: pointer;
+      z-index: 0;
+      text-align: center;
+      line-height: 40px;
+      font-size: 16px;
+      display: -ms-flexbox;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: flex;
+      -ms-flex-pack: center;
+          -webkit-box-pack: center;
+          -webkit-justify-content: center;
+              justify-content: center;
+      -ms-flex-align: center;
+          -webkit-box-align: center;
+          -webkit-align-items: center;
+              align-items: center;
+      background: #fff;
+    }
+    .drawer-handle-icon {
+      width: 14px;
+      height: 2px;
+      background: #333;
+      position: relative;
+      -webkit-transition: background 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: background 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    }
+    .drawer-handle-icon:before,
+    .drawer-handle-icon:after {
+      content: '';
+      display: block;
+      position: absolute;
+      background: #333;
+      width: 100%;
+      height: 2px;
+      -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    }
+    .drawer-handle-icon:before {
+      top: -5px;
+    }
+    .drawer-handle-icon:after {
+      top: 5px;
+    }
+    .drawer-left,
+    .drawer-right {
+      width: 0%;
+      height: 100%;
+    }
+    .drawer-left .drawer-content-wrapper,
+    .drawer-right .drawer-content-wrapper,
+    .drawer-left .drawer-content,
+    .drawer-right .drawer-content {
+      height: 100%;
+    }
+    .drawer-left.drawer-open,
+    .drawer-right.drawer-open {
+      width: 100%;
+    }
+    .drawer-left .drawer-handle {
+      right: -40px;
+      -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+              box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+      border-radius: 0 4px 4px 0;
+    }
+    .drawer-left.drawer-open .drawer-content-wrapper {
+      -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+              box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+    }
+    .drawer-right .drawer-content-wrapper {
+      right: 0;
+    }
+    .drawer-right .drawer-handle {
+      left: -40px;
+      -webkit-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+              box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+      border-radius: 4px 0 0 4px;
+    }
+    .drawer-right.drawer-open .drawer-content-wrapper {
+      -webkit-box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+              box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    }
+    .drawer-top,
+    .drawer-bottom {
+      width: 100%;
+      height: 0%;
+    }
+    .drawer-top .drawer-content-wrapper,
+    .drawer-bottom .drawer-content-wrapper,
+    .drawer-top .drawer-content,
+    .drawer-bottom .drawer-content {
+      width: 100%;
+    }
+    .drawer-top .drawer-handle,
+    .drawer-bottom .drawer-handle {
+      left: 50%;
+      margin-left: -20px;
+    }
+    .drawer-top.drawer-open,
+    .drawer-bottom.drawer-open {
+      height: 100%;
+    }
+    .drawer-top .drawer-handle {
+      top: auto;
+      bottom: -40px;
+      -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      border-radius: 0 0 4px 4px;
+    }
+    .drawer-top.drawer-open .drawer-wrapper {
+      -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .drawer-bottom .drawer-content-wrapper {
+      bottom: 0;
+    }
+    .drawer-bottom .drawer-handle {
+      top: -40px;
+      -webkit-box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+              box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+      border-radius: 4px 4px 0 0;
+    }
+    .drawer-bottom.drawer-open .drawer-content-wrapper {
+      -webkit-box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+              box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .drawer.drawer-open .drawer-mask {
+      opacity: .3;
+      width: 100%;
+      height: 100%;
+      -webkit-animation: rcDrawerFadeIn 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+              animation: rcDrawerFadeIn 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+      -webkit-transition: none;
+      transition: none;
+    }
+    .drawer.drawer-open .drawer-handle-icon {
+      background: transparent;
+    }
+    .drawer.drawer-open .drawer-handle-icon:before {
+      -webkit-transform: translateY(5px) rotate(45deg);
+          -ms-transform: translateY(5px) rotate(45deg);
+              transform: translateY(5px) rotate(45deg);
+    }
+    .drawer.drawer-open .drawer-handle-icon:after {
+      -webkit-transform: translateY(-5px) rotate(-45deg);
+          -ms-transform: translateY(-5px) rotate(-45deg);
+              transform: translateY(-5px) rotate(-45deg);
+    }
+    @-webkit-keyframes rcDrawerFadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0.3;
+      }
+    }
+    @keyframes rcDrawerFadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0.3;
+      }
+    }
+    .move-menu{
+        transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86) 0s;
+        transform: translateX(27px);
+    }
+    .move-menu-hide{
+          transform: translateX(-100%);
+    }
+
   }
 </style>
 <template>
   <vui-scrollbar class="page-component__scroll" ref="componentScrollBar">
   <div class="page-container page-component" :class="{'theme-config': isThemeConfigVisible}">
-    <vui-scrollbar class="page-component__nav">
-      <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
-    </vui-scrollbar>
+
+    <div class="drawer-wrapper">
+      <div class="drawer drawer-left " :class="{'drawer-open': isShowMenu}" >
+        <div class="drawer-mask" @click="showHandle">
+        </div>
+        <div class="drawer-content-wrapper move-menu-hide" >
+          <div class="drawer-content" ref="drawerContent">
+            <vui-scrollbar class="page-component__nav" ref="pageComponentNav">
+              <side-nav :data="navsData[lang]" :base="`/${ lang }/component`"></side-nav>
+            </vui-scrollbar>
+          </div>
+          <div class="drawer-handle" @click="showHandle">
+            <i class="drawer-handle-icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="page-component__content" :class="{'theme-config': isThemeConfigVisible}">
       <router-view class="content"></router-view>
       <footer-nav></footer-nav>
@@ -235,7 +467,8 @@
         showHeader: true,
         componentScrollBar: null,
         componentScrollBoxElement: null,
-        isThemeConfigVisible: false
+        isThemeConfigVisible: false,
+        isShowMenu: false
       };
     },
     watch: {
@@ -248,6 +481,15 @@
       }
     },
     methods: {
+      showHandle() {
+        this.isShowMenu = !this.isShowMenu;
+        if (this.isShowMenu) {
+          let pageComponentNav = this.$refs.drawerContent.offsetWidth;
+          document.querySelector('body').style.transform = 'translateX(' + pageComponentNav + 'px)';
+        } else {
+          document.querySelector('body').style.transform = 'translateX(0)';
+        }
+      },
       renderAnchorHref() {
         if (/changelog/g.test(location.href)) return;
         const anchors = document.querySelectorAll('h2 a,h3 a,h4 a,h5 a');

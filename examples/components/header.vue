@@ -31,11 +31,12 @@
     line-height: 80px;
     z-index: 100;
     position: relative;
+    box-shadow: 0 2px 8px #f0f1f2;
 
     .container {
       height: 100%;
       box-sizing: border-box;
-      border-bottom: 1px solid #DCDFE6;
+      /*border-bottom: 1px solid #DCDFE6;*/
     }
 
     .nav-lang-spe {

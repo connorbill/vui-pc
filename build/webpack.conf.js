@@ -2,9 +2,14 @@ const path = require('path');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-
+const WebpackAutoInject = require('webpack-auto-inject-version');
+const versiony = require('versiony');
 const config = require('./config');
-
+const vuiVersion = process.env.VERSION || require('../package.json').version;
+versiony
+  .major()
+  .version(vuiVersion)
+  .to('./packages/theme-chalk/package.json');
 module.exports = {
   mode: 'production',
   entry: {
@@ -78,6 +83,29 @@ module.exports = {
   },
   plugins: [
     new ProgressBarPlugin(),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    new WebpackAutoInject({
+      SHORT: 'CUSTOM',
+      SILENT: false,
+      PACKAGE_JSON_PATH: './package.json',
+      PACKAGE_JSON_INDENT: 4,
+      components: {
+        AutoIncreaseVersion: false,
+        InjectAsComment: true,
+        InjectByTag: true
+      },
+      componentsOptions: {
+        AutoIncreaseVersion: {
+          runInWatchMode: false
+        },
+        InjectAsComment: {
+          tag: 'Vui-pc Version: {version} - {date}',
+          multiLineCommentType: true // use `/** */` instead of `//` as comment block
+        }
+      },
+      LOGS_TEXT: {
+        AIS_START: 'add version started'
+      }
+    })
   ]
 };
