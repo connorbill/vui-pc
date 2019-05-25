@@ -1,0 +1,34 @@
+
+/*flex布局 start*/
+/*从左至右，水平居中，行满后换行*/
+.middle-left-wrap{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.middle-right-wrap{
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+/*水平居中，内容两端对齐*/
+.middle-between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+/*水平居中，内容显示中间*/
+.middle-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/*从左至右，水平居中，行满后不换行*/
+.middle-left-nowrap{
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/*flex布局 start*/

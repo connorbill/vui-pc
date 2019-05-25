@@ -1,0 +1,77 @@
+
+/*common table start*/
+.vui-total-table-display table{
+  table-layout:fixed;
+  border-collapse: collapse;
+}
+.vui-total-table-border{
+  border-left: 1px solid #cfcfcf;
+  border-top: 1px solid #cfcfcf;
+}
+.vui-total-table-border th{
+  border-right: 1px solid #cfcfcf;
+  border-bottom: 1px solid #cfcfcf;
+}
+.vui-total-table-border td{
+  border-right: 1px solid #cfcfcf;
+  border-bottom: 1px solid #cfcfcf;
+}
+.vui-table__footer-wrapper, .vui-table__body-wrapper, .vui-table__header-wrapper{
+  /*overflow: hidden;*/
+  width: 100%;
+}
+.vui-table-common-bg .vui-table__body-wrapper tr:nth-child(2n){
+  background-color: #e9eef8;
+}
+.vui-table-common-bg .vui-table__body-wrapper tr:nth-child(2n+1){
+  background-color: #fff;
+}
+.vui-table-common-bg .vui-table__fixed-body-wrapper tr:nth-child(2n){
+  background-color: #e9eef8;
+}
+.vui-table-common-bg .vui-table__fixed-body-wrapper tr:nth-child(2n+1){
+  background-color: #fff;
+}
+.vui-table__footer-wrapper tr {
+  //background-color: #e9eef8;
+	background-color: #fff;
+}
+.vui-table__empty-block{
+  height: 56px;
+  line-height: 56px;
+  border-bottom: 1px solid #cfcfcf;
+  border-right: 1px solid #cfcfcf;
+}
+
+.vui-table{
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+}
+/*default style*/
+
+
+.vui-default-style{
+  text-align: center;
+}
+.vui-default-style thead{
+  background-color: #e9eef8;
+}
+.vui-default-style td, .vui-default-style th{
+  height: 66px;
+  text-align: center;
+}
+.overflow-x-vui{
+  overflow-x: auto;
+}
+.overflow-body{
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.overflow-body-hidden{
+  overflow-y: hidden;
+  overflow-x: hidden;
+}

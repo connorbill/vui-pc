@@ -16,3 +16,7 @@ coverage
 waiter.config.js
 build/bin/algolia-key.js
 .envrc
+<<<<<<< HEAD
+=======
+examples/vui-pc
+>>>>>>> 5e0b500d9ff23acd2242f833f3e6d08ea2cdcc4f

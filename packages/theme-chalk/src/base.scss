@@ -1,0 +1,47 @@
+@import "./common/common-index";
+@import "~animate.css";
+@import "common/transition.scss";
+@import "icon.scss";
+.vui-close-style{
+	position: absolute;
+	border-radius: 50%;
+	display: flex;
+	&.vui-large-close{
+		right: -15px;
+		top: -15px;
+		width: 30px;
+		height: 30px;
+	}
+	&.vui-normal-close{
+		width: 20px;
+		height: 20px;
+		right: -10px;
+		top: -10px;
+	}
+	&.vui-small-close{
+		right: -7px;
+		top: -7px;
+		width: 15px;
+		height: 15px;
+	}
+	.vui-icon-delete{
+		background-repeat: no-repeat;
+		background-size: 100% 100%;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+	}
+}
+.vui-icon-delete{
+	background-image: url("../../../icon/close-circle.png");
+}
+.vui-icon-download {
+	background-image: url("../../../icon/download.png");
+}
+.vui-icon-file {
+	background-image: url("../../../icon/file.png");
+}
+
+.vui-dialog-close{
+	background-image: url("../../../icon/close_icon.png");
+}

@@ -3,6 +3,7 @@
 ### 说明
 - 复制与模仿，增加风控项目所需功能 [element-ui: https://element.eleme.io](https://element.eleme.io)
 
+<<<<<<< HEAD
 ### 开发组件发布到npm 
 
 - 名字:vui-pc
@@ -405,5 +406,8 @@ Events
 ### [0.8.3](#--if)
 
 - 解决校验函数导出，导入后找不到的问题
+=======
+
+>>>>>>> 5e0b500d9ff23acd2242f833f3e6d08ea2cdcc4f
 
 
