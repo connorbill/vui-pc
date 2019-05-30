@@ -8,6 +8,7 @@
     :aria-owns="id"
   >
     <vui-input
+      :rule="selfRule"
       ref="input"
       v-bind="[$props, $attrs]"
       @input="handleChange"
@@ -53,6 +54,7 @@
   import Migrating from '../../../src/mixins/migrating';
   import { generateId } from '../../../src/utils/util';
   import Focus from '../../../src/mixins/focus';
+  // import {judgeValue} from '../../../src/funs/validate';
 
   export default {
     name: 'VuiAutocomplete',
@@ -118,6 +120,12 @@
       highlightFirstItem: {
         type: Boolean,
         default: false
+      },
+      rule: {
+        type: [String, Array],
+        default: function() {
+          return '';
+        }
       }
     },
     data() {
@@ -126,7 +134,8 @@
         suggestions: [],
         loading: false,
         highlightedIndex: -1,
-        suggestionDisabled: false
+        suggestionDisabled: false,
+        selfRule: ''
       };
     },
     computed: {
@@ -144,6 +153,12 @@
         let $input = this.getInput();
         if ($input) {
           this.broadcast('VuiAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
+        }
+      },
+      rule: {
+        immediate: true,
+        handler(newVal) {
+          this.selfRule = newVal;
         }
       }
     },
@@ -183,6 +198,7 @@
           return;
         }
         this.debouncedGetData(value);
+        this.checkValue();
       },
       handleFocus(event) {
         this.activated = true;
@@ -249,6 +265,29 @@
       },
       getInput() {
         return this.$refs.input.getInput();
+      },
+      checkValue: function() {
+        this.$refs.input.checkValue();
+        // let obj = {
+        //   value: '',
+        //   rule: this.selfRule
+        // };
+        // if (!obj.rule) return;
+        // let tip = judgeValue(obj);
+        // let res = {
+        //   isRight: true
+        // };
+        // if (tip) {
+        //   this.errorTip = tip;
+        //   this.error = true;
+        //
+        //   res.isRight = false;
+        // } else {
+        //   this.error = false;
+        //   this.errorTip = '';
+        //   res.isRight = true;
+        // }
+        // return res;
       }
     },
     mounted() {

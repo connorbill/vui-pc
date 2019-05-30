@@ -138,31 +138,31 @@
   ],
   "en-US": [
     {
-      "name": "更新日志",
+      "name": "Changelog",
       "path": "/changelog"
     },
     {
-      "name": "开发指南",
+      "name": "Development",
       "children": [
         {
           "path": "/installation",
-          "name": "安装"
+          "name": "Installation"
         },
         {
           "path": "/quickstart",
-          "name": "快速上手"
+          "name": "Quick Start"
         }
       ]
     },
     {
-      "name": "组件",
+      "name": "Components",
       "groups": [
         {
           "groupName": "Basic",
           "list": [
             {
               "path": "/button",
-              "title": "Button 按钮"
+              "title": "Button"
             }
           ]
         },
@@ -171,39 +171,39 @@
           "list": [
             {
               "path": "/addr",
-              "title": "Addr 省市区三级联动"
+              "title": "Addr three linkage"
             },
             {
               "path": "/radio",
-              "title": "Radio 单选框"
+              "title": "Radio"
             },
             {
               "path": "/checkbox",
-              "title": "Checkbox 多选框"
+              "title": "Checkbox"
             },
             {
               "path": "/input",
-              "title": "Input 输入框"
+              "title": "Input"
             },
             {
               "path": "/select",
-              "title": "Select 选择器"
+              "title": "Select"
             },
             {
               "path": "/select-great",
-              "title": "SelectGreat 选择器"
+              "title": "SelectGreat"
             },
             {
               "path": "/date-picker",
-              "title": "DatePicker 日期选择器"
+              "title": "DatePicker"
             },
             {
               "path": "/upload",
-              "title": "Upload 上传"
+              "title": "Upload"
             },
             {
               "path": "/form",
-              "title": "Form 表单"
+              "title": "Form"
             }
           ]
         },
@@ -212,15 +212,15 @@
           "list": [
             {
               "path": "/table",
-              "title": "Table 表格"
+              "title": "Table"
             },
             {
               "path": "/tablelr",
-              "title": "Tablelr 左右表格"
+              "title": "Tablelr"
             },
             {
               "path": "/pagination",
-              "title": "Pagination 分页"
+              "title": "Pagination"
             }
           ]
         },
@@ -229,23 +229,23 @@
           "list": [
             {
               "path": "/loading",
-              "title": "Loading 加载"
+              "title": "Loading"
             },
             {
               "path": "/message",
-              "title": "Message 消息提示"
+              "title": "Message"
             },
             {
               "path": "/message-box",
-              "title": "MessageBox 弹框"
+              "title": "MessageBox"
             },
             {
               "path": "/notification",
-              "title": "Notification 通知"
+              "title": "Notification"
             },
             {
               "path": "/icon-loading",
-              "title": "IconLoading 加载图标"
+              "title": "IconLoading"
             }
           ]
         },
@@ -254,19 +254,156 @@
           "list": [
             {
               "path": "/scrollbar",
-              "title": "Scrollbar 美化滚动条"
+              "title": "Scrollbar"
             },
             {
               "path": "/dialog",
-              "title": "Dialog 对话框"
+              "title": "Dialog"
             },
             {
               "path": "/tooltip",
-              "title": "Tooltip 文字提示"
+              "title": "Tooltip"
             },
             {
               "path": "/popover",
-              "title": "Popover 弹出框"
+              "title": "Popover"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "de-DE": [
+    {
+      "name": "Protokoll aktualisieren",
+      "path": "/changelog"
+    },
+    {
+      "name": "Entwicklung",
+      "children": [
+        {
+          "path": "/installation",
+          "name": "Installation"
+        },
+        {
+          "path": "/quickstart",
+          "name": "Fangen Sie schnell an"
+        }
+      ]
+    },
+    {
+      "name": "Komponente",
+      "groups": [
+        {
+          "groupName": "Basic",
+          "list": [
+            {
+              "path": "/button",
+              "title": "Button"
+            }
+          ]
+        },
+        {
+          "groupName": "Bilden",
+          "list": [
+            {
+              "path": "/addr",
+              "title": "Addr three linkage"
+            },
+            {
+              "path": "/radio",
+              "title": "Radio"
+            },
+            {
+              "path": "/checkbox",
+              "title": "Checkbox"
+            },
+            {
+              "path": "/input",
+              "title": "Input"
+            },
+            {
+              "path": "/select",
+              "title": "Select"
+            },
+            {
+              "path": "/select-great",
+              "title": "SelectGreat"
+            },
+            {
+              "path": "/date-picker",
+              "title": "DatePicker"
+            },
+            {
+              "path": "/upload",
+              "title": "Upload"
+            },
+            {
+              "path": "/form",
+              "title": "Form"
+            }
+          ]
+        },
+        {
+          "groupName": "Daten",
+          "list": [
+            {
+              "path": "/table",
+              "title": "Table"
+            },
+            {
+              "path": "/tablelr",
+              "title": "Tablelr"
+            },
+            {
+              "path": "/pagination",
+              "title": "Pagination"
+            }
+          ]
+        },
+        {
+          "groupName": "Beachten",
+          "list": [
+            {
+              "path": "/loading",
+              "title": "Loading"
+            },
+            {
+              "path": "/message",
+              "title": "Message"
+            },
+            {
+              "path": "/message-box",
+              "title": "MessageBox"
+            },
+            {
+              "path": "/notification",
+              "title": "Notification"
+            },
+            {
+              "path": "/icon-loading",
+              "title": "IconLoading"
+            }
+          ]
+        },
+        {
+          "groupName": "Andere",
+          "list": [
+            {
+              "path": "/scrollbar",
+              "title": "Scrollbar"
+            },
+            {
+              "path": "/dialog",
+              "title": "Dialog"
+            },
+            {
+              "path": "/tooltip",
+              "title": "Tooltip"
+            },
+            {
+              "path": "/popover",
+              "title": "Popover"
             }
           ]
         }

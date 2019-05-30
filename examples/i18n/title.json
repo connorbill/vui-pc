@@ -10,5 +10,11 @@
     "guide": "Guide | Vui",
     "component": "Component | Vui",
     "resource": "Resource | Vui"
+  },
+  "de-DE": {
+    "home": "Vui - Ein Desktop UI Toolkit für das Web",
+    "guide": "Führen | Vui",
+    "component": "Komponente | Vui",
+    "resource": "Ressource | Vui"
   }
 }

@@ -4,7 +4,7 @@
     "pages": {
       "index": {
         "1": "为了没有的功能",
-        "2": "vui-pc, 复制与模仿<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，并增加后台系统所需更多功能<br>为了我们曾经重复写同样的代码而逝去的青春，同样也是为了站在element-ui的肩膀上去学习",
+        "2": "vui-pc, 复制与模仿<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，并增加后台系统所需更多功能<br>为了我们曾经重复写同样的代码而逝去的青春，同样也是为了站在element-ui的肩膀上去学习（使用多语言文档也是如此目的）,最主要的是市面上没有适配风控操作习惯的组件，因此，要自己去改装，尽量保持与独特的后台系统保持统一。",
         "3": "指南",
         "4": "了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。",
         "5": "查看详情",
@@ -95,13 +95,13 @@
     "lang": "en-US",
     "pages": {
       "index": {
-        "1": "为了没有的功能",
-        "2": "vui-pc, 复制与模仿<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，并增加后台系统所需更多功能<br>为了我们曾经重复写同样的代码而逝去的青春，同样也是为了站在element-ui的肩膀上去学习",
-        "3": "指南",
-        "4": "了解设计指南，帮助产品设计人员搭建逻辑清晰、结构合理且高效易用的产品。",
-        "5": "查看详情",
-        "6": "组件",
-        "7": "组件 Demo ",
+        "1": "For Component that we have no function",
+        "2": "vui-pc, Copy and imitation<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，and add more features needed for the backend system<br>For the youth that we have repeatedly written the same code, it is also to stand on the shoulder of element-ui to learn.",
+        "3": "guide",
+        "4": "",
+        "5": "go to details",
+        "6": "Component",
+        "7": "Component Demo ",
         "8": "Resource",
         "9": "Download relevant design resources for shaping page prototype or visual draft, increasing design efficiency.",
         "lang": "en-US",
@@ -112,6 +112,98 @@
       "changelog": {
         "1": "Changelog",
         "2": "en-US"
+      },
+      "design": {
+        "1": "Design Disciplines",
+        "2": "Consistency",
+        "3": "",
+        "4": "Feedback",
+        "5": "",
+        "6": "Efficiency",
+        "7": "",
+        "8": "Controllability",
+        "9": "",
+        "10": "Consistency",
+        "11": "Consistent with real life: ",
+        "12": "in line with the process and logic of real life, and comply with languages and habits that the users are used to.",
+        "13": "Consistent within interface: ",
+        "14": "all elements should be consistent, such as: design style, icons and texts, position of elements, etc.",
+        "15": "Feedback",
+        "16": "Operation feedback: ",
+        "17": "enable the users to clearly perceive their operations by style updates and interactive effects.",
+        "18": "Visual feedback: ",
+        "19": "reflect current state by updating or rearranging elements of the page.",
+        "20": "Efficiency",
+        "21": "Simplify the process: ",
+        "22": "keep operating process simple and intuitive.",
+        "23": "Definite and clear: ",
+        "24": "enunciate your intentions clearly so that the users can quickly understand and make decisions.",
+        "25": "Easy to identify: ",
+        "26": "the interface should be straightforward, which helps the users to identify and frees them from memorizing and recalling.",
+        "27": "Controllability",
+        "28": "Decision making: ",
+        "29": "giving advices about operations is acceptable, but do not make decisions for the users.",
+        "30": "Controlled consequences: ",
+        "31": "users should be granted the freedom to operate, including canceling, aborting or terminating current operation."
+      },
+      "guide": {
+        "1": "Design Disciplines",
+        "2": "Navigation"
+      },
+      "nav": {
+        "1": "Navigation",
+        "2": "Navigation focuses on solving the users' problems of where to go and how to get there. Generally it can be categorized into 'sidebar navigation' and 'top navigation'.",
+        "3": "Choose the right navigation",
+        "4": "An appropriate navigation gives users a smooth experience, while an inappropriate one leads to confusion. Here are the differences between sidebar navigation and top navigation",
+        "5": "Side Navigation",
+        "6": "Fix the navigation at the left edge, thus improves its visibility, making it easier to switch between pages. In this case, the top area of the page holds commonly used tools, e.g. search bar, help button, notice button, etc. Suitable for background management or utility websites.",
+        "7": "Level 1 categories",
+        "8": "Suitable for simply structured sites with only one level of pages. No breadcrumb is needed.",
+        "9": "Level 2 categories",
+        "10": "Sidebar displays up to two levels of navigation. Breadcrumbs are recommended in combination of second level navigation, making it easier for the users to locate and navigate.",
+        "11": "Level 3 categories",
+        "12": "Suitable for complicated utility websites. The left sidebar holds first level navigation, and the middle column displays second level navigation or other utility options.",
+        "13": "Top Navigation",
+        "14": "Conforms to the normal browsing order from top to bottom, which makes things more natural. The navigation amount and text length are limited to the width of the top.",
+        "15": "Suitable for sites with few navigations and large chunks."
+      },
+      "resource": {
+        "1": "Resource",
+        "2": "Under construction.",
+        "3": "Axure Components",
+        "4": "By importing Element UI in Axure, you can easily apply all the components we provide during interaction design.",
+        "5": "Download",
+        "6": "Sketch Template",
+        "7": "Apply components from Element template, so you can improve design efficiency while keeping a unified visual style.",
+        "8": "Interaction Design Documentation",
+        "9": "Take a closer look at the interaction design documentation. Learn more details of each component from a microcosmic perspective.",
+        "paraHeight": "1.6",
+        "placeholder1": "Under construction",
+        "placeholder2": "More resources are being developed"
+      }
+    }
+  },
+  {
+    "lang": "de-DE",
+    "pages": {
+      "index": {
+        "1": "Für keine Funktion",
+        "2": "vui-pc, Kopie und Nachahmung<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，Und fügen Sie weitere Funktionen für das Backend-System hinzu<br>Für die Jugend, die wir wiederholt den gleichen Code geschrieben haben, ist es auch, auf der Schulter von Element-UI zu stehen, um zu lernen.",
+        "3": "Anleitung",
+        "4": "",
+        "5": "Details anzeigen",
+        "6": "Komponente",
+        "7": "Komponente Demo ",
+        "8": "Ressource",
+        "9": "Laden Sie relevante Designressourcen für die Gestaltung von Seitenprototypen oder visuellen Entwürfen herunter, um die Designeffizienz zu steigern.",
+        "lang": "de-DE",
+        "titleSize": "34",
+        "paraSize": "18"
+      },
+      "component": {},
+      "changelog": {
+        "1": "Änderungsprotokoll",
+        "2": "de-DE"
       },
       "design": {
         "1": "Design Disciplines",

@@ -286,7 +286,7 @@
             <p><%= 7 ></p>
             <router-link
               active-class="active"
-              to="/<%= lang >/component/layout"
+              to="/<%= lang >/component/installation"
               exact><%= 5 >
             </router-link>
           </div>

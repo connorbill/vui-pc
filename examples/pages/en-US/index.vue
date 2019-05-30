@@ -273,8 +273,8 @@
   <div>
     <div class="banner">
       <div class="banner-desc">
-        <h1>为了没有的功能</h1>
-        <p>vui-pc, 复制与模仿<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，并增加后台系统所需更多功能<br>为了我们曾经重复写同样的代码而逝去的青春，同样也是为了站在element-ui的肩膀上去学习</p>
+        <h1>For Component that we have no function</h1>
+        <p>vui-pc, Copy and imitation<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，and add more features needed for the backend system<br>For the youth that we have repeatedly written the same code, it is also to stand on the shoulder of element-ui to learn.</p>
       </div>
     </div>
     <div class="cards">
@@ -282,12 +282,12 @@
         <li>
           <div class="card">
             <img src="~examples/assets/images/component.png" alt="">
-            <h3>组件</h3>
-            <p>组件 Demo </p>
+            <h3>Component</h3>
+            <p>Component Demo </p>
             <router-link
               active-class="active"
-              to="/en-US/component/layout"
-              exact>查看详情
+              to="/en-US/component/installation"
+              exact>go to details
             </router-link>
           </div>
         </li>

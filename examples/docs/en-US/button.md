@@ -1,84 +1,82 @@
-## Button 按钮
-常用的操作按钮。
+## Button
+Commonly used button.
 
-### 基础用法
+### Basic usage
 
-基础的按钮用法。
-
-:::demo 使用`type`、`plain`属性来定义 Button 的样式。
+:::demo Use `type`、`plain` to define Button's style.
 
 ```html
-  <vui-button >默认按钮</vui-button>
-  <vui-button type="primary" >主要按钮</vui-button>
-  <vui-button type="success" >主要按钮</vui-button>
-  <vui-button type="warning" >主要按钮</vui-button>
-  <vui-button type="danger" >主要按钮</vui-button>
-  <vui-button type="info" >主要按钮</vui-button>
+  <vui-button >Default</vui-button>
+  <vui-button type="primary" >Primary</vui-button>
+  <vui-button type="success" >success</vui-button>
+  <vui-button type="warning" >warning</vui-button>
+  <vui-button type="danger" >danger</vui-button>
+  <vui-button type="info" >info</vui-button>
   <div style="margin-top: 10px;">
-    <vui-button plain>朴素按钮</vui-button>
-    <vui-button type="primary" plain>主要按钮</vui-button>
-  <vui-button type="success" plain>主要按钮</vui-button>
-  <vui-button type="warning" plain>主要按钮</vui-button>
-  <vui-button type="danger" plain>主要按钮</vui-button>
-  <vui-button type="info" plain>主要按钮</vui-button>
+    <vui-button plain>Plain</vui-button>
+    <vui-button type="primary" plain>primary</vui-button>
+  <vui-button type="success" plain>success</vui-button>
+  <vui-button type="warning" plain>warning</vui-button>
+  <vui-button type="danger" plain>danger</vui-button>
+  <vui-button type="info" plain>info</vui-button>
   </div>
   <div style="margin-top: 10px;">
-    <vui-button round>圆角按钮</vui-button>
-    <vui-button type="primary" round>主要按钮</vui-button>
-    <vui-button type="success" round>成功按钮</vui-button>
-    <vui-button type="info" round>信息按钮</vui-button>
-    <vui-button type="warning" round>警告按钮</vui-button>
-    <vui-button type="danger" round>危险按钮</vui-button>
+    <vui-button round>Round</vui-button>
+    <vui-button type="primary" round>primary</vui-button>
+    <vui-button type="success" round>success</vui-button>
+    <vui-button type="info" round>info</vui-button>
+    <vui-button type="warning" round>warning</vui-button>
+    <vui-button type="danger" round>danger</vui-button>
   </div>
 
 ```
 :::
 
-### 禁用状态
+### Disabled Button
 
-按钮不可用状态。
+The `disabled` attribute determines if the button is disabled.
 
-:::demo 你可以使用`disabled`属性来定义按钮是否可用，它接受一个`Boolean`值。
+:::demo  Use `disabled` attribute to determine whether a button is disabled. It accepts a `Boolean` value.
 
 ```html
-  <vui-button disabled>默认按钮</vui-button>
-  <vui-button type="primary" disabled>主要按钮</vui-button>
+  <vui-button disabled>Default</vui-button>
+  <vui-button type="primary" disabled>primary</vui-button>
   <div style="margin-top: 10px;">
-    <vui-button plain disabled>默认按钮</vui-button>
-    <vui-button type="primary" plain disabled>主要按钮</vui-button>
+    <vui-button plain disabled>Plain</vui-button>
+    <vui-button type="primary" plain disabled>primary</vui-button>
   </div>
 ```
 :::
 
 
-### 文字按钮
+### Text Button
 
-没有边框和背景色的按钮。
+Buttons without border and background.
 
 :::demo
 ```html
-<vui-button type="text">文字按钮</vui-button>
-<vui-button type="text" disabled>文字按钮</vui-button>
+<vui-button type="text">Text Button</vui-button>
+<vui-button type="text" disabled>Text Button</vui-button>
 ```
 :::
 
-### 加载中
+### Loading Button
 
-点击按钮后进行数据加载操作，在按钮上显示加载状态。
+Click the button to load data, then the button displays a loading state.
 
-:::demo 要设置为 loading 状态，只要设置`loading`属性为`true`即可。
+:::demo Set `loading` attribute to `true` to display loading state.
 
 ```html
-  <vui-button type="primary" :loading="true">加载中</vui-button>
+  <vui-button type="primary" :loading="true">Loading</vui-button>
 ```
 :::
 
 ### Attributes
-| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+| Attribute      | Description    | Type      | Accepted values       | Default   |
 |---------- |-------- |---------- |-------------  |-------- |
-| type     | 类型   | string    |   primary / success / warning / danger / info / text |     —    |
-| plain     | 是否朴素按钮   | boolean    | — | false   |
-| round     | 是否圆角按钮   | boolean    | — | false   |
-| circle     | 是否圆形按钮   | boolean    | — | false   |
-| loading     | 是否加载中状态   | boolean    | — | false   |
-| disabled  | 是否禁用状态    | boolean   | —   | false   |
+| type     | button type   | string    |   primary / success / warning / danger / info / text |     —    |
+| plain     | determine whether it's a plain button   | boolean    | — | false   |
+| round     |determine whether it's a round button   | boolean    | — | false   |
+| circle     | determine whether it's a circle button  | boolean    | — | false   |
+| loading     | determine whether it's loading    | boolean    | — | false   |
+| disabled  | disable the button    | boolean   | —   | false   |

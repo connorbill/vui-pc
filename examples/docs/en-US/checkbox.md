@@ -1,16 +1,17 @@
-## Checkbox 多选框
-一组备选项中进行多选
+## Checkbox
 
-### 基础用法
+A group of options for multiple choices.
 
-单独使用可以表示两种状态之间的切换，写在标签中的内容为 checkbox 按钮后的介绍。
+### Basic usage
 
-:::demo 在`vui-checkbox`元素中定义`v-model`绑定变量，单一的`checkbox`中，默认绑定变量的值会是`Boolean`，选中为`true`。
+Checkbox can be used alone to switch between two states.
+
+:::demo Define `v-model`(bind variable) in `vui-checkbox`. The default value is a `Boolean` for single `checkbox`, and it becomes `true` when selected. Content inside the `vui-checkbox` tag will become the description following the button of the checkbox.
 
 ```html
 <template>
-  <!-- `checked` 为 true 或 false -->
-  <vui-checkbox v-model="checked">备选项</vui-checkbox>
+  <!-- `checked` should be true or false -->
+  <vui-checkbox v-model="checked">Option</vui-checkbox>
 </template>
 <script>
   export default {
@@ -24,16 +25,16 @@
 ```
 :::
 
-### 禁用状态
+### Disabled State
 
-多选框不可用状态。
+Disabled state for checkbox.
 
-:::demo 设置`disabled`属性即可。
+:::demo Set the `disabled` attribute.
 
 ```html
 <template>
-  <vui-checkbox v-model="checked1" disabled>备选项1</vui-checkbox>
-  <vui-checkbox v-model="checked2" disabled>备选项</vui-checkbox>
+  <vui-checkbox v-model="checked1" disabled>Option</vui-checkbox>
+  <vui-checkbox v-model="checked2" disabled>Option</vui-checkbox>
 </template>
 <script>
   export default {
@@ -48,11 +49,11 @@
 ```
 :::
 
-### 多选框组
+###  Checkbox group
 
-适用于多个勾选框绑定到同一个数组的情景，通过是否勾选来表示这一组选项中选中的项。
+It is used for multiple checkboxes which are bound in one group, and indicates whether one option is selected by checking if it is checked.
 
-:::demo `checkbox-group`元素能把多个 checkbox 管理为一组，只需要在 Group 中使用`v-model`绑定`Array`类型的变量即可。 `vui-checkbox` 的 `label`属性是该 checkbox 对应的值，若该标签中无内容，则该属性也充当 checkbox 按钮后的介绍。`label`与数组中的元素值相对应，如果存在指定的值则为选中状态，否则为不选中。
+:::demo `checkbox-group` element can manage multiple checkboxes in one group by using `v-model` which is bound as an `Array`. Inside the `vui-checkbox` element, `label` is the value of the checkbox. If no content is nested in that tag, `label` will be rendered as the description following the button of the checkbox. `label` also corresponds with the element values in the array. It is selected if the specified value exists in the array, and vice versa.
 
 ```html
 <template>
@@ -80,26 +81,26 @@
 
 
 ### Checkbox Attributes
-| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+| Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | 绑定值 | string / number / boolean | — | — |
-| label     | 选中状态的值（只有在`checkbox-group`或者绑定对象类型为`array`时有效）| string / number / boolean  | 
-| disabled  | 是否禁用    | boolean   |  — | false   |
-| name | 原生 name 属性 | string    |      —         |     —    |
-| checked  | 当前是否勾选    | boolean   |  — | false   |
+| value / v-model | binding value | string / number / boolean | — | — |
+| label     | value of the Checkbox when used inside a `checkbox-group`| string / number / boolean  | 
+| disabled  | whether the Checkbox is disabled   | boolean   |  — | false   |
+| name | native 'name' attribute | string    |      —         |     —    |
+| checked  | if the Checkbox is checked    | boolean   |  — | false   |
 
 ### Checkbox Events
-| 事件名称      | 说明    | 回调参数      |
+| Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| change  | 当绑定值变化时触发的事件 | 更新后的值 |
+| change  | triggers when the binding value changes | the updated value |
 
 ### Checkbox-group Attributes
-| 参数      | 说明    | 类型      | 可选值       | 默认值   |
+| Attribute      | Description         | Type    | Options                         | Default|
 |---------- |-------- |---------- |-------------  |-------- |
-| value / v-model | 绑定值 | array | — | — |
-| disabled  | 是否禁用    | boolean   | — | false   |
+| value / v-model | binding value | array | — | — |
+| disabled  | whether the Checkbox is disabled     | boolean   | — | false   |
 
 ### Checkbox-group Events
-| 事件名称      | 说明    | 回调参数      |
+| Event Name | Description | Parameters |
 |---------- |-------- |---------- |
-| change  | 当绑定值变化时触发的事件 | 更新后的值 |
+| change  | triggers when the binding value changes | the updated value |

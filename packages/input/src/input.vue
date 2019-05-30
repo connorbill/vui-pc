@@ -150,6 +150,7 @@
         if (!input) return;
         if (input.value === this.nativeInputValue) return;
         input.value = this.nativeInputValue;
+        this.checkValue();
       },
       getInput() {
         return this.$refs.input || this.$refs.textarea;

@@ -15,7 +15,7 @@
             autocomplete="off"
             @change="handleChangeProvince"
           >
-            <option value="">请选择</option>
+            <option value="">{{selectDefaultName}}</option>
             <option v-for="(item, index) in allProvince" :key="index" :value="item[sProvinceId]">
               {{item[sProvinceName]}}
             </option>
@@ -42,7 +42,7 @@
             autocomplete="off"
             @change="handleChangeCity"
           >
-            <option value="">请选择</option>
+            <option value="">{{selectDefaultName}}</option>
             <option v-for="(item, index) in allCity" :key="index" :value="item[sCityId]">{{item[sCityName]}}</option>
           </select>
         </div>
@@ -67,7 +67,7 @@
             autocomplete="off"
             @change="handleChangeArea"
           >
-            <option value="">请选择</option>
+            <option value="">{{selectDefaultName}}</option>
             <option v-for="(item, index) in allArea" :key="index" :value="item[sAreaId]">{{item[sAreaName]}}</option>
           </select>
         </div>
@@ -86,7 +86,7 @@
         >
           <input
             type="text"
-            placeholder="请输入详细地址"
+            :placeholder="detailAddr"
             class="vui-input__inner"
             v-bind="$attrs"
             style="width: 250px"
@@ -198,6 +198,14 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      selectDefaultName: {
+        type: String,
+        default: '请选择'
+      },
+      detailAddr: {
+        type: String,
+        default: ''
       }
     },
     computed: {

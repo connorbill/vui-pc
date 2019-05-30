@@ -273,8 +273,8 @@
   <div>
     <div class="banner">
       <div class="banner-desc">
-        <h1>为了没有的功能</h1>
-        <p>vui-pc, 复制与模仿<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，并增加后台系统所需更多功能<br>为了我们曾经重复写同样的代码而逝去的青春，同样也是为了站在element-ui的肩膀上去学习（使用多语言文档也是如此目的）,最主要的是市面上没有适配风控操作习惯的组件，因此，要自己去改装，尽量保持与独特的后台系统保持统一。</p>
+        <h1>Für keine Funktion</h1>
+        <p>vui-pc, Kopie und Nachahmung<a href='https://element.eleme.io](https://element.eleme.io'>element-ui</a>，Und fügen Sie weitere Funktionen für das Backend-System hinzu<br>Für die Jugend, die wir wiederholt den gleichen Code geschrieben haben, ist es auch, auf der Schulter von Element-UI zu stehen, um zu lernen.</p>
       </div>
     </div>
     <div class="cards">
@@ -282,12 +282,12 @@
         <li>
           <div class="card">
             <img src="~examples/assets/images/component.png" alt="">
-            <h3>组件</h3>
-            <p>组件 Demo </p>
+            <h3>Komponente</h3>
+            <p>Komponente Demo </p>
             <router-link
               active-class="active"
-              to="/zh-CN/component/installation"
-              exact>查看详情
+              to="/de-DE/component/installation"
+              exact>Details anzeigen
             </router-link>
           </div>
         </li>

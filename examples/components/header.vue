@@ -407,11 +407,11 @@
   // import ThemeConfigurator from './theme-configurator';
   // import AlgoliaSearch from './search.vue';
   import compoLang from '../i18n/component.json';
-  import Element from 'main/index.js';
+  import Vui from 'main/index.js';
   // import { getVars } from './theme-configurator/utils/api.js';
   import bus from '../bus';
 
-  const { version } = Element;
+  const { version } = Vui;
 
   export default {
     data() {
@@ -423,7 +423,8 @@
         langDropdownVisible: true,
         langs: {
           'zh-CN': '中文',
-          'en-US': 'English'
+          'en-US': 'English',
+          'de-DE': 'Deutsch'
         },
         showThemeConfigurator: false
       };
@@ -495,7 +496,7 @@
           }, {});
         }
       };
-      xhr.open('GET', '/versions.json');
+      xhr.open('GET', 'versions.json');
       xhr.send();
       let primaryLast = '#409EFF';
       bus.$on('user-theme-config-update', (val) => {

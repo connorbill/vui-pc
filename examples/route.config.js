@@ -11,6 +11,10 @@ const LOAD_MAP = {
     return r => require.ensure([], () =>
       r(require(`./pages/en-US/${name}.vue`)),
     'en-US');
+  },
+  'de-DE': name => {
+    return r => require.ensure([], () => r(require(`./pages/de-DE/${name}.vue`)),
+      'de-DE');
   }
 };
 
@@ -28,6 +32,11 @@ const LOAD_DOCS_MAP = {
     return r => require.ensure([], () =>
       r(require(`./docs/en-US${path}.md`)),
     'en-US');
+  },
+  'de-DE': path => {
+    return r => require.ensure([], () =>
+      r(require(`./docs/de-DE${path}.md`)),
+    'de-DE');
   }
 };
 
@@ -134,6 +143,8 @@ let userLanguage = localStorage.getItem('VUI_LANGUAGE') || window.navigator.lang
 let defaultPath = '/en-US';
 if (userLanguage.indexOf('zh-') !== -1) {
   defaultPath = '/zh-CN';
+} else if (userLanguage.indexOf('de') !== -1) {
+  defaultPath = '/de-DE';
 }
 
 route = route.concat([{
