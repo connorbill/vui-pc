@@ -1,10 +1,11 @@
-## Table-lr 表格
 
-用于展示左右显示内容布局表格
 
-### 基础表格
+## Table-lr 
 
-基础的表格展示用法。
+Used to display left and right display content layout tables
+
+### Basic table
+
 
 :::demo 
 ```html
@@ -15,13 +16,13 @@
       <template>
           <tbody>
           <tr>
-              <td>图片类型：</td>
+              <td>Picture type：</td>
               <td>
                   
               </td>
           </tr>
           <tr>
-              <td>图片：</td>
+              <td>image：</td>
               <td>
                   
               </td>
@@ -60,11 +61,9 @@
 
 
 ### Table-lr Attributes
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| column | 设置每列的宽度， 数组中 width 字段表示宽度 | array | — | — |
+| column | Set the width of each column, the width field in the array represents the width | array | — | — |
 
-### Table-lr Slot
-| name | 说明 |
-|------|--------|
-| vui-table-lr 标签内即内容 | <template><tbody></tbody></template> 中，加 tbody 标签 |
+
+

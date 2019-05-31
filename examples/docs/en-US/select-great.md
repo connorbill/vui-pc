@@ -1,21 +1,21 @@
-## Select 选择器
+## Select
 
-当选项过多时，使用下拉菜单展示并选择内容。
+When there are plenty of options, use a drop-down menu to display and select desired ones.
 
-### 基础用法
+### Basic usage
 
-适用广泛的基础单选
-:::demo `v-model`的值为当前被选中的`vui-option`的 value 属性值
+:::demo `v-model` is the value of `el-option` that is currently selected.
+
 ```html
 <template>
-  <vui-select-great v-model="value" placeholder="请选择">
-    <vui-option
+  <el-select v-model="value" placeholder="Select">
+    <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -23,20 +23,20 @@
     data() {
       return {
         options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: 'Option1',
+          label: 'Option1'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: 'Option2',
+          label: 'Option2'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'Option3',
+          label: 'Option3'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: 'Option4',
+          label: 'Option4'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'Option5',
+          label: 'Option5'
         }],
         value: ''
       }
@@ -46,20 +46,21 @@
 ```
 :::
 
-### 有禁用选项
+### Disabled option
 
-:::demo 在`vui-option`中，设定`disabled`值为 true，即可禁用该选项
+:::demo Set the value of `disabled` in `el-option` to `true` to disable this option.
+
 ```html
 <template>
-  <vui-select-great v-model="value2" placeholder="请选择">
-    <vui-option
+  <el-select v-model="value2" placeholder="Select">
+    <el-option
       v-for="item in options2"
       :key="item.value"
       :label="item.label"
       :value="item.value"
       :disabled="item.disabled">
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -67,21 +68,21 @@
     data() {
       return {
         options2: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: 'Option1',
+          label: 'Option1'
         }, {
-          value: '选项2',
-          label: '双皮奶',
+          value: 'Option2',
+          label: 'Option2',
           disabled: true
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'Option3',
+          label: 'Option3'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: 'Option4',
+          label: 'Option4'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'Option5',
+          label: 'Option5'
         }],
         value2: ''
       }
@@ -91,42 +92,42 @@
 ```
 :::
 
-### 禁用状态
+### Disabled select
 
-选择器不可用状态
+Disable the whole component.
 
-:::demo 为`vui-select-great`设置`disabled`属性，则整个选择器不可用
+:::demo Set `disabled` of `el-select` to make it disabled.
 ```html
 <template>
-  <vui-select-great v-model="value3" disabled placeholder="请选择">
-    <vui-option
+  <el-select v-model="value3" disabled placeholder="Select">
+    <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
-  
+
 <script>
   export default {
     data() {
       return {
         options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: 'Option1',
+          label: 'Option1'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: 'Option2',
+          label: 'Option2'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'Option3',
+          label: 'Option3'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: 'Option4',
+          label: 'Option4'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'Option5',
+          label: 'Option5'
         }],
         value3: ''
       }
@@ -136,21 +137,21 @@
 ```
 :::
 
-### 可清空单选
+### Clearable single select
 
-包含清空按钮，可将选择器清空为初始状态
+You can clear Select using a clear icon.
 
-:::demo 为`vui-select-great`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅适用于单选。
+:::demo Set `clearable` attribute for `el-select` and a clear icon will appear. Note that `clearable` is only for single select.
 ```html
 <template>
-  <vui-select-great v-model="value4" clearable placeholder="请选择">
-    <vui-option
+  <el-select v-model="value4" clearable placeholder="Select">
+    <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -158,20 +159,20 @@
     data() {
       return {
         options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: 'Option1',
+          label: 'Option1'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: 'Option2',
+          label: 'Option2'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'Option3',
+          label: 'Option3'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: 'Option4',
+          label: 'Option4'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'Option5',
+          label: 'Option5'
         }],
         value4: ''
       }
@@ -181,35 +182,35 @@
 ```
 :::
 
-### 基础多选
+### Basic multiple select
 
-适用性较广的基础多选，用 Tag 展示已选项
+Multiple select uses tags to display selected options.
 
-:::demo 为`vui-select-great`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。
+:::demo Set `multiple` attribute for `el-select` to enable multiple mode. In this case, the value of `v-model` will be an array of selected options. By default the selected options will be displayed as Tags. You can collapse them to a text by using `collapse-tags` attribute.
 ```html
 <template>
-  <vui-select-great v-model="value5" multiple placeholder="请选择">
-    <vui-option
+  <el-select v-model="value5" multiple placeholder="Select">
+    <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </vui-option>
-  </vui-select-great>
-
-  <vui-select-great
+    </el-option>
+  </el-select>
+  
+  <el-select
     v-model="value11"
     multiple
     collapse-tags
     style="margin-left: 20px;"
-    placeholder="请选择">
-    <vui-option
+    placeholder="Select">
+    <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -217,20 +218,20 @@
     data() {
       return {
         options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: 'Option1',
+          label: 'Option1'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: 'Option2',
+          label: 'Option2'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'Option3',
+          label: 'Option3'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: 'Option4',
+          label: 'Option4'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'Option5',
+          label: 'Option5'
         }],
         value5: [],
         value11: []
@@ -241,23 +242,24 @@
 ```
 :::
 
-### 自定义模板
+### Custom template
 
-可以自定义备选项
+You can customize HTML templates for options.
 
-:::demo 将自定义的 HTML 模板插入`vui-option`的 slot 中即可。
+:::demo Insert customized HTML templates into the slot of `el-option`.
+
 ```html
 <template>
-  <vui-select-great v-model="value6" placeholder="请选择">
-    <vui-option
+  <el-select v-model="value6" placeholder="Select">
+    <el-option
       v-for="item in cities"
       :key="item.value"
       :label="item.label"
       :value="item.value">
       <span style="float: left">{{ item.label }}</span>
       <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -266,22 +268,22 @@
       return {
         cities: [{
           value: 'Beijing',
-          label: '北京'
+          label: 'Beijing'
         }, {
           value: 'Shanghai',
-          label: '上海'
+          label: 'Shanghai'
         }, {
           value: 'Nanjing',
-          label: '南京'
+          label: 'Nanjing'
         }, {
           value: 'Chengdu',
-          label: '成都'
+          label: 'Chengdu'
         }, {
           value: 'Shenzhen',
-          label: '深圳'
+          label: 'Shenzhen'
         }, {
           value: 'Guangzhou',
-          label: '广州'
+          label: 'Guangzhou'
         }],
         value6: ''
       }
@@ -291,26 +293,27 @@
 ```
 :::
 
-### 分组
+### Grouping
 
-备选项进行分组展示
+Display options in groups.
 
-:::demo 使用`vui-option-group`对备选项进行分组，它的`label`属性为分组名
+:::demo Use `el-option-group` to group the options, and its `label` attribute stands for the name of the group.
+
 ```html
 <template>
-  <vui-select-great v-model="value7" placeholder="请选择">
-    <vui-option-group
+  <el-select v-model="value7" placeholder="Select">
+    <el-option-group
       v-for="group in options3"
       :key="group.label"
       :label="group.label">
-      <vui-option
+      <el-option
         v-for="item in group.options"
         :key="item.value"
         :label="item.label"
         :value="item.value">
-      </vui-option>
-    </vui-option-group>
-  </vui-select-great>
+      </el-option>
+    </el-option-group>
+  </el-select>
 </template>
 
 <script>
@@ -318,28 +321,28 @@
     data() {
       return {
         options3: [{
-          label: '热门城市',
+          label: 'Popular cities',
           options: [{
             value: 'Shanghai',
-            label: '上海'
+            label: 'Shanghai'
           }, {
             value: 'Beijing',
-            label: '北京'
+            label: 'Beijing'
           }]
         }, {
-          label: '城市名',
+          label: 'City name',
           options: [{
             value: 'Chengdu',
-            label: '成都'
+            label: 'Chengdu'
           }, {
             value: 'Shenzhen',
-            label: '深圳'
+            label: 'Shenzhen'
           }, {
             value: 'Guangzhou',
-            label: '广州'
+            label: 'Guangzhou'
           }, {
             value: 'Dalian',
-            label: '大连'
+            label: 'Dalian'
           }]
         }],
         value7: ''
@@ -350,21 +353,21 @@
 ```
 :::
 
-### 可搜索
+### Option filtering
 
-可以利用搜索功能快速查找选项
+You can filter options for your desired ones.
 
-:::demo 为`vui-select-great`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
+:::demo Adding `filterable` to `el-select` enables filtering. By default, Select will find all the options whose `label` attribute contains the input value. If you prefer other filtering strategies, you can pass the `filter-method`. `filter-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value.
 ```html
 <template>
-  <vui-select-great v-model="value8" filterable placeholder="请选择">
-    <vui-option
+  <el-select v-model="value8" filterable placeholder="Select">
+    <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -372,20 +375,20 @@
     data() {
       return {
         options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: 'Option1',
+          label: 'Option1'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: 'Option2',
+          label: 'Option2'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'Option3',
+          label: 'Option3'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: 'Option4',
+          label: 'Option4'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'Option5',
+          label: 'Option5'
         }],
         value8: ''
       }
@@ -395,28 +398,30 @@
 ```
 :::
 
-### 远程搜索
+### Remote Search
 
-从服务器搜索数据，输入关键字进行查找
-:::demo 为了启用远程搜索，需要将`filterable`和`remote`设置为`true`，同时传入一个`remote-method`。`remote-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。需要注意的是，如果`vui-option`是通过`v-for`指令渲染出来的，此时需要为`vui-option`添加`key`属性，且其值需具有唯一性，比如此例中的`item.value`。
+Enter keywords and search data from server.
+
+:::demo Set the value of `filterable` and `remote` with `true` to enable remote search, and you should pass the `remote-method`. `remote-method` is a `Function` that gets called when the input value changes, and its parameter is the current input value. Note that if `el-option` is rendered with the `v-for` directive, you should add the `key` attribute for `el-option`. Its value needs to be unique, such as `item.value` in the following example.
+
 ```html
 <template>
-  <vui-select-great
+  <el-select
     v-model="value9"
     multiple
     filterable
     remote
     reserve-keyword
-    placeholder="请输入关键词"
+    placeholder="Please enter a keyword"
     :remote-method="remoteMethod"
     :loading="loading">
-    <vui-option
+    <el-option
       v-for="item in options4"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -472,25 +477,25 @@
 ```
 :::
 
-### 创建条目
-可以创建并选中选项中不存在的条目
-:::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。本例还使用了`default-first-option`属性，在该属性打开的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
+### Create new items
+Create and select new items that are not included in select options
+:::demo By using the `allow-create` attribute, users can create new items by typing in the input box. Note that for `allow-create` to work, `filterable` must be `true`. This example also demonstrates `default-first-option`. When this attribute is set to `true`, you can select the first option in the current option list by hitting enter without having to navigate with mouse or arrow keys.
 ```html
 <template>
-  <vui-select-great
+  <el-select
     v-model="value10"
     multiple
     filterable
     allow-create
     default-first-option
-    placeholder="请选择文章标签">
-    <vui-option
+    placeholder="Choose tags for your article">
+    <el-option
       v-for="item in options5"
       :key="item.value"
       :label="item.label"
       :value="item.value">
-    </vui-option>
-  </vui-select-great>
+    </el-option>
+  </el-select>
 </template>
 
 <script>
@@ -516,71 +521,71 @@
 :::
 
 :::tip
-如果 Select 的绑定值为对象类型，请务必指定 `value-key` 作为它的唯一性标识。
+If the binding value of Select is an object, make sure to assign `value-key` as its unique identity key name.
 :::
 
 ### Select Attributes
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value / v-model | 绑定值 | boolean / string / number | — | — |
-| multiple | 是否多选 | boolean | — | false |
-| disabled | 是否禁用 | boolean | — | false |
-| value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
-| size | 输入框尺寸 | string | medium/small/mini | — |
-| clearable | 是否可以清空选项 | boolean | — | false |
-| collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
-| multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
-| name | select input 的 name 属性 | string | — | — |
-| autocomplete | select input 的 autocomplete 属性 | string | — | off |
-| auto-complete | 下个主版本弃用 | string | — | off |
-| placeholder | 占位符 | string | — | 请选择 |
-| filterable | 是否可搜索 | boolean | — | false |
-| allow-create | 是否允许用户创建新条目，需配合 `filterable` 使用 | boolean | — | false |
-| filter-method | 自定义搜索方法 | function | — | — |
-| remote | 是否为远程搜索 | boolean | — | false |
-| remote-method | 远程搜索方法 | function | — | — |
-| loading | 是否正在从远程获取数据 | boolean | — | false |
-| loading-text | 远程加载时显示的文字 | string | — | 加载中 |
-| no-match-text | 搜索条件无匹配时显示的文字，也可以使用`slot="empty"`设置 | string | — | 无匹配数据 |
-| no-data-text | 选项为空时显示的文字，也可以使用`slot="empty"`设置 | string | — | 无数据 |
-| popper-class | Select 下拉框的类名 | string | — | — |
-| reserve-keyword | 多选且可搜索时，是否在选中一个选项后保留当前的搜索关键词 | boolean | — | false |
-| default-first-option | 在输入框按下回车，选择第一个匹配项。需配合 `filterable` 或 `remote` 使用 | boolean | - | false |
-| popper-append-to-body | 是否将弹出框插入至 body 元素。在弹出框的定位出现问题时，可将该属性设置为 false | boolean | - | true |
-| automatic-dropdown | 对于不可搜索的 Select，是否在输入框获得焦点后自动弹出选项菜单 | boolean | - | false |
+| value / v-model | binding value | boolean / string / number | — | — |
+| multiple | whether multiple-select is activated | boolean | — | false |
+| disabled | whether Select is disabled | boolean | — | false |
+| value-key | unique identity key name for value, required when value is an object | string | — | value |
+| size | size of Input | string | large/small/mini | — |
+| clearable | whether select can be cleared | boolean | — | false |
+| collapse-tags | whether to collapse tags to a text when multiple selecting | boolean | — | false |
+| multiple-limit | maximum number of options user can select when `multiple` is `true`. No limit when set to 0 | number | — | 0 |
+| name | the name attribute of select input | string | — | — |
+| autocomplete | the autocomplete attribute of select input | string | — | off |
+| auto-complete | @DEPRECATED in next major version | string | — | off |
+| placeholder | placeholder | string | — | Select |
+| filterable | whether Select is filterable | boolean | — | false |
+| allow-create | whether creating new items is allowed. To use this, `filterable` must be true | boolean | — | false |
+| filter-method | custom filter method | function | — | — |
+| remote | whether options are loaded from server | boolean | — | false |
+| remote-method | custom remote search method | function | — | — |
+| loading | whether Select is loading data from server | boolean | — | false |
+| loading-text | displayed text while loading data from server | string | — | Loading |
+| no-match-text | displayed text when no data matches the filtering query, you can also use slot `empty` | string | — | No matching data |
+| no-data-text | displayed text when there is no options, you can also use slot `empty` | string | — | No data |
+| popper-class | custom class name for Select's dropdown | string | — | — |
+| reserve-keyword | when `multiple` and `filter` is true, whether to reserve current keyword after selecting an option | boolean | — | false |
+| default-first-option | select first matching option on enter key. Use with `filterable` or `remote` | boolean | - | false |
+| popper-append-to-body| whether to append the popper menu to body. If the positioning of the popper is wrong, you can try to set this prop to false | boolean | - | true |
+| automatic-dropdown | for non-filterable Select, this prop decides if the option menu pops up when the input is focused | boolean | - | false |
 
 ### Select Events
-| 事件名称 | 说明 | 回调参数 |
+| Event Name | Description | Parameters |
 |---------|---------|---------|
-| change | 选中值发生变化时触发 | 目前的选中值 |
-| visible-change | 下拉框出现/隐藏时触发 | 出现则为 true，隐藏则为 false |
-| remove-tag | 多选模式下移除tag时触发 | 移除的tag值 |
-| clear | 可清空的单选模式下用户点击清空按钮时触发 | — |
-| blur | 当 input 失去焦点时触发 | (event: Event) |
-| focus | 当 input 获得焦点时触发 | (event: Event) |
+| change | triggers when the selected value changes | current selected value |
+| visible-change | triggers when the dropdown appears/disappears | true when it appears, and false otherwise |
+| remove-tag | triggers when a tag is removed in multiple mode | removed tag value |
+| clear | triggers when the clear icon is clicked in a clearable Select | — |
+| blur | triggers when Input blurs | (event: Event) |
+| focus | triggers when Input focuses | (event: Event) |
 
 ### Select Slots
-|   name  | 说明     |
-|---------|---------|
-|    —    | Option 组件列表 |
-| prefix  | Select 组件头部内容 |
-| empty | 无选项时的列表 |
+| Name    | Description |
+|---------|-------------|
+|    —    | Option component list |
+| prefix  | content as Select prefix |
+| empty  | content when there is no options |
 
 ### Option Group Attributes
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| label | 分组的组名 | string | — | — |
-| disabled | 是否将该分组下所有选项置为禁用 | boolean | — | false |
+| label | name of the group | string | — | — |
+| disabled | whether to disable all options in this group | boolean | — | false |
 
 ### Option Attributes
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value | 选项的值 | string/number/object | — | — |
-| label | 选项的标签，若不设置则默认与 `value` 相同 | string/number | — | — |
-| disabled | 是否禁用该选项 | boolean | — | false |
+| value | value of option | string/number/object | — | — |
+| label | label of option, same as `value` if omitted | string/number | — | — |
+| disabled | whether option is disabled | boolean | — | false |
 
 ### Methods
-| 方法名 | 说明 | 参数 |
-| ---- | ---- | ---- |
-| focus | 使 input 获取焦点 | - |
-| blur | 使 input 失去焦点，并隐藏下拉框 | - |
+| Method | Description | Parameters |
+|------|--------|-------|
+| focus | focus the Input component | - |
+| blur | blur the Input component, and hide the dropdown | - |

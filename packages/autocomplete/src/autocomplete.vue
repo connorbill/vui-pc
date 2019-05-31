@@ -267,7 +267,15 @@
         return this.$refs.input.getInput();
       },
       checkValue: function() {
-        this.$refs.input.checkValue();
+        if (this.$refs.input) {
+          if (this.$refs.input.checkValue) {
+            this.$refs.input.checkValue();
+          } else {
+            return true;
+          }
+        } else {
+          return true;
+        }
         // let obj = {
         //   value: '',
         //   rule: this.selfRule

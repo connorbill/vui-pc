@@ -1,7 +1,7 @@
 
 ## DatePicker 日期选择器
 
-用于选择或输入日期,本组件依赖[My97DatePicker](http://www.my97.net/),为了保持与后台系统统一
+用于选择或输入日期,本组件依赖[My97DatePicker](http://www.my97.net/)且配置项与原来一致,为了保持与后台系统统一,此处不做示例，请在后台使用。
 
 ###  选择
 
@@ -13,6 +13,7 @@
     <!--<vui-date-picker
       v-model="value1"
       date-format="yyyy-MM-dd"
+      :option="timeOption"
       placeholder="选择日期">
     </vui-date-picker>-->
   </div>
@@ -23,6 +24,9 @@
     data() {
       return {
         value1: '',
+        timeOption: {
+          maxDate: new Date()
+        },
       };
     }
   };

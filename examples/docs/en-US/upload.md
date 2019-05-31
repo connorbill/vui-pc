@@ -1,14 +1,14 @@
-## Upload 上传
+## Upload
 
-通过点击或者拖拽上传文件
+Upload files by clicking
 
-### 点击上传
+### Click to upload files
 
-:::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置`limit`和`on-exceed`来限制上传文件的个数和定义超出限制时的行为。可通过设置`before-remove`来阻止文件移除操作。
+:::demo Customize upload button type and text using `slot`. Set `limit` and `before-upload` to limit the maximum number of uploads allowed and specify method when the limit is exceeded. Plus, you can abort removing a file in the `before-remove` hook.
 ```html
-<vui-button @click="upFile">点击上传</vui-button>
+<vui-button @click="upFile">Click to upload</vui-button>
 <vui-dialog
-  title="图片上传"
+  title="Upload file"
   :visible.sync="upload.isShow"
   width="500px"
 >
@@ -25,14 +25,14 @@
   </vui-upload>
   <template v-slot:footer class="dialog-footer">
     <div class="middle-right-wrap">
-      <vui-button @click="upload.isShow = false" type="primary" plain>取 消</vui-button>
+      <vui-button @click="upload.isShow = false" type="primary" plain>Cansel</vui-button>
       <div style="margin-right: 15px;"></div>
       <vui-button
         type="primary"
         :loading="upload.isSaving"
         @click="judgeUpload()"
         :disabled="upload.disabled"
-      >确认添加</vui-button>
+      >add file</vui-button>
     </div>
   </template>
 </vui-dialog>
@@ -60,12 +60,10 @@
       };
     },
     methods: {
-      // 点击显示弹框 选择上传文件
       upFile: function(obj, num) {
         //id, type, pathType, agenciesNo
         this.upload.limit = 20;
         this.upload.multiple = true;
-        // 置空
         this.upload.id = '';
         this.upload.type = '';
         this.upload.pathType = '';
@@ -82,7 +80,7 @@
         if (size > 20 * 1024 * 1024) {
           return {
             right: false,
-            tip: '上传文件不能大于20M'
+            tip: 'no more than 20M'
           };
         }
   
@@ -113,7 +111,7 @@
         this.willUploadImg = [].concat(file);
         var willUploadImg = this.$refs.uploadFileRef.willUploadImg;
         willUploadImg.forEach(function(item, index) {
-          // 判断是否上传失败
+          // Determine if the upload failed
           if (item.res) {
             if (item.res.code != '000000') {
               Vue.set(that.$refs.uploadFileRef.willUploadImg[index], 'hasUp', false);
@@ -129,19 +127,19 @@
           this.upload.disabled = true;
         }
       },
-      // 判断每一个文件是否上传成功，上传成功的才执行添加文件
+      // Determine whether each file is successfully uploaded. If the upload is successful, add the file.
       judgeUpload: function() {
         var that = this;
         this.upload.isSaving = true;
         this.willUploadImg.forEach(function(item, index) {
-          // 判断是否上传失败
+          // Determine if the upload failed
           if (item.res.code == '000000') {
             var url = item.res.data.url;
             that.saveUpload(url, item.name);
           }
         });
       },
-      // 新增签约文件
+      // New signing document
       saveUpload: function(url, fileName) {
         let that = this;
         var sendData = {
@@ -168,17 +166,17 @@
 
 
 ### Attribute
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+Attribute      | Description          | Type      | Accepted Values       | Default
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| action | 必选参数，上传的地址 | string | — | — |
-| multiple | 是否支持多选文件 | boolean | — | — |
-| accept | 接受上传的文件类型| string | — | — |
-| auto-upload | 选择文件后是否自动上传 | boolean | — | — |
-| multiple | 是否多选 | boolean | — | — |
-| limit | 最多选择文件个数 | number | — | — |
-| on-after-upload | 每上传一张图返回当前接口返回对象res:接口返回对象， index第几个文件 | function(res, index) | — | — |
-| before-upload | 每一个文件上传之前file：当前文件信息所有信息， size: 文件大小 | function(file, size) | — | — |
-| on-remove | 接受上传的文件类型obj:被删除对象信息，fileList: 剩下的文件数组，index：删除之前的文件在数组中的下标 | function(obj, fileList, index) | — | — |
-| on-all-file | 当选择的所有图片上传完，接口都有回调时，返回文件所有信息的数组 | function(fileList) | — | — |
+| action |required, request URL | string | — | — |
+| multiple |  whether uploading multiple files is permitted  | boolean | — | — |
+| accept | accepted [file types]| string | — | — |
+| auto-upload |  whether to auto upload file | boolean | — | — |
+| multiple | whether uploading multiple files is permitted | boolean | — | — |
+| limit | maximum number of uploads allowed | number | — | — |
+| on-after-upload | hook function when uploaded res: remote back data， index: number of file | function(res, index) | — | — |
+| before-upload | Before each file is uploaded(File: all information about the current file information, size: file size)| function(file, size) | — | — |
+| on-remove | Obj: deleted object information, fileList: the remaining file array, index: the index of the file before deletion in the array| function(obj, fileList, index) | — | — |
+| on-all-file | Returns an array of all the information of the file when all the selected images have been uploaded and the interface has a callback. | function(fileList) | — | — |
 
 

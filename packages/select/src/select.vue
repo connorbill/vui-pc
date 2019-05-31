@@ -99,6 +99,7 @@
         immediate: true,
         handler(newVal) {
           this.sValue = newVal;
+          this.setNativeInputValue();
         }
       },
       option: {
@@ -143,6 +144,7 @@
         if (!input) return;
         if (input.value === this.nativeInputValue) return;
         input.value = this.nativeInputValue;
+        this.checkValue();
       },
       getInput() {
         return this.$refs.input;

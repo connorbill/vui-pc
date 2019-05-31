@@ -1,19 +1,19 @@
 
-## DatePicker 日期选择器
+## DatePicker
 
-用于选择或输入日期,本组件依赖[My97DatePicker](http://www.my97.net/),为了保持与后台系统统一
+Use Date Picker for date input. This component dependencies [My97DatePicker](http://www.my97.net/),In order to maintain consistency with the back-end system
 
-###  选择
+###  Select
 
 :::demo 
 ```html
 <template>
   <div class="block">
-    <span class="demonstration">默认</span>
+    <span class="demonstration">default</span>
     <!--<vui-date-picker
       v-model="value1"
       date-format="yyyy-MM-dd"
-      placeholder="选择日期">
+      placeholder="Select date">
     </vui-date-picker>-->
   </div>
 </template>
@@ -33,20 +33,20 @@
 
 
 ### Attributes
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value / v-model | 绑定值 |  string / number | — | — |
-| disabled | 是否禁用 | boolean | — | false |
-| rule | 校验规则 |  | Array | - |
-| date-format | 日期格式 | string | — | yyyy-MM-dd |
-| idName | 输入框id | string | — | value |
-| option | 其它日期配置项，请参考[My97DatePicker](http://www.my97.net/)，配置项完全相同 | Object | — | value |
+| value / v-model | binding value |  string / number | — | — |
+| disabled | whether DatePicker is disabled | boolean | — | false |
+| rule | Verification rule |  | Array | - |
+| date-format | Date format | string | — | yyyy-MM-dd |
+| idName | input id | string | — | value |
+| option | For other date configuration items, please refer to[My97DatePicker](http://www.my97.net/)，Configuration items are identical | Object | — | value |
 | class-name | 输入框样式 | string | — | value |
 
 ### Events
-| 事件名称      | 说明    | 回调参数      |
+| Event Name | Description | Parameters |
 |---------|--------|---------|
-| change | 用户确认选定的值时触发 | 组件绑定值。格式与绑定值一致，可受 `value-format` 控制 |
-| blur | 当 input 失去焦点时触发 | 组件实例 |
-| focus | 当 input 获得焦点时触发 | 组件实例 |
+| change | triggers when user confirms the value |  |
+| blur | triggers when Input blurs  |  |
+| focus | triggers when Input focuses |  |
 

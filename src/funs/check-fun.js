@@ -4,25 +4,29 @@ function isRight(obj, that) {
   var check = obj;
   for (var key in check) {
     var v = check[key];
-    // keys.push(key);
-    // values.push(obj[key]);//取得value
     if (Array.isArray(vueIns.$refs[v])) {
-      // console.log(this.$refs[v]);
       if (vueIns.$refs[v].length > 0) {
         vueIns.$refs[v].forEach(function(el) {
-          // console.log(el)
-          var vali = el.checkValue();
-          if (vali && !vali.isRight) {
-            valiRes = false;
+          var elDom = el.$el;
+          if (elDom.isConnected) {
+            var vali = el.checkValue();
+            if (vali && !vali.isRight) {
+              valiRes = false;
+            }
+          } else {
+            valiRes = true;
           }
         });
       }
     } else {
       if (vueIns.$refs[v]) {
-        // console.log(this.$refs[v])
-        var vali = vueIns.$refs[v].checkValue();
-        if (vali && !vali.isRight) {
-          valiRes = false;
+        if (vueIns.$refs[v].$el.isConnected) {
+          var vali = vueIns.$refs[v].checkValue();
+          if (vali && !vali.isRight) {
+            valiRes = false;
+          }
+        } else {
+          valiRes = true;
         }
       }
     }

@@ -1,47 +1,49 @@
-## Popover 弹出框
+## Popover
 
-### 基础用法
-Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的，因此对于重复属性，请参考 Tooltip 的文档，在此文档中不做详尽解释。
+### Basic usage
 
-:::demo `trigger`属性用于设置何时触发 Popover，支持四种触发方式：`hover`，`click`，`focus` 和 `manual`。对于触发 Popover 的元素，有两种写法：使用 `slot="reference"` 的具名插槽，或使用自定义指令`v-popover`指向 Popover 的索引`ref`。
+Similar to Tooltip, Popover is also built with `Vue-popper`. So for some duplicated attributes, please refer to the documentation of Tooltip.
+
+:::demo The `trigger` attribute is used to define how popover is triggered: `hover`, `click`, `focus` or `manual`. As for the triggering element, you can write it in two different ways: use the `slot="reference"` named slot, or use the `v-popover` directive and set it to Popover's `ref`.
+
 ```html
 <template>
   <vui-popover
     placement="top-start"
-    title="标题"
+    title="Title"
     width="200"
     trigger="hover"
-    content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
-    <vui-button slot="reference">hover 激活</vui-button>
+    content="this is content, this is content, this is content">
+    <vui-button slot="reference">Hover to activate</vui-button>
   </vui-popover>
 
   <vui-popover
     placement="bottom"
-    title="标题"
+    title="Title"
     width="200"
     trigger="click"
-    content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
-    <vui-button slot="reference">click 激活</vui-button>
+    content="this is content, this is content, this is content">
+    <vui-button slot="reference">Click to activate</vui-button>
   </vui-popover>
 
   <vui-popover
     ref="popover"
     placement="right"
-    title="标题"
+    title="Title"
     width="200"
     trigger="focus"
-    content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。">
+    content="this is content, this is content, this is content">
   </vui-popover>
-  <vui-button v-popover:popover>focus 激活</vui-button>
+  <vui-button v-popover:popover>Focus to activate</vui-button>
 
   <vui-popover
     placement="bottom"
-    title="标题"
+    title="Title"
     width="200"
     trigger="manual"
-    content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
+    content="this is content, this is content, this is content"
     v-model="visible">
-    <vui-button slot="reference" @click="visible = !visible">手动激活</vui-button>
+    <vui-button slot="reference" @click="visible = !visible">Manual to activate</vui-button>
   </vui-popover>
 </template>
 
@@ -57,25 +59,25 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 ```
 :::
 
-### 嵌套信息
+### Nested information
 
-可以在 Popover 中嵌套多种类型信息，以下为嵌套表格的例子。
+Other components can be nested in popover. Following is an example of nested table.
 
-:::demo 利用分发取代`content`属性
+:::demo replace the `content` attribute with a default `slot`.
+
 ```html
 <vui-popover
   placement="right"
   width="400"
   trigger="click">
-  <table>
-  <tbody>
-  <tr>
-  <td>12</td>
-  <td>23</td>
-</tr>
-</tbody>
-</table>
-  <vui-button slot="reference">click 激活</vui-button>
+  <div>
+    <ul>
+      <li>sfsldfjlasjflajsdflajd</li>
+      <li>sfsldfjlasjflajsdflajd</li>
+      <li>sfsldfjlasjflajsdflajd</li>
+    </ul>
+  </div>
+  <vui-button slot="reference">Click to activate</vui-button>
 </vui-popover>
 
 <script>
@@ -84,20 +86,20 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
       return {
         gridData: [{
           date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'Jack',
+          address: 'New York City'
         }, {
           date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'Jack',
+          address: 'New York City'
         }, {
           date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'Jack',
+          address: 'New York City'
         }, {
           date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          name: 'Jack',
+          address: 'New York City'
         }]
       };
     }
@@ -106,9 +108,9 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 ```
 :::
 
-### 嵌套操作
+### Nested operation
 
-当然，你还可以嵌套操作，这相比 Dialog 更为轻量：
+Of course, you can nest other operations. It's more light-weight than using a dialog.
 
 :::demo
 ```html
@@ -116,12 +118,12 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
   placement="top"
   width="160"
   v-model="visible2">
-  <p>这是一段内容这是一段内容确定删除吗？</p>
+  <p>Are you sure to delete this?</p>
   <div style="text-align: right; margin: 0">
-    <vui-button size="mini" type="text" @click="visible2 = false">取消</vui-button>
-    <vui-button type="primary" size="mini" @click="visible2 = false">确定</vui-button>
+    <vui-button size="mini" type="text" @click="visible2 = false">cancel</vui-button>
+    <vui-button type="primary" size="mini" @click="visible2 = false">confirm</vui-button>
   </div>
-  <vui-button slot="reference">删除</vui-button>
+  <vui-button slot="reference">Delete</vui-button>
 </vui-popover>
 
 <script>
@@ -137,32 +139,32 @@ Popover 的属性与 Tooltip 很类似，它们都是基于`Vue-popper`开发的
 :::
 
 ### Attributes
-| 参数               | 说明                                                     | 类型              | 可选值      | 默认值 |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |--------------------|----------------------------------------------------------|-------------------|-------------|--------|
-| trigger | 触发方式 | String  | click/focus/hover/manual |    click    |
-|  title              | 标题 | String | — | — |
-|  content        |  显示的内容，也可以通过 `slot` 传入 DOM   | String            | — | — |
-|  width        |  宽度  | String, Number            | — | 最小宽度 150px |
-|  placement        |  出现位置  | String | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
-|  disabled       |  Popover 是否可用  | Boolean           | — |  false |
-|  value / v-model        |  状态是否可见  | Boolean           | — |  false |
-|  offset        |  出现位置的偏移量  | Number           | — |  0 |
-|  transition     |  定义渐变动画      | String             | — | fade-in-linear |
-|  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean | — | true |
-|  popper-options        | [popper.js](https://popper.js.org/documentation.html) 的参数 | Object            | 参考 [popper.js](https://popper.js.org/documentation.html) 文档 | `{ boundariesElement: 'body', gpuAcceleration: false }` |
-| popper-class | 为 popper 添加类名 | String | — | — |
-| open-delay | 触发方式为 hover 时的显示延迟，单位为毫秒 | Number | — | — |
+| trigger | how the popover is triggered | string  | click/focus/hover/manual |    click    |
+|  title              | popover title | string | — | — |
+|  content        |  popover content, can be replaced with a default `slot`    | string            | — | — |
+|  width        |  popover width  | string, number            | — | Min width 150px |
+|  placement        |  popover placement  | string | top/top-start/top-end/bottom/bottom-start/bottom-end/left/left-start/left-end/right/right-start/right-end |  bottom |
+|  disabled       |  whether Popover is disabled  | boolean    | — |  false |
+|  value / v-model        |  whether popover is visible  | Boolean           | — |  false |
+|  offset        |  popover offset  | number           | — |  0 |
+|  transition     |  popover transition animation      | string             | — | vui-fade-in-linear |
+|  visible-arrow   |  whether a tooltip arrow is displayed or not. For more info, please refer to [Vue-popper] | boolean | — | true |
+|  popper-options        | parameters for [popper.js] | object            | please refer to [popper.js] | `{ boundariesElement: 'body', gpuAcceleration: false }` |
+|  popper-class        |  custom class name for popover | string | — | — |
+|  open-delay        | delay of appearance when `trigger` is hover, in milliseconds | number | — | — |
 
 ### Slot
-| 参数 | 说明 |
-|--- | ---|
-| — | Popover 内嵌 HTML 文本 |
-| reference | 触发 Popover 显示的 HTML 元素 |
+| Name | Description |
+| --- | --- |
+| — | text content of popover |
+| reference | HTML element that triggers popover |
 
 ### Events
-| 事件名称 | 说明 | 回调参数 |
+| Event Name | Description | Parameters |
 |---------|--------|---------|
-| show | 显示时触发 | — |
-| after-enter | 显示动画播放完毕后触发 | — |
-| hide | 隐藏时触发 | — |
-| after-leave | 隐藏动画播放完毕后触发 | — |
+| show | triggers when popover shows | — |
+| after-enter | triggers when the entering transition ends | — |
+| hide | triggers when popover hides | — |
+| after-leave | triggers when the leaving transition ends | — |

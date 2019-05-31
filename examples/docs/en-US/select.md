@@ -1,11 +1,10 @@
-## Select 选择器
+## Select 
 
-当选项过多时，使用下拉菜单展示并选择内容。
+When there are plenty of options, use a drop-down menu to display and select desired ones.
 
-### 基础用法
+### Basic usage
 
-适用广泛的基础单选
-:::demo `v-model`的值为当前被选中的`vui-option`的 value 属性值
+:::demo `v-model` is the value of `option` that is currently selected.
 ```html
 <template>
   <vui-select
@@ -21,20 +20,20 @@
     data() {
       return {
         options: [{
-          value: '选项1',
-          label: '黄金糕'
+          value: 'Option1',
+          label: 'Option1'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: 'Option2',
+          label: 'Option2'
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'Option3',
+          label: 'Option3'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: 'Option4',
+          label: 'Option4'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'Option5',
+          label: 'Option5'
         }],
         value: ''
       }
@@ -45,11 +44,10 @@
 :::
 
 
-### 禁用状态
+### Disabled 
 
-选择器不可用状态
 
-:::demo 为`vui-select`设置`disabled`属性，则整个选择器不可用
+:::demo Set the value of `disabled` in `vui-option` to `true` to disable this option.
 ```html
 <template>
   <vui-select v-model="value3" disabled>
@@ -60,21 +58,22 @@
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
+        options2: [{
+          value: 'Option1',
+          label: 'Option1'
         }, {
-          value: '选项2',
-          label: '双皮奶'
+          value: 'Option2',
+          label: 'Option2',
+          disabled: true
         }, {
-          value: '选项3',
-          label: '蚵仔煎'
+          value: 'Option3',
+          label: 'Option3'
         }, {
-          value: '选项4',
-          label: '龙须面'
+          value: 'Option4',
+          label: 'Option4'
         }, {
-          value: '选项5',
-          label: '北京烤鸭'
+          value: 'Option5',
+          label: 'Option5'
         }],
         value3: ''
       }
@@ -87,19 +86,19 @@
 
 
 ### Select Attributes
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| value / v-model | 绑定值 | boolean / string / number | — | — |
-| disabled | 是否禁用 | boolean | — | false |
-| select-id | 选项对应value字段 | string | — | value |
-| select-name | 显示的选项字段 | string | — | value |
-| select-default-name | 默认空值选项显示文字 | string | — | value |
-| show-default-name | 是否显示默认为空选项（比如是否显示“请选择”） | string | — | value |
-| option | option数组 | string | — | value |
-| class-name | select框样式 | string | — | value |
+| value / v-model | binding value | boolean / string / number | — | — |
+| disabled | whether Select is disabled | boolean | — | false |
+| select-id | option prop of value | string | — | value |
+| select-name | name of show  | string | — | value |
+| select-default-name | set default name of empty option  | string | — | value |
+| show-default-name | whether show default empty option | string | — | value |
+| option | option array | string | — | value |
+| class-name |`class` of  select  | string | — | value |
 
 ### Select Events
-| 事件名称 | 说明 | 回调参数 |
+| Event Name | Description | Parameters |
 |---------|---------|---------|
-| change | 选中值发生变化时触发 | 目前的选中值 |
+| change | triggers when the selected value changes | current selected value |
 

@@ -1,12 +1,12 @@
-## IconLoading 警告
+## IconLoading
 
-纯css写的loading样式。目前只有一种
+The loading style written by pure css. There is only one
 
-### 基本用法
+### Basic usage
 
 
 
-:::demo `color ` 配置loading颜色， 目前只有两种 'white' 'gray'
+:::demo `color ` configure loading color, there are currently only two `white` `gray`
 ```html
 <template>
   <vui-icon-loading color="gray"></vui-icon-loading>
@@ -17,7 +17,7 @@
 
 
 ### Attributes
-| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+| Attribute      | Description          | Type      | Accepted Values       | Default  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| color     | loading 颜色， white：白色，    gray： 灰色        | string | white / gray | gray |
+| color     | loading color       | string | white / gray | gray |
 
