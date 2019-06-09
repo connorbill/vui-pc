@@ -146,7 +146,7 @@ if (userLanguage.indexOf('zh-') !== -1) {
 } else if (userLanguage.indexOf('de') !== -1) {
   defaultPath = '/de-DE';
 }
-
+console.log(userLanguage);
 route = route.concat([{
   path: '/',
   redirect: defaultPath

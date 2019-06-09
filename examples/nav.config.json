@@ -53,10 +53,6 @@
               "title": "Select 选择器"
             },
             {
-              "path": "/select-great",
-              "title": "SelectGreat 选择器"
-            },
-            {
               "path": "/date-picker",
               "title": "DatePicker 日期选择器"
             },
@@ -190,10 +186,6 @@
               "title": "Select"
             },
             {
-              "path": "/select-great",
-              "title": "SelectGreat"
-            },
-            {
               "path": "/date-picker",
               "title": "DatePicker"
             },
@@ -325,10 +317,6 @@
             {
               "path": "/select",
               "title": "Select"
-            },
-            {
-              "path": "/select-great",
-              "title": "SelectGreat"
             },
             {
               "path": "/date-picker",

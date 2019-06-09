@@ -1,6 +1,6 @@
-## 安装
+## Installation
 
-### npm 安装
+### npm
 
 Installing with npm is recommended and it works seamlessly with [webpack](https://webpack.js.org/).
 

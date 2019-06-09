@@ -12,6 +12,7 @@ When there are plenty of options, use a drop-down menu to display and select des
     :option="options"
     select-id="value"
     select-name="label"
+    select-default-name="please select"
   ></vui-select>
 </template>
 
@@ -50,7 +51,8 @@ When there are plenty of options, use a drop-down menu to display and select des
 :::demo Set the value of `disabled` in `vui-option` to `true` to disable this option.
 ```html
 <template>
-  <vui-select v-model="value3" disabled>
+  <vui-select v-model="value3" disabled
+    select-default-name="please select">
   </vui-select>
 </template>
   

@@ -1,63 +1,63 @@
-## 更新日志
+## Protokoll aktualisieren
 
 ### 1.0.1
 
 *2019-05-29*
 
-#### 优化
-- Addr组件
-  - 添加修改默认的“请选择”文字功能
+#### Optimierung
+- Addr Component
+  - Add the default "Please select" text function
 
 ### 0.9.9
 
 *2019-05-13*
 
-#### 优化
-- 文档
-  - 开始编写中文文档
+#### Optimierung
+- Document
+  - Start writing Chinese documents
   
   
 ### 0.9.6 
 
-- 一直在模仿,抄袭，修改element-ui源代码，增加没有的组件和功能
+- I have been imitating, copying, modifying the element-ui source code, adding no components and functions.
 
 ### 0.9.5
 
-- vui-upload 增加上传图片个数限制， 是否自动上传，提示文件大小限制，
+- vui-upload Increase the number of uploaded images, whether to upload automatically, prompt file size limit,
 
 ### 0.9.4
 
-- vui-upload 修复, vui-addr 增加 disabled 禁用参数
+- vui-upload repair, vui-addr Increase disabled disable parameter
 
 ### 0.9.3
 
-- vui-upload 修复问题
+- vui-upload Fix the problem
 
 ### 0.9.2
 
-- vui-table-lr 样式修改
+- vui-table-lr Style modification
 
 ### 0.9.1
 
-- vui-pagination 新增分页组件
+- vui-pagination Add paging component
 
 ### 0.9.0
 
-- vui-table-lr 组件更改名字
+- vui-table-lr Change component name
 
 ### 0.8.6
 
-- vui-upload 组件更新样式，提供所有上传完成后返回所有图片地址的数组：on-all-file
+- vui-upload update Component  style, providing an array of all image addresses returned after all uploads are completed：on-all-file
 
 ### 0.8.5
 
-- 根目录增加other目录，存放es5的 filter, v-multi-ref指令，数值格式化函数，以便用于es5语法的js中，在页面中直接引入。
--  vui-button组件： 更换loading 样式
+- The root directory is added to the other directory, the es5 filter, the v-multi-ref command, and the numeric formatting function are used in the js for the es5 syntax, which is directly introduced in the page.
+-  vui-button Component： Replace loading style
 
 ### 0.8.3
 
-- 解决校验函数导出，导入后找不到的问题
+- Solve the problem of validation function export, not found after import
 
 ### 0.1.0
 
-- 启蒙中
+- Enlightenment

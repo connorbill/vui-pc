@@ -496,7 +496,7 @@
           }, {});
         }
       };
-      xhr.open('GET', 'versions.json');
+      xhr.open('GET', '/versions.json');
       xhr.send();
       let primaryLast = '#409EFF';
       bus.$on('user-theme-config-update', (val) => {

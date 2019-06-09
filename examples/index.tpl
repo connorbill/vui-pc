@@ -81,7 +81,6 @@
     <div id="app"></div>
 
     <% if (process.env.NODE_ENV === 'production') { %>
-      <script src="//unpkg.com/npm/vue@2.6.10/dist/vue.js"></script>
       <script src="//cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
       <script src="//unpkg.com/vue-router@3.0.6/dist/vue-router.js"></script>
       <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.15.6/build/highlight.min.js"></script>

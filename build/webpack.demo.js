@@ -8,6 +8,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const WebpackAutoInject = require('webpack-auto-inject-version');
+const CompressionPlugin = require('compression-webpack-plugin');
 // const proxy = require('http-proxy-middleware');
 const config = require('./config');
 const isProd = process.env.NODE_ENV === 'production';
@@ -160,6 +161,15 @@ if (isProd) {
   webpackConfig.plugins.push(
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:7].css'
+    }),
+    new CompressionPlugin({
+      test: new RegExp(
+        '\\.(js|css)$'
+      ),
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      threshold: 10240,
+      minRatio: 0.8
     })
   );
   webpackConfig.optimization.minimizer.push(

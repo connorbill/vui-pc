@@ -173,7 +173,7 @@ Customize how suggestions are displayed.
   popper-class="my-autocomplete"
   v-model="state3"
   :fetch-suggestions="querySearch"
-  placeholder="请输入内容"
+  placeholder="please input"
   @select="handleSelect">
   <i
     class="vui-icon-edit vui-input__icon"
@@ -263,7 +263,7 @@ Search data from server-side.
 <vui-autocomplete
   v-model="state4"
   :fetch-suggestions="querySearchAsync"
-  placeholder="请输入内容"
+  placeholder="please input"
   @select="handleSelect"
 ></vui-autocomplete>
 <script>
@@ -317,7 +317,7 @@ Search data from server-side.
 
 ### Input Attributes
 
-| 参数          | 说明            | 类型            | 可选值                 | 默认值   |
+| Attribute      | Description         | Type    | Options                         | Default|
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | type         | type of input   | string  | text，textarea | text |
 | value / v-model | binding value           | string / number  | — | — |

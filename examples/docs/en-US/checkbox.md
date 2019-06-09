@@ -58,11 +58,11 @@ It is used for multiple checkboxes which are bound in one group, and indicates w
 ```html
 <template>
   <vui-checkbox-group v-model="checkList">
-    <vui-checkbox label="复选框 A"></vui-checkbox>
-    <vui-checkbox label="复选框 B"></vui-checkbox>
-    <vui-checkbox label="复选框 C"></vui-checkbox>
-    <vui-checkbox label="禁用" disabled></vui-checkbox>
-    <vui-checkbox label="选中且禁用" disabled></vui-checkbox>
+    <vui-checkbox label="option1"></vui-checkbox>
+    <vui-checkbox label="option2"></vui-checkbox>
+    <vui-checkbox label="option3"></vui-checkbox>
+    <vui-checkbox label="disabled" disabled></vui-checkbox>
+    <vui-checkbox label="disabled option" disabled></vui-checkbox>
   </vui-checkbox-group>
 </template>
 
@@ -70,7 +70,7 @@ It is used for multiple checkboxes which are bound in one group, and indicates w
   export default {
     data () {
       return {
-        checkList: ['选中且禁用','复选框 A']
+        checkList: ['disabled option','option1']
       };
     }
   };
