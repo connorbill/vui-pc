@@ -25,7 +25,7 @@ Wir empfehlen Benutzern, die Vui-pc mit CDN einführen, die Version an der Linka
 
 ### Hello world
 
-Mit CDN können wir mit Element leicht eine Hello World-Seite schreiben. [Online Demo](https://codepen.io/connorbill/pen/OYWgEM)
+Mit CDN können wir mit  leicht eine Hello World-Seite schreiben. [Online Demo](https://codepen.io/connorbill/pen/OYWgEM)
 
 <iframe height="265" style="width: 100%;" scrolling="no" title="Vui demo" src="//codepen.io/connorbill/embed/OYWgEM?height=265&theme-id=light&default-tab=html" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/connorbill/pen/OYWgEM'>Vui demo</a> by hetech

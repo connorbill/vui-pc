@@ -25,7 +25,7 @@ npm i vui-pc -S
 
 ### Hello world
 
-通过 CDN 的方式我们可以很容易地使用 Element 写出一个 Hello world 页面。[在线演示](https://codepen.io/connorbill/pen/OYWgEM)
+通过 CDN 的方式我们可以很容易地使用  写出一个 Hello world 页面。[在线演示](https://codepen.io/connorbill/pen/OYWgEM)
 
 <iframe height="265" style="width: 100%;" scrolling="no" title="Vui demo" src="//codepen.io/connorbill/embed/OYWgEM?height=265&theme-id=light&default-tab=html" frameborder="no" allowtransparency="true" allowfullscreen="true">
   See the Pen <a href='https://codepen.io/connorbill/pen/OYWgEM'>Vui demo</a> by hetech

@@ -13,6 +13,11 @@
       class-name="vui-example-table"
       scroll="about"
     >
+      <template v-slot:headerstorename="slotProps">
+        <div>
+          change ....
+        </div>
+      </template>
       <template v-slot:operator="slotProps">
         <div class="middle-center">
           <vui-button  @click="addDom(slotProps.row.index)">Add</vui-button>

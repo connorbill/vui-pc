@@ -138,7 +138,7 @@
   <div class="page-changelog">
     <div class="heading">
       <vui-button class="fr">
-        <a href="https://github.com/connorbill/vui-pc/releases" target="_blank">GitHub Releases</a>
+        <a href="http://139.224.43.8:88/qianxiang/html/src/vui-markdown-version" target="_blank">GitHub Releases</a>
       </vui-button>
       <%= 1 >
     </div>
