@@ -203,6 +203,9 @@ export default {
     setExpectedState(expectedState) {
       if (expectedState === false) {
         clearTimeout(this.timeoutPending);
+        this.$emit('mouseleave');
+      } else {
+        this.$emit('mouseenter');
       }
       this.expectedState = expectedState;
     },

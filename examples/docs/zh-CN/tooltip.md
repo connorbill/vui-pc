@@ -11,7 +11,7 @@
 ```html
 <div class="box">
   <div class="top">
-    <vui-tooltip class="item" effect="dark" content="Top Left 提示文字" placement="top-start">
+    <vui-tooltip class="item" effect="dark" @mouseenter="onME" @mouseleave="onLe"   content="Top Left 提示文字" placement="top-start">
       <vui-button>上左</vui-button>
     </vui-tooltip>
     <vui-tooltip class="item" effect="dark" content="Top Center 提示文字" placement="top">
@@ -56,7 +56,18 @@
     </vui-tooltip>
   </div>
 </div>
-
+<script>
+    export default {
+        methods: {
+            onME: function() {
+                console.log(1)
+            },
+            onLe() {
+                console.log('leave');
+            }
+        }
+    }
+</script>
 <style>
   .box {
     width: 400px;
@@ -174,3 +185,10 @@ tooltip 内不支持 disabled form 元素，参考[MDN](https://developer.mozill
 | popper-class | 为 Tooltip 的 popper 添加类名 | String | — | — |
 | enterable | 鼠标是否可进入到 tooltip 中 | Boolean | — | true |
 | hide-after | Tooltip 出现后自动隐藏延时，单位毫秒，为 0 则不会自动隐藏 | number | — | 0 |
+
+
+### Events
+| 事件名称 | 说明 | 回调参数 |
+|---------|--------|---------|
+| mouseenter | 鼠标移入时触发 | 无 |
+| mouseleave | 鼠标移出时触发 | 无 |
