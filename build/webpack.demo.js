@@ -7,9 +7,10 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const WebpackAutoInject = require('webpack-auto-inject-version');
+const CompressionPlugin = require('compression-webpack-plugin');
 // const proxy = require('http-proxy-middleware');
 const config = require('./config');
-
 const isProd = process.env.NODE_ENV === 'production';
 
 const webpackConfig = {
@@ -121,6 +122,29 @@ const webpackConfig = {
           preserveWhitespace: false
         }
       }
+    }),
+    new WebpackAutoInject({
+      SHORT: 'CUSTOM',
+      SILENT: false,
+      PACKAGE_JSON_PATH: './package.json',
+      PACKAGE_JSON_INDENT: 4,
+      components: {
+        AutoIncreaseVersion: false,
+        InjectAsComment: true,
+        InjectByTag: true
+      },
+      componentsOptions: {
+        AutoIncreaseVersion: {
+          runInWatchMode: false
+        },
+        InjectAsComment: {
+          tag: 'Vui-pc Version: {version} - {date}',
+          multiLineCommentType: true // use `/** */` instead of `//` as comment block
+        }
+      },
+      LOGS_TEXT: {
+        AIS_START: 'add version started'
+      }
     })
   ],
   optimization: {
@@ -137,6 +161,15 @@ if (isProd) {
   webpackConfig.plugins.push(
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:7].css'
+    }),
+    new CompressionPlugin({
+      test: new RegExp(
+        '\\.(js|css)$'
+      ),
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      threshold: 10240,
+      minRatio: 0.8
     })
   );
   webpackConfig.optimization.minimizer.push(

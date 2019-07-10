@@ -1,0 +1,186 @@
+@import "common/var";
+
+@font-face {
+  font-family: 'element-icons';
+  src: url('#{$--font-path}/element-icons.woff') format('woff'), /* chrome, firefox */
+       url('#{$--font-path}/element-icons.ttf') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  font-weight: normal;
+  font-style: normal
+}
+
+[class^="vui-icon-"], [class*=" vui-icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'element-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline-block;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.vui-icon-info:before { content: "\e61a"; }
+
+.vui-icon-error:before { content: "\e62c"; }
+
+.vui-icon-success:before { content: "\e62d"; }
+
+.vui-icon-warning:before { content: "\e62e"; }
+
+.vui-icon-question:before { content: "\e634"; }
+
+.vui-icon-back:before { content: "\e606"; }
+
+.vui-icon-arrow-left:before { content: "\e600"; }
+
+.vui-icon-arrow-down:before { content: "\e603"; }
+
+.vui-icon-arrow-right:before { content: "\e604"; }
+
+.vui-icon-arrow-up:before { content: "\e605"; }
+
+.vui-icon-caret-left:before { content: "\e60a"; }
+
+.vui-icon-caret-bottom:before { content: "\e60b"; }
+
+.vui-icon-caret-top:before { content: "\e60c"; }
+
+.vui-icon-caret-right:before { content: "\e60e"; }
+
+.vui-icon-d-arrow-left:before { content: "\e610"; }
+
+.vui-icon-d-arrow-right:before { content: "\e613"; }
+
+.vui-icon-minus:before { content: "\e621"; }
+
+.vui-icon-plus:before { content: "\e62b"; }
+
+.vui-icon-remove:before { content: "\e635"; }
+
+.vui-icon-circle-plus:before { content: "\e601"; }
+
+.vui-icon-remove-outline:before { content: "\e63c"; }
+
+.vui-icon-circle-plus-outline:before { content: "\e602"; }
+
+.vui-icon-close:before { content: "\e60f"; }
+
+.vui-icon-check:before { content: "\e611"; }
+
+.vui-icon-circle-close:before { content: "\e607"; }
+
+.vui-icon-circle-check:before { content: "\e639"; }
+
+.vui-icon-circle-close-outline:before { content: "\e609"; }
+
+.vui-icon-circle-check-outline:before { content: "\e63e"; }
+
+.vui-icon-zoom-out:before { content: "\e645"; }
+
+.vui-icon-zoom-in:before { content: "\e641"; }
+
+.vui-icon-d-caret:before { content: "\e615"; }
+
+.vui-icon-sort:before { content: "\e640"; }
+
+.vui-icon-sort-down:before { content: "\e630"; }
+
+.vui-icon-sort-up:before { content: "\e631"; }
+
+.vui-icon-tickets:before { content: "\e63f"; }
+
+.vui-icon-document:before { content: "\e614"; }
+
+.vui-icon-goods:before { content: "\e618"; }
+
+.vui-icon-sold-out:before { content: "\e63b"; }
+
+.vui-icon-news:before { content: "\e625"; }
+
+.vui-icon-message:before { content: "\e61b"; }
+
+.vui-icon-date:before { content: "\e608"; }
+
+.vui-icon-printer:before { content: "\e62f"; }
+
+.vui-icon-time:before { content: "\e642"; }
+
+.vui-icon-bell:before { content: "\e622"; }
+
+.vui-icon-mobile-phone:before { content: "\e624"; }
+
+.vui-icon-service:before { content: "\e63a"; }
+
+.vui-icon-view:before { content: "\e643"; }
+
+.vui-icon-menu:before { content: "\e620"; }
+
+.vui-icon-more:before { content: "\e646"; }
+
+.vui-icon-more-outline:before { content: "\e626"; }
+
+.vui-icon-star-on:before { content: "\e637"; }
+
+.vui-icon-star-off:before { content: "\e63d"; }
+
+.vui-icon-location:before { content: "\e61d"; }
+
+.vui-icon-location-outline:before { content: "\e61f"; }
+
+.vui-icon-phone:before { content: "\e627"; }
+
+.vui-icon-phone-outline:before { content: "\e628"; }
+
+.vui-icon-picture:before { content: "\e629"; }
+
+.vui-icon-picture-outline:before { content: "\e62a"; }
+
+.vui-icon-delete:before { content: "\e612"; }
+
+.vui-icon-search:before { content: "\e619"; }
+
+.vui-icon-edit:before { content: "\e61c"; }
+
+.vui-icon-edit-outline:before { content: "\e616"; }
+
+.vui-icon-rank:before { content: "\e632"; }
+
+.vui-icon-refresh:before { content: "\e633"; }
+
+.vui-icon-share:before { content: "\e636"; }
+
+.vui-icon-setting:before { content: "\e638"; }
+
+.vui-icon-upload:before { content: "\e60d"; }
+
+.vui-icon-upload2:before { content: "\e644"; }
+
+.vui-icon-download:before { content: "\e617"; }
+
+.vui-icon-loading:before { content: "\e61e"; }
+
+.vui-icon-loading {
+  animation: rotating 2s linear infinite;
+}
+
+.vui-icon--right {
+  margin-left: 5px;
+}
+.vui-icon--left {
+  margin-right: 5px;
+}
+
+@keyframes rotating {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

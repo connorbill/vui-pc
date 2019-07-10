@@ -1,4 +1,4 @@
-import { addClass, removeClass } from 'element-ui/src/utils/dom';
+import { addClass, removeClass } from 'vui-pc/src/utils/dom';
 
 class Transition {
   beforeEnter(el) {
@@ -65,7 +65,7 @@ class Transition {
 }
 
 export default {
-  name: 'ElCollapseTransition',
+  name: 'VuiCollapseTransition',
   functional: true,
   render(h, { children }) {
     const data = {

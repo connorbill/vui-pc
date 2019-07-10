@@ -1,5 +1,5 @@
 <template>
-  <span
+  <label
     class="vui-checkbox"
     :class="[
           border && checkboxSize ? 'vui-checkbox--' + checkboxSize : '',
@@ -52,7 +52,7 @@
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
-  </span>
+  </label>
 </template>
 
 <script>

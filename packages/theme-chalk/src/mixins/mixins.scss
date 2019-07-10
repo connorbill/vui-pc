@@ -74,6 +74,13 @@
     @content;
   }
 }
+@mixin vuib($block) {
+	$B: $namespacevuiel+'-'+$block !global;
+
+	.#{$B} {
+		@content;
+	}
+}
 
 @mixin e($element) {
   $E: $element !global;

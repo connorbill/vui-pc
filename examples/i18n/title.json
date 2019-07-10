@@ -1,0 +1,20 @@
+{
+  "zh-CN": {
+    "home": "Vui",
+    "guide": "指南 | Vui",
+    "component": "组件 | Vui",
+    "resource": "资源 | Vui"
+  },
+  "en-US": {
+    "home": "Vui - A Desktop UI Toolkit for Web",
+    "guide": "Guide | Vui",
+    "component": "Component | Vui",
+    "resource": "Resource | Vui"
+  },
+  "de-DE": {
+    "home": "Vui - Ein Desktop UI Toolkit für das Web",
+    "guide": "Führen | Vui",
+    "component": "Komponente | Vui",
+    "resource": "Ressource | Vui"
+  }
+}

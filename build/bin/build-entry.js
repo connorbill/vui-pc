@@ -22,20 +22,20 @@ const install = function(Vue, opts = {}) {
     Vue.component(component.name, component);
   });
 
-  // Vue.use(Loading.directive);
+  Vue.use(Loading.directive);
 
-  // Vue.prototype.$ELEMENT = {
-  //   size: opts.size || '',
-  //   zIndex: opts.zIndex || 2000
-  // };
+  Vue.prototype.$VUI = {
+    size: opts.size || '',
+    zIndex: opts.zIndex || 2000
+  };
 
-  // Vue.prototype.$loading = Loading.service;
-  // Vue.prototype.$msgbox = MessageBox;
-  // Vue.prototype.$alert = MessageBox.alert;
-  // Vue.prototype.$confirm = MessageBox.confirm;
-  // Vue.prototype.$prompt = MessageBox.prompt;
-  // Vue.prototype.$notify = Notification;
-  // Vue.prototype.$message = Message;
+  Vue.prototype.$loading = Loading.service;
+  Vue.prototype.$msgbox = MessageBox;
+  Vue.prototype.$alert = MessageBox.alert;
+  Vue.prototype.$confirm = MessageBox.confirm;
+  Vue.prototype.$prompt = MessageBox.prompt;
+  Vue.prototype.$notify = Notification;
+  Vue.prototype.$message = Message;
 
 };
 

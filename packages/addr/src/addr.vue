@@ -15,7 +15,7 @@
             autocomplete="off"
             @change="handleChangeProvince"
           >
-            <option value="">请选择</option>
+            <option value="">{{selectDefaultNameProvince}}</option>
             <option v-for="(item, index) in allProvince" :key="index" :value="item[sProvinceId]">
               {{item[sProvinceName]}}
             </option>
@@ -42,7 +42,7 @@
             autocomplete="off"
             @change="handleChangeCity"
           >
-            <option value="">请选择</option>
+            <option value="">{{selectDefaultNameCity}}</option>
             <option v-for="(item, index) in allCity" :key="index" :value="item[sCityId]">{{item[sCityName]}}</option>
           </select>
         </div>
@@ -67,7 +67,7 @@
             autocomplete="off"
             @change="handleChangeArea"
           >
-            <option value="">请选择</option>
+            <option value="">{{selectDefaultNameArea}}</option>
             <option v-for="(item, index) in allArea" :key="index" :value="item[sAreaId]">{{item[sAreaName]}}</option>
           </select>
         </div>
@@ -86,7 +86,7 @@
         >
           <input
             type="text"
-            placeholder="请输入详细地址"
+            :placeholder="detailAddr"
             class="vui-input__inner"
             v-bind="$attrs"
             style="width: 250px"
@@ -198,6 +198,22 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      selectDefaultNameProvince: {
+        type: String,
+        default: '请选择'
+      },
+      selectDefaultNameCity: {
+        type: String,
+        default: '请选择'
+      },
+      selectDefaultNameArea: {
+        type: String,
+        default: '请选择'
+      },
+      detailAddr: {
+        type: String,
+        default: ''
       }
     },
     computed: {
@@ -314,9 +330,10 @@
         this.$emit('province', event);
         let that = this;
         this.errorProvince = false;
-        this.checkValue('province');
         that.city = '';
         that.area = '';
+        that.allArea = [].concat([]);
+        this.checkValue('province');
         if (provinceId === '') return;
         axios({
           method: 'post',
@@ -327,6 +344,9 @@
         }).then(function(res) {
           if (res.data.code === '000000') {
             that.allCity = [].concat(res.data.data);
+            that.city = '';
+            that.area = '';
+            that.allArea = [].concat([]);
           }
         });
 
@@ -350,6 +370,7 @@
           .then(res => {
             if (res.data.code === '000000') {
               that.allArea = [].concat(res.data.data);
+              that.area = '';
             }
           });
 
@@ -410,32 +431,32 @@
         let pro = '';
         let cit = '';
         let are = '';
-        if (this.province && this.city && this.address) {
-          for (let p = 0; p < this.allProvince.length; p++) {
-            if (Number(this.allProvince[p][this.sProvinceId]) === Number(this.province)) {
-              pro = this.allProvince[p][this.sProvinceName];
-            }
+        // if (this.province && this.city && this.address) {
+        for (let p = 0; p < this.allProvince.length; p++) {
+          if (Number(this.allProvince[p][this.sProvinceId]) === Number(this.province)) {
+            pro = this.allProvince[p][this.sProvinceName];
           }
-
-          for (let c = 0; c < this.allCity.length; c++) {
-            if (Number(this.allCity[c][this.sCityId]) === Number(this.city)) {
-              cit = this.allCity[c][this.sCityName];
-              if (cit === '县级' || cit === '市辖区' || cit === '县') {
-                cit = '';
-              }
-            }
-          }
-          for (let a = 0; a < this.allArea.length; a++) {
-            if (Number(this.allArea[a][this.sAreaId]) === Number(this.area)) {
-              are = this.allArea[a][this.sAreaName];
-              if (are === '县级' || are === '市辖区' || are === '县') {
-                are = '';
-              }
-            }
-          }
-          let adrText = pro + cit + are + this.address;
-          this.$emit('addresstext', adrText);
         }
+
+        for (let c = 0; c < this.allCity.length; c++) {
+          if (Number(this.allCity[c][this.sCityId]) === Number(this.city)) {
+            cit = this.allCity[c][this.sCityName];
+            if (cit === '县级' || cit === '市辖区' || cit === '县') {
+              cit = '';
+            }
+          }
+        }
+        for (let a = 0; a < this.allArea.length; a++) {
+          if (Number(this.allArea[a][this.sAreaId]) === Number(this.area)) {
+            are = this.allArea[a][this.sAreaName];
+            if (are === '县级' || are === '市辖区' || are === '县') {
+              are = '';
+            }
+          }
+        }
+        let adrText = pro + cit + are + this.address;
+        this.$emit('addresstext', adrText);
+        // }
       },
 
       checkValue: function(type) {

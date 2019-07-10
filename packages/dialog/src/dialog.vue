@@ -46,6 +46,7 @@
 
 <script>
   import Emitter from '../../../src/mixins/emitter';
+  import {checkNumber} from '../../../src/funs/check-fun';
 
   export default {
     name: 'VuiDialog',
@@ -112,7 +113,8 @@
       center: {
         type: Boolean,
         default: false
-      }
+      },
+      time: Number
     },
     mixins: [Emitter],
     data: function() {
@@ -133,11 +135,15 @@
           if (this.appendToBody) {
             document.body.appendChild(this.$el);
           }
+          this.setTimeClose();
         } else {
           this.$el.removeEventListener('scroll', this.updatePopper);
           if (!this.closed) this.$emit('close');
         }
         if (!val) this.broadcast('VuiUpload', 'clearData', true);
+      },
+      time() {
+        this.setTimeClose();
       }
 
     },
@@ -179,6 +185,7 @@
           this.$emit('update:visible', false);
           this.$emit('close');
           this.closed = true;
+          clearTimeout(this.showTime);
         }
       },
       updatePopper() {
@@ -190,6 +197,14 @@
       },
       afterLeave() {
         this.$emit('closed');
+      },
+      setTimeClose() {
+        if (checkNumber(this.time) && this.time >= 0) {
+          let that = this;
+          this.showTime = setTimeout(function() {
+            that.hide();
+          }, this.time);
+        }
       }
     },
 

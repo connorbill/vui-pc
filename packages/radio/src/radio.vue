@@ -1,5 +1,5 @@
 <template>
-  <span
+  <label
     class="vui-radio"
     :class="[
           border && radioSize ? 'vui-radio--' + radioSize : '',
@@ -39,7 +39,7 @@
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
     </span>
-  </span>
+  </label>
 </template>
 
 <script>

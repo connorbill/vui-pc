@@ -1,5 +1,6 @@
 {
   "input": "./packages/input/index.js",
+  "input-great": "./packages/input-great/index.js",
   "button": "./packages/button/index.js",
   "addr": "./packages/addr/index.js",
   "checkbox": "./packages/checkbox/index.js",
@@ -9,9 +10,24 @@
   "radio": "./packages/radio/index.js",
   "radio-group": "./packages/radio-group/index.js",
   "select": "./packages/select/index.js",
+  "option": "./packages/option/index.js",
+  "option-group": "./packages/option-group/index.js",
   "table": "./packages/table/index.js",
   "table-lr": "./packages/table-lr/index.js",
   "upload": "./packages/upload/index.js",
   "pagination": "./packages/pagination/index.js",
-  "scrollbar": "./packages/scrollbar/index.js"
+  "scrollbar": "./packages/scrollbar/index.js",
+  "tooltip": "./packages/tooltip/index.js",
+  "autocomplete": "./packages/autocomplete/index.js",
+  "icon-loading": "./packages/icon-loading/index.js",
+  "popover": "./packages/popover/index.js",
+  "message-box": "./packages/message-box/index.js",
+  "alert": "./packages/alert/index.js",
+  "notification": "./packages/notification/index.js",
+  "loading": "./packages/loading/index.js",
+  "message": "./packages/message/index.js",
+  "dropdown": "./packages/dropdown/index.js",
+  "dropdown-menu": "./packages/dropdown-menu/index.js",
+  "dropdown-item": "./packages/dropdown-item/index.js",
+  "icon": "./packages/icon/index.js"
 }

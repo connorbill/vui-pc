@@ -1,6 +1,7 @@
 @import "./common/common-index";
 @import "~animate.css";
-
+@import "common/transition.scss";
+@import "icon.scss";
 .vui-close-style{
 	position: absolute;
 	border-radius: 50%;
@@ -23,7 +24,7 @@
 		width: 15px;
 		height: 15px;
 	}
-	.vui-icon-delete{
+	.vui-i-delete{
 		background-repeat: no-repeat;
 		background-size: 100% 100%;
 		width: 100%;
@@ -31,7 +32,7 @@
 		cursor: pointer;
 	}
 }
-.vui-icon-delete{
+.vui-i-delete{
 	background-image: url("../../../icon/close-circle.png");
 }
 .vui-icon-download {
