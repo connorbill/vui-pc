@@ -94,7 +94,7 @@
 | select-id | 选项对应value字段 | string | — | value |
 | select-name | 显示的选项字段 | string | — | value |
 | select-default-name | 默认空值选项显示文字 | string | — | value |
-| show-default-name | 是否显示默认为空选项（比如是否显示“请选择”） | string | — | value |
+| show-default-name | 是否显示默认为空选项（比如是否显示“请选择”） | boolean | — | true |
 | option | option数组 | string | — | value |
 | class-name | select框样式 | string | — | value |
 

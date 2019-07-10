@@ -101,6 +101,10 @@
 | city-rule-detail | 市的校验规则 | string | - | []|
 | area-rule-detail | 区的校验规则 | string | - | []|
 | address-rule-detail | address的校验规则 | string | - | []|
+| selectDefaultNameProvince | 省的空值显示值 | string | - | '请选择'|
+| selectDefaultNameCity | 市的空值显示值 | string | - | '请选择'|
+| selectDefaultNameArea | 区的空值显示值 | string | - | '请选择'|
+| detailAddr | 详细地址的空值显示值 | string | - | 空|
 
 
 ### Events

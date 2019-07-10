@@ -206,7 +206,7 @@ var vuiCheck = {
       ref[key] = key;
     });
     o.ref = ref;
-    o = doDeep(o);
+    // o = doDeep(o);
     return o;
   }
   function judgeValue(obj) {

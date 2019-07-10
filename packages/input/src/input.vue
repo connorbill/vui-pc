@@ -18,6 +18,8 @@
           :readonly="readonly"
           :autocomplete="autoComplete || autocomplete"
           ref="input"
+          @compositionstart="handleCompositionStart"
+          @compositionend="handleCompositionEnd"
           @input="handleInput"
           @focus="handleFocus"
           @blur="handleBlur"
@@ -33,6 +35,8 @@
           :disabled="inputDisabled"
           :readonly="readonly"
           :autocomplete="autoComplete || autocomplete"
+          @compositionstart="handleCompositionStart"
+          @compositionend="handleCompositionEnd"
           @focus="handleFocus"
           @blur="handleBlur"
           @change="handleChange"
@@ -70,6 +74,7 @@
     name: 'VuiInput',
     data() {
       return {
+        isComposing: false,
         errorTwo: false,
         focused: false,
         error: false,
@@ -146,6 +151,7 @@
     methods: {
 
       setNativeInputValue() {
+        if (this.isComposing) return;
         const input = this.getInput();
         if (!input) return;
         if (input.value === this.nativeInputValue) return;
@@ -173,7 +179,15 @@
         this.focused = true;
         this.$emit('focus', event);
       },
+      handleCompositionStart() {
+        this.isComposing = true;
+      },
+      handleCompositionEnd(event) {
+        this.isComposing = false;
+        this.handleInput(event);
+      },
       handleInput(event) {
+        if (this.isComposing) return;
         if (event.target.value === this.nativeInputValue) return;
         this.$emit('input', event.target.value);
         this.$nextTick(function() {
